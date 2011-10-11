@@ -1,0 +1,257 @@
+/** Top grey nav bar **/
+#wpp-navbar {
+	margin-top: 10px;
+	padding: 4px;
+	cursor: default;
+}
+
+
+/** The grey box behind the big buttons **/
+#wpp-scan-form-wrapper {
+	cursor: default;
+	padding: 10px;
+	width: 170px;
+	height: 80px;
+	text-align: center;
+	margin-top: 10px;
+}
+
+/** Big buttons **/
+.wpp-big-button {
+	margin: auto;
+	text-align: center;
+}
+.wpp-big-button label {
+	margin: 5px;
+}
+.wpp-big-button label span {
+	font-size: 110%;
+	font-weight: bold;
+	width: 110px;
+	margin: 2px;
+}
+
+
+/** Light grey italic captions **/ 
+em.wpp-em {
+	color: #999999;
+}
+
+
+/** Auto scanner frame **/
+#wpp-scan-frame {
+	border-width: 0px;
+	height: 500px;
+	width: 100%;
+}
+
+
+/** jQuery UI Dialog overrides **/
+.noPadding.ui-dialog .ui-dialog-content {
+	padding: 0;
+}
+.noTitle .ui-dialog-titlebar {
+	display: none;
+}
+.ui-dialog .ui-dialog-buttonpane .ui-dialog-buttonset { 
+    float: none;
+    text-align: center;
+}
+.wpp-dialog {
+	display: none;
+}
+
+
+
+/** Turn "Cancel" button into link **/ 
+button.wpp-cancel-button{
+	border-width: 0px !important;
+	background-image: none !important;
+	background-color: transparent !important;
+}
+.ui-dialog .ui-dialog-buttonpane button.wpp-cancel-button span {
+	text-decoration: underline;
+	padding-left: 0;
+	padding-right: 0;
+	margin-left: 1px;
+	margin-right: 0;
+	color: #21759b;
+}
+#wpp-manual-scan-cancel {
+	color: #21759b;
+}
+
+
+/** Captions for the scan "This will take several minutes ..." **/
+#wpp-scan-caption {
+	margin: 8px auto 0 auto;
+	width: 85%;
+}
+
+
+/** Auto scanner display status **/
+#wpp-scan-url {
+	overflow: hidden;
+	width: 350px;
+	height: 14px;
+	padding-left: 4px;
+}
+
+
+/** Charts and graphs **/
+div.wpp-plugin-graph {
+	margin: 0 auto 20px auto;
+	width: 620px;
+	height: 320px;
+}
+div.wpp-graph-holder {
+	width: 500px;
+	height: 300px;
+	margin: auto;
+}
+div.wpp-custom-legend {
+	float: left;
+	width: 120px;
+	height: 280px;
+}
+#wpp-tabs h2 {
+	margin: auto;
+	text-align: center;
+}
+div.wpp-plugin-graph td {
+	vertical-align: top;
+}
+div.wpp-plugin-graph td h3{
+	text-align: center;
+	margin: auto;
+}
+div.wpp-plugin-graph div.yAxis div.tickLabel {
+	margin-right: 25px;
+	margin-top: -10px;
+}
+
+
+/** Advanced metrics table and glossary table **/
+table.wpp-results-table td {
+	background-color: #ffffff;
+	padding: 6px;
+}
+table.wpp-results-table td {
+	border-style: solid;
+	border-color: #eaeaea;
+	border-width: 0px 1px 1px 1px;
+	vertical-align: top;
+}
+table.wpp-results-table th:last-child {
+	border-left-width: 0px;
+}
+table.wpp-results-table tr.even td {
+	background-color: #fcfcfc;
+}
+table.wpp-results-table {
+	width: 100%;
+	border-collapse: collapse;
+	margin: 0 auto 20px auto;
+}
+wpp-metrics-header {
+	width: 100%;
+}
+wpp-metrics-container {
+	min-width: 650px;
+	max-width: 800px;
+	width: 80%;
+}
+wpp-glossary-header {
+	width: 100%;
+}
+wpp-glossary-container {
+	min-width: 650px;
+	max-width: 800px;
+	width: 80%;
+}
+
+
+
+/** Glossary **/
+#wpp-glossary-term-display {
+	vertical-align: text-top;
+	border-width: 1px !important;
+	font-size: 14px;
+}
+#wpp-glossary-table td.term {
+	border-width: 1px !important;
+	border-color: transparent !important;
+	cursor: pointer;
+}
+#wpp-glossary-table td.term.hover {
+	background-color: #206d92;
+	border-width: 1px 0px 1px 1px !important;
+	border-color: #298cba !important;
+	background-image: url(custom-theme/images/ui-bg_highlight-hard_100_206d92_1x100.png);
+	background-position: 50% 50%;
+	background-repeat: repeat-x;
+	color: white;
+}
+
+/** Quick report table **/
+#wpp-quick-report {
+	width: 100%;
+}
+#wpp-quick-report td {
+	width: 20%;
+	vertical-align: top;
+	padding: 0px;
+}
+#wpp-quick-report td.wpp-callout {
+	text-align: center;
+}
+#wpp-quick-report div.wpp-callout-outer-wrapper {
+	border: 1px solid #cccccc;
+	margin: 10px auto;
+	width: 140px;
+}
+#wpp-quick-report div.wpp-callout-inner-wrapper {
+	width: 140px;
+	height: 92px;
+}
+#wpp-quick-report td div.wpp-callout-caption {
+	text-align: center;
+	position: relative;
+}
+#wpp-quick-report td div.wpp-callout-caption:first-child {
+	top: 5px;
+}
+#wpp-quick-report td div.wpp-callout-caption:last-child {
+	top: -6px;
+}
+#wpp-quick-report div.wpp-callout-data {
+	font-weight: bold;
+	text-align: center;
+	font-size: 40px;
+	position: relative;
+	top: 22px;
+	height: 60px;
+}
+.wpp-faded-grey {
+	color: #dddddd;	
+}
+
+
+
+/** Enter your IP dialog **/
+#wpp-ip-dialog {
+	padding: 15px;
+}
+
+
+/** Tabs shim **/
+#wpp-tabs ul li:first-child {
+	margin-left: 4px;
+}
+
+
+/** Copyright notice **/
+#wpp-copyright {
+	text-align: center;
+	margin: 20px auto 20px auto;
+}
