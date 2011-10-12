@@ -106,7 +106,7 @@ button.wpp-cancel-button{
 
 /** Charts and graphs **/
 div.wpp-plugin-graph {
-	margin: 0 auto 20px auto;
+	margin: 10px auto 20px auto;
 	width: 620px;
 	height: 320px;
 }
@@ -260,4 +260,36 @@ wpp-glossary-container {
 #wpp-copyright {
 	text-align: center;
 	margin: 20px auto 20px auto;
+}
+
+
+/** Rotated y-axis label **/
+div.wpp-y-axis-label {
+
+	position: relative;
+	top: 135px;
+	left: -20px;
+
+	/* Safari */
+	-webkit-transform: rotate(-90deg);
+
+	/* Firefox */
+	-moz-transform: rotate(-90deg);
+
+	/* IE */
+	-ms-transform: rotate(-90deg);
+
+	/* Opera */
+	-o-transform: rotate(-90deg);
+
+	/* Internet Explorer */
+	filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=3);
+}
+
+
+/** X axis label **/
+div.wpp-x-axis-label {
+	position: relative;
+	top: 20px;
+	left: 235px;
 }
