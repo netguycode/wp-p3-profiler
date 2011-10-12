@@ -91,8 +91,12 @@ button.wpp-cancel-button{
 
 /** Auto scanner display status **/
 #wpp-scanning-caption {
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	-moz-binding: url('wordwrap.xml#wordwrap');
+	word-wrap: break-word;
 	overflow: hidden;
-	width: 320px;
+	width: 100%;
 	padding-left: 4px;
 	height: 18px;
 }
