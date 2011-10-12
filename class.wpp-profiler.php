@@ -167,7 +167,7 @@ class wpp_profiler {
 
 		// Monitor all function-calls
 		declare(ticks=1);
-		register_tick_function(array(&$this, 'tick_handler'));
+		register_tick_function(array($this, 'tick_handler'));
 	}
 	
 	/**
