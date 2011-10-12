@@ -158,7 +158,7 @@ class wpp_profile_table extends WP_List_Table {
 			'name' => $key
 		));
 		return <<<EOD
-<strong>$display</strong>
+<a href="$url"><strong>$display</strong></a>
 <div class="row-actions-visible">
 	<span class="view">
 		<a href="$url" data-name="$key" title="View the results of this scan" class="view-results">View</a> |
