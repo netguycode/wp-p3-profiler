@@ -49,9 +49,6 @@ if (is_admin()) {
 	// Show any notices
 	add_action('admin_notices', array($wpp_profiler_plugin, 'show_notices'));
 
-	// Load resources
-	add_action('admin_init', array($wpp_profiler_plugin, 'load_resources'));
-
 	// Early init actions (processing bulk table actions, loading libraries, etc.)
 	add_action('admin_head', array($wpp_profiler_plugin, 'early_init'));
 }
@@ -116,7 +113,10 @@ class WP_Profiler {
 	 */
 	public function settings_menu() {
 		if (function_exists ( 'add_submenu_page' )) {
-			add_submenu_page ( 'plugins.php', 'Plugin Performance', 'Performance', 'manage_options', basename(__FILE__), array($this, 'dispatcher'));
+			$page = add_submenu_page ( 'plugins.php', 'Plugin Performance', 'Performance', 'manage_options', basename(__FILE__), array($this, 'dispatcher'));
+			add_action('load-' . $page, array($this, 'load_libraries'));
+			add_action('admin_print_scripts-' . $page, array($this, 'load_scripts'));
+			add_action('admin_print_styles-' . $page, array($this, 'load_styles'));
 		}
 	}
 
@@ -127,26 +127,37 @@ class WP_Profiler {
 	 * @uses flot, flot.pie
 	 * @return void
 	 */
-	public function load_resources() {
+	public function load_libraries() {
 
-		// Only for our page
-		if (isset($_REQUEST['page']) && basename(__FILE__) == $_REQUEST['page']) {
+		// Load php libraries libraries
+		require_once (WPP_PATH . '/class.wpp-profile-table-sorter.php');
+		require_once (WPP_PATH . '/class.wpp-profile-table.php');
+		require_once (WPP_PATH . '/class.wpp-profile-reader.php');
+	}
+	
+	/**
+	 * Load javascripts
+	 * @uses wp_enqueue_script
+	 * @uses jquery, jquery-ui, jquery.corners
+	 * @uses flot, flot.pie
+	 * @return void
+	 */
+	public function load_scripts() {
+		wp_enqueue_script('flot', plugins_url () . '/wp-profiler/js/jquery.flot.min.js', array('jquery'));
+		wp_enqueue_script('flot.pie', plugins_url () . '/wp-profiler/js/jquery.flot.pie.min.js', array('jquery', 'flot'));
+		wp_enqueue_script('wpp_jquery_ui', plugins_url () . '/wp-profiler/js/jquery-ui-1.8.16.custom.min.js', array('jquery'));
+		wp_enqueue_script('wpp_corners', plugins_url() . '/wp-profiler/js/jquery.corner.js', array('jquery'));
+	}
 
-			// Load php libraries libraries
-			require_once (WPP_PATH . '/class.wpp-profile-table-sorter.php');
-			require_once (WPP_PATH . '/class.wpp-profile-table.php');
-			require_once (WPP_PATH . '/class.wpp-profile-reader.php');
-
-			// Load javascript libraries
-			wp_enqueue_script('flot', plugins_url () . '/wp-profiler/js/jquery.flot.min.js', array('jquery'));
-			wp_enqueue_script('flot.pie', plugins_url () . '/wp-profiler/js/jquery.flot.pie.min.js', array('jquery', 'flot'));
-			wp_enqueue_script('wpp_jquery_ui', plugins_url () . '/wp-profiler/js/jquery-ui-1.8.16.custom.min.js', array('jquery'));
-			wp_enqueue_script('wpp_corners', plugins_url() . '/wp-profiler/js/jquery.corner.js', array('jquery'));
-
-			// Load CSS
-			wp_enqueue_style('wpp_jquery_ui_css', plugins_url () . '/wp-profiler/css/custom-theme/jquery-ui-1.8.16.custom.css');
-			wp_enqueue_style('wpp_css', plugins_url () . '/wp-profiler/css/wpp.css');
-		}
+	/**
+	 * Load styles
+	 * @uses wp_enqueue_style
+	 * @uses jquery-ui
+	 * @return void
+	 */
+	public function load_styles() {
+		wp_enqueue_style('wpp_jquery_ui_css', plugins_url () . '/wp-profiler/css/custom-theme/jquery-ui-1.8.16.custom.css');
+		wp_enqueue_style('wpp_css', plugins_url () . '/wp-profiler/css/wpp.css');
 	}
 	
 	/**
