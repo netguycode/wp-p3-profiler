@@ -54,6 +54,9 @@
 			}
 		});
 		$("#wpp-hide-glossary").trigger("click");
+		$("#wpp-glossary-container").dblclick(function() {
+			$("#wpp-hide-glossary").trigger("click");
+		});
 	});
 
 
@@ -133,7 +136,7 @@
 			label: "WP Core time",
 			data: [
 			<?php foreach (array_values($url_stats) as $k => $v) : ?>
-				[<?php echo $k; ?>,  <?php echo $v['core']; ?>],
+				[<?php echo $k+1; ?>,  <?php echo $v['core']; ?>],
 			<?php endforeach; ?>
 			]
 		},
@@ -141,7 +144,7 @@
 			label: "Theme time",
 			data: [
 			<?php foreach (array_values($url_stats) as $k => $v) : ?>
-				[<?php echo $k; ?>,  <?php echo $v['theme']; ?>],
+				[<?php echo $k+1; ?>,  <?php echo $v['theme']; ?>],
 			<?php endforeach; ?>
 			]
 		},
@@ -149,7 +152,7 @@
 			label: "Plugin time",
 			data: [
 			<?php foreach (array_values($url_stats) as $k => $v) : ?>
-				[<?php echo $k; ?>,  <?php echo $v['plugins']; ?>],
+				[<?php echo $k+1; ?>,  <?php echo $v['plugins']; ?>],
 			<?php endforeach; ?>
 			]
 		}
@@ -207,7 +210,7 @@
 			data: [
 			<?php if (!empty($profile)): ?>
 				<?php foreach (array_values($url_stats) as $k => $v) : ?>
-					[<?php echo $k; ?>,  <?php echo $v['queries']; ?>],
+					[<?php echo $k+1; ?>,  <?php echo $v['queries']; ?>],
 				<?php endforeach; ?>
 			<?php endif; ?>
 			]
@@ -294,6 +297,11 @@
 			<table>
 				<tr>
 					<td rowspan="2">
+						<div class="wpp-y-axis-label">
+							<em class="wpp-em">Seconds</em>
+						</div>
+					</td>
+					<td rowspan="2">
 						<div class="wpp-line wpp-graph-holder" id="wpp-holder_<?php echo $runtime_chart_id; ?>"></div>
 					</td>
 					<td>
@@ -303,6 +311,14 @@
 				<tr>
 					<td>
 						<div class="wpp-custom-legend" id="wpp-legend_<?php echo $runtime_chart_id; ?>"></div>
+					</td>
+				</tr>
+				<tr>
+					<td>&nbsp;</td>
+					<td colspan="2">
+						<div class="wpp-x-axis-label">
+							<em class="wpp-em">Visit</em>
+						</div>
 					</td>
 				</tr>
 			</table>
@@ -316,6 +332,11 @@
 			<table>
 				<tr>
 					<td rowspan="2">
+						<div class="wpp-y-axis-label">
+							<em class="wpp-em">Queries</em>
+						</div>
+					</td>
+					<td rowspan="2">
 						<div class="wpp-line wpp-graph-holder" id="wpp-holder_<?php echo $query_chart_id; ?>"></div>
 					</td>
 					<td>
@@ -325,6 +346,14 @@
 				<tr>
 					<td>
 						<div class="wpp-custom-legend" id="wpp-legend_<?php echo $query_chart_id; ?>"></div>
+					</td>
+				</tr>
+				<tr>
+					<td>&nbsp;</td>
+					<td colspan="2">
+						<div class="wpp-x-axis-label">
+							<em class="wpp-em">Visit</em>
+						</div>
 					</td>
 				</tr>
 			</table>
