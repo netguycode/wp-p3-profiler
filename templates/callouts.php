@@ -225,7 +225,7 @@
 			'resizable' : false,
 			'modal' : true,
 			'width' : 450,
-			'height' : 110,
+			'height' : 115,
 			'dialogClass' : 'noTitle'
 		});
 
@@ -562,7 +562,7 @@
 
 <!-- Dialog for progress bar -->
 <div id="wpp-progress-dialog" class="wpp-dialog">
-	<div id="wpp-scanning-caption" style="height: 20px;">
+	<div id="wpp-scanning-caption">
 		Scanning ...
 	</div>
 	<div id="wpp-progress"></div>

@@ -90,11 +90,17 @@ button.wpp-cancel-button{
 
 
 /** Auto scanner display status **/
-#wpp-scan-url {
+#wpp-scanning-caption {
 	overflow: hidden;
-	width: 350px;
-	height: 14px;
+	width: 320px;
 	padding-left: 4px;
+	height: 18px;
+}
+
+
+/** Progress bar **/
+#wpp-progress {
+	margin: 5px auto 5px auto;
 }
 
 
