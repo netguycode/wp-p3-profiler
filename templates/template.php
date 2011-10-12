@@ -65,6 +65,8 @@ if ('current-scan' == $wpp_action) {
 			} catch (Exception $e) {
 				wp_die('<div id="message" class="error"><p>Error reading scan</p></div>');
 			}
+		} else {
+			$profile = null;
 		}
 		
 		// Show the callouts bar
