@@ -37,21 +37,24 @@ require_once(WPP_PATH . '/start-profile.php');
 // Global plugin object
 $wpp_profiler_plugin = new WP_Profiler();
 
-// Show the 'Profiler' option under the 'Plugins' menu
-add_action ('admin_menu', array($wpp_profiler_plugin, 'settings_menu'));
+// Admin hooks
+if (is_admin()) {
+	// Show the 'Profiler' option under the 'Plugins' menu
+	add_action ('admin_menu', array($wpp_profiler_plugin, 'settings_menu'));
 
-// Ajax actions
-add_action('wp_ajax_wpp_start_scan', array($wpp_profiler_plugin, 'ajax_start_scan'));
-add_action('wp_ajax_wpp_stop_scan', array($wpp_profiler_plugin, 'ajax_stop_scan'));
+	// Ajax actions
+	add_action('wp_ajax_wpp_start_scan', array($wpp_profiler_plugin, 'ajax_start_scan'));
+	add_action('wp_ajax_wpp_stop_scan', array($wpp_profiler_plugin, 'ajax_stop_scan'));
 
-// Show any notices
-add_action('admin_notices', array($wpp_profiler_plugin, 'show_notices'));
+	// Show any notices
+	add_action('admin_notices', array($wpp_profiler_plugin, 'show_notices'));
 
-// Load resources
-add_action('admin_init', array($wpp_profiler_plugin, 'load_resources'));
+	// Load resources
+	add_action('admin_init', array($wpp_profiler_plugin, 'load_resources'));
 
-// Early init actions (processing bulk table actions, loading libraries, etc.)
-add_action('admin_head', array($wpp_profiler_plugin, 'early_init'));
+	// Early init actions (processing bulk table actions, loading libraries, etc.)
+	add_action('admin_head', array($wpp_profiler_plugin, 'early_init'));
+}
 
 // Remove the admin bar when in profiling mode
 if (defined('WPP_PROFILING_STARTED')) {
