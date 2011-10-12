@@ -40,9 +40,15 @@ if ('current-scan' == $wpp_action) {
 		$("#wpp-navbar").corner("round 8px");
 		$(".wpp-big-button").buttonset();
 		$("#wpp-results-table tr:even").addClass("even");
+		$("td div.row-actions-visible").hide();
+		$("table.wp-list-table td").mouseover(function() {
+			$("div.row-actions-visible", $(this)).show();
+		}).mouseout(function() {
+			$("div.row-actions-visible", $(this)).hide();
+		});
 	});
 </script>
-<div id="wpp-wrap">
+<div class="wrap">
 
 	<!-- Header icon / title -->
 	<div id="icon-plugins" class="icon32"><br/></div>
