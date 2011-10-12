@@ -411,6 +411,12 @@
 
 		// Start / stop buttons
 		$("#wpp-scan-form-wrapper").corner("round 8px");
+		
+		// Continue scan
+		$("a.wpp-continue-scan").click(function() {
+			$("#wpp-start-scan-submit").trigger("click");
+			$("#wpp-scan-name").val($(this).attr("data-name").replace(/\.json$/, ''));
+		});
 	});
 </script>
 <table id="wpp-quick-report" cellpadding="0" cellspacing="0">

@@ -163,6 +163,9 @@ class wpp_profile_table extends WP_List_Table {
 	<span class="view">
 		<a href="$url" data-name="$key" title="View the results of this scan" class="view-results">View</a> |
 	</span>
+	<span>
+		<a href="javascript:;" data-name="$key" title="Continue this scan" class="wpp-continue-scan">Continue</a> |
+	</span>
 	<span class="delete">
 		<a href="javascript:;" data-name="$key" title="Delete this scan" class="delete-scan delete">Delete</a>
 	</span>
