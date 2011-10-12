@@ -211,7 +211,7 @@
 			'draggable' : false,
 			'resizable' : false,
 			'modal' : true,
-			'width' : 325,
+			'width' : 410,
 			'height' : 170,
 			'title' : 'Scan Name'
 			// 'dialogClass' : 'noTitle'
@@ -550,10 +550,9 @@
 
 <!-- Dialog for choose manual or auto scan  -->
 <div id="wpp-scan-name-dialog" class="wpp-dialog">
-	Scan name:<br />
-	<input type="text" name="wpp_scan_name" id="wpp-scan-name" title="Enter scan name here" value="scan_<?php echo date('Y-m-d'); ?>_<?php echo substr(md5(uniqid()), -8);?>" size="35" maxlength="100" />
-	<br /><br />
-	<em class="wpp-em">Select one:</em><br />
+	<div style="padding-top: 10px;">Scan name:	<input type="text" name="wpp_scan_name" id="wpp-scan-name" title="Enter scan name here" value="scan_<?php echo date('Y-m-d'); ?>_<?php echo substr(md5(uniqid()), -8);?>" size="35" maxlength="100" /></div>
+	<div style="padding-top: 10px;"><em class="wpp-em">Enter the name of a previous scan to continue scanning</em></div>
+	<br />
 	<div class="wpp-big-button">
 		<input type="checkbox" id="wpp-auto-scan-submit" checked="checked" /><label for="wpp-auto-scan-submit">Auto Scan</label>
 		<input type="checkbox" id="wpp-manual-scan-submit" checked="checked" /><label for="wpp-manual-scan-submit">Manual Scan</label>
