@@ -106,7 +106,7 @@ class WP_Profiler {
 	 * @param string $url
 	 * @return string
 	 */
-	private function _fix_url($url) {
+	public function _fix_url($url) {
 		return str_ireplace('http://', 'https://', $url);
 	}
 
