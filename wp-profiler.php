@@ -418,8 +418,8 @@ class WP_Profiler {
 	 */
 	public function show_notices() {
 		$notices = get_transient('wpp_notices');
-		$notices = array_unique($notices);
 		if (!empty($notices)) {
+			$notices = array_unique($notices);
 			foreach ($notices as $notice) {
 				echo '<div id="message" class="updated"><p>' . htmlentities($notice) . '</p></div>';
 			}
