@@ -99,6 +99,8 @@ button.wpp-cancel-button{
 	width: 100%;
 	padding-left: 4px;
 	height: 18px;
+	color: #999999;
+	font-style: italic;
 }
 
 

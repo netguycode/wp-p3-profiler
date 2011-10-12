@@ -68,7 +68,7 @@
 				WPP_Scan.paused = true;
 				
 				// Update the caption
-				jQuery("#wpp-scanning-caption").html("Scanning is paused.");
+				jQuery("#wpp-scanning-caption").html("Scanning is paused.").css("color", "black");
 			});
 		},
 
@@ -121,13 +121,13 @@
 				jQuery("#wpp-view-results-submit").attr("data-scan-name", response);
 				
 				// Update the caption
-				jQuery("#wpp-scanning-caption").html("Scanning is complete.");
+				jQuery("#wpp-scanning-caption").html("Scanning is complete.").css("color", "black");
 			});
 		},
 
 		// Update the display
 		update_display : function() {
-			jQuery("#wpp-scanning-caption").html('<em class="wpp-em">Scanning ' + WPP_Scan.pages[WPP_Scan.current_page] + '</em>');
+			jQuery("#wpp-scanning-caption").html('Scanning ' + WPP_Scan.pages[WPP_Scan.current_page]).css("color", "");
 			jQuery("#wpp-progress").progressbar("value", (WPP_Scan.current_page / (WPP_Scan.pages.length - 1)) * 100);
 		},
 
