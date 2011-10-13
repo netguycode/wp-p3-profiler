@@ -20,11 +20,7 @@ define('WPP_FLAG_FILE', WPP_PATH . DIRECTORY_SEPARATOR . '.profiling_enabled');
 
 // Directory for profiles
 $uploads_dir = wp_upload_dir();
-if (function_exists('is_multisite') && is_multisite()) {
-	define('WPP_PROFILES_PATH', $uploads_dir['basedir'] . DIRECTORY_SEPARATOR . 'profiles' . DIRECTORY_SEPARATOR . $wpdb->blogid);
-} else {
-	define('WPP_PROFILES_PATH', $uploads_dir['basedir'] . DIRECTORY_SEPARATOR . 'profiles');
-}
+define('WPP_PROFILES_PATH', $uploads_dir['basedir'] . DIRECTORY_SEPARATOR . 'profiles');
 
 
 /**************************************************************************/
@@ -457,7 +453,6 @@ class WP_Profiler {
 	 * @return void
 	 */
 	public function activate() {
-		global $wpdb;
 		$sapi = strtolower(php_sapi_name());
 
 		// .htaccess for mod_php
@@ -488,20 +483,7 @@ class WP_Profiler {
 		}
 		
 		// Create the profiles folder
-		if (function_exists('is_multisite') && is_multisite()) {
-			if (isset($_GET['networkwide']) && ($_GET['networkwide'] == 1)) {
-				$blogids = $wpdb->get_col($wpdb->prepare('SELECT blog_id FROM ' . $wpdb->blogs));
-				foreach ($blogids as $blog_id) {
-					switch_to_blog($blog_id);
-					$uploads_dir = wp_upload_dir();
-					$folder = $uploads_dir['basedir'] . DIRECTORY_SEPARATOR . 'profiles' . DIRECTORY_SEPARATOR . $wpdb->blogid;
-					$this->_make_profiles_folder($folder);
-				}
-				restore_current_blog();
-			}
-		} else {
-			$this->_make_profiles_folder(WPP_PROFILES_PATH);
-		}
+		$this->sync_profiles_folder();
 	}
 
 	/**
@@ -511,8 +493,12 @@ class WP_Profiler {
 	 */
 	private function _make_profiles_folder($path) {
 		wp_mkdir_p($path);
-		file_put_contents($path . DIRECTORY_SEPARATOR . '.htaccess', "Deny from all\n");
-		file_put_contents($path. DIRECTORY_SEPARATOR . 'index.php', '<' . "?php header('Status: 404 Not found'); ?" . ">\nNot found");	
+		if (!file_exists("$path/.htaccess")) {
+			file_put_contents($path . DIRECTORY_SEPARATOR . '.htaccess', "Deny from all\n");
+		}
+		if (!file_exists("$path/index.php")) {
+			file_put_contents($path. DIRECTORY_SEPARATOR . 'index.php', '<' . "?php header('Status: 404 Not found'); ?" . ">\nNot found");
+		}
 	}
 	
 	/**
@@ -528,7 +514,8 @@ class WP_Profiler {
 			}
 		}
 		closedir($dir);
-		rmdir($path);	}	
+		rmdir($path);
+	}	
 
 	/**
 	 * Deactivation hook
@@ -567,8 +554,12 @@ class WP_Profiler {
 	 * @return void
 	 */
 	public function sync_profiles_folder() {
-		global $wpdb;
 		
+		// Base blog profiles folder
+		$uploads_dir = wp_upload_dir();
+		$folder = $uploads_dir['basedir'] . DIRECTORY_SEPARATOR . 'profiles';
+		$this->_make_profiles_folder($folder);
+
 		// Only for multisite
 		if (!function_exists('is_multisite') || !is_multisite()) {
 			return;
@@ -576,8 +567,6 @@ class WP_Profiler {
 
 		// List profiles/<blog id> folders
 		$folders = array();
-		$uploads_dir = wp_upload_dir();
-		$folder = $uploads_dir['basedir'] . DIRECTORY_SEPARATOR . 'profiles';
 		$dir = opendir($folder);
 		while (($file = readdir($dir)) !== false) {
 			if ($file != '.' && $file != '..' && is_dir("$folder/$file") && is_numeric($file)) {
@@ -588,9 +577,9 @@ class WP_Profiler {
 
 		// List blogs
 		$blogs = array();
-		$blogids = $wpdb->get_col($wpdb->prepare('SELECT blog_id FROM ' . $wpdb->blogs));
-		foreach ($blogids as $blog_id) {
-			$blogs[] = $blog_id;
+		$blogs = get_blog_list( 0, 'all' );
+		foreach ($blogs as $blog) {
+			$blogs[] = $blog['blog_id'];
 		}
 
 		// Folders without a blog
@@ -602,8 +591,9 @@ class WP_Profiler {
 		foreach (array_diff($blogs, $folders) as $id) {
 			switch_to_blog($id);
 			$uploads_dir = wp_upload_dir();
-			$folder = $uploads_dir['basedir'] . DIRECTORY_SEPARATOR . 'profiles' . DIRECTORY_SEPARATOR . $id;
+			$folder = $uploads_dir['basedir'] . DIRECTORY_SEPARATOR . 'profiles';
 			$this->_make_profiles_folder($folder);
+			restore_current_blog();
 		}
 	}
 	
@@ -620,16 +610,14 @@ class WP_Profiler {
 		
 		// Delete the profiles folder
 		if (function_exists('is_multisite') && is_multisite()) {
-			if (isset($_GET['networkwide']) && ($_GET['networkwide'] == 1)) {
-				$blogids = $wpdb->get_col($wpdb->prepare('SELECT blog_id FROM ' . $wpdb->blogs));
-				foreach ($blogids as $blog_id) {
-					switch_to_blog($blog_id);
-					$uploads_dir = wp_upload_dir();
-					$folder = $uploads_dir['basedir'] . DIRECTORY_SEPARATOR . 'profiles' . DIRECTORY_SEPARATOR . $wpdb->blogid;
-					$me->_delete_profiles_folder($folder);
-				}
-				restore_current_blog();
+			$blogs = get_blog_list( 0, 'all' );
+			foreach ($blogs as $blog) {
+				switch_to_blog($blog['blog_id']);
+				$uploads_dir = wp_upload_dir();
+				$folder = $uploads_dir['basedir'] . DIRECTORY_SEPARATOR . 'profiles' . DIRECTORY_SEPARATOR;
+				$me->_delete_profiles_folder($folder);
 			}
+			restore_current_blog();
 		} else {
 			$me->_delete_profiles_folder(WPP_PROFILES_PATH);
 		}

@@ -354,7 +354,6 @@ class wpp_profiler {
 	 * @return void
 	 */
 	public function shutdown_handler() {
-		global $wpdb;
 
 		// Make sure we've actually started (wp-cron??)
 		if (!defined('WPP_PROFILING_STARTED') || !WPP_PROFILING_STARTED) {
@@ -452,11 +451,7 @@ class wpp_profiler {
 		// Open the file and acquire an exclusive lock (prevent multiple hits from stomping on our
 		// previous profiles
 		$uploads_dir = wp_upload_dir();
-		if (function_exists('is_multisite') && is_multisite()) {
-			$path = $uploads_dir['basedir'] . DIRECTORY_SEPARATOR . 'profiles' . DIRECTORY_SEPARATOR . $wpdb->blogid . DIRECTORY_SEPARATOR . $this->_profile_filename;
-		} else {
-			$path = $uploads_dir['basedir'] . DIRECTORY_SEPARATOR . 'profiles' . DIRECTORY_SEPARATOR . $this->_profile_filename;
-		}
+		$path = $uploads_dir['basedir'] . DIRECTORY_SEPARATOR . 'profiles' . DIRECTORY_SEPARATOR . $this->_profile_filename;
 		$fp = fopen($path, 'a+');
 		$wait = 30; // Wait 30 iterations (3 seconds)
 		while (!flock($fp, LOCK_EX) && $wait--) {
