@@ -229,11 +229,11 @@ class wpp_profiler {
 
 		// Examine the current stack, see if we should track it.  It should be
 		// related to a plugin file if we're going to track it
-		#if (defined('DEBUG_BACKTRACE_IGNORE_ARGS')) {
-		#	$bt = debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS | DEBUG_BACKTRACE_PROVIDE_OBJECT);
-		#} else {
+		if (defined('DEBUG_BACKTRACE_IGNORE_ARGS')) {
+			$bt = debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS | DEBUG_BACKTRACE_PROVIDE_OBJECT);
+		} else {
 			$bt = debug_backtrace(true);
-		#}
+		}
 
 		// Find our function
 		$frame = $bt[1];
