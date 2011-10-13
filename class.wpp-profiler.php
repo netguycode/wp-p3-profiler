@@ -162,7 +162,7 @@ class wpp_profiler {
 		declare(ticks=1);
 		register_tick_function(array($this, 'tick_handler'));
 	}
-	
+
 	/**
 	 * In between every call, examine the stack trace time the calls, and record
 	 * the calls if the operations went through a plugin
@@ -171,6 +171,15 @@ class wpp_profiler {
 	public function tick_handler() {
 		static $theme_files_cache = array();      // Cache for theme files
 		static $actions_hooked = false;
+		static $themes_folder = 'themes';
+		static $content_folder = 'wp-content';    // Guess, if it's not defined
+		static $folder_flag = false;
+		
+		// Set the content folder
+		if (!$folder_flag && defined('WP_CONTENT_DIR')) {
+			$content_folder = basename(WP_CONTENT_DIR);
+			$folder_flag = true;
+		}
 
 		// Start timing time spent in the profiler 
 		$start = microtime(true);
@@ -190,7 +199,7 @@ class wpp_profiler {
 		if (!$actions_hooked && function_exists('add_action')) {
 
 			// Hook the shutdown action to save the profile when we're done
-			add_action('shutdown', array(&$this, 'shutdown_handler'));
+			add_action('shutdown', array($this, 'shutdown_handler'));
 
 			// Don't re-hook again
 			$actions_hooked = true;
@@ -220,54 +229,89 @@ class wpp_profiler {
 
 		// Examine the current stack, see if we should track it.  It should be
 		// related to a plugin file if we're going to track it
-		if (defined('DEBUG_BACKTRACE_IGNORE_ARGS')) {
-			$bt = debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS);
+		#if (defined('DEBUG_BACKTRACE_IGNORE_ARGS')) {
+		#	$bt = debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS | DEBUG_BACKTRACE_PROVIDE_OBJECT);
+		#} else {
+			$bt = debug_backtrace(true);
+		#}
+
+		// Find our function
+		$frame = $bt[1];
+
+		// Include/require
+		if (in_array(strtolower($frame['function']), array('include', 'require', 'include_once', 'require_once'))) {
+			$file = $frame['args'][0];
+			
+		// Object instances
+		} elseif (isset($frame['object']) && method_exists($frame['object'], $frame['function'])) {
+			try {
+				$reflector = new ReflectionMethod($frame['object'], $frame['function']);
+				$file = $reflector->getFileName();
+			} catch (Exception $e) {
+			}
+		
+		// Static object calls
+		} elseif (isset($frame['class']) && method_exists($frame['class'], $frame['function'])) {
+			try {
+				$reflector = new ReflectionMethod($frame['class'], $frame['function']);
+				$file = $reflector->getFileName();
+			} catch (Exception $e) {
+			}
+
+		// Functions
+		} elseif (!empty($frame['function']) && function_exists($frame['function'])) {
+			try {
+				$reflector = new ReflectionFunction($frame['function']);
+				$file = $reflector->getFileName();
+			} catch (Exception $e) {
+			}
+
+		// Lambdas / closures
+		} elseif ('__lambda_func' == $frame['function'] || '{closure}' == $frame['function']) {
+			$file = preg_replace('/\(\d+\)\s+:\s+runtime-created function/', '', $bt[0]['file']);
+
+		// Files, no other hints
+		} elseif (isset($frame['file'])) {
+			$file = $frame['file'];
+
+		// No idea
 		} else {
-			$bt = debug_backtrace();
+			$file = $_SERVER['SCRIPT_FILENAME'];
+			#error_log('Unknown function / file');
+			#error_log(print_r($bt, true));
 		}
+		unset($bt);
 
 		// Is it a plugin?
-		$plugin = false;
-		foreach ($bt as $frame) {
-			if (!array_key_exists('file', $frame)) {
-				continue; // eval'd code
-			}
-			if ($this->_is_a_plugin_file($frame['file'])) {
-				$plugin = $this->_get_plugin_name($frame['file']);
-				break;
-			}
+		$plugin = $this->_is_a_plugin_file($file);
+		if ($plugin) {
+			$plugin_name = $this->_get_plugin_name($file);
 		}
 
 		// Is it a theme?
 		$is_a_theme = false;
 		if (FALSE === $plugin) {
-			foreach ($bt as $frame) {
-				if (!isset($frame['file'])) {
-					continue; // eval'd code
-				}
-				if (isset($theme_files_cache[$frame['file']])) {
-					$is_a_theme = $theme_files_cache[$frame['file']];
-					break;
-				}
+			if (!$is_a_theme && isset($theme_files_cache[$file])) {
+				$is_a_theme = $theme_files_cache[$file];
+			}
 
-				$theme_files_cache[$frame['file']] = (
-					(FALSE !== strpos($frame['file'], '/themes/') || FALSE !== strpos($frame['file'], '\\themes\\')) &&  // Most common filter
-					(FALSE !== strpos($frame['file'], '/wp-content/') || FALSE !== strpos($frame['file'], '\\wp-content\\')) // Second most common filter
-				);
-				$theme_files_cache[$frame['file']];
+			$theme_files_cache[$file] = (
+				(FALSE !== strpos($file, '/' . $themes_folder . '/') || FALSE !== strpos($file, '\\'. $themes_folder . '\\')) &&  // Most common filter
+				(FALSE !== strpos($file, '/' . $content_folder . '/') || FALSE !== strpos($file, '\\' . $content_folder . '\\')) // Second most common filter
+			);
+			$theme_files_cache[$file];
 
-				if ($theme_files_cache[$frame['file']]) {
-					$is_a_theme = true;
-					break;
-				}
+			if ($theme_files_cache[$file]) {
+				$is_a_theme = true;
 			}
 		}
 
 		// If we're in a plugin, queue up the stack to be timed and logged during the next tick
-		if (count($bt) > 2 && FALSE !== $plugin) {
+		if (FALSE !== $plugin) {
 
-			$this->_last_stack = $bt;
-			$this->_last_stack['plugin'] = $plugin;
+			$this->_last_stack = array(
+				'plugin' => $plugin_name
+			);
 			$this->_last_call_category = self::CATEGORY_PLUGIN;
 
 		// Track theme times - code can travel from core -> theme -> plugin, and the whole trace
@@ -295,16 +339,29 @@ class wpp_profiler {
 	 */
 	private function _is_a_plugin_file($file) {
 		static $plugin_files_cache = array();
+		static $plugins_folder = 'plugins';    // Guess, if it's not defined
+		static $muplugins_folder = 'mu-plugins';
+		static $content_folder = 'wp-content';
+		static $folder_flag = false;
+
+		// Set the plugins folder
+		if (!$folder_flag && defined('WP_PLUGIN_DIR')) {
+			$plugins_folder = basename(WP_PLUGIN_DIR);
+			$muplugins_folder = basename(WPMU_PLUGIN_DIR);
+			$content_folder = basename(WP_CONTENT_DIR);
+			$folder_flag = true;
+		}
+
 		if (isset($plugin_files_cache[$file])) {
 			return $plugin_files_cache[$file];
 		}
 
 		$plugin_files_cache[$file] = (
 			(
-				(FALSE !== strpos($file, '/plugins/') || FALSE !== strpos($file, '\\plugins\\')) ||     // Plugins
-				(FALSE !== strpos($file, '/mu-plugins/') || FALSE !== strpos($file, '\\mu-plugins\\'))  // Must-use plugins
+				(FALSE !== strpos($file, '/' . $plugins_folder . '/') || FALSE !== stripos($file, '\\' . $plugins_folder . '\\')) ||   // Plugins
+				(FALSE !== strpos($file, '/' . $muplugins_folder . '/') || FALSE !== stripos($file, '\\' . $muplugins_folder . '\\'))  // Must-use plugins
 			) &&
-			(FALSE !== strpos($file, '/wp-content/') || FALSE !== strpos($file, '\\wp-content\\')) // Second most common filter
+			(FALSE !== strpos($file, '/' . $content_folder . '/') || FALSE !== stripos($file, '\\' . $content_folder . '\\')) // Second most common filter
 		);
 
 		return $plugin_files_cache[$file];
@@ -317,6 +374,18 @@ class wpp_profiler {
 	 */
 	private function _get_plugin_name($path) {
 		static $seen_files_cache = array();
+		static $plugins_folder = 'plugins';    // Guess, if it's not defined
+		static $muplugins_folder = 'mu-plugins';
+		static $content_folder = 'wp-content';
+		static $folder_flag = false;
+
+		// Set the plugins folder
+		if (!$folder_flag && defined('WP_PLUGIN_DIR')) {
+			$plugins_folder = basename(WP_PLUGIN_DIR);
+			$muplugins_folder = basename(WPMU_PLUGIN_DIR);
+			$content_folder = basename(WP_CONTENT_DIR);
+			$folder_flag = true;
+		}
 
 		// Check the cache
 		if (isset($seen_files_cache[$path])) {
@@ -325,14 +394,14 @@ class wpp_profiler {
 
 		// Trim off the base path
 		$_path = realpath($path);
-		if (FALSE !== strpos($_path, '/wp-content/plugins/')) {
-			$_path = substr($_path, strpos($_path, '/wp-content/plugins/') + strlen('/wp-content/plugins/'));
-		} elseif (FALSE !== strpos($_path, '\\wp-content\\plugins\\')) {
-			$_path = substr($_path, strpos($_path, '\\wp-content\\plugins\\') + strlen('\\wp-content\\plugins\\'));
-		} elseif (FALSE !== strpos($_path, '/wp-content/mu-plugins/')) {
-			$_path = substr($_path, strpos($_path, '/wp-content/mu-plugins/') + strlen('/wp-content/mu-plugins/'));
-		} elseif (FALSE !== strpos($_path, '\\wp-content\\mu-plugins\\')) {
-			$_path = substr($_path, strpos($_path, '\\wp-content\\mu-plugins\\') + strlen('\\wp-content\\mu-plugins\\'));
+		if (FALSE !== strpos($_path, '/' . $content_folder . '/' . $plugins_folder . '/')) {
+			$_path = substr($_path, strpos($_path, '/' . $content_folder . '/' . $plugins_folder . '/') + strlen('/' . $content_folder . '/' . $plugins_folder . '/'));
+		} elseif (FALSE !== stripos($_path, '\\' . $content_folder . '\\' . $plugins_folder . '\\')) {
+			$_path = substr($_path, stripos($_path, '\\' . $content_folder . '\\' . $plugins_folder . '\\') + strlen('\\' . $content_folder . '\\' . $plugins_folder . '\\'));
+		} elseif (FALSE !== strpos($_path, '/' . $content_folder . '/' . $muplugins_folder . '/')) {
+			$_path = substr($_path, strpos($_path, '/' . $content_folder . '/' . $muplugins_folder . '/') + strlen('/' . $content_folder . '/' . $muplugins_folder . '/'));
+		} elseif (FALSE !== stripos($_path, '\\' . $content_folder . '\\' . $muplugins_folder . '\\')) {
+			$_path = substr($_path, stripos($_path, '\\' . $content_folder . '\\' . $muplugins_folder . '\\') + strlen('\\' . $content_folder . '\\' . $muplugins_folder . '\\'));
 		}
 
 		// Grab the plugin name as a folder or a file
@@ -417,8 +486,8 @@ class wpp_profiler {
 				)
 			);
 		} elseif (
-			(FALSE !== strpos($_SERVER['SCRIPT_FILENAME'], '/themes/') || FALSE !== strpos($_SERVER['SCRIPT_FILENAME'], '\\themes\\')) &&  // Most common filter
-			(FALSE !== strpos($_SERVER['SCRIPT_FILENAME'], '/wp-content/') || FALSE !== strpos($file, '\\wp-content\\')) // Second most common filter
+			(FALSE !== strpos($_SERVER['SCRIPT_FILENAME'], '/themes/') || FALSE !== stripos($_SERVER['SCRIPT_FILENAME'], '\\themes\\')) &&  // Most common filter
+			(FALSE !== strpos($_SERVER['SCRIPT_FILENAME'], '/' . basename(WP_CONTENT_DIR) . '/') || FALSE !== stripos($file, '\\' . basename(WP_CONTENT_DIR) . '\\')) // Second most common filter
 			) {
 			$this->_profile['runtime'] = array(
 				'total'     => $runtime,
