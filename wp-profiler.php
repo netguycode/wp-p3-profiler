@@ -20,7 +20,11 @@ define('WPP_FLAG_FILE', WPP_PATH . DIRECTORY_SEPARATOR . '.profiling_enabled');
 
 // Directory for profiles
 $uploads_dir = wp_upload_dir();
-define('WPP_PROFILES_PATH', $uploads_dir['basedir'] . DIRECTORY_SEPARATOR . 'profiles');
+if (function_exists('is_multisite') && is_multisite()) {
+	define('WPP_PROFILES_PATH', $uploads_dir['basedir'] . DIRECTORY_SEPARATOR . 'profiles' . DIRECTORY_SEPARATOR . $wpdb->blogid);
+} else {
+	define('WPP_PROFILES_PATH', $uploads_dir['basedir'] . DIRECTORY_SEPARATOR . 'profiles');
+}
 
 
 /**************************************************************************/
@@ -63,6 +67,10 @@ if (defined('WPP_PROFILING_STARTED')) {
 register_activation_hook(WPP_PATH . DIRECTORY_SEPARATOR . 'wp-profiler.php', array($wpp_profiler_plugin, 'activate'));
 register_deactivation_hook(WPP_PATH . DIRECTORY_SEPARATOR . 'wp-profiler.php', array($wpp_profiler_plugin, 'deactivate'));
 register_uninstall_hook(WPP_PATH . DIRECTORY_SEPARATOR . 'wp-profiler.php', array('WP_Profiler', 'uninstall'));
+if (function_exists('is_multisite') && is_multisite()) {
+	add_action('wpmu_add_blog', array($wpp_profiler_plugin, 'sync_profiles_folder'));
+	add_action('wpmu_delete_blog', array($wpp_profiler_plugin, 'sync_profiles_folder'));
+}
 
 /**
  * WordPress Plugin Profiler Plugin Controller
@@ -449,6 +457,7 @@ class WP_Profiler {
 	 * @return void
 	 */
 	public function activate() {
+		global $wpdb;
 		$sapi = strtolower(php_sapi_name());
 
 		// .htaccess for mod_php
@@ -479,10 +488,47 @@ class WP_Profiler {
 		}
 		
 		// Create the profiles folder
-		wp_mkdir_p(WPP_PROFILES_PATH);
-		file_put_contents(WPP_PROFILES_PATH . DIRECTORY_SEPARATOR . '.htaccess', "Deny from all\n");
-		file_put_contents(WPP_PROFILES_PATH . DIRECTORY_SEPARATOR . 'index.php', '<' . "?php header('Status: 404 Not found'); ?" . ">\nNot found");
+		if (function_exists('is_multisite') && is_multisite()) {
+			if (isset($_GET['networkwide']) && ($_GET['networkwide'] == 1)) {
+				$blogids = $wpdb->get_col($wpdb->prepare('SELECT blog_id FROM ' . $wpdb->blogs));
+				foreach ($blogids as $blog_id) {
+					switch_to_blog($blog_id);
+					$uploads_dir = wp_upload_dir();
+					$folder = $uploads_dir['basedir'] . DIRECTORY_SEPARATOR . 'profiles' . DIRECTORY_SEPARATOR . $wpdb->blogid;
+					$this->_make_profiles_folder($folder);
+				}
+				restore_current_blog();
+			}
+		} else {
+			$this->_make_profiles_folder(WPP_PROFILES_PATH);
+		}
 	}
+
+	/**
+	 * Make the profiles folder
+	 * @param string $path
+	 * @return void
+	 */
+	private function _make_profiles_folder($path) {
+		wp_mkdir_p($path);
+		file_put_contents($path . DIRECTORY_SEPARATOR . '.htaccess', "Deny from all\n");
+		file_put_contents($path. DIRECTORY_SEPARATOR . 'index.php', '<' . "?php header('Status: 404 Not found'); ?" . ">\nNot found");	
+	}
+	
+	/**
+	 * Delete the profiles folder
+	 * @param string $path
+	 * @return void
+	 */
+	private function _delete_profiles_folder($path) {
+		$dir = opendir($path);
+		while (($file = readdir($dir)) !== false) {
+			if ($file != '.' && $file != '..') {
+				unlink($path . DIRECTORY_SEPARATOR . $file);
+			}
+		}
+		closedir($dir);
+		rmdir($path);	}	
 
 	/**
 	 * Deactivation hook
@@ -516,18 +562,76 @@ class WP_Profiler {
 	}
 	
 	/**
+	 * Sync profiles folder
+	 * Call whenever a blog is added / removed
+	 * @return void
+	 */
+	public function sync_profiles_folder() {
+		global $wpdb;
+		
+		// Only for multisite
+		if (!function_exists('is_multisite') || !is_multisite()) {
+			return;
+		}
+
+		// List profiles/<blog id> folders
+		$folders = array();
+		$uploads_dir = wp_upload_dir();
+		$folder = $uploads_dir['basedir'] . DIRECTORY_SEPARATOR . 'profiles';
+		$dir = opendir($folder);
+		while (($file = readdir($dir)) !== false) {
+			if ($file != '.' && $file != '..' && is_dir("$folder/$file") && is_numeric($file)) {
+				$folders[] = $file;
+			}
+		}
+		closedir($dir);
+
+		// List blogs
+		$blogs = array();
+		$blogids = $wpdb->get_col($wpdb->prepare('SELECT blog_id FROM ' . $wpdb->blogs));
+		foreach ($blogids as $blog_id) {
+			$blogs[] = $blog_id;
+		}
+
+		// Folders without a blog
+		foreach (array_diff($folders, $blogs) as $id) {
+			$this->_delete_profiles_folder($folder . DIRECTORY_SEPARATOR . $id);
+		}
+		
+		// Blogs without a folder
+		foreach (array_diff($blogs, $folders) as $id) {
+			switch_to_blog($id);
+			$uploads_dir = wp_upload_dir();
+			$folder = $uploads_dir['basedir'] . DIRECTORY_SEPARATOR . 'profiles' . DIRECTORY_SEPARATOR . $id;
+			$this->_make_profiles_folder($folder);
+		}
+	}
+	
+	/**
 	 * Uninstall hook
 	 * Remove profile data
 	 * @return void
 	 */
 	public static function uninstall() {
-		$dir = opendir(WPP_PROFILES_PATH);
-		while (($file = readdir($dir)) !== false) {
-			if ($file != '.' && $file != '..') {
-				unlink(WPP_PROFILES_PATH . DIRECTORY_SEPARATOR . $file);
+		// This is a static function so it needs an instance
+		// Since I'm myself, I can call my own private methods
+		$class = __CLASS__;
+		$me = new $class();
+		
+		// Delete the profiles folder
+		if (function_exists('is_multisite') && is_multisite()) {
+			if (isset($_GET['networkwide']) && ($_GET['networkwide'] == 1)) {
+				$blogids = $wpdb->get_col($wpdb->prepare('SELECT blog_id FROM ' . $wpdb->blogs));
+				foreach ($blogids as $blog_id) {
+					switch_to_blog($blog_id);
+					$uploads_dir = wp_upload_dir();
+					$folder = $uploads_dir['basedir'] . DIRECTORY_SEPARATOR . 'profiles' . DIRECTORY_SEPARATOR . $wpdb->blogid;
+					$me->_delete_profiles_folder($folder);
+				}
+				restore_current_blog();
 			}
+		} else {
+			$me->_delete_profiles_folder(WPP_PROFILES_PATH);
 		}
-		closedir($dir);
-		rmdir(WPP_PROFILES_PATH);
 	}
 }
