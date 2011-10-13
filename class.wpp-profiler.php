@@ -89,12 +89,6 @@ class wpp_profiler {
 	 * @var string
 	 */
 	private $_wpp_flag_file = '';
-
-	/**
-	 * Path to the "profiles" folder for saving the finished profile
-	 * @var string
-	 */
-	private $_wpp_profiles_path = '';
 	
 	/**
 	 * Last stack should be marked as plugin time
@@ -125,7 +119,6 @@ class wpp_profiler {
 		// Set up paths
 		$this->_wpp_path = realpath(dirname(__FILE__));
 		$this->_wpp_flag_file = $this->_wpp_path . DIRECTORY_SEPARATOR . '.profiling_enabled';
-		$this->_wpp_profiles_path = $this->_wpp_path . DIRECTORY_SEPARATOR . 'profiles';
 
 		// Check to see if we should profile
 		$wpp_json = (file_exists($this->_wpp_flag_file) ? json_decode(file_get_contents($this->_wpp_flag_file)) : null);
@@ -138,7 +131,7 @@ class wpp_profiler {
 		set_time_limit(90);
 		
 		// Set the profile file
-		$this->_profile_filename = $this->_wpp_profiles_path . DIRECTORY_SEPARATOR . $wpp_json->name . '.json';
+		$this->_profile_filename = $wpp_json->name . '.json';
 
 		// Start timing
 		$this->_start_time = microtime(true);
@@ -457,7 +450,8 @@ class wpp_profiler {
 
 		// Open the file and acquire an exclusive lock (prevent multiple hits from stomping on our
 		// previous profiles
-		$fp = fopen($this->_profile_filename, 'a+');
+		$uploads_dir = wp_upload_dir();
+		$fp = fopen($uploads_dir['basedir'] . DIRECTORY_SEPARATOR . 'profiles' . DIRECTORY_SEPARATOR . $this->_profile_filename, 'a+');
 		$wait = 30; // Wait 30 iterations (3 seconds)
 		while (!flock($fp, LOCK_EX) && $wait--) {
 			usleep(100 * 1000);

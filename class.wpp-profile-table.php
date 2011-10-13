@@ -247,7 +247,7 @@ EOD;
 	 * @return type 
 	 */
 	private function _get_profiles() {
-		$wpp_profile_dir = WPP_PATH . '/profiles';
+		$wpp_profile_dir = WPP_PROFILES_PATH;
 		$files = list_files($wpp_profile_dir);
 		$files = array_filter($files, array(&$this, '_filter_json_files'));
 		$ret = array();

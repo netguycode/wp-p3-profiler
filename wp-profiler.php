@@ -19,7 +19,8 @@ define('WPP_PATH',  realpath(dirname(__FILE__)));
 define('WPP_FLAG_FILE', WPP_PATH . DIRECTORY_SEPARATOR . '.profiling_enabled');
 
 // Directory for profiles
-define('WPP_PROFILES_PATH', WPP_PATH . DIRECTORY_SEPARATOR . 'profiles');
+$uploads_dir = wp_upload_dir();
+define('WPP_PROFILES_PATH', $uploads_dir['basedir'] . DIRECTORY_SEPARATOR . 'profiles');
 
 
 /**************************************************************************/
@@ -61,6 +62,7 @@ if (defined('WPP_PROFILING_STARTED')) {
 // Install / uninstall hooks
 register_activation_hook(WPP_PATH . DIRECTORY_SEPARATOR . 'wp-profiler.php', array($wpp_profiler_plugin, 'activate'));
 register_deactivation_hook(WPP_PATH . DIRECTORY_SEPARATOR . 'wp-profiler.php', array($wpp_profiler_plugin, 'deactivate'));
+register_uninstall_hook(WPP_PATH . DIRECTORY_SEPARATOR . 'wp-profiler.php', array('WP_Profiler', 'uninstall'));
 
 /**
  * WordPress Plugin Profiler Plugin Controller
@@ -470,11 +472,16 @@ class WP_Profiler {
 
 		// mu-plugins doesn't exist
 		if (!file_exists(WPP_PATH . '/../../mu-plugins/') && is_writable(WPP_PATH . '/../../')) {
-			$flag = @mkdir(WPP_PATH . '/../../mu-plugins/');
+			$flag = wp_mkdir_p(WPP_PATH . '/../../mu-plugins/');
 		}
 		if (file_exists(WPP_PATH . '/../../mu-plugins/') && is_writable(WPP_PATH . '/../../mu-plugins')) {
 			file_put_contents(WPP_PATH . '/../../mu-plugins/wp-profiler.php', '<' . "?php // Start profiling\nrequire_once(realpath(dirname(__FILE__)) . '/../plugins/wp-profiler/start-profile.php'); ?" . '>');
 		}
+		
+		// Create the profiles folder
+		wp_mkdir_p(WPP_PROFILES_PATH);
+		file_put_contents(WPP_PROFILES_PATH . DIRECTORY_SEPARATOR . '.htaccess', "Deny from all\n");
+		file_put_contents(WPP_PROFILES_PATH . DIRECTORY_SEPARATOR . 'index.php', '<' . "?php header('Status: 404 Not found'); ?" . ">\nNot found");
 	}
 
 	/**
@@ -504,10 +511,23 @@ class WP_Profiler {
 				// Some servers give write permission, but not delete permission.  Empty the file out, first, then try to delete it.
 				file_put_contents(WPP_PATH . '/../../mu-plugins/wp-profiler.php', '');
 				unlink(WPP_PATH . '/../../mu-plugins/wp-profiler.php');
-			} else {
-				// Make the user remove it manually.  This isn't pretty.
-				wp_die('Please remove ' . realpath(WPP_PATH . '/../../mu-plugins/wp-profiler.php'));
 			}
 		}
-	}	
+	}
+	
+	/**
+	 * Uninstall hook
+	 * Remove profile data
+	 * @return void
+	 */
+	public static function uninstall() {
+		$dir = opendir(WPP_PROFILES_PATH);
+		while (($file = readdir($dir)) !== false) {
+			if ($file != '.' && $file != '..') {
+				ulink(WPP_PROFILES_PATH . DIRECTORY_SEPARATOR . $file);
+			}
+		}
+		closedir($dir);
+		rmdir(WPP_PROFILES_PATH);
+	}
 }
