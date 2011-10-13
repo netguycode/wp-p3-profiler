@@ -524,7 +524,7 @@ class WP_Profiler {
 		$dir = opendir(WPP_PROFILES_PATH);
 		while (($file = readdir($dir)) !== false) {
 			if ($file != '.' && $file != '..') {
-				ulink(WPP_PROFILES_PATH . DIRECTORY_SEPARATOR . $file);
+				unlink(WPP_PROFILES_PATH . DIRECTORY_SEPARATOR . $file);
 			}
 		}
 		closedir($dir);
