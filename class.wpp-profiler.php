@@ -236,7 +236,10 @@ class wpp_profiler {
 		}
 
 		// Find our function
-		$frame = $bt[1];
+		$frame = $bt[0];
+		if (count($bt) >= 2) {
+			$frame = $bt[1];
+		}
 
 		// Include/require
 		if (in_array(strtolower($frame['function']), array('include', 'require', 'include_once', 'require_once'))) {
