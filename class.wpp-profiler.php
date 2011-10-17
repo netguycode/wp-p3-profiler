@@ -122,7 +122,17 @@ class wpp_profiler {
 
 		// Check to see if we should profile
 		$wpp_json = (file_exists($this->_wpp_flag_file) ? json_decode(file_get_contents($this->_wpp_flag_file)) : null);
-		if (empty($wpp_json) || !preg_match('/' . preg_quote($wpp_json->ip) . '/', $this->get_ip())) {
+		if (empty($wpp_json)) {
+			return $this;
+		}
+		$found = false;
+		foreach ($wpp_json as $k => $v) {
+			if (0 === strpos($_SERVER['REQUEST_URI'], $v->site_url) && preg_match('/' . preg_quote($v->ip) . '/', $this->get_ip())) {
+				$found = true;
+				break;
+			}
+		}
+		if (!$found) {
 			return $this;
 		}
 
@@ -131,7 +141,7 @@ class wpp_profiler {
 		set_time_limit(90);
 		
 		// Set the profile file
-		$this->_profile_filename = $wpp_json->name . '.json';
+		$this->_profile_filename = $v->name . '.json';
 
 		// Start timing
 		$this->_start_time = microtime(true);
@@ -157,6 +167,20 @@ class wpp_profiler {
 			'date'  => @date('c'),
 			'stack' => array()
 		);
+
+		// Clear any opcode caches, the optimization / caching from these can
+		// hide calls from the tick handler and backtraces
+		if ($v->disable_opcode_cache) {
+			if (extension_loaded('xcache') && function_exists('xcache_clear_cache') && !ini_get('xcache.admin.enable_auth')) {
+				for ($i = 0 ; $i < xcache_count(XC_TYPE_PHP); $i++ ) {
+					xcache_clear_cache(XC_TYPE_PHP, 0);
+				}
+			} elseif (extension_loaded('apc') && function_exists('apc_clear_cache')) {
+				apc_clear_cache();
+			} elseif (extension_loaded('eaccelerator') && function_exists('eaccelerator_clean')) {
+				@eaccelerator_clean();
+			}
+		}
 
 		// Monitor all function-calls
 		declare(ticks=1);

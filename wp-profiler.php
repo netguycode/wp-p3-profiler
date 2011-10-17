@@ -272,11 +272,21 @@ class WP_Profiler {
 		$filename = sanitize_file_name($_POST['wpp_scan_name']);
 
 		// Create flag file
-		$flag1 = file_put_contents(WPP_FLAG_FILE, json_encode(array(
-			'ip'   => $_POST['wpp_ip'],
-			'name' => $filename
-		)));
+		if (file_exists(WPP_FLAG_FILE)) {
+			$json = json_decode(file_get_contents(WPP_FLAG_FILE));
+		} else {
+			$json = array();
+		}
 
+		// Add the entry (multisite installs can run more than one concurrent profile)
+		$json[] = array(
+			'ip'                   => $_POST['wpp_ip'],
+			'disable_opcode_cache' => ('true' == $_POST['wpp_disable_opcode_cache']),
+			'site_url'             => parse_url(get_home_url(), PHP_URL_PATH),
+			'name'                 => $filename
+		);
+		$flag1 = file_put_contents(WPP_FLAG_FILE, json_encode($json));
+		
 		// Kick start the profile file
 		if (!file_exists(WPP_PROFILES_PATH . "/$filename.json")) {
 			$flag2 = file_put_contents(WPP_PROFILES_PATH . "/$filename.json", '');
@@ -308,19 +318,27 @@ class WP_Profiler {
 			wp_die(0);
 		}
 
-		// Get the filename
+		// Get the file
 		$json = json_decode(file_get_contents(WPP_FLAG_FILE));
+		
+		// Stop all sites who match the current site's URL
+		foreach ($json as $k => $v) {
+			if (0 === strpos(parse_url(get_home_url(), PHP_URL_PATH), $v->site_url)) {
+				unset($json[$k]);
+			}
+		}
 
-		// Remove flag file
-		if (!unlink(WPP_FLAG_FILE)) {
+		// Rewrite the file
+		$flag = file_put_contents(WPP_FLAG_FILE, json_encode($json));
+		if (!$flag) {
 			wp_die(0);
 		}
 
 		// Tell the user what happened
 		$this->add_notice('Turned off performance scanning.');
 
-		// Return the filename
-		echo $json->name . '.json';
+		// Return the last filename
+		echo $v->name . '.json';
 		die();
 	}
 
@@ -442,7 +460,7 @@ class WP_Profiler {
 			}
 		}
 		set_transient('wpp_notices', array());
-		if (file_exists(WPP_FLAG_FILE)) {
+		if (false !== $this->scan_enabled()) {
 			echo '<div id="message" class="updated"><p>Performance scanning is enabled.</p></div>';
 		}
 	}
@@ -621,5 +639,22 @@ class WP_Profiler {
 		} else {
 			$me->_delete_profiles_folder(WPP_PROFILES_PATH);
 		}
+	}
+
+	/**
+	 * Check to see if a scan is enabled
+	 * @return array|false
+	 */
+	public function scan_enabled() {
+		if (!file_exists(WPP_FLAG_FILE)) {
+			return false;
+		}
+		$json = json_decode(file_get_contents(WPP_FLAG_FILE), true);
+		foreach ($json as $v) {
+			if (0 === strpos(parse_url(get_home_url(), PHP_URL_PATH), $v['site_url'])) {
+				return $v;
+			}
+		}
+		return false;
 	}
 }

@@ -21,7 +21,8 @@
 			
 			// Form data
 			data = {
-				'wpp_ip' : jQuery('#wpp-ip').val(),
+				'wpp_ip' : jQuery('#wpp-advanced-ip').val(),
+				'wpp_disable_opcode_cache' : jQuery('#wpp-disable-opcode-cache').prop('checked'),
 				'wpp_scan_name' : jQuery("#wpp-scan-name").val(),
 				'action' : 'wpp_start_scan',
 				'wpp_nonce' : jQuery("#wpp_nonce").val()
@@ -76,7 +77,8 @@
 		resume: function() {
 			
 			data = {
-				'wpp_ip' : jQuery('#wpp-ip').val(),
+				'wpp_ip' : jQuery('#wpp-advanced-ip').val(),
+				'wpp_disable_opcode_cache' : jQuery('#wpp-disable-opcode-cache').prop('checked'),
 				'wpp_scan_name' : jQuery("#wpp-scan-name").val(),
 				'action' : 'wpp_start_scan',
 				'wpp_nonce' : jQuery("#wpp_nonce").val()
@@ -169,7 +171,7 @@
 			'resizable' : false,
 			'modal' : true,
 			'width' : 400,
-			'height' : 180,
+			'height' : 240,
 			'title' : "Advanced Settings",
 			'buttons' :
 			[
@@ -177,7 +179,6 @@
 					text: 'OK',
 					'class' : 'button-secondary',
 					click: function() {
-						$("#wpp-ip").val($("#wpp-advanced-ip").val());
 						$(this).dialog("close");
 					}
 				},
@@ -237,7 +238,6 @@
 		
 		// Advanced settings link
 		$("#wpp-advanced-settings").click(function() {
-			$("#wpp-advanced-ip").val($("#wpp-ip").val());
 			$("#wpp-ip-dialog").dialog("open");
 		});
 
@@ -309,7 +309,8 @@
 			
 			// Form data
 			data = {
-				'wpp_ip' : jQuery('#wpp-ip').val(),
+				'wpp_ip' : jQuery('#wpp-advanced-ip').val(),
+				'wpp_disable_opcode_cache' : jQuery('#wpp-disable-opcode-cache').prop('checked'),
 				'wpp_scan_name' : jQuery("#wpp-scan-name").val(),
 				'action' : 'wpp_start_scan',
 				'wpp_nonce' : jQuery("#wpp_nonce").val()
@@ -424,19 +425,17 @@
 
 		<td>
 			<div class="ui-widget-header" id="wpp-scan-form-wrapper">
-				<?php if (file_exists(WPP_FLAG_FILE)) : ?>
+				<?php if (false !== ($info = $this->scan_enabled())) : ?>
 					<!-- Stop scan button -->
 
-					<?php $json = json_decode(file_get_contents(WPP_FLAG_FILE)); ?>
-					<strong>IP:</strong><?php echo htmlentities($json->ip); ?>
+					<strong>IP:</strong><?php echo htmlentities($info['ip']); ?>
 					<div class="wpp-big-button"><input type="checkbox" checked="checked" id="wpp-stop-scan-submit" /><label for="wpp-stop-scan-submit">Stop Scan</label></div>
-					<?php echo htmlentities($json->name); ?>
+					<?php echo htmlentities($info['name']); ?>
 
 				<?php else : ?>
 
 					<!-- Start scan button -->
 					<?php echo wp_nonce_field('wpp_ajax_start_scan', 'wpp_nonce'); ?>
-					<input type="hidden" id="wpp-ip" name="wpp_ip" value="<?php echo $GLOBALS['wpp_profiler']->get_ip(); ?>" />
 					<strong>My IP:</strong><?php echo htmlentities($GLOBALS['wpp_profiler']->get_ip()); ?>
 					<div class="wpp-big-button"><input type="checkbox" checked="checked" id="wpp-start-scan-submit" /><label for="wpp-start-scan-submit">Start Scan</label></div>
 					<a href="javascript:;" id="wpp-advanced-settings">Advanced Settings</a>
@@ -523,10 +522,18 @@
 
 <!-- Dialog for IP settings -->
 <div id="wpp-ip-dialog" class="wpp-dialog">
-	IP address or pattern:<br />
-	<input type="text" id="wpp-advanced-ip" style="width:90%;" size="35" value="<?php echo $GLOBALS['wpp_profiler']->get_ip(); ?>" title="Enter IP address or regular expression pattern" />
+	<div>
+		IP address or pattern:<br />
+		<input type="text" id="wpp-advanced-ip" style="width:90%;" size="35" value="<?php echo $GLOBALS['wpp_profiler']->get_ip(); ?>" title="Enter IP address or regular expression pattern" />
+		<br />
+		<em class="wpp-em">Example: 1.2.3.4 or (1.2.3.4|4.5.6.7)</em>
+	</div>
 	<br />
-	<em class="wpp-em">Example: 1.2.3.4 or (1.2.3.4|4.5.6.7)</em>
+	<div>
+		<input type="checkbox" id="wpp-disable-opcode-cache" checked="checked" /><label for="wpp-disable-opcode-cache">Attempt to disable opcode caches <em>(recommended)</em></label>
+		<br />
+		<em class="wpp-em">This can increase accuracy in plugin detection, but decrease accuracy in timing</em>
+	</div>		
 </div>
 
 <!-- Dialog for iframe scanner -->
