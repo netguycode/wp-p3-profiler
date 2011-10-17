@@ -277,12 +277,18 @@ class WP_Profiler {
 		} else {
 			$json = array();
 		}
+		
+		// Site url
+		$site_url = parse_url(get_home_url(), PHP_URL_PATH);
+		if (null === $site_url) {
+			$site_url = '/';
+		}
 
 		// Add the entry (multisite installs can run more than one concurrent profile)
 		$json[] = array(
 			'ip'                   => $_POST['wpp_ip'],
 			'disable_opcode_cache' => ('true' == $_POST['wpp_disable_opcode_cache']),
-			'site_url'             => parse_url(get_home_url(), PHP_URL_PATH),
+			'site_url'             => $site_url,
 			'name'                 => $filename
 		);
 		$flag1 = file_put_contents(WPP_FLAG_FILE, json_encode($json));
@@ -322,8 +328,12 @@ class WP_Profiler {
 		$json = json_decode(file_get_contents(WPP_FLAG_FILE));
 		
 		// Stop all sites who match the current site's URL
+		$site_url = parse_url(get_home_url(), PHP_URL_PATH);
+		if (null === $site_url) {
+			$site_url = '/';
+		}
 		foreach ($json as $k => $v) {
-			if (0 === strpos(parse_url(get_home_url(), PHP_URL_PATH), $v->site_url)) {
+			if ($site_url == $v->site_url) {
 				unset($json[$k]);
 			}
 		}
@@ -649,9 +659,13 @@ class WP_Profiler {
 		if (!file_exists(WPP_FLAG_FILE)) {
 			return false;
 		}
+		$site_url = parse_url(get_home_url(), PHP_URL_PATH);
+		if (null === $site_url) {
+			$site_url = '/';
+		}
 		$json = json_decode(file_get_contents(WPP_FLAG_FILE), true);
 		foreach ($json as $v) {
-			if (0 === strpos(parse_url(get_home_url(), PHP_URL_PATH), $v['site_url'])) {
+			if ($site_url == $v['site_url']) {
 				return $v;
 			}
 		}
