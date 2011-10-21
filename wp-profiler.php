@@ -40,6 +40,7 @@ $wpp_profiler_plugin = new WP_Profiler();
 
 // Admin hooks
 if (is_admin()) {
+
 	// Show the 'Profiler' option under the 'Plugins' menu
 	add_action ('admin_menu', array($wpp_profiler_plugin, 'settings_menu'));
 
@@ -119,7 +120,7 @@ class WP_Profiler {
 	 */
 	public function settings_menu() {
 		if (function_exists ( 'add_submenu_page' )) {
-			$page = add_submenu_page ( 'plugins.php', 'Plugin Performance', 'Performance', 'manage_options', basename(__FILE__), array($this, 'dispatcher'));
+			$page = add_submenu_page('tools.php', 'Plugin Performance', 'Plugin Performance', 'manage_options', basename(__FILE__), array($this, 'dispatcher'));
 			add_action('load-' . $page, array($this, 'load_libraries'));
 			add_action('admin_print_scripts-' . $page, array($this, 'load_scripts'));
 			add_action('admin_print_styles-' . $page, array($this, 'load_styles'));
