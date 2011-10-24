@@ -1,3 +1,64 @@
+<script type="text/javascript">
+	// Set up the tabs
+	jQuery(document).ready(function($) {
+		$("#toggle-glossary").click(function() {
+			$("#glossary-terms").toggle();
+			if ("Hide Glossary" == $("#toggle-glossary").html()) {
+				$("#toggle-glossary").html("Show Glossary");
+			} else {
+				$("#toggle-glossary").html("Hide Glossary");
+			}
+		});
+		$("#glossary-terms td.term").click(function() {
+			var definition = $("div.definition", $(this)).html();
+			$("#wpp-glossary-term-display").html(definition);
+			$("#wpp-glossary-table td.term.hover").removeClass("hover");
+			$(this).addClass("hover");
+		});
+		$("#wpp-glossary-table td.term:first").click();
+		$("#wpp-hide-glossary").click(function() {
+			if ("Hide" == $(this).html()) {
+				$("#wpp-glossary-table tbody").hide();
+				$("#wpp-glossary-table tfoot").hide();
+				$(this).html("Show");
+			} else {
+				$("#wpp-glossary-table tbody").show();
+				$("#wpp-glossary-table tfoot").show();
+				$(this).html("Hide");
+			}
+		});
+		// $("#wpp-hide-glossary").trigger("click");
+		$("#wpp-glossary-container").dblclick(function() {
+			$("#wpp-hide-glossary").trigger("click");
+		});
+	});
+</script>
+
+<h2>How do I use this?</h2>
+<blockquote>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut ac
+turpis erat. Quisque porta metus at velit porta at euismod arcu accumsan. Aenean
+lorem risus, pulvinar ac facilisis eu, consectetur vitae lacus. Cras
+pellentesque lacinia orci, et dictum erat tempus nec. Cras id tincidunt eros.
+Cras dignissim posuere scelerisque. Donec dignissim hendrerit porta. Nullam
+interdum libero eget ligula sollicitudin tristique. Curabitur semper ullamcorper
+augue quis ullamcorper. Donec rhoncus molestie mi, mollis dapibus metus laoreet
+nec. Morbi sit amet eros ipsum. Vivamus dictum magna sed massa pellentesque
+varius malesuada odio sodales. Morbi bibendum justo id felis egestas
+condimentum. Fusce ac est nec orci mollis blandit sit amet et elit.</blockquote>
+
+<h2>What do I do with these results?</h2>
+<blockquote>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut ac
+turpis erat. Quisque porta metus at velit porta at euismod arcu accumsan. Aenean
+lorem risus, pulvinar ac facilisis eu, consectetur vitae lacus. Cras
+pellentesque lacinia orci, et dictum erat tempus nec. Cras id tincidunt eros.
+Cras dignissim posuere scelerisque. Donec dignissim hendrerit porta. Nullam
+interdum libero eget ligula sollicitudin tristique. Curabitur semper ullamcorper
+augue quis ullamcorper. Donec rhoncus molestie mi, mollis dapibus metus laoreet
+nec. Morbi sit amet eros ipsum. Vivamus dictum magna sed massa pellentesque
+varius malesuada odio sodales. Morbi bibendum justo id felis egestas
+condimentum. Fusce ac est nec orci mollis blandit sit amet et elit.</blockquote>
+
+
 <h2>How does this work?</h2>
 <blockquote>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut ac
 turpis erat. Quisque porta metus at velit porta at euismod arcu accumsan. Aenean
@@ -79,7 +140,7 @@ nec. Morbi sit amet eros ipsum. Vivamus dictum magna sed massa pellentesque
 varius malesuada odio sodales. Morbi bibendum justo id felis egestas
 condimentum. Fusce ac est nec orci mollis blandit sit amet et elit.</blockquote>
 
-<h2>Why is plugin <em>Xyz</em> slow?</h2>
+<h2>Why is <em>some plugin name</em>?</h2>
 <blockquote>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut ac
 turpis erat. Quisque porta metus at velit porta at euismod arcu accumsan. Aenean
 lorem risus, pulvinar ac facilisis eu, consectetur vitae lacus. Cras
@@ -91,7 +152,7 @@ nec. Morbi sit amet eros ipsum. Vivamus dictum magna sed massa pellentesque
 varius malesuada odio sodales. Morbi bibendum justo id felis egestas
 condimentum. Fusce ac est nec orci mollis blandit sit amet et elit.</blockquote>
 
-<h2>These results are different than YSlow/PageSpeed/Webpagetest.org</h2>
+<h2>How are these results different from YSlow/PageSpeed/Webpagetest.org?</h2>
 <blockquote>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut ac
 turpis erat. Quisque porta metus at velit porta at euismod arcu accumsan. Aenean
 lorem risus, pulvinar ac facilisis eu, consectetur vitae lacus. Cras
@@ -103,7 +164,7 @@ nec. Morbi sit amet eros ipsum. Vivamus dictum magna sed massa pellentesque
 varius malesuada odio sodales. Morbi bibendum justo id felis egestas
 condimentum. Fusce ac est nec orci mollis blandit sit amet et elit.</blockquote>
 
-<h2>Why is plugin <em>Xyz</em> slow??</h2>
+<h2>What can interfere with testing?</h2>
 <blockquote>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut ac
 turpis erat. Quisque porta metus at velit porta at euismod arcu accumsan. Aenean
 lorem risus, pulvinar ac facilisis eu, consectetur vitae lacus. Cras
@@ -114,3 +175,140 @@ augue quis ullamcorper. Donec rhoncus molestie mi, mollis dapibus metus laoreet
 nec. Morbi sit amet eros ipsum. Vivamus dictum magna sed massa pellentesque
 varius malesuada odio sodales. Morbi bibendum justo id felis egestas
 condimentum. Fusce ac est nec orci mollis blandit sit amet et elit.</blockquote>
+
+<h2>What can interfere with testing?</h2>
+<blockquote>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut ac
+turpis erat. Quisque porta metus at velit porta at euismod arcu accumsan. Aenean
+lorem risus, pulvinar ac facilisis eu, consectetur vitae lacus. Cras
+pellentesque lacinia orci, et dictum erat tempus nec. Cras id tincidunt eros.
+Cras dignissim posuere scelerisque. Donec dignissim hendrerit porta. Nullam
+interdum libero eget ligula sollicitudin tristique. Curabitur semper ullamcorper
+augue quis ullamcorper. Donec rhoncus molestie mi, mollis dapibus metus laoreet
+nec. Morbi sit amet eros ipsum. Vivamus dictum magna sed massa pellentesque
+varius malesuada odio sodales. Morbi bibendum justo id felis egestas
+condimentum. Fusce ac est nec orci mollis blandit sit amet et elit.</blockquote>
+
+<h2>Glossary</h2>
+<div>
+	<div id="wpp-glossary-container">
+		<div class="ui-widget-header" id="wpp-glossary-header" style="padding: 8px;">
+			<strong>Glossary</strong>
+			<div style="position: relative; top: 0px; right: 80px; float: right;">
+				<a href="javascript:;" id="wpp-hide-glossary">Hide</a>
+			</div>
+		</div>
+		<div>
+		<table class="wpp-results-table" id="wpp-glossary-table" cellpadding="0" cellspacing="0" border="0">
+			<tbody>
+				<tr>
+					<td colspan="2" style="border-left-width: 1px !important;">
+						<div id="glossary">
+							<table width="100%" cellpadding="0" cellspacing="0" border="0" id="glossary-terms">
+								<tr>
+									<td width="200" class="term"><strong>Total Load Time</strong>
+										<div id="total-load-time-definition" style="display: none;" class="definition">
+											How long the site took to load.  This is an observed measurement (start timing when the page was requested,
+											stop timing when the page was delivered to the browser, calcuate the difference).  Lower is better.
+										</div>
+									</td>
+									<td width="400" rowspan="12" id="wpp-glossary-term-display">&nbsp;</td>
+								</tr>
+								<tr>
+									<td class="term"><strong>Site Load Time</strong>
+										<div id="site-load-time-definition" style="display: none;" class="definition">
+											The calculated total load time minus the profile overhead.  This is closer to your site's real-life load time.  Lower is better.
+										</div>
+									</td>
+								</tr>
+								<tr>
+									<td class="term"><strong>Profile Overhead</strong>
+										<div id="profile-overhead-definition" style="display: none;" class="definition">
+											The load time spent in the profiling code.  Since using the profiler will slow down your load time, it is important
+											to know how much impact the profiler is having on your site.  This won't impact your site's real-life load time.
+										</div>
+									</td>
+								</tr>
+								<tr>
+									<td class="term"><strong>Plugin Load Time</strong>
+										<div id="plugin-load-time-definition" style="display: none;" class="definition">
+											The load time spent in plugins.  Because of the way WordPress is built, a function call can be traced from a
+											plugin through a theme through the core.  The profiler prioritizes plugin calls first, theme calls second, and
+											core calls last.  Lower is better.
+										</div>
+									</td>
+								</tr>
+								<tr>
+									<td class="term"><strong>Theme Load Time</strong>
+										<div id="theme-load-time-definition" style="display: none;" class="definition">
+											The load time spent in the theme.  Because of the way WordPress is built, a function call can be traced from a
+											plugin through a theme through the core.  The profiler prioritizes plugin calls first, theme calls second, and
+											core calls last.  Lower is better.
+										</div>
+									</td>
+								</tr>
+								<tr>
+									<td class="term"><strong>Core Load Time</strong>
+										<div id="core-load-time-definition" style="display: none;" class="definition">
+											The load time spent in the WordPress core.  Because of the way WordPress is built, a function call can be traced from a
+											plugin through a theme through the core.  The profiler prioritizes plugin calls first, theme calls second, and
+											core calls last.  This will probably be constant.
+										</div>
+									</td>
+								</tr>
+								<tr>
+									<td class="term"><strong>Margin of Error</strong>
+										<div id="drift-definition" style="display: none;" class="definition">
+											This is the difference between the observed runtime (what actually happened) and expected runtime (adding up the plugin
+											runtime, theme runtime, core runtime, and profiler overhead).  There are several reasons this margin of error can exist.
+											Most likely, the profiler is missing microsends while it's doing math to add up the runtime it just observed.  Using a
+											network clock to set the time (NTP) can also cause minute timing changes.  Ideally, this number should be zero, but
+											there's nothing you can do to change it.  It will give you an idea of how accurate the other results are.
+											</ul>
+										</div>
+									</td>
+								</tr>
+								<tr>
+									<td class="term"><strong>Observed</strong>
+										<div id="observed-definition" style="display: none;" class="definition">
+											How long the site took to load.  This is an observed measurement (start timing when the page was requested,
+											stop timing when the page was delivered to the browser, calcuate the difference).
+										</div>
+									</td>
+								</tr>
+								<tr>
+									<td class="term"><strong>Expected</strong>
+										<div id="expected-definition" style="display: none;" class="definition">
+											The expected site load time calculated by adding plugin load time + core load time + theme load time + profiler overhead.
+										</div>
+									</td>
+								</tr>
+								<tr>
+									<td class="term"><strong>Plugin Function Calls</strong>
+										<div id="plugin-funciton-calls-definition" style="display: none;" class="definition">
+											The number of php function calls generated by a plugin.  Lower is better.
+										</div>
+									</td>
+								</tr>
+								<tr>
+									<td class="term"><strong>Memory Usage</strong>
+										<div id="memory-usage-definition" style="display: none;" class="definition">
+											The amount of RAM usage observed.  This is reporeted by <a href="http://php.net/memory_get_peak_usage" target="_blank">memory_get_peak_usage()</a>.  Lower is better.
+										</div>
+									</td>
+								</tr>
+								<tr>
+									<td class="term"><strong>MySQL Queries</strong>
+										<div id="mysql-queries-definition" style="display: none;" class="definition">
+											The count of queries sent to the database.  This reported by the WordPress function <a href="http://codex.wordpress.org/Function_Reference/get_num_queries" target="_new">get_num_queries()</a>.  Lower is better.
+										</div>
+									</td>
+								</tr>
+							</table>
+						</div>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</div>
+</div>

@@ -299,3 +299,10 @@ div.wpp-x-axis-label {
 	top: 20px;
 	left: 235px;
 }
+
+
+/** Jack up the font size on the tooltips **/
+.ui-tooltip {
+	font-size: 120%;
+	line-height: 125%;
+}

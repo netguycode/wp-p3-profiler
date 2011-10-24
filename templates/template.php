@@ -46,6 +46,18 @@ if ('current-scan' == $wpp_action) {
 		}).mouseout(function() {
 			$("div.row-actions-visible", $(this)).hide();
 		});
+		$(".qtip-tip").each(function() {
+			$(this).qtip({
+				content: $(this).attr("title"),
+				position: {
+					my: 'top center',
+					at: 'bottom center'
+				},
+				style: {
+					classes: 'ui-tooltip-blue ui-tooltip-shadow'
+				}
+			});
+		});
 	});
 </script>
 <div class="wrap">

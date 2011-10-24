@@ -254,6 +254,7 @@
 			$(this).prop("checked", true);
 			$(this).button("refresh");
 			
+			$("#wpp-scan-frame").attr("src", $("#wpp-scan-frame").attr("data-defaultsrc"));
 			$("#wpp-scanner-dialog").dialog("open");
 			$("#wpp-scan-name-dialog").dialog("open");
 		});
@@ -446,7 +447,7 @@
 
 		<!-- First callout cell -->
 		<td class="wpp-callout">
-			<div class="wpp-callout-outer-wrapper">
+			<div class="wpp-callout-outer-wrapper qtip-tip" title="Total number of active plugins, including must-use plugins, on your site.">
 				<div class="wpp-callout-inner-wrapper">
 					<div class="wpp-callout-caption">Total plugins:</div>
 					<div class="wpp-callout-data">
@@ -468,7 +469,7 @@
 
 		<!-- Second callout cell -->
 		<td class="wpp-callout">
-			<div class="wpp-callout-outer-wrapper" <?php if (!empty($scan)) : ?>title="From <?php echo basename($scan); ?><?php endif; ?>">
+			<div class="wpp-callout-outer-wrapper qtip-tip" title="Total number of seconds dedicated to plugin code per visit on your site." <?php if (!empty($scan)) : ?>title="From <?php echo basename($scan); ?><?php endif; ?>">
 				<div class="wpp-callout-inner-wrapper">
 					<div class="wpp-callout-caption">Plugin load time</div>
 					<div class="wpp-callout-data">
@@ -485,7 +486,7 @@
 
 		<!-- Third callout cell -->
 		<td class="wpp-callout">
-			<div class="wpp-callout-outer-wrapper" <?php if (!empty($scan)) : ?>title="From <?php echo basename($scan); ?><?php endif; ?>">
+			<div class="wpp-callout-outer-wrapper qtip-tip" title="Percent of load time on your site dedicated to plugin code." <?php if (!empty($scan)) : ?>title="From <?php echo basename($scan); ?><?php endif; ?>">
 				<div class="wpp-callout-inner-wrapper">
 					<div class="wpp-callout-caption">Plugin impact</div>
 					<div class="wpp-callout-data">
@@ -502,7 +503,7 @@
 
 		<!-- Fourth callout cell -->
 		<td class="wpp-callout">
-			<div class="wpp-callout-outer-wrapper" <?php if (!empty($scan)) : ?>title="From <?php echo basename($scan); ?><?php endif; ?>">
+			<div class="wpp-callout-outer-wrapper qtip-tip" title="Total number of database queries per visit." <?php if (!empty($scan)) : ?>title="From <?php echo basename($scan); ?><?php endif; ?>">
 				<div class="wpp-callout-inner-wrapper">
 					<div class="wpp-callout-caption">MySQL Queries</div>
 					<div class="wpp-callout-data">
@@ -538,7 +539,7 @@
 
 <!-- Dialog for iframe scanner -->
 <div id="wpp-scanner-dialog" class="wpp-dialog">
-	<iframe id="wpp-scan-frame" frameborder="0" src="<?php if (true === force_ssl_admin()) {echo str_replace('http://', 'https://', home_url());} else {echo home_url();} ?>"></iframe>
+	<iframe id="wpp-scan-frame" frameborder="0" data-defaultsrc="<?php if (true === force_ssl_admin()) {echo str_replace('http://', 'https://', home_url());} else {echo home_url();} ?>"></iframe>
 	<div id="wpp-scan-caption">
 		The scanner will analyze the speed and resource usage of all active plugins on your website.
 		It may take several minutes, and this window must remain open for the scan to finish successfully. 
