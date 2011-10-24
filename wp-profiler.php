@@ -152,6 +152,7 @@ class WP_Profiler {
 	public function load_scripts() {
 		wp_enqueue_script('flot', plugins_url () . '/wp-profiler/js/jquery.flot.min.js', array('jquery'));
 		wp_enqueue_script('flot.pie', plugins_url () . '/wp-profiler/js/jquery.flot.pie.min.js', array('jquery', 'flot'));
+		wp_enqueue_script('flot.navigate', plugins_url () . '/wp-profiler/js/jquery.flot.navigate.js', array('jquery', 'flot'));
 		wp_enqueue_script('wpp_jquery_ui', plugins_url () . '/wp-profiler/js/jquery-ui-1.8.16.custom.min.js', array('jquery'));
 		wp_enqueue_script('wpp_corners', plugins_url() . '/wp-profiler/js/jquery.corner.js', array('jquery'));
 		wp_enqueue_script('wpp_qtip', plugins_url() . '/wp-profiler/js/jquery.qtip.min.js', array('jquery', 'wpp_jquery_ui'));

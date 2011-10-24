@@ -255,9 +255,10 @@
 		},
 		<?php endforeach; ?>
 	];
-	
+
+	var barchartplot = null;
 	jQuery(document).ready(function($) {
-		$.plot($("#wpp-holder_<?php echo $plugin_breakdown_chart_id; ?>"), data_<?php echo $plugin_breakdown_chart_id; ?>,
+		barchartplot = $.plot($("#wpp-holder_<?php echo $plugin_breakdown_chart_id; ?>"), data_<?php echo $plugin_breakdown_chart_id; ?>,
 		{
 				series: {
 					bars: {
@@ -276,6 +277,7 @@
 					clickable: true
 				},
 				xaxis: {
+					show: false,
 					ticks: [
 						[0, 'WP Core Time'],
 						[1, 'Theme'],
@@ -284,13 +286,23 @@
 						<?php foreach ($profile->plugin_times as $k => $v) : ?>
 						[<?php echo $i++ ?>, '<?php echo $k; ?>'],
 						<?php endforeach; ?>
-					]
+					],
+					zoomRange: [0.1, 10],
+					panRange: [-10, 10]
+				},
+				yaxis: {
+					zoomRange: [0.1, 10], panRange: [-10, 10]
 				},
 				legend : {
 					container: $("#wpp-legend_<?php echo $plugin_breakdown_chart_id; ?>")
+				},
+				zoom: {
+					interactive: true
+				},
+				pan: {
+					interactive: true
 				}
 		});
-
 
 		$("#wpp-holder_<?php echo $plugin_breakdown_chart_id; ?>").bind("plothover", function (event, pos, item) {
 			if (item) {
@@ -301,6 +313,16 @@
 			} else {
 				$("#wpp-tooltip").remove();
 			}
+		});
+
+		// zoom buttons
+		$('<div class="button" style="float: left; position: relative; left: 440px; top: -290px;">-</div>').appendTo($("#wpp-holder_<?php echo $plugin_breakdown_chart_id; ?>").parent()).click(function (e) {
+			e.preventDefault();
+			barchartplot.zoomOut();
+		});
+		$('<div class="button" style="float: left; position: relative; left: 440px; top: -290px;">+</div>').appendTo($("#wpp-holder_<?php echo $plugin_breakdown_chart_id; ?>").parent()).click(function (e) {
+			e.preventDefault();
+			barchartplot.zoom();
 		});
 	});
 
@@ -317,7 +339,7 @@
 	<!-- Plugin bar chart -->
 	<div id="wpp-tabs-5">
 		<h2>Plugin Breakdown</h2>
-		<div class="wpp-plugin-graph" style="border: 1px solid red;">
+		<div class="wpp-plugin-graph">
 			<table>
 				<tr>
 					<td rowspan="2">
@@ -340,7 +362,7 @@
 				<tr>
 					<td>&nbsp;</td>
 					<td colspan="2">
-						<div class="wpp-x-axis-label">
+						<div class="wpp-x-axis-label" style="top: -10px;">
 							<em class="wpp-em">Component</em>
 						</div>
 					</td>
