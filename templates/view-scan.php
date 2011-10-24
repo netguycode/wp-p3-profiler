@@ -329,8 +329,8 @@
 </script>
 <div id="wpp-tabs">
 	<ul>
-		<li><a href="#wpp-tabs-5">Plugin Breakdown</a></li>
 		<li><a href="#wpp-tabs-1">Runtime By Plugin</a></li>
+		<li><a href="#wpp-tabs-5">Component Breakdown</a></li>
 		<li><a href="#wpp-tabs-2">Runtime Timeline</a></li>
 		<li><a href="#wpp-tabs-3">Query Timeline</a></li>
 		<li><a href="#wpp-tabs-4">Advanced Metrics</a></li>
