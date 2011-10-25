@@ -267,7 +267,7 @@ EOD;
 				'name'      => $this->_action_links($key, $name),
 				'date'      => date('D, M jS', $time) . ' at ' . date('g:i a', $time),
 				'count'     => number_format($count),
-				'filesize'  => $this->readable_size(filesize($file)),
+				'filesize'  => $GLOBALS['wpp_profiler_plugin']->readable_size(filesize($file)),
 				'_filesize' => filesize($file),
 				'_date'     => $time,
 				'_count'    => $count
@@ -283,19 +283,5 @@ EOD;
 	 */
 	private function _filter_json_files($file) {
 		return ('.json' == substr(strtolower($file), -5));
-	}
-
-	/**
-	 * Convert a filesize (in bytes) to a human readable filesize
-	 * @param int $size
-	 * @return string
-	 */
-	public function readable_size($size) {
-		$units = array('B', 'KB', 'MB', 'GB', 'TB');
-		$size = max($size, 0);
-		$pow = floor(($size ? log($size) : 0) / log(1024));
-		$pow = min($pow, count($units) - 1);
-		$size /= pow(1024, $pow);
-		return round($size, 0) . ' ' . $units[$pow];
 	}
 }

@@ -675,4 +675,18 @@ class WP_Profiler {
 		}
 		return false;
 	}
+	
+	/**
+	 * Convert a filesize (in bytes) to a human readable filesize
+	 * @param int $size
+	 * @return string
+	 */
+	public function readable_size($size) {
+		$units = array('B', 'KB', 'MB', 'GB', 'TB');
+		$size = max($size, 0);
+		$pow = floor(($size ? log($size) : 0) / log(1024));
+		$pow = min($pow, count($units) - 1);
+		$size /= pow(1024, $pow);
+		return round($size, 0) . ' ' . $units[$pow];
+	}
 }
