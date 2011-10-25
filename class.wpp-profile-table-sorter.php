@@ -48,6 +48,10 @@ class wpp_profile_table_sorter {
 	 * @return bool
 	 */
 	private function _compare($a, $b) {
-		return strcmp($a[$this->field], $b[$this->field]);
+		if ('_filesize' == $this->field) {
+			return $a[$this->field] < $b[$this->field];
+		} else {
+			return strcmp($a[$this->field], $b[$this->field]);
+		}
 	}
 }
