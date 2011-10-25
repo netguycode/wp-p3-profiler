@@ -243,17 +243,21 @@
 			label: 'Theme',
 			data: [[1, <?php echo $profile->averages['theme']; ?>]]
 		},
-		{
-			label: 'Total Plugins',
-			data: [[2, <?php echo $profile->averages['plugins']; ?>]]
-		},
-		<?php $i = 3; ?>
+		<?php $i = 2; $other = 0; $threshold = .05 * $profile->averages['plugins']; ?>
 		<?php foreach ($profile->plugin_times as $k => $v) : ?>
-		{
-			label: '<?php echo $k; ?>',
-			data: [[<?php echo $i++; ?>, <?php echo $v; ?>]],
-		},
+			<?php if ($v <= $threshold ) : ?>
+				<?php $other += $v; ?>
+			<?php else : ?>
+			{
+				label: '<?php echo $k; ?>',
+				data: [[<?php echo $i++; ?>, <?php echo $v; ?>]],
+			},
+			<?php endif; ?>
 		<?php endforeach; ?>
+		{
+			label: 'Other',
+			data: [[<?php echo $i++; ?>, <?php echo $other; ?>]]
+		}
 	];
 
 	var barchartplot = null;
@@ -281,17 +285,21 @@
 					ticks: [
 						[0, 'WP Core Time'],
 						[1, 'Theme'],
-						[2, 'Total Plugins'],
-						<?php $i = 3; ?>
+						<?php $i = 2; ?>
+						<?php $i = 2; $other = 0; $threshold = .05 * $profile->averages['plugins']; ?>
 						<?php foreach ($profile->plugin_times as $k => $v) : ?>
-						[<?php echo $i++ ?>, '<?php echo $k; ?>'],
+							<?php if ($v > $threshold) : ?>
+								[<?php echo $i++ ?>, '<?php echo $k; ?>'],
+							<?php endif; ?>
 						<?php endforeach; ?>
+						[<?php echo $i++; ?>, 'Other']
 					],
-					zoomRange: [0.1, 10],
-					panRange: [-10, 10]
+					zoomRange: [1, 10],
+					panRange: [-1, <?php echo $i; ?>]
 				},
 				yaxis: {
-					zoomRange: [0.1, 10], panRange: [-10, 10]
+					zoomRange: [1, 10],
+					panRange: [-1, <? echo $profile->averages['plugins'] + 1; ?>]
 				},
 				legend : {
 					container: $("#wpp-legend_<?php echo $plugin_breakdown_chart_id; ?>")
