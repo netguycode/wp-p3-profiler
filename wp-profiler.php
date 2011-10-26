@@ -47,6 +47,7 @@ if (is_admin()) {
 	// Ajax actions
 	add_action('wp_ajax_wpp_start_scan', array($wpp_profiler_plugin, 'ajax_start_scan'));
 	add_action('wp_ajax_wpp_stop_scan', array($wpp_profiler_plugin, 'ajax_stop_scan'));
+	add_action('wp_ajax_wpp_send_results', array($wpp_profiler_plugin, 'ajax_send_results'));
 
 	// Show any notices
 	add_action('admin_notices', array($wpp_profiler_plugin, 'show_notices'));
@@ -353,6 +354,47 @@ class WP_Profiler {
 
 		// Return the last filename
 		echo $v->name . '.json';
+		die();
+	}
+
+
+	/**************************************************************/
+	/** EMAIL RESULTS                                            **/
+	/**************************************************************/
+
+	/**
+	 * Send results (presumably to admin or support)
+	 * @return void
+	 */
+	public function ajax_send_results() {
+
+		// Check nonce
+		if (! wp_verify_nonce ( $_POST ['wpp_nonce'], 'wpp_ajax_send_results' ))
+			wp_die ( 'Invalid nonce' );
+
+		// Check fields
+		$to = sanitize_email($_POST['wpp_to']);
+		$subject = filter_var($_POST['wpp_subject'], FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES | FILTER_FLAG_STRIP_HIGH | FILTER_FLAG_STRIP_LOW);
+		$message = strip_tags($_POST['wpp_message']);
+		$results = strip_tags($_POST['wpp_results']);
+		
+		// Append the results to the message (if a messge was specified)
+		if (empty($message)) {
+			$message = $results;
+		} else {
+			$message = $message . "\n\n" .$results;
+		}
+
+		// Check for errors and send message
+		if (!is_email($to)) {
+			echo '0|Invalid e-mail';
+		} elseif (empty($subject)) {
+			echo '0|Invalid subject';
+		} elseif (false === wp_mail($to, $subject, $message)) {
+			echo '0|<a href="http://codex.wordpress.org/Function_Reference/wp_mail" target="_blank">wp_mail()</a> function returned false';
+		} else {
+			echo '1';
+		}
 		die();
 	}
 

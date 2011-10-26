@@ -192,23 +192,21 @@
 				if (!array_key_exists($k, $this->plugin_times)) {
 					$this->plugin_times[$k] = 0;
 				}
-				if ($k != 'wp-profiler') {
-					$this->plugin_times[$k] += $v;
-				}
+				$this->plugin_times[$k] += $v;
 			}
-			
-			// Fix plugin names
-			$tmp = $this->plugin_times;
-			$this->plugin_times = array();
-			foreach ($tmp as $k => $v) {
-				$k = ucwords(str_replace(array('-', '_'), ' ', $k));
-				$this->plugin_times[$k] = $v;
-			}
-			
-			// Get a list of the plugins we detected
-			$this->detected_plugins = array_keys($this->plugin_times);
-			sort($this->detected_plugins);
 		}
+
+		// Fix plugin names and average out plugin times
+		$tmp = $this->plugin_times;
+		$this->plugin_times = array();
+		foreach ($tmp as $k => $v) {
+			$k = ucwords(str_replace(array('-', '_'), ' ', $k));
+			$this->plugin_times[$k] = $v / $this->visits;
+		}
+
+		// Get a list of the plugins we detected
+		$this->detected_plugins = array_keys($this->plugin_times);
+		sort($this->detected_plugins);
 
 		// Calculate the averages
 		$this->_get_averages();
@@ -248,14 +246,23 @@
 	public function get_stats_by_url() {
 		$ret = array();
 		foreach ($this->_data as $o) {
-			$ret[] = array(
-				'url'     => $o->url,
-				'core'    => $o->runtime->wordpress,
-				'plugins' => $o->runtime->plugins,
-				'profile' => $o->runtime->profile,
-				'theme'   => $o->runtime->theme,
-				'queries' => $o->queries
+			$tmp = array(
+				'url'       => $o->url,
+				'core'      => $o->runtime->wordpress,
+				'plugins'   => $o->runtime->plugins,
+				'profile'   => $o->runtime->profile,
+				'theme'     => $o->runtime->theme,
+				'queries'   => $o->queries,
+				'breakdown' => array()
 			);
+			foreach ($o->runtime->breakdown as $k => $v) {
+				$name = ucwords(str_replace(array('-', '_'), ' ', $k));
+				if (!array_key_exists($name, $tmp['breakdown'])) {
+					$tmp['breakdown'][$name] = 0;
+				}
+				$tmp['breakdown'][$name] += $v;
+			}
+			$ret[] = $tmp;
 		}
 		return $ret;
 	}

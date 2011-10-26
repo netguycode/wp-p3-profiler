@@ -100,7 +100,8 @@ if ('current-scan' == $wpp_action) {
 		<?php require_once(WPP_PATH . '/templates/list-scans.php'); ?>
 	<?php endif; ?>
 
-	<div id="wpp-copyright">
-		Copyright &copy; 2011 <a href="http://www.godaddy.com/" target="_blank">GoDaddy.com</a>
-	</div>
+</div>
+
+<div id="wpp-copyright">
+	Copyright &copy; 2011 <a href="http://www.godaddy.com/" target="_blank">GoDaddy.com</a>
 </div>
