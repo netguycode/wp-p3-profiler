@@ -358,8 +358,12 @@ class WP_Profiler {
 		$this->add_notice('Turned off performance scanning.');
 
 		// Return the last filename
-		echo $v->name . '.json';
-		die();
+		if (property_exists($v, 'name')) {
+			echo $v->name . '.json';
+			die();
+		} else {
+			wp_die(0);
+		}
 	}
 
 
