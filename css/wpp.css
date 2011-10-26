@@ -125,6 +125,7 @@ div.wpp-custom-legend {
 	float: left;
 	width: 120px;
 	height: 280px;
+	overflow: auto;
 }
 #wpp-tabs h2 {
 	margin: auto;
