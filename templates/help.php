@@ -34,45 +34,52 @@
 	});
 </script>
 
+<div id="wpp-help-toc"></div>
+
 <h2>How do I use this?</h2>
-<blockquote>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut ac
-turpis erat. Quisque porta metus at velit porta at euismod arcu accumsan. Aenean
-lorem risus, pulvinar ac facilisis eu, consectetur vitae lacus. Cras
-pellentesque lacinia orci, et dictum erat tempus nec. Cras id tincidunt eros.
-Cras dignissim posuere scelerisque. Donec dignissim hendrerit porta. Nullam
-interdum libero eget ligula sollicitudin tristique. Curabitur semper ullamcorper
-augue quis ullamcorper. Donec rhoncus molestie mi, mollis dapibus metus laoreet
-nec. Morbi sit amet eros ipsum. Vivamus dictum magna sed massa pellentesque
-varius malesuada odio sodales. Morbi bibendum justo id felis egestas
-condimentum. Fusce ac est nec orci mollis blandit sit amet et elit.</blockquote>
+<blockquote>
+	Simply click "Start Scan" and run an automated scan on your site.
+	The scanner will generate some traffic on your site and monitor your site's
+	performance on the server, then show you the results.  You can then decide
+	what action to take.
+</blockquote>
 
 <h2>What do I do with these results?</h2>
-<blockquote>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut ac
-turpis erat. Quisque porta metus at velit porta at euismod arcu accumsan. Aenean
-lorem risus, pulvinar ac facilisis eu, consectetur vitae lacus. Cras
-pellentesque lacinia orci, et dictum erat tempus nec. Cras id tincidunt eros.
-Cras dignissim posuere scelerisque. Donec dignissim hendrerit porta. Nullam
-interdum libero eget ligula sollicitudin tristique. Curabitur semper ullamcorper
-augue quis ullamcorper. Donec rhoncus molestie mi, mollis dapibus metus laoreet
-nec. Morbi sit amet eros ipsum. Vivamus dictum magna sed massa pellentesque
-varius malesuada odio sodales. Morbi bibendum justo id felis egestas
-condimentum. Fusce ac est nec orci mollis blandit sit amet et elit.</blockquote>
+<blockquote>
+	If your site's load time is within an acceptable range (usually < 0.5 seconds)
+	then you may want to look at other possibilities to explain any sluggish
+	loading.  For example, loading large images, large videos, or lots of content
+	can lead your page to render slowly.  Tools like <a href="http://www.webpagetest.org/" target="_blank">webpagetest.org</a>,
+	<a href="http://getfirebug.com/" target="_blank">Firebug</a>, or Safari or
+	Chrome's developer console can show you a connection breakdown of your site's
+	content.
+</blockquote>
 
 
 <h2>How does this work?</h2>
-<blockquote>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut ac
-turpis erat. Quisque porta metus at velit porta at euismod arcu accumsan. Aenean
-lorem risus, pulvinar ac facilisis eu, consectetur vitae lacus. Cras
-pellentesque lacinia orci, et dictum erat tempus nec. Cras id tincidunt eros.
-Cras dignissim posuere scelerisque. Donec dignissim hendrerit porta. Nullam
-interdum libero eget ligula sollicitudin tristique. Curabitur semper ullamcorper
-augue quis ullamcorper. Donec rhoncus molestie mi, mollis dapibus metus laoreet
-nec. Morbi sit amet eros ipsum. Vivamus dictum magna sed massa pellentesque
-varius malesuada odio sodales. Morbi bibendum justo id felis egestas
-condimentum. Fusce ac est nec orci mollis blandit sit amet et elit.</blockquote>
+<blockquote>
+	This plugin is only active when you click "Start Scan."  Once it's active, it
+	detects visits from your IP address and actively monitors all function calls
+	that happen when the WordPress page is generated on the server.  It then
+	records the information in a scan file that you can view later in a report
+	format.  When the scan is complete, or you click "Stop Scan," the plugin
+	is dormant again.
+</blockquote>
 
 <h2>Which loader am I using?</h2>
 <blockquote>
+	The plugin should be active at the earliest point in the code execution.
+	If the plugin can be loaded through an <code>auto_prepend_file</code> configuration
+	directive from a .htaccess file or a <a href="http://php.net/manual/en/configuration.file.per-user.php" target="_blank">.user.ini</a>
+	file, but be careful.  The .user.ini files are cached, so you must remove the
+	entry from your .user.ini file before you remove this plugin.
+	<br /><br />
+	This plugin will automatically enable itself in .htaccess if possible, and if
+	not, it will create a <a href="http://codex.wordpress.org/Must_Use_Plugins" target="_blank">must-use</a>
+	plugin to load before other plugins.  If all else fails, it will run like a
+	regular plugin.
+	<br /><br />
+	You are currently using: 
 <?php
 
 // .htaccess file test
@@ -129,64 +136,80 @@ $ini_files = array_filter(
 </blockquote>
 
 <h2>How accurate are these results?</h2>
-<blockquote>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut ac
-turpis erat. Quisque porta metus at velit porta at euismod arcu accumsan. Aenean
-lorem risus, pulvinar ac facilisis eu, consectetur vitae lacus. Cras
-pellentesque lacinia orci, et dictum erat tempus nec. Cras id tincidunt eros.
-Cras dignissim posuere scelerisque. Donec dignissim hendrerit porta. Nullam
-interdum libero eget ligula sollicitudin tristique. Curabitur semper ullamcorper
-augue quis ullamcorper. Donec rhoncus molestie mi, mollis dapibus metus laoreet
-nec. Morbi sit amet eros ipsum. Vivamus dictum magna sed massa pellentesque
-varius malesuada odio sodales. Morbi bibendum justo id felis egestas
-condimentum. Fusce ac est nec orci mollis blandit sit amet et elit.</blockquote>
+<blockquote>
+	These results have an inherent margin of error.  This is using php, inside a
+	plugin, inside WordPress, to measure the performance of other plugins inside
+	WordPress, in php.  This plugin is changing the environment in order to measure
+	it, and that makes it impossible to get completely accurate results.
+	<br /><br />
+	It does a really close job, though!  You can see the "margin of error" on the
+	Advanced Metrics screen to see the discrepancy between the measured results
+	(timing from when your site's php code started running to when it was finished)
+	and the expected results (adding up all of the plugins, core, theme, profile time)
+	and that will show you how accurate this is.
+	<br /><br />
+	If you want more accurate results, you'll need to resort to a different profiler
+	like <a href="http://xdebug.org/" target="_blank">xdebug</a>, but this will
+	not break down results by plugin.
+</blockquote>
 
-<h2>Why is <em>some plugin name</em>?</h2>
-<blockquote>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut ac
-turpis erat. Quisque porta metus at velit porta at euismod arcu accumsan. Aenean
-lorem risus, pulvinar ac facilisis eu, consectetur vitae lacus. Cras
-pellentesque lacinia orci, et dictum erat tempus nec. Cras id tincidunt eros.
-Cras dignissim posuere scelerisque. Donec dignissim hendrerit porta. Nullam
-interdum libero eget ligula sollicitudin tristique. Curabitur semper ullamcorper
-augue quis ullamcorper. Donec rhoncus molestie mi, mollis dapibus metus laoreet
-nec. Morbi sit amet eros ipsum. Vivamus dictum magna sed massa pellentesque
-varius malesuada odio sodales. Morbi bibendum justo id felis egestas
-condimentum. Fusce ac est nec orci mollis blandit sit amet et elit.</blockquote>
+<h2>Why is <em>some plugin name</em> slow?</h2>
+<blockquote>
+	WordPress is a complex ecosystem of plugins and themes, and it lives on a
+	complex ecosystem of software (your web server).
+	<br /><br />
+	If a plugin is showing as slow only once, this is probably an anomaly,
+	a transient hiccup, and can be safely ignored.
+	<br /><br />
+	If a plugin is showing a slow once on a reguarly basis (e.g. every
+	time you run a scan, once a day, once an hour) then it may be due to a
+	scheduled task.  Plugins that backup your site, monitor your site for changes,
+	contact outside sources (e.g. RSS feeds), warm up caches, etc. can exhibit
+	this kind of behavior.
+	<br /><br />
+	If a plugin is showing as fast-slow-fast-slow-fast-slow, then it may because
+	the plugin loads its main code, then a follow-up piece of code, like a
+	piece of generated javascript.
+	<br /><br />
+	If a plugin is consistently showing as slow, then you may want to contact
+	the plugin author or try deactivating the plugin temporarily to see if
+	it makes a difference on your site.
+</blockquote>
 
 <h2>How are these results different from YSlow/PageSpeed/Webpagetest.org?</h2>
-<blockquote>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut ac
-turpis erat. Quisque porta metus at velit porta at euismod arcu accumsan. Aenean
-lorem risus, pulvinar ac facilisis eu, consectetur vitae lacus. Cras
-pellentesque lacinia orci, et dictum erat tempus nec. Cras id tincidunt eros.
-Cras dignissim posuere scelerisque. Donec dignissim hendrerit porta. Nullam
-interdum libero eget ligula sollicitudin tristique. Curabitur semper ullamcorper
-augue quis ullamcorper. Donec rhoncus molestie mi, mollis dapibus metus laoreet
-nec. Morbi sit amet eros ipsum. Vivamus dictum magna sed massa pellentesque
-varius malesuada odio sodales. Morbi bibendum justo id felis egestas
-condimentum. Fusce ac est nec orci mollis blandit sit amet et elit.</blockquote>
+<blockquote>
+	This plugin measures how your site was generated on the server.  Tools like
+	YSlow!, PageSpeed, Webpagetest.org measure how your site looks to the browser.
+</blockquote>
 
 <h2>What can interfere with testing?</h2>
-<blockquote>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut ac
-turpis erat. Quisque porta metus at velit porta at euismod arcu accumsan. Aenean
-lorem risus, pulvinar ac facilisis eu, consectetur vitae lacus. Cras
-pellentesque lacinia orci, et dictum erat tempus nec. Cras id tincidunt eros.
-Cras dignissim posuere scelerisque. Donec dignissim hendrerit porta. Nullam
-interdum libero eget ligula sollicitudin tristique. Curabitur semper ullamcorper
-augue quis ullamcorper. Donec rhoncus molestie mi, mollis dapibus metus laoreet
-nec. Morbi sit amet eros ipsum. Vivamus dictum magna sed massa pellentesque
-varius malesuada odio sodales. Morbi bibendum justo id felis egestas
-condimentum. Fusce ac est nec orci mollis blandit sit amet et elit.</blockquote>
+<blockquote>
+	Opcode caches can interfere with php backtraces.  Leaving opcode caches turned
+	on will result in timing that more accurately reflects your site's real performance,
+	but the function calls to plugins may be "optimized" out of the backtraces and
+	some plugins (especially those with only one hook) may not show up.  Disabling
+	opcode caches will result in slower times, but will show all plugins.
+	<br /><br />
+	By default, this plugin attempts to clear any opcode caches before it runs.
+	You can change this setting in the "Advanced Settings" link under "Start Scan."
+</blockquote>
 
-<h2>What can interfere with testing?</h2>
-<blockquote>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut ac
-turpis erat. Quisque porta metus at velit porta at euismod arcu accumsan. Aenean
-lorem risus, pulvinar ac facilisis eu, consectetur vitae lacus. Cras
-pellentesque lacinia orci, et dictum erat tempus nec. Cras id tincidunt eros.
-Cras dignissim posuere scelerisque. Donec dignissim hendrerit porta. Nullam
-interdum libero eget ligula sollicitudin tristique. Curabitur semper ullamcorper
-augue quis ullamcorper. Donec rhoncus molestie mi, mollis dapibus metus laoreet
-nec. Morbi sit amet eros ipsum. Vivamus dictum magna sed massa pellentesque
-varius malesuada odio sodales. Morbi bibendum justo id felis egestas
-condimentum. Fusce ac est nec orci mollis blandit sit amet et elit.</blockquote>
+<h2>How much room do these profiles take up on my server</h2>
+<?php
+$total_size = 0;
+$dir = opendir(WPP_PROFILES_PATH);
+while (false !== ($file = readdir($dir))) {
+	if ('.' != $file && '..' != $file && '.json' == substr($file, -5)) {
+		$total_size += filesize(WPP_PROFILES_PATH . "/$file");
+	}
+}
+closedir($dir);
+
+?>
+The scans are stored in <code><?php echo realpath(WPP_PROFILES_PATH); ?></code> and
+take up <?php echo $this->readable_size($total_size); ?> of disk space.  Each time you
+run a scan, this storage requirement goes up, and each time you delete a scan, this
+goes down.
 
 <h2>Glossary</h2>
 <div>
@@ -312,20 +335,3 @@ condimentum. Fusce ac est nec orci mollis blandit sit amet et elit.</blockquote>
 	</div>
 </div>
 </div>
-
-<h2>How much room do these profiles take up on my server</h2>
-<?php
-$total_size = 0;
-$dir = opendir(WPP_PROFILES_PATH);
-while (false !== ($file = readdir($dir))) {
-	if ('.' != $file && '..' != $file && '.json' == substr($file, -5)) {
-		$total_size += filesize(WPP_PROFILES_PATH . "/$file");
-	}
-}
-closedir($dir);
-
-?>
-The profiles are stored in <code><?php echo realpath(WPP_PROFILES_PATH); ?></code> and
-take up <?php echo $this->readable_size($total_size); ?> of disk space.  Each time you
-run the scan, this storage requirement goes up, and each time you delete a scan, this
-goes down.
