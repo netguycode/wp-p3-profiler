@@ -363,6 +363,18 @@
 	var chart_<?php echo $component_breakdown_chart_id; ?> = null;
 	var data_<?php echo $component_breakdown_chart_id; ?> = [
 		{
+			label: 'Site Load Time',
+			bars: {show: false},
+			points: {show: false},
+			lines: {show: true, lineWidth: 3},
+			shadowSize: 0,
+			data: [
+				<?php for($i = -999 ; $i < 999 + 2; $i++) : ?>
+					[<?php echo $i; ?>, <?php echo $profile->averages['site']; ?>],
+				<?php endfor; ?>
+			]
+		},
+		{
 			label: 'WP Core Time',
 			data: [[0, <?php echo $profile->averages['core']; ?>]]
 		},
@@ -396,19 +408,21 @@
 				},
 				grid: {
 					hoverable: true,
-					clickable: true
+					clickable: true,
 				},
 				xaxis: {
 					show: false,
 					ticks: [
-						[0, 'WP Core Time'],
-						[1, 'Theme'],
-						<?php $i = 2; ?>
-						<?php $i = 2; $other = 0; ?>
+						[0, 'Site Load Time'],
+						[1, 'WP Core Time'],
+						[2, 'Theme'],
+						<?php $i = 3; ?>
 						<?php foreach ($profile->plugin_times as $k => $v) : ?>
 							[<?php echo $i++ ?>, '<?php echo $k; ?>'],
 						<?php endforeach; ?>
-					]
+					],
+					min: 0,
+					max: <?php echo $i; ?>,
 				},
 				legend : {
 					container: $("#wpp-legend_<?php echo $component_breakdown_chart_id; ?>")
