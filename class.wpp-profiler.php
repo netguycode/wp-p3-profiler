@@ -372,7 +372,7 @@ class wpp_profiler {
 		static $folder_flag = false;
 
 		// Set the plugins folder
-		if (!$folder_flag && defined('WP_PLUGIN_DIR')) {
+		if (!$folder_flag && defined('WPMU_PLUGIN_DIR')) {
 			$plugins_folder = basename(WP_PLUGIN_DIR);
 			$muplugins_folder = basename(WPMU_PLUGIN_DIR);
 			$content_folder = basename(WP_CONTENT_DIR);
