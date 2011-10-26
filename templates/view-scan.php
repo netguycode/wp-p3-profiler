@@ -46,7 +46,7 @@
 			'resizable' : false,
 			'modal' : true,
 			'width' : 500,
-			'height' : 500,
+			'height' : 550,
 			'title' : "Email Report",
 			'buttons' :
 			[
@@ -56,6 +56,7 @@
 					click: function() {
 						data = {
 							'wpp_to'      : jQuery('#wpp-email-results-to').val(),
+							'wpp_from'    : jQuery('#wpp-email-results-from').val(),
 							'wpp_subject' : jQuery('#wpp-email-results-subject').val(),
 							'wpp_results' : jQuery("#wpp-email-results-results").val(),
 							'wpp_message' : jQuery("#wpp-email-results-message").val(),
@@ -233,6 +234,9 @@
 				},
 				pan: {
 					interactive: true
+				},
+				xaxis: {
+					show: false
 				}
 		});
 
@@ -309,6 +313,9 @@
 				},
 				pan: {
 					interactive: true
+				},
+				xaxis: {
+					show: false
 				}
 		});
 
@@ -363,21 +370,13 @@
 			label: 'Theme',
 			data: [[1, <?php echo $profile->averages['theme']; ?>]]
 		},
-		<?php $i = 2; $other = 0; $threshold = .05 * $profile->averages['plugins']; ?>
+		<?php $i = 2; $other = 0; ?>
 		<?php foreach ($profile->plugin_times as $k => $v) : ?>
-			<?php if ($v <= $threshold ) : ?>
-				<?php $other += $v; ?>
-			<?php else : ?>
 			{
 				label: '<?php echo $k; ?>',
 				data: [[<?php echo $i++; ?>, <?php echo $v; ?>]],
 			},
-			<?php endif; ?>
 		<?php endforeach; ?>
-		{
-			label: 'Other',
-			data: [[<?php echo $i++; ?>, <?php echo $other; ?>]]
-		}
 	];
 
 	jQuery(document).ready(function($) {
@@ -405,14 +404,11 @@
 						[0, 'WP Core Time'],
 						[1, 'Theme'],
 						<?php $i = 2; ?>
-						<?php $i = 2; $other = 0; $threshold = .05 * $profile->averages['plugins']; ?>
+						<?php $i = 2; $other = 0; ?>
 						<?php foreach ($profile->plugin_times as $k => $v) : ?>
-							<?php if ($v > $threshold) : ?>
-								[<?php echo $i++ ?>, '<?php echo $k; ?>'],
-							<?php endif; ?>
+							[<?php echo $i++ ?>, '<?php echo $k; ?>'],
 						<?php endforeach; ?>
-						[<?php echo $i++; ?>, 'Other']
-					],
+					]
 				},
 				legend : {
 					container: $("#wpp-legend_<?php echo $component_breakdown_chart_id; ?>")
@@ -504,6 +500,9 @@
 				},
 				pan: {
 					interactive: true
+				},
+				xaxis: {
+					show: false
 				}
 		});
 
@@ -547,16 +546,16 @@
 <div id="wpp-tabs">
 	<ul>
 		<li><a href="#wpp-tabs-1">Runtime By Plugin</a></li>
-		<li><a href="#wpp-tabs-5">Component Breakdown</a></li>
-		<li><a href="#wpp-tabs-6">Component Runtime Timeline</a></li>
-		<li><a href="#wpp-tabs-2">Summary Runtime Timeline</a></li>
+		<li><a href="#wpp-tabs-5">Detailed Breakdown</a></li>
+		<li><a href="#wpp-tabs-2">Simple Timeline</a></li>
+		<li><a href="#wpp-tabs-6">Detailed Timeline</a></li>
 		<li><a href="#wpp-tabs-3">Query Timeline</a></li>
 		<li><a href="#wpp-tabs-4">Advanced Metrics</a></li>
 	</ul>
 
 	<!-- Plugin bar chart -->
 	<div id="wpp-tabs-5">
-		<h2>Component Breakdown</h2>
+		<h2>Detailed Breakdown</h2>
 		<div class="wpp-plugin-graph">
 			<table>
 				<tr>
@@ -613,7 +612,7 @@
 
 	<!-- Runtime line chart div -->
 	<div id="wpp-tabs-2">
-		<h2>Summary Runtime Timeline</h2>
+		<h2>Summary Timeline</h2>
 		<div class="wpp-plugin-graph">
 			<table>
 				<tr>
@@ -638,7 +637,7 @@
 					<td>&nbsp;</td>
 					<td colspan="2">
 						<div class="wpp-x-axis-label">
-							<em class="wpp-em">Visit</em>
+							<!-- <em class="wpp-em">Visit</em> -->
 						</div>
 					</td>
 				</tr>
@@ -673,7 +672,7 @@
 					<td>&nbsp;</td>
 					<td colspan="2">
 						<div class="wpp-x-axis-label">
-							<em class="wpp-em">Visit</em>
+							<!-- <em class="wpp-em">Visit</em> -->
 						</div>
 					</td>
 				</tr>
@@ -683,7 +682,7 @@
 
 	<!-- Component runtime chart div -->
 	<div id="wpp-tabs-6">
-		<h2>Component Runtime Timeline</h2>
+		<h2>Detailed Timeline</h2>
 		<div class="wpp-plugin-graph">
 			<table>
 				<tr>
@@ -708,7 +707,7 @@
 					<td>&nbsp;</td>
 					<td colspan="2">
 						<div class="wpp-x-axis-label">
-							<em class="wpp-em">Visit</em>
+							<!-- <em class="wpp-em">Visit</em> -->
 						</div>
 					</td>
 				</tr>
@@ -846,6 +845,11 @@
 	<!-- Email results dialog -->
 	<div id="wpp-email-results-dialog" class="wpp-dialog">
 		<div>
+			From:<br />
+			<input type="text" id="wpp-email-results-from" style="width:95%;" size="35" value="<?php $user = wp_get_current_user(); echo $user->user_email; ?>" title="Enter the e-mail address to send from" />
+		</div>
+		<br />
+		<div>
 			Recipient:<br />
 			<input type="text" id="wpp-email-results-to" style="width:95%;" size="35" value="<?php $user = wp_get_current_user(); echo $user->user_email; ?>" title="Enter the e-mail address where you would like to send these results" />
 		</div>
@@ -856,7 +860,7 @@
 		</div>
 		<br />
 		<div>
-			Message:<br />
+			Message: <em class="wpp-em">(optional)</em><br />
 			<textarea id="wpp-email-results-message" style="width: 95%; height: 100px;">Hello,
 
 I profiled my WordPress site's performance using the Profile Plugin and I wanted to share the results with you.  Please take a look at the information below:</textarea>

@@ -374,15 +374,16 @@ class WP_Profiler {
 
 		// Check fields
 		$to = sanitize_email($_POST['wpp_to']);
+		$from = sanitize_email($_POST['wpp_from']);
 		$subject = filter_var($_POST['wpp_subject'], FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES | FILTER_FLAG_STRIP_HIGH | FILTER_FLAG_STRIP_LOW);
 		$message = strip_tags($_POST['wpp_message']);
 		$results = strip_tags($_POST['wpp_results']);
 		
 		// Append the results to the message (if a messge was specified)
 		if (empty($message)) {
-			$message = $results;
+			$message = stripslashes($results);
 		} else {
-			$message = $message . "\n\n" .$results;
+			$message = stripslashes($message . "\n\n" .$results);
 		}
 
 		// Check for errors and send message
@@ -390,7 +391,7 @@ class WP_Profiler {
 			echo '0|Invalid e-mail';
 		} elseif (empty($subject)) {
 			echo '0|Invalid subject';
-		} elseif (false === wp_mail($to, $subject, $message)) {
+		} elseif (false === wp_mail($to, $subject, $message, "From: $from")) {
 			echo '0|<a href="http://codex.wordpress.org/Function_Reference/wp_mail" target="_blank">wp_mail()</a> function returned false';
 		} else {
 			echo '1';
