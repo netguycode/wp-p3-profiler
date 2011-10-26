@@ -108,11 +108,16 @@ class WP_Profiler {
 
 	/**
 	 * Replace http with https to avoid SSL warnings in the preview iframe if the admin is in SSL
+	 * This will strip off any port numbers and will not replace URLs in off-site links
 	 * @param string $url
 	 * @return string
 	 */
 	public function _fix_url($url) {
-		return str_ireplace('http://', 'https://', $url);
+		static $host = '';
+		if (empty($host)) {
+			$host = preg_replace('/[:\d+$]/', '', $_SERVER['HTTP_HOST']);
+		}
+		return str_ireplace('http://' . $host, 'https://' . $host, $url);
 	}
 
 	/**
