@@ -274,7 +274,7 @@ class WP_Profiler {
 			wp_die ( 'Invalid nonce' );
 
 		// Sanitize the file name
-		$filename = sanitize_file_name($_POST['wpp_scan_name']);
+		$filename = sanitize_file_name(basename($_POST['wpp_scan_name']));
 
 		// Create flag file
 		if (file_exists(WPP_FLAG_FILE)) {
@@ -387,7 +387,7 @@ class WP_Profiler {
 		}
 
 		// Check for errors and send message
-		if (!is_email($to)) {
+		if (!is_email($to) || !is_email($from)) {
 			echo '0|Invalid e-mail';
 		} elseif (empty($subject)) {
 			echo '0|Invalid subject';
