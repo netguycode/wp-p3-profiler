@@ -488,7 +488,9 @@
 					label: "<?php echo $plugin; ?>",
 					data: [
 					<?php foreach (array_values($url_stats) as $k => $v) : ?>
-						[<?php echo $k+1; ?>,  <?php echo $v['breakdown'][$plugin]; ?>],
+						<?php if (array_key_exists($plugin, $v['breakdown'])) : ?>
+							[<?php echo $k+1; ?>, <?php echo $v['breakdown'][$plugin]; ?>]
+						<?php endif; ?>
 					<?php endforeach; ?>
 					]
 				},
