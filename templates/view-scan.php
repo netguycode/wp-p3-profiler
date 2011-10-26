@@ -175,7 +175,7 @@
 			if (item) {
 				$("#wpp-tooltip").remove();
 				showTooltip(pos.pageX, pos.pageY,
-					item.series.label + "<br />" + Math.round(item.series.percent) + "%"
+					item.series.label + "<br />" + Math.round(item.series.percent) + "%<br />" + Math.round(item.datapoint[1][0][1] * Math.pow(10, 4)) / Math.pow(10, 4) + " seconds"
 				);
 			} else {
 				$("#wpp-tooltip").remove();
@@ -489,7 +489,7 @@
 					data: [
 					<?php foreach (array_values($url_stats) as $k => $v) : ?>
 						<?php if (array_key_exists($plugin, $v['breakdown'])) : ?>
-							[<?php echo $k+1; ?>, <?php echo $v['breakdown'][$plugin]; ?>]
+							[<?php echo $k+1; ?>, <?php echo $v['breakdown'][$plugin]; ?>],
 						<?php endif; ?>
 					<?php endforeach; ?>
 					]
