@@ -323,3 +323,14 @@ div.p3-x-axis-label {
 	margin: 20px auto;
 	text-align: center;
 }
+
+
+/** Help page questions **/
+div.p3-question {
+	border: 1px solid #cccccc;
+	margin-bottom: 10px;
+	padding: 8px;
+}
+div.p3-question h2.p3-help-question {
+	margin-top: -15px;
+}
