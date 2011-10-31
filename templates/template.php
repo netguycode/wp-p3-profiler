@@ -64,7 +64,7 @@ if ('current-scan' == $p3_action) {
 
 	<!-- Header icon / title -->
 	<div id="icon-plugins" class="icon32"><br/></div>
-	<h2>Plugin Performance</h2>
+	<h2>P3 - Plugin Performance Profiler</h2>
 	
 	<!-- Header navbar -->
 	<div class="ui-widget-header" id="p3-navbar">
