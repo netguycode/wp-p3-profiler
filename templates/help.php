@@ -83,7 +83,7 @@
 <?php
 
 // .htaccess file test
-$htaccess_file = WPP_PATH . '/../../../.htaccess';
+$htaccess_file = P3_PATH . '/../../../.htaccess';
 $htaccess_content = '';
 if (file_exists($htaccess_file)) {
 	$htaccess_content = extract_from_markers($htaccess_file, 'wp-profiler');
@@ -96,7 +96,7 @@ if (file_exists($htaccess_file)) {
 }
 
 // must-use plugin file
-$mu_file = WPP_PATH . '/../../mu-plugins/wp-profiler.php';
+$mu_file = P3_PATH . '/../../mu-plugins/wp-profiler.php';
 
 // List php ini files
 $ini_files = array_filter(
@@ -131,7 +131,7 @@ $ini_files = array_filter(
 <?php /* default, using this plugin file */ ?>
 <?php else: ?>
 	<a href="http://codex.wordpress.org/Plugins" target="_blank">plugin</a>
-	- <code><?php echo realpath(WPP_PATH . '/wp-profiler.php'); ?></code>
+	- <code><?php echo realpath(P3_PATH . '/wp-profiler.php'); ?></code>
 <?php endif; ?>
 </blockquote>
 
@@ -197,16 +197,16 @@ $ini_files = array_filter(
 <h2>How much room do these profiles take up on my server</h2>
 <?php
 $total_size = 0;
-$dir = opendir(WPP_PROFILES_PATH);
+$dir = opendir(P3_PROFILES_PATH);
 while (false !== ($file = readdir($dir))) {
 	if ('.' != $file && '..' != $file && '.json' == substr($file, -5)) {
-		$total_size += filesize(WPP_PROFILES_PATH . "/$file");
+		$total_size += filesize(P3_PROFILES_PATH . "/$file");
 	}
 }
 closedir($dir);
 
 ?>
-The scans are stored in <code><?php echo realpath(WPP_PROFILES_PATH); ?></code> and
+The scans are stored in <code><?php echo realpath(P3_PROFILES_PATH); ?></code> and
 take up <?php echo $this->readable_size($total_size); ?> of disk space.  Each time you
 run a scan, this storage requirement goes up, and each time you delete a scan, this
 goes down.

@@ -82,13 +82,13 @@ class wpp_profiler {
 	 * Path to ourselves
 	 * @var string
 	 */
-	private $_wpp_path = ''; // Cannot rely on WPP_PATH, may be instantiated before the plugin
+	private $_P3_PATH = ''; // Cannot rely on P3_PATH, may be instantiated before the plugin
 
 	/**
 	 * Path to the ".profiling_enabled" flag file
 	 * @var string
 	 */
-	private $_wpp_flag_file = '';
+	private $_P3_FLAG_FILE = '';
 	
 	/**
 	 * Last stack should be marked as plugin time
@@ -117,11 +117,11 @@ class wpp_profiler {
 	public function __construct() {
 
 		// Set up paths
-		$this->_wpp_path = realpath(dirname(__FILE__));
-		$this->_wpp_flag_file = $this->_wpp_path . DIRECTORY_SEPARATOR . '.profiling_enabled';
+		$this->_P3_PATH = realpath(dirname(__FILE__));
+		$this->_P3_FLAG_FILE = $this->_P3_PATH . DIRECTORY_SEPARATOR . '.profiling_enabled';
 
 		// Check to see if we should profile
-		$wpp_json = (file_exists($this->_wpp_flag_file) ? json_decode(file_get_contents($this->_wpp_flag_file)) : null);
+		$wpp_json = (file_exists($this->_P3_FLAG_FILE) ? json_decode(file_get_contents($this->_P3_FLAG_FILE)) : null);
 		if (empty($wpp_json)) {
 			return $this;
 		}

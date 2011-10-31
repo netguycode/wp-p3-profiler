@@ -8,10 +8,10 @@ if (empty($wpp_action) || 'current-scan' == $wpp_action) {
 	$wpp_action = 'current-scan';
 } elseif ('view-scan' == $wpp_action && !empty($_REQUEST['name'])) {
 	$scan = sanitize_file_name($_REQUEST['name']);
-	if (!file_exists(WPP_PROFILES_PATH . "/$scan")) {
+	if (!file_exists(P3_PROFILES_PATH . "/$scan")) {
 		wp_die('<div id="message" class="error"><p>Scan does not exist</p></div>');
 	}
-	$scan = WPP_PROFILES_PATH . "/$scan";
+	$scan = P3_PROFILES_PATH . "/$scan";
 }
 $button_current_checked = '';
 $button_history_checked = '';
@@ -88,20 +88,24 @@ if ('current-scan' == $wpp_action) {
 		}
 		
 		// Show the callouts bar
-		require_once(WPP_PATH . '/templates/callouts.php');
+		require_once(P3_PATH . '/templates/callouts.php');
 	?>
 
 	<!-- View scan or show a list of scans -->
 	<?php if (('current-scan' == $wpp_action && !empty($scan)) || 'view-scan' == $wpp_action) : ?>
-		<?php require_once(WPP_PATH . '/templates/view-scan.php'); ?>
+		<?php require_once(P3_PATH . '/templates/view-scan.php'); ?>
 	<?php elseif ('help' == $wpp_action) : ?>
-		<?php require_once(WPP_PATH . '/templates/help.php'); ?>
+		<?php require_once(P3_PATH . '/templates/help.php'); ?>
 	<?php else : ?>
-		<?php require_once(WPP_PATH . '/templates/list-scans.php'); ?>
+		<?php require_once(P3_PATH . '/templates/list-scans.php'); ?>
 	<?php endif; ?>
 
 </div>
 
 <div id="wpp-copyright">
-	Copyright &copy; 2011 <a href="http://www.godaddy.com/" target="_blank">GoDaddy.com</a>
+	<?php if (date('Y') > 2011) : ?>
+		Copyright &copy; 2011-<?php echo date('Y'); ?> Starfield Technologies, Inc. All rights reserved.
+	<?php else : ?>
+		Copyright &copy; 2011 Starfield Technologies, Inc. All rights reserved.
+	<?php endif; ?>
 </div>

@@ -196,21 +196,21 @@ EOD;
 	 * @return void
 	 */
     public function do_bulk_action() {
-		global $wpp_profiler_plugin;
+		global $p3_profiler_plugin;
         if ('delete' === $this->current_action() && !empty($_REQUEST['scan'])) {
 			if (!wp_verify_nonce($_REQUEST['wpp_nonce'], 'delete_scans'))
 				wp_die('Invalid nonce');
 			foreach ($_REQUEST['scan'] as $scan) {
-				$file = WPP_PROFILES_PATH  . DIRECTORY_SEPARATOR . basename($scan);
+				$file = P3_PROFILES_PATH  . DIRECTORY_SEPARATOR . basename($scan);
 				if (!file_exists($file) || !is_writable($file) || !unlink($file)) {
 					wp_die('Error removing file ' . $file);
 				}
 			}
 			$count = count($_REQUEST['scan']);
 			if ($count == 1) {
-				$wpp_profiler_plugin->add_notice("Deleted $count scan.");
+				$p3_profiler_plugin->add_notice("Deleted $count scan.");
 			} else {
-				$wpp_profiler_plugin->add_notice("Deleted $count scans.");
+				$p3_profiler_plugin->add_notice("Deleted $count scans.");
 			}
 		}
     }
@@ -253,7 +253,7 @@ EOD;
 	 * @return type 
 	 */
 	private function _get_profiles() {
-		$wpp_profile_dir = WPP_PROFILES_PATH;
+		$wpp_profile_dir = P3_PROFILES_PATH;
 		$files = list_files($wpp_profile_dir);
 		$files = array_filter($files, array(&$this, '_filter_json_files'));
 		$ret = array();
@@ -267,7 +267,7 @@ EOD;
 				'name'      => $this->_action_links($key, $name),
 				'date'      => date('D, M jS', $time) . ' at ' . date('g:i a', $time),
 				'count'     => number_format($count),
-				'filesize'  => $GLOBALS['wpp_profiler_plugin']->readable_size(filesize($file)),
+				'filesize'  => $GLOBALS['p3_profiler_plugin']->readable_size(filesize($file)),
 				'_filesize' => filesize($file),
 				'_date'     => $time,
 				'_count'    => $count
