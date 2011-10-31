@@ -738,7 +738,7 @@
 				<strong>Advanced Metrics</strong>
 			</div>
 			<div>
-				<table class="wpp-results-table" id="wpp-results-table" cellpadding="0" cellspacing="0" border="0">
+				<table class="p3-results-table" id="p3-results-table" cellpadding="0" cellspacing="0" border="0">
 					<tbody>
 						<tr class="advanced">
 							<td class="qtip-tip" title="How long the site took to load.  This is an observed measurement (start timing when the page was requested,

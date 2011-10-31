@@ -339,7 +339,7 @@
 				if (response.indexOf('.json') < 0) {
 					alert("Error response.  Code: " + response);
 				} else {
-					location.href = "<?php echo add_query_arg(array('wpp_action' => 'view-scan')); ?>&name=" + response;
+					location.href = "<?php echo add_query_arg(array('p3_action' => 'view-scan')); ?>&name=" + response;
 				}
 			})
 			$("#wpp-scanner-dialog").dialog("close");
@@ -383,7 +383,7 @@
 			jQuery("#wpp-progress-dialog").dialog("close");
 
 			// View the scan
-			location.href = "<?php echo add_query_arg(array('wpp_action' => 'view-scan')); ?>&name=" + $(this).attr("data-scan-name");
+			location.href = "<?php echo add_query_arg(array('p3_action' => 'view-scan')); ?>&name=" + $(this).attr("data-scan-name");
 		});
 		$("#wpp-view-incomplete-results-submit").click(function() {
 			$("#wpp-view-results-submit").trigger("click");
@@ -430,7 +430,7 @@
 					<!-- Stop scan button -->
 
 					<strong>IP:</strong><?php echo htmlentities($info['ip']); ?>
-					<div class="wpp-big-button"><input type="checkbox" checked="checked" id="wpp-stop-scan-submit" /><label for="wpp-stop-scan-submit">Stop Scan</label></div>
+					<div class="p3-big-button"><input type="checkbox" checked="checked" id="wpp-stop-scan-submit" /><label for="wpp-stop-scan-submit">Stop Scan</label></div>
 					<?php echo htmlentities($info['name']); ?>
 
 				<?php else : ?>
@@ -438,7 +438,7 @@
 					<!-- Start scan button -->
 					<?php echo wp_nonce_field('wpp_ajax_start_scan', 'wpp_nonce'); ?>
 					<strong>My IP:</strong><?php echo htmlentities($GLOBALS['wpp_profiler']->get_ip()); ?>
-					<div class="wpp-big-button"><input type="checkbox" checked="checked" id="wpp-start-scan-submit" /><label for="wpp-start-scan-submit">Start Scan</label></div>
+					<div class="p3-big-button"><input type="checkbox" checked="checked" id="wpp-start-scan-submit" /><label for="wpp-start-scan-submit">Start Scan</label></div>
 					<a href="javascript:;" id="wpp-advanced-settings">Advanced Settings</a>
 
 				<?php endif; ?>
@@ -555,7 +555,7 @@
 				<td width="220">
 					<a href="javascript:;" id="wpp-manual-scan-cancel">Cancel</a>
 					&nbsp;&nbsp;&nbsp;
-					<span class="wpp-big-button"><input type="checkbox" id="wpp-manual-scan-done-submit" checked="checked" /><label for="wpp-manual-scan-done-submit">I'm Done</label></span>
+					<span class="p3-big-button"><input type="checkbox" id="wpp-manual-scan-done-submit" checked="checked" /><label for="wpp-manual-scan-done-submit">I'm Done</label></span>
 				</td>
 			</tr>
 		</table>
@@ -567,7 +567,7 @@
 	<div style="padding-top: 10px;">Scan name:	<input type="text" name="wpp_scan_name" id="wpp-scan-name" title="Enter scan name here" value="scan_<?php echo date('Y-m-d'); ?>_<?php echo substr(md5(uniqid()), -8);?>" size="35" maxlength="100" /></div>
 	<div style="padding-top: 10px;"><em class="wpp-em">Enter the name of a previous scan to continue scanning</em></div>
 	<br />
-	<div class="wpp-big-button">
+	<div class="p3-big-button">
 		<input type="checkbox" id="wpp-auto-scan-submit" checked="checked" /><label for="wpp-auto-scan-submit">Auto Scan</label>
 		<input type="checkbox" id="wpp-manual-scan-submit" checked="checked" /><label for="wpp-manual-scan-submit">Manual Scan</label>
 	</div>
@@ -581,18 +581,18 @@
 	<div id="wpp-progress"></div>
 	
 	<!-- Cancel button -->
-	<div class="wpp-big-button" id="wpp-cancel-scan-buttonset">
+	<div class="p3-big-button" id="wpp-cancel-scan-buttonset">
 		<input type="checkbox" id="wpp-cancel-scan-submit" checked="checked" /><label for="wpp-cancel-scan-submit">Stop Scan</label>
 	</div>
 
 	<!-- View / resume buttons -->
-	<div class="wpp-big-button" id="wpp-resume-scan-buttonset" style="display: none;">
+	<div class="p3-big-button" id="wpp-resume-scan-buttonset" style="display: none;">
 		<input type="checkbox" id="wpp-resume-scan-submit" checked="checked" /><label for="wpp-resume-scan-submit">Resume</label>
 		<input type="checkbox" id="wpp-view-incomplete-results-submit" checked="checked" data-scan-name="" /><label for="wpp-view-incomplete-results-submit">View Results</label>
 	</div>
 	
 	<!-- View results button -->
-	<div class="wpp-big-button" id="wpp-view-results-buttonset" style="display: none;">
+	<div class="p3-big-button" id="wpp-view-results-buttonset" style="display: none;">
 		<input type="checkbox" id="wpp-view-results-submit" checked="checked" data-scan-name="" /><label for="wpp-view-results-submit">View Results</label>
 	</div>	
 </div>

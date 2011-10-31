@@ -221,7 +221,7 @@ goes down.
 			</div>
 		</div>
 		<div>
-		<table class="wpp-results-table" id="wpp-glossary-table" cellpadding="0" cellspacing="0" border="0">
+		<table class="p3-results-table" id="wpp-glossary-table" cellpadding="0" cellspacing="0" border="0">
 			<tbody>
 				<tr>
 					<td colspan="2" style="border-left-width: 1px !important;">
