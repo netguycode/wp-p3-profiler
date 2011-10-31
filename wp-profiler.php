@@ -62,9 +62,9 @@ if (defined('WPP_PROFILING_STARTED')) {
 }
 
 // Install / uninstall hooks
-register_activation_hook(P3_PATH . DIRECTORY_SEPARATOR . 'wp-profiler.php', array($p3_profiler_plugin, 'activate'));
-register_deactivation_hook(P3_PATH . DIRECTORY_SEPARATOR . 'wp-profiler.php', array($p3_profiler_plugin, 'deactivate'));
-register_uninstall_hook(P3_PATH . DIRECTORY_SEPARATOR . 'wp-profiler.php', array('P3_Profiler', 'uninstall'));
+register_activation_hook(P3_PATH . DIRECTORY_SEPARATOR . 'p3-profiler.php', array($p3_profiler_plugin, 'activate'));
+register_deactivation_hook(P3_PATH . DIRECTORY_SEPARATOR . 'p3-profiler.php', array($p3_profiler_plugin, 'deactivate'));
+register_uninstall_hook(P3_PATH . DIRECTORY_SEPARATOR . 'p3-profiler.php', array('P3_Profiler', 'uninstall'));
 if (function_exists('is_multisite') && is_multisite()) {
 	add_action('wpmu_add_blog', array($p3_profiler_plugin, 'sync_profiles_folder'));
 	add_action('wpmu_delete_blog', array($p3_profiler_plugin, 'sync_profiles_folder'));
@@ -156,12 +156,12 @@ class P3_Profiler {
 	 * @return void
 	 */
 	public function load_scripts() {
-		wp_enqueue_script('flot', plugins_url () . '/wp-profiler/js/jquery.flot.min.js', array('jquery'));
-		wp_enqueue_script('flot.pie', plugins_url () . '/wp-profiler/js/jquery.flot.pie.min.js', array('jquery', 'flot'));
-		wp_enqueue_script('flot.navigate', plugins_url () . '/wp-profiler/js/jquery.flot.navigate.js', array('jquery', 'flot'));
-		wp_enqueue_script('p3_jquery_ui', plugins_url () . '/wp-profiler/js/jquery-ui-1.8.16.custom.min.js', array('jquery'));
-		wp_enqueue_script('p3_corners', plugins_url() . '/wp-profiler/js/jquery.corner.js', array('jquery'));
-		wp_enqueue_script('p3_qtip', plugins_url() . '/wp-profiler/js/jquery.qtip.min.js', array('jquery', 'p3_jquery_ui'));
+		wp_enqueue_script('flot', plugins_url () . '/p3-profiler/js/jquery.flot.min.js', array('jquery'));
+		wp_enqueue_script('flot.pie', plugins_url () . '/p3-profiler/js/jquery.flot.pie.min.js', array('jquery', 'flot'));
+		wp_enqueue_script('flot.navigate', plugins_url () . '/p3-profiler/js/jquery.flot.navigate.js', array('jquery', 'flot'));
+		wp_enqueue_script('p3_jquery_ui', plugins_url () . '/p3-profiler/js/jquery-ui-1.8.16.custom.min.js', array('jquery'));
+		wp_enqueue_script('p3_corners', plugins_url() . '/p3-profiler/js/jquery.corner.js', array('jquery'));
+		wp_enqueue_script('p3_qtip', plugins_url() . '/p3-profiler/js/jquery.qtip.min.js', array('jquery', 'p3_jquery_ui'));
 	}
 
 	/**
@@ -541,7 +541,7 @@ class P3_Profiler {
 
 		// .htaccess for mod_php
 		if ('apache2handler' == $sapi) {
-			insert_with_markers(P3_PATH . '/../../../.htaccess', 'wp-profiler', array('php_value auto_prepend_file "' . P3_PATH . DIRECTORY_SEPARATOR . 'start-profile.php"'));
+			insert_with_markers(P3_PATH . '/../../../.htaccess', 'p3-profiler', array('php_value auto_prepend_file "' . P3_PATH . DIRECTORY_SEPARATOR . 'start-profile.php"'));
 
 		//.user.ini for php 5.3.0+ if auto_prepend_file isn't set
 		# Can't use this until there's a way to foce php to reload .user.ini settings, otherwise the user
@@ -563,7 +563,7 @@ class P3_Profiler {
 			$flag = wp_mkdir_p(P3_PATH . '/../../mu-plugins/');
 		}
 		if (file_exists(P3_PATH . '/../../mu-plugins/') && is_writable(P3_PATH . '/../../mu-plugins')) {
-			file_put_contents(P3_PATH . '/../../mu-plugins/wp-profiler.php', '<' . "?php // Start profiling\nrequire_once(realpath(dirname(__FILE__)) . '/../plugins/wp-profiler/start-profile.php'); ?" . '>');
+			file_put_contents(P3_PATH . '/../../mu-plugins/p3-profiler.php', '<' . "?php // Start profiling\nrequire_once(realpath(dirname(__FILE__)) . '/../plugins/p3-profiler/start-profile.php'); ?" . '>');
 		}
 		
 		// Create the profiles folder
@@ -610,8 +610,8 @@ class P3_Profiler {
 
 		// Remove any .htaccess modifications
 		$file = P3_PATH . '/../../../.htaccess';
-		if (file_exists($file) && array() !== extract_from_markers($file, 'wp-profiler')) {
-			insert_with_markers($file, 'wp-profiler', array('# removed during uninstall'));
+		if (file_exists($file) && array() !== extract_from_markers($file, 'p3-profiler')) {
+			insert_with_markers($file, 'p3-profiler', array('# removed during uninstall'));
 		}
 
 		// Can't use this until there's a way to foce php to reload .user.ini settings
@@ -623,11 +623,11 @@ class P3_Profiler {
 		#}
 
 		// Remove mu-plugin
-		if (file_exists(P3_PATH . '/../../mu-plugins/wp-profiler.php')) {
-			if (is_writable(P3_PATH . '/../../mu-plugins/wp-profiler.php')) {
+		if (file_exists(P3_PATH . '/../../mu-plugins/p3-profiler.php')) {
+			if (is_writable(P3_PATH . '/../../mu-plugins/p3-profiler.php')) {
 				// Some servers give write permission, but not delete permission.  Empty the file out, first, then try to delete it.
-				file_put_contents(P3_PATH . '/../../mu-plugins/wp-profiler.php', '');
-				unlink(P3_PATH . '/../../mu-plugins/wp-profiler.php');
+				file_put_contents(P3_PATH . '/../../mu-plugins/p3-profiler.php', '');
+				unlink(P3_PATH . '/../../mu-plugins/p3-profiler.php');
 			}
 		}
 	}
