@@ -157,7 +157,7 @@ class wpp_profile_table extends WP_List_Table {
 	 */
 	private function _action_links($key, $display) {
 		$url = add_query_arg(array(
-			'wpp_action' => 'view-scan',
+			'p3_action' => 'view-scan',
 			'name' => $key
 		));
 		return <<<EOD
