@@ -854,7 +854,7 @@
 
 	<!-- Email these results -->
 	<div class="button" id="p3-email-results" style="width: 155px; padding: 5px;">
-		<img src="<?php echo plugins_url(); ?>/p3-profiler/css/mail.png" height="22" width="22" align="center" alt="Email these results" title="Email these results" />
+		<img src="<?php echo plugins_url(); ?>/p3-profiler/css/icon_mail.gif" height="22" width="22" align="center" alt="Email these results" title="Email these results" />
 		<a href="javascript:;">Email these results</a>
 	</div>
 	
