@@ -1,5 +1,6 @@
+
 /** Top grey nav bar **/
-#wpp-navbar {
+#p3-navbar {
 	margin-top: 10px;
 	padding: 4px;
 	cursor: default;
@@ -7,7 +8,7 @@
 
 
 /** The grey box behind the big buttons **/
-#wpp-scan-form-wrapper {
+#p3-scan-form-wrapper {
 	cursor: default;
 	padding: 10px;
 	width: 170px;
@@ -17,14 +18,14 @@
 }
 
 /** Big buttons **/
-.wpp-big-button {
+.p3-big-button {
 	margin: auto;
 	text-align: center;
 }
-.wpp-big-button label {
+.p3-big-button label {
 	margin: 5px;
 }
-.wpp-big-button label span {
+.p3-big-button label span {
 	font-size: 110%;
 	font-weight: bold;
 	width: 110px;
@@ -33,13 +34,13 @@
 
 
 /** Light grey italic captions **/ 
-em.wpp-em {
+em.p3-em {
 	color: #999999;
 }
 
 
 /** Auto scanner frame **/
-#wpp-scan-frame {
+#p3-scan-frame {
 	border-width: 0px;
 	height: 500px;
 	width: 100%;
@@ -57,19 +58,19 @@ em.wpp-em {
     float: none;
     text-align: center;
 }
-.wpp-dialog {
+.p3-dialog {
 	display: none;
 }
 
 
 
 /** Turn "Cancel" button into link **/ 
-button.wpp-cancel-button{
+button.p3-cancel-button{
 	border-width: 0px !important;
 	background-image: none !important;
 	background-color: transparent !important;
 }
-.ui-dialog .ui-dialog-buttonpane button.wpp-cancel-button span {
+.ui-dialog .ui-dialog-buttonpane button.p3-cancel-button span {
 	text-decoration: underline;
 	padding-left: 0;
 	padding-right: 0;
@@ -77,20 +78,20 @@ button.wpp-cancel-button{
 	margin-right: 0;
 	color: #21759b;
 }
-#wpp-manual-scan-cancel {
+#p3-manual-scan-cancel {
 	color: #21759b;
 }
 
 
 /** Captions for the scan "This will take several minutes ..." **/
-#wpp-scan-caption {
+#p3-scan-caption {
 	margin: 8px auto 0 auto;
 	width: 85%;
 }
 
 
 /** Auto scanner display status **/
-#wpp-scanning-caption {
+#p3-scanning-caption {
 	text-overflow: ellipsis;
 	white-space: nowrap;
 	-moz-binding: url('wordwrap.xml#wordwrap');
@@ -105,79 +106,79 @@ button.wpp-cancel-button{
 
 
 /** Progress bar **/
-#wpp-progress {
+#p3-progress {
 	margin: 5px auto 5px auto;
 }
 
 
 /** Charts and graphs **/
-div.wpp-plugin-graph {
+div.p3-plugin-graph {
 	margin: 10px auto 20px auto;
 	width: 620px;
 	height: 320px;
 }
-div.wpp-graph-holder {
+div.p3-graph-holder {
 	width: 500px;
 	height: 300px;
 	margin: auto;
 }
-div.wpp-custom-legend {
+div.p3-custom-legend {
 	float: left;
 	width: 120px;
 	height: 280px;
 	overflow: auto;
 }
-#wpp-tabs h2 {
+#p3-tabs h2 {
 	margin: auto;
 	text-align: center;
 }
-div.wpp-plugin-graph td {
+div.p3-plugin-graph td {
 	vertical-align: top;
 }
-div.wpp-plugin-graph td h3{
+div.p3-plugin-graph td h3{
 	text-align: center;
 	margin: auto;
 }
-div.wpp-plugin-graph div.yAxis div.tickLabel {
+div.p3-plugin-graph div.yAxis div.tickLabel {
 	margin-right: 25px;
 	margin-top: -10px;
 }
 
 
 /** Advanced metrics table and glossary table **/
-table.wpp-results-table td {
+table.p3-results-table td {
 	background-color: #ffffff;
 	padding: 6px;
 }
-table.wpp-results-table td {
+table.p3-results-table td {
 	border-style: solid;
 	border-color: #eaeaea;
 	border-width: 0px 1px 1px 1px;
 	vertical-align: top;
 }
-table.wpp-results-table th:last-child {
+table.p3-results-table th:last-child {
 	border-left-width: 0px;
 }
-table.wpp-results-table tr.even td {
+table.p3-results-table tr.even td {
 	background-color: #fcfcfc;
 }
-table.wpp-results-table {
+table.p3-results-table {
 	width: 100%;
 	border-collapse: collapse;
 	margin: 0 auto 20px auto;
 }
-wpp-metrics-header {
+p3-metrics-header {
 	width: 100%;
 }
-wpp-metrics-container {
+p3-metrics-container {
 	min-width: 650px;
 	max-width: 800px;
 	width: 80%;
 }
-wpp-glossary-header {
+p3-glossary-header {
 	width: 100%;
 }
-wpp-glossary-container {
+p3-glossary-container {
 	min-width: 650px;
 	max-width: 800px;
 	width: 80%;
@@ -186,17 +187,17 @@ wpp-glossary-container {
 
 
 /** Glossary **/
-#wpp-glossary-term-display {
+#p3-glossary-term-display {
 	vertical-align: text-top;
 	border-width: 1px !important;
 	font-size: 14px;
 }
-#wpp-glossary-table td.term {
+#p3-glossary-table td.term {
 	border-width: 1px !important;
 	border-color: transparent !important;
 	cursor: pointer;
 }
-#wpp-glossary-table td.term.hover {
+#p3-glossary-table td.term.hover {
 	background-color: #206d92;
 	border-width: 1px 0px 1px 1px !important;
 	border-color: #298cba !important;
@@ -207,37 +208,37 @@ wpp-glossary-container {
 }
 
 /** Quick report table **/
-#wpp-quick-report {
+#p3-quick-report {
 	width: 100%;
 }
-#wpp-quick-report td {
+#p3-quick-report td {
 	width: 20%;
 	vertical-align: top;
 	padding: 0px;
 }
-#wpp-quick-report td.wpp-callout {
+#p3-quick-report td.p3-callout {
 	text-align: center;
 }
-#wpp-quick-report div.wpp-callout-outer-wrapper {
+#p3-quick-report div.p3-callout-outer-wrapper {
 	border: 1px solid #cccccc;
 	margin: 10px auto;
 	width: 140px;
 }
-#wpp-quick-report div.wpp-callout-inner-wrapper {
+#p3-quick-report div.p3-callout-inner-wrapper {
 	width: 140px;
 	height: 92px;
 }
-#wpp-quick-report td div.wpp-callout-caption {
+#p3-quick-report td div.p3-callout-caption {
 	text-align: center;
 	position: relative;
 }
-#wpp-quick-report td div.wpp-callout-caption:first-child {
+#p3-quick-report td div.p3-callout-caption:first-child {
 	top: 5px;
 }
-#wpp-quick-report td div.wpp-callout-caption:last-child {
+#p3-quick-report td div.p3-callout-caption:last-child {
 	top: -6px;
 }
-#wpp-quick-report div.wpp-callout-data {
+#p3-quick-report div.p3-callout-data {
 	font-weight: bold;
 	text-align: center;
 	font-size: 40px;
@@ -245,33 +246,33 @@ wpp-glossary-container {
 	top: 22px;
 	height: 60px;
 }
-.wpp-faded-grey {
+.p3-faded-grey {
 	color: #dddddd;	
 }
 
 
 
 /** Enter your IP dialog **/
-#wpp-ip-dialog {
+#p3-ip-dialog {
 	padding: 15px;
 }
 
 
 /** Tabs shim **/
-#wpp-tabs ul li:first-child {
+#p3-tabs ul li:first-child {
 	margin-left: 4px;
 }
 
 
 /** Copyright notice **/
-#wpp-copyright {
+#p3-copyright {
 	text-align: center;
 	margin: 60px auto 20px auto;
 }
 
 
 /** Rotated y-axis label **/
-div.wpp-y-axis-label {
+div.p3-y-axis-label {
 
 	position: relative;
 	top: 135px;
@@ -295,7 +296,7 @@ div.wpp-y-axis-label {
 
 
 /** X axis label **/
-div.wpp-x-axis-label {
+div.p3-x-axis-label {
 	position: relative;
 	top: 20px;
 	left: 235px;
@@ -310,15 +311,15 @@ div.wpp-x-axis-label {
 
 
 /** Email these results button **/
-#wpp-email-results {
+#p3-email-results {
 	margin: 20px auto 30px auto;
 }
-#wpp-email-sending-dialog img {
+#p3-email-sending-dialog img {
 	left: 125px;
 	top: 38px;
 	position: relative;
 }
-#wpp-email-sending-close {
+#p3-email-sending-close {
 	margin: 20px auto;
 	text-align: center;
 }
