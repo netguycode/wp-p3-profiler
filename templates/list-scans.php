@@ -1,6 +1,6 @@
 <form id="scans-filter" method="post">
 	<input type="hidden" name="page" value="<?php echo $_REQUEST ['page']?>" />
-	<?php echo wp_nonce_field ( 'delete_scans', 'wpp_nonce' ); ?>
+	<?php echo wp_nonce_field ( 'delete_scans', 'p3_nonce' ); ?>
 	<?php $this->scan_table->display(); ?>
 </form>
 <script type="text/javascript">

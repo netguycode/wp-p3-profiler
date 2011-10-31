@@ -11,30 +11,30 @@
 		});
 		$("#glossary-terms td.term").click(function() {
 			var definition = $("div.definition", $(this)).html();
-			$("#wpp-glossary-term-display").html(definition);
-			$("#wpp-glossary-table td.term.hover").removeClass("hover");
+			$("#p3-glossary-term-display").html(definition);
+			$("#p3-glossary-table td.term.hover").removeClass("hover");
 			$(this).addClass("hover");
 		});
-		$("#wpp-glossary-table td.term:first").click();
-		$("#wpp-hide-glossary").click(function() {
+		$("#p3-glossary-table td.term:first").click();
+		$("#p3-hide-glossary").click(function() {
 			if ("Hide" == $(this).html()) {
-				$("#wpp-glossary-table tbody").hide();
-				$("#wpp-glossary-table tfoot").hide();
+				$("#p3-glossary-table tbody").hide();
+				$("#p3-glossary-table tfoot").hide();
 				$(this).html("Show");
 			} else {
-				$("#wpp-glossary-table tbody").show();
-				$("#wpp-glossary-table tfoot").show();
+				$("#p3-glossary-table tbody").show();
+				$("#p3-glossary-table tfoot").show();
 				$(this).html("Hide");
 			}
 		});
-		// $("#wpp-hide-glossary").trigger("click");
-		$("#wpp-glossary-container").dblclick(function() {
-			$("#wpp-hide-glossary").trigger("click");
+		// $("#p3-hide-glossary").trigger("click");
+		$("#p3-glossary-container").dblclick(function() {
+			$("#p3-hide-glossary").trigger("click");
 		});
 	});
 </script>
 
-<div id="wpp-help-toc"></div>
+<div id="p3-help-toc"></div>
 
 <h2>How do I use this?</h2>
 <blockquote>
@@ -213,15 +213,15 @@ goes down.
 
 <h2>Glossary</h2>
 <div>
-	<div id="wpp-glossary-container">
-		<div class="ui-widget-header" id="wpp-glossary-header" style="padding: 8px;">
+	<div id="p3-glossary-container">
+		<div class="ui-widget-header" id="p3-glossary-header" style="padding: 8px;">
 			<strong>Glossary</strong>
 			<div style="position: relative; top: 0px; right: 80px; float: right;">
-				<a href="javascript:;" id="wpp-hide-glossary">Hide</a>
+				<a href="javascript:;" id="p3-hide-glossary">Hide</a>
 			</div>
 		</div>
 		<div>
-		<table class="p3-results-table" id="wpp-glossary-table" cellpadding="0" cellspacing="0" border="0">
+		<table class="p3-results-table" id="p3-glossary-table" cellpadding="0" cellspacing="0" border="0">
 			<tbody>
 				<tr>
 					<td colspan="2" style="border-left-width: 1px !important;">
@@ -234,7 +234,7 @@ goes down.
 											stop timing when the page was delivered to the browser, calcuate the difference).  Lower is better.
 										</div>
 									</td>
-									<td width="400" rowspan="12" id="wpp-glossary-term-display">&nbsp;</td>
+									<td width="400" rowspan="12" id="p3-glossary-term-display">&nbsp;</td>
 								</tr>
 								<tr>
 									<td class="term"><strong>Site Load Time</strong>

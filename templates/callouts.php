@@ -5,7 +5,7 @@
 	/*****************************************************************/
 	// This will load all of the pages in the list, then turn off
 	// the profile mode and view the results when complete.
-	var WPP_Scan = {
+	var P3_Scan = {
 
 		// List of pages to scan
 		pages: <?php echo json_encode($this->list_of_pages()); ?>,
@@ -21,11 +21,11 @@
 			
 			// Form data
 			data = {
-				'wpp_ip' : jQuery('#wpp-advanced-ip').val(),
-				'wpp_disable_opcode_cache' : jQuery('#wpp-disable-opcode-cache').prop('checked'),
-				'wpp_scan_name' : jQuery("#wpp-scan-name").val(),
-				'action' : 'wpp_start_scan',
-				'wpp_nonce' : jQuery("#wpp_nonce").val()
+				'p3_ip' : jQuery('#p3-advanced-ip').val(),
+				'p3_disable_opcode_cache' : jQuery('#p3-disable-opcode-cache').prop('checked'),
+				'p3_scan_name' : jQuery("#p3-scan-name").val(),
+				'action' : 'p3_start_scan',
+				'p3_nonce' : jQuery("#p3_nonce").val()
 			}
 
 			// Turn on the profiler
@@ -35,10 +35,10 @@
 				} else {
 
 					// Start scanning pages
-					jQuery("#wpp-scan-frame").attr("onload", "WPP_Scan.next_page();");
-					jQuery("#wpp-scan-frame").attr("src", WPP_Scan.pages[0]);
-					WPP_Scan.current_page = 0;
-					WPP_Scan.update_display();
+					jQuery("#p3-scan-frame").attr("onload", "P3_Scan.next_page();");
+					jQuery("#p3-scan-frame").attr("src", P3_Scan.pages[0]);
+					P3_Scan.current_page = 0;
+					P3_Scan.update_display();
 					
 				}
 			});
@@ -49,8 +49,8 @@
 			
 			// Turn off the profiler
 			data = {
-				'action' : 'wpp_stop_scan',
-				'wpp_nonce' : '<?php echo wp_create_nonce('wpp_ajax_stop_scan'); ?>'
+				'action' : 'p3_stop_scan',
+				'p3_nonce' : '<?php echo wp_create_nonce('p3_ajax_stop_scan'); ?>'
 			}
 			jQuery.post(ajaxurl, data, function(response) {
 				if (response.indexOf('.json') < 0) {
@@ -58,18 +58,18 @@
 				}
 
 				// Hide the cancel button
-				jQuery("#wpp-cancel-scan-buttonset").hide();
-				jQuery("#wpp-resume-scan-buttonset").show();
-				jQuery("#wpp-view-results-buttonset").hide();
+				jQuery("#p3-cancel-scan-buttonset").hide();
+				jQuery("#p3-resume-scan-buttonset").show();
+				jQuery("#p3-view-results-buttonset").hide();
 				
 				// Show the view results button
-				jQuery("#wpp-view-incomplete-results-submit").attr("data-scan-name", response);
+				jQuery("#p3-view-incomplete-results-submit").attr("data-scan-name", response);
 				
 				// Pause
-				WPP_Scan.paused = true;
+				P3_Scan.paused = true;
 				
 				// Update the caption
-				jQuery("#wpp-scanning-caption").html("Scanning is paused.").css("color", "black");
+				jQuery("#p3-scanning-caption").html("Scanning is paused.").css("color", "black");
 			});
 		},
 
@@ -77,11 +77,11 @@
 		resume: function() {
 			
 			data = {
-				'wpp_ip' : jQuery('#wpp-advanced-ip').val(),
-				'wpp_disable_opcode_cache' : jQuery('#wpp-disable-opcode-cache').prop('checked'),
-				'wpp_scan_name' : jQuery("#wpp-scan-name").val(),
-				'action' : 'wpp_start_scan',
-				'wpp_nonce' : jQuery("#wpp_nonce").val()
+				'p3_ip' : jQuery('#p3-advanced-ip').val(),
+				'p3_disable_opcode_cache' : jQuery('#p3-disable-opcode-cache').prop('checked'),
+				'p3_scan_name' : jQuery("#p3-scan-name").val(),
+				'action' : 'p3_start_scan',
+				'p3_nonce' : jQuery("#p3_nonce").val()
 			}
 
 			// Turn on the profiler
@@ -91,12 +91,12 @@
 				} else {
 
 					// Show the cancel button
-					WPP_Scan.paused = false;
-					jQuery("#wpp-cancel-scan-buttonset").show();
-					jQuery("#wpp-resume-scan-buttonset").hide();
-					jQuery("#wpp-view-results-buttonset").hide();
-					WPP_Scan.update_display();
-					WPP_Scan.next_page();
+					P3_Scan.paused = false;
+					jQuery("#p3-cancel-scan-buttonset").show();
+					jQuery("#p3-resume-scan-buttonset").hide();
+					jQuery("#p3-view-results-buttonset").hide();
+					P3_Scan.update_display();
+					P3_Scan.next_page();
 				}
 			});
 		},
@@ -106,8 +106,8 @@
 			
 			// Turn off the profiler
 			data = {
-				'action' : 'wpp_stop_scan',
-				'wpp_nonce' : '<?php echo wp_create_nonce('wpp_ajax_stop_scan'); ?>'
+				'action' : 'p3_stop_scan',
+				'p3_nonce' : '<?php echo wp_create_nonce('p3_ajax_stop_scan'); ?>'
 			}
 			jQuery.post(ajaxurl, data, function(response) {
 				if (response.indexOf('.json') < 0) {
@@ -115,43 +115,43 @@
 				}
 				
 				// Hide the cancel button
-				jQuery("#wpp-cancel-scan-buttonset").hide();
-				jQuery("#wpp-resume-scan-buttonset").hide();
-				jQuery("#wpp-view-results-buttonset").show();
+				jQuery("#p3-cancel-scan-buttonset").hide();
+				jQuery("#p3-resume-scan-buttonset").hide();
+				jQuery("#p3-view-results-buttonset").show();
 				
 				// Show the view results button
-				jQuery("#wpp-view-results-submit").attr("data-scan-name", response);
+				jQuery("#p3-view-results-submit").attr("data-scan-name", response);
 				
 				// Update the caption
-				jQuery("#wpp-scanning-caption").html("Scanning is complete.").css("color", "black");
+				jQuery("#p3-scanning-caption").html("Scanning is complete.").css("color", "black");
 			});
 		},
 
 		// Update the display
 		update_display : function() {
-			jQuery("#wpp-scanning-caption").html('Scanning ' + WPP_Scan.pages[WPP_Scan.current_page]).css("color", "");
-			jQuery("#wpp-progress").progressbar("value", (WPP_Scan.current_page / (WPP_Scan.pages.length - 1)) * 100);
+			jQuery("#p3-scanning-caption").html('Scanning ' + P3_Scan.pages[P3_Scan.current_page]).css("color", "");
+			jQuery("#p3-progress").progressbar("value", (P3_Scan.current_page / (P3_Scan.pages.length - 1)) * 100);
 		},
 
 		// Look at the next page
 		next_page : function() {
 
 			// Paused?
-			if (WPP_Scan.paused) {
+			if (P3_Scan.paused) {
 				return true;
 			}
 
 			// Is it time to stop?
-			if (WPP_Scan.current_page >= WPP_Scan.pages.length - 1) {
-				WPP_Scan.stop();
+			if (P3_Scan.current_page >= P3_Scan.pages.length - 1) {
+				P3_Scan.stop();
 				return true;
 			}
 
 			// Next page
-			jQuery("#wpp-scan-frame").attr("src", WPP_Scan.pages[++WPP_Scan.current_page]);
+			jQuery("#p3-scan-frame").attr("src", P3_Scan.pages[++P3_Scan.current_page]);
 
 			// Update the display
-			WPP_Scan.update_display();
+			P3_Scan.update_display();
 		}
 	};
 
@@ -164,7 +164,7 @@
 		/*****************************************************************/
 
 		// IP settings
-		$("#wpp-ip-dialog").dialog({
+		$("#p3-ip-dialog").dialog({
 			'autoOpen' : false,
 			'closeOnEscape' : true,
 			'draggable' : false,
@@ -184,7 +184,7 @@
 				},
 				{
 					text: 'Cancel',
-					'class': 'wpp-cancel-button',
+					'class': 'p3-cancel-button',
 					click: function() {
 						$(this).dialog("close");
 					}
@@ -193,7 +193,7 @@
 		});
 
 		// Iframe scanner
-		$("#wpp-scanner-dialog").dialog({
+		$("#p3-scanner-dialog").dialog({
 			'autoOpen' : false,
 			'closeOnEscape' : true,
 			'draggable' : false,
@@ -206,7 +206,7 @@
 		});
 
 		// Auto scan or manual scan 
-		$("#wpp-scan-name-dialog").dialog({
+		$("#p3-scan-name-dialog").dialog({
 			'autoOpen' : false,
 			'closeOnEscape' : true,
 			'draggable' : false,
@@ -219,7 +219,7 @@
 		});
 
 		// Progress dialog
-		$("#wpp-progress-dialog").dialog({
+		$("#p3-progress-dialog").dialog({
 			'autoOpen' : false,
 			'closeOnEscape' : false,
 			'draggable' : false,
@@ -237,8 +237,8 @@
 		/*****************************************************************/
 		
 		// Advanced settings link
-		$("#wpp-advanced-settings").click(function() {
-			$("#wpp-ip-dialog").dialog("open");
+		$("#p3-advanced-settings").click(function() {
+			$("#p3-ip-dialog").dialog("open");
 		});
 
 
@@ -248,19 +248,19 @@
 		/*****************************************************************/
 		
 		// Start scan button
-		$("#wpp-start-scan-submit").click(function() {
+		$("#p3-start-scan-submit").click(function() {
 			
 			// Stay checked to keep the styling
 			$(this).prop("checked", true);
 			$(this).button("refresh");
 			
-			$("#wpp-scan-frame").attr("src", $("#wpp-scan-frame").attr("data-defaultsrc"));
-			$("#wpp-scanner-dialog").dialog("open");
-			$("#wpp-scan-name-dialog").dialog("open");
+			$("#p3-scan-frame").attr("src", $("#p3-scan-frame").attr("data-defaultsrc"));
+			$("#p3-scanner-dialog").dialog("open");
+			$("#p3-scan-name-dialog").dialog("open");
 		});
 		
 		// Stop scan button
-		$("#wpp-stop-scan-submit").click(function() {
+		$("#p3-stop-scan-submit").click(function() {
 
 			// Stay checked to keep the styling
 			$(this).prop("checked", true);
@@ -268,8 +268,8 @@
 
 			// Turn off the profiler
 			data = {
-				'action' : 'wpp_stop_scan',
-				'wpp_nonce' : '<?php echo wp_create_nonce('wpp_ajax_stop_scan'); ?>'
+				'action' : 'p3_stop_scan',
+				'p3_nonce' : '<?php echo wp_create_nonce('p3_ajax_stop_scan'); ?>'
 			}
 			jQuery.post(ajaxurl, data, function(response) {
 				if (response.indexOf('.json') < 0) {
@@ -280,28 +280,28 @@
 		});
 
 		// Auto scan button
-		$("#wpp-auto-scan-submit").click(function() {
+		$("#p3-auto-scan-submit").click(function() {
 			
 			// Stay checked to keep the styling
 			$(this).prop("checked", true);
 			$(this).button("refresh");
 
 			// Close the "auto or manual" dialog
-			$("#wpp-scan-name-dialog").dialog("close");
+			$("#p3-scan-name-dialog").dialog("close");
 
 			// Open the progress bar dialog
-			$("#wpp-progress-dialog").dialog("open");
+			$("#p3-progress-dialog").dialog("open");
 
 			// Initialize the progress bar to 0%
-			$("#wpp-progress").progressbar({
+			$("#p3-progress").progressbar({
 				'value': 0
 			});
 
-			WPP_Scan.start();
+			P3_Scan.start();
 		});
 
 		// Manual scan button
-		$("#wpp-manual-scan-submit").click(function() {
+		$("#p3-manual-scan-submit").click(function() {
 			
 			// Stay checked to keep the styling
 			$(this).prop("checked", true);
@@ -310,11 +310,11 @@
 			
 			// Form data
 			data = {
-				'wpp_ip' : jQuery('#wpp-advanced-ip').val(),
-				'wpp_disable_opcode_cache' : jQuery('#wpp-disable-opcode-cache').prop('checked'),
-				'wpp_scan_name' : jQuery("#wpp-scan-name").val(),
-				'action' : 'wpp_start_scan',
-				'wpp_nonce' : jQuery("#wpp_nonce").val()
+				'p3_ip' : jQuery('#p3-advanced-ip').val(),
+				'p3_disable_opcode_cache' : jQuery('#p3-disable-opcode-cache').prop('checked'),
+				'p3_scan_name' : jQuery("#p3-scan-name").val(),
+				'action' : 'p3_start_scan',
+				'p3_nonce' : jQuery("#p3_nonce").val()
 			}
 
 			// Turn on the profiler
@@ -324,16 +324,16 @@
 				}
 			});
 
-			$("#wpp-scan-name-dialog").dialog("close");
-			$("#wpp-scan-caption").hide();
-			$("#wpp-manual-scan-caption").show();
+			$("#p3-scan-name-dialog").dialog("close");
+			$("#p3-scan-caption").hide();
+			$("#p3-manual-scan-caption").show();
 		});
 		
 		// Manual scan "I'm done" button
-		$("#wpp-manual-scan-done-submit").click(function() {
+		$("#p3-manual-scan-done-submit").click(function() {
 			data = {
-				'action' : 'wpp_stop_scan',
-				'wpp_nonce' : '<?php echo wp_create_nonce('wpp_ajax_stop_scan'); ?>'
+				'action' : 'p3_stop_scan',
+				'p3_nonce' : '<?php echo wp_create_nonce('p3_ajax_stop_scan'); ?>'
 			}
 			jQuery.post(ajaxurl, data, function(response) {
 				if (response.indexOf('.json') < 0) {
@@ -342,51 +342,51 @@
 					location.href = "<?php echo add_query_arg(array('p3_action' => 'view-scan')); ?>&name=" + response;
 				}
 			})
-			$("#wpp-scanner-dialog").dialog("close");
+			$("#p3-scanner-dialog").dialog("close");
 		});
 		
 		// Manual scan cancel link
-		$("#wpp-manual-scan-cancel").click(function() {
-			WPP_Scan.pause();
-			$("#wpp-scanner-dialog").dialog("close");
+		$("#p3-manual-scan-cancel").click(function() {
+			P3_Scan.pause();
+			$("#p3-scanner-dialog").dialog("close");
 		});
 
 		// Cancel scan button
-		$("#wpp-cancel-scan-submit").click(function() {
+		$("#p3-cancel-scan-submit").click(function() {
 			
 			// Stay checked to keep the styling
 			$(this).prop("checked", true);
 			$(this).button("refresh");
 
-			WPP_Scan.pause();
+			P3_Scan.pause();
 		});
 		
 		// Resume
-		$("#wpp-resume-scan-submit").click(function() {
+		$("#p3-resume-scan-submit").click(function() {
 			
 			// Stay checked to keep the styling
 			$(this).prop("checked", true);
 			$(this).button("refresh");
 
-			WPP_Scan.resume();
+			P3_Scan.resume();
 		});
 		
 		// View results button
-		$("#wpp-view-results-submit").click(function() {
+		$("#p3-view-results-submit").click(function() {
 
 			// Stay checked to keep the styling
 			$(this).prop("checked", true);
 			$(this).button("refresh");
 
 			// Close the dialogs
-			jQuery("#wpp-scanner-dialog").dialog("close");
-			jQuery("#wpp-progress-dialog").dialog("close");
+			jQuery("#p3-scanner-dialog").dialog("close");
+			jQuery("#p3-progress-dialog").dialog("close");
 
 			// View the scan
 			location.href = "<?php echo add_query_arg(array('p3_action' => 'view-scan')); ?>&name=" + $(this).attr("data-scan-name");
 		});
-		$("#wpp-view-incomplete-results-submit").click(function() {
-			$("#wpp-view-results-submit").trigger("click");
+		$("#p3-view-incomplete-results-submit").click(function() {
+			$("#p3-view-results-submit").trigger("click");
 		});
 
 
@@ -394,63 +394,63 @@
 		/**  OTHER                                                      **/
 		/*****************************************************************/
 		// Enable / disable buttons based on scan name input
-		$("#wpp-scan-name").live("keyup", function() {
+		$("#p3-scan-name").live("keyup", function() {
 			if ($(this).val().match(/^[a-zA-Z0-9_\.-]+$/)) {
-				$("#wpp-auto-scan-submit").button("enable")
-				$("#wpp-manual-scan-submit").button("enable");
+				$("#p3-auto-scan-submit").button("enable")
+				$("#p3-manual-scan-submit").button("enable");
 			} else {
-				$("#wpp-auto-scan-submit").button("disable");
-				$("#wpp-manual-scan-submit").button("disable");
+				$("#p3-auto-scan-submit").button("disable");
+				$("#p3-manual-scan-submit").button("disable");
 			}
 		});
 		
 		// Callouts
-		$("div.wpp-callout-inner-wrapper")
+		$("div.p3-callout-inner-wrapper")
 		.corner("round 8px")
 		.parent()
 		.css("padding", "4px")
 		.corner("round 10px");
 
 		// Start / stop buttons
-		$("#wpp-scan-form-wrapper").corner("round 8px");
+		$("#p3-scan-form-wrapper").corner("round 8px");
 		
 		// Continue scan
-		$("a.wpp-continue-scan").click(function() {
-			$("#wpp-start-scan-submit").trigger("click");
-			$("#wpp-scan-name").val($(this).attr("data-name").replace(/\.json$/, ''));
+		$("a.p3-continue-scan").click(function() {
+			$("#p3-start-scan-submit").trigger("click");
+			$("#p3-scan-name").val($(this).attr("data-name").replace(/\.json$/, ''));
 		});
 	});
 </script>
-<table id="wpp-quick-report" cellpadding="0" cellspacing="0">
+<table id="p3-quick-report" cellpadding="0" cellspacing="0">
 	<tr>
 
 		<td>
-			<div class="ui-widget-header" id="wpp-scan-form-wrapper">
+			<div class="ui-widget-header" id="p3-scan-form-wrapper">
 				<?php if (false !== ($info = $this->scan_enabled())) : ?>
 					<!-- Stop scan button -->
 
 					<strong>IP:</strong><?php echo htmlentities($info['ip']); ?>
-					<div class="p3-big-button"><input type="checkbox" checked="checked" id="wpp-stop-scan-submit" /><label for="wpp-stop-scan-submit">Stop Scan</label></div>
+					<div class="p3-big-button"><input type="checkbox" checked="checked" id="p3-stop-scan-submit" /><label for="p3-stop-scan-submit">Stop Scan</label></div>
 					<?php echo htmlentities($info['name']); ?>
 
 				<?php else : ?>
 
 					<!-- Start scan button -->
-					<?php echo wp_nonce_field('wpp_ajax_start_scan', 'wpp_nonce'); ?>
-					<strong>My IP:</strong><?php echo htmlentities($GLOBALS['wpp_profiler']->get_ip()); ?>
-					<div class="p3-big-button"><input type="checkbox" checked="checked" id="wpp-start-scan-submit" /><label for="wpp-start-scan-submit">Start Scan</label></div>
-					<a href="javascript:;" id="wpp-advanced-settings">Advanced Settings</a>
+					<?php echo wp_nonce_field('p3_ajax_start_scan', 'p3_nonce'); ?>
+					<strong>My IP:</strong><?php echo htmlentities($GLOBALS['p3_profiler']->get_ip()); ?>
+					<div class="p3-big-button"><input type="checkbox" checked="checked" id="p3-start-scan-submit" /><label for="p3-start-scan-submit">Start Scan</label></div>
+					<a href="javascript:;" id="p3-advanced-settings">Advanced Settings</a>
 
 				<?php endif; ?>
 			</div>
 		</td>
 
 		<!-- First callout cell -->
-		<td class="wpp-callout">
-			<div class="wpp-callout-outer-wrapper qtip-tip" title="Total number of active plugins, including must-use plugins, on your site.">
-				<div class="wpp-callout-inner-wrapper">
-					<div class="wpp-callout-caption">Total plugins:</div>
-					<div class="wpp-callout-data">
+		<td class="p3-callout">
+			<div class="p3-callout-outer-wrapper qtip-tip" title="Total number of active plugins, including must-use plugins, on your site.">
+				<div class="p3-callout-inner-wrapper">
+					<div class="p3-callout-caption">Total plugins:</div>
+					<div class="p3-callout-data">
 						<?php
 						// Get the total number of plugins
 						$active_plugins = count(get_mu_plugins());
@@ -462,58 +462,58 @@
 						echo $active_plugins;
 						?>
 					</div>
-					<div class="wpp-callout-caption">(currently active)</div>
+					<div class="p3-callout-caption">(currently active)</div>
 				</div>
 			</div>
 		</td>
 
 		<!-- Second callout cell -->
-		<td class="wpp-callout">
-			<div class="wpp-callout-outer-wrapper qtip-tip" title="Total number of seconds dedicated to plugin code per visit on your site." <?php if (!empty($scan)) : ?>title="From <?php echo basename($scan); ?><?php endif; ?>">
-				<div class="wpp-callout-inner-wrapper">
-					<div class="wpp-callout-caption">Plugin load time</div>
-					<div class="wpp-callout-data">
+		<td class="p3-callout">
+			<div class="p3-callout-outer-wrapper qtip-tip" title="Total number of seconds dedicated to plugin code per visit on your site." <?php if (!empty($scan)) : ?>title="From <?php echo basename($scan); ?><?php endif; ?>">
+				<div class="p3-callout-inner-wrapper">
+					<div class="p3-callout-caption">Plugin load time</div>
+					<div class="p3-callout-data">
 						<?php if (null === $profile) : ?>
-							<span class="wpp-faded-grey">n/a</span>
+							<span class="p3-faded-grey">n/a</span>
 						<?php else : ?>
 							<?php printf('%.3f', $profile->averages['plugins']); ?>
 						<?php endif; ?>
 					</div>
-					<div class="wpp-callout-caption">(sec. per visit)</div>
+					<div class="p3-callout-caption">(sec. per visit)</div>
 				</div>
 			</div>
 		</td>
 
 		<!-- Third callout cell -->
-		<td class="wpp-callout">
-			<div class="wpp-callout-outer-wrapper qtip-tip" title="Percent of load time on your site dedicated to plugin code." <?php if (!empty($scan)) : ?>title="From <?php echo basename($scan); ?><?php endif; ?>">
-				<div class="wpp-callout-inner-wrapper">
-					<div class="wpp-callout-caption">Plugin impact</div>
-					<div class="wpp-callout-data">
+		<td class="p3-callout">
+			<div class="p3-callout-outer-wrapper qtip-tip" title="Percent of load time on your site dedicated to plugin code." <?php if (!empty($scan)) : ?>title="From <?php echo basename($scan); ?><?php endif; ?>">
+				<div class="p3-callout-inner-wrapper">
+					<div class="p3-callout-caption">Plugin impact</div>
+					<div class="p3-callout-data">
 						<?php if (null === $profile) : ?>
-							<span class="wpp-faded-grey">n/a</span>
+							<span class="p3-faded-grey">n/a</span>
 						<?php else : ?>
 							<?php printf('%.1f%%', $profile->averages['plugin_impact']); ?>
 						<?php endif; ?>
 					</div>
-					<div class="wpp-callout-caption">(of page load time)</div>
+					<div class="p3-callout-caption">(of page load time)</div>
 				</div>
 			</div>
 		</td>
 
 		<!-- Fourth callout cell -->
-		<td class="wpp-callout">
-			<div class="wpp-callout-outer-wrapper qtip-tip" title="Total number of database queries per visit." <?php if (!empty($scan)) : ?>title="From <?php echo basename($scan); ?><?php endif; ?>">
-				<div class="wpp-callout-inner-wrapper">
-					<div class="wpp-callout-caption">MySQL Queries</div>
-					<div class="wpp-callout-data">
+		<td class="p3-callout">
+			<div class="p3-callout-outer-wrapper qtip-tip" title="Total number of database queries per visit." <?php if (!empty($scan)) : ?>title="From <?php echo basename($scan); ?><?php endif; ?>">
+				<div class="p3-callout-inner-wrapper">
+					<div class="p3-callout-caption">MySQL Queries</div>
+					<div class="p3-callout-data">
 						<?php if (null === $profile) : ?>
-							<span class="wpp-faded-grey">n/a</span>
+							<span class="p3-faded-grey">n/a</span>
 						<?php else : ?>
 							<?php echo round($profile->averages['queries']); ?>
 						<?php endif; ?>
 					</div>
-					<div class="wpp-callout-caption">Per visit</div>
+					<div class="p3-callout-caption">Per visit</div>
 				</div>
 			</div>
 		</td>
@@ -522,29 +522,29 @@
 </table>
 
 <!-- Dialog for IP settings -->
-<div id="wpp-ip-dialog" class="wpp-dialog">
+<div id="p3-ip-dialog" class="p3-dialog">
 	<div>
 		IP address or pattern:<br />
-		<input type="text" id="wpp-advanced-ip" style="width:90%;" size="35" value="<?php echo $GLOBALS['wpp_profiler']->get_ip(); ?>" title="Enter IP address or regular expression pattern" />
+		<input type="text" id="p3-advanced-ip" style="width:90%;" size="35" value="<?php echo $GLOBALS['p3_profiler']->get_ip(); ?>" title="Enter IP address or regular expression pattern" />
 		<br />
-		<em class="wpp-em">Example: 1.2.3.4 or (1.2.3.4|4.5.6.7)</em>
+		<em class="p3-em">Example: 1.2.3.4 or (1.2.3.4|4.5.6.7)</em>
 	</div>
 	<br />
 	<div>
-		<input type="checkbox" id="wpp-disable-opcode-cache" checked="checked" /><label for="wpp-disable-opcode-cache">Attempt to disable opcode caches <em>(recommended)</em></label>
+		<input type="checkbox" id="p3-disable-opcode-cache" checked="checked" /><label for="p3-disable-opcode-cache">Attempt to disable opcode caches <em>(recommended)</em></label>
 		<br />
-		<em class="wpp-em">This can increase accuracy in plugin detection, but decrease accuracy in timing</em>
+		<em class="p3-em">This can increase accuracy in plugin detection, but decrease accuracy in timing</em>
 	</div>		
 </div>
 
 <!-- Dialog for iframe scanner -->
-<div id="wpp-scanner-dialog" class="wpp-dialog">
-	<iframe id="wpp-scan-frame" frameborder="0" data-defaultsrc="<?php if (true === force_ssl_admin()) {echo str_replace('http://', 'https://', home_url());} else {echo home_url();} ?>"></iframe>
-	<div id="wpp-scan-caption">
+<div id="p3-scanner-dialog" class="p3-dialog">
+	<iframe id="p3-scan-frame" frameborder="0" data-defaultsrc="<?php if (true === force_ssl_admin()) {echo str_replace('http://', 'https://', home_url());} else {echo home_url();} ?>"></iframe>
+	<div id="p3-scan-caption">
 		The scanner will analyze the speed and resource usage of all active plugins on your website.
 		It may take several minutes, and this window must remain open for the scan to finish successfully. 
 	</div>
-	<div id="wpp-manual-scan-caption" style="display: none;">
+	<div id="p3-manual-scan-caption" style="display: none;">
 		<table>
 			<tr>
 				<td>
@@ -553,9 +553,9 @@
 					plugins.
 				</td>
 				<td width="220">
-					<a href="javascript:;" id="wpp-manual-scan-cancel">Cancel</a>
+					<a href="javascript:;" id="p3-manual-scan-cancel">Cancel</a>
 					&nbsp;&nbsp;&nbsp;
-					<span class="p3-big-button"><input type="checkbox" id="wpp-manual-scan-done-submit" checked="checked" /><label for="wpp-manual-scan-done-submit">I'm Done</label></span>
+					<span class="p3-big-button"><input type="checkbox" id="p3-manual-scan-done-submit" checked="checked" /><label for="p3-manual-scan-done-submit">I'm Done</label></span>
 				</td>
 			</tr>
 		</table>
@@ -563,36 +563,36 @@
 </div>
 
 <!-- Dialog for choose manual or auto scan  -->
-<div id="wpp-scan-name-dialog" class="wpp-dialog">
-	<div style="padding-top: 10px;">Scan name:	<input type="text" name="wpp_scan_name" id="wpp-scan-name" title="Enter scan name here" value="scan_<?php echo date('Y-m-d'); ?>_<?php echo substr(md5(uniqid()), -8);?>" size="35" maxlength="100" /></div>
-	<div style="padding-top: 10px;"><em class="wpp-em">Enter the name of a previous scan to continue scanning</em></div>
+<div id="p3-scan-name-dialog" class="p3-dialog">
+	<div style="padding-top: 10px;">Scan name:	<input type="text" name="p3_scan_name" id="p3-scan-name" title="Enter scan name here" value="scan_<?php echo date('Y-m-d'); ?>_<?php echo substr(md5(uniqid()), -8);?>" size="35" maxlength="100" /></div>
+	<div style="padding-top: 10px;"><em class="p3-em">Enter the name of a previous scan to continue scanning</em></div>
 	<br />
 	<div class="p3-big-button">
-		<input type="checkbox" id="wpp-auto-scan-submit" checked="checked" /><label for="wpp-auto-scan-submit">Auto Scan</label>
-		<input type="checkbox" id="wpp-manual-scan-submit" checked="checked" /><label for="wpp-manual-scan-submit">Manual Scan</label>
+		<input type="checkbox" id="p3-auto-scan-submit" checked="checked" /><label for="p3-auto-scan-submit">Auto Scan</label>
+		<input type="checkbox" id="p3-manual-scan-submit" checked="checked" /><label for="p3-manual-scan-submit">Manual Scan</label>
 	</div>
 </div>
 
 <!-- Dialog for progress bar -->
-<div id="wpp-progress-dialog" class="wpp-dialog">
-	<div id="wpp-scanning-caption">
+<div id="p3-progress-dialog" class="p3-dialog">
+	<div id="p3-scanning-caption">
 		Scanning ...
 	</div>
-	<div id="wpp-progress"></div>
+	<div id="p3-progress"></div>
 	
 	<!-- Cancel button -->
-	<div class="p3-big-button" id="wpp-cancel-scan-buttonset">
-		<input type="checkbox" id="wpp-cancel-scan-submit" checked="checked" /><label for="wpp-cancel-scan-submit">Stop Scan</label>
+	<div class="p3-big-button" id="p3-cancel-scan-buttonset">
+		<input type="checkbox" id="p3-cancel-scan-submit" checked="checked" /><label for="p3-cancel-scan-submit">Stop Scan</label>
 	</div>
 
 	<!-- View / resume buttons -->
-	<div class="p3-big-button" id="wpp-resume-scan-buttonset" style="display: none;">
-		<input type="checkbox" id="wpp-resume-scan-submit" checked="checked" /><label for="wpp-resume-scan-submit">Resume</label>
-		<input type="checkbox" id="wpp-view-incomplete-results-submit" checked="checked" data-scan-name="" /><label for="wpp-view-incomplete-results-submit">View Results</label>
+	<div class="p3-big-button" id="p3-resume-scan-buttonset" style="display: none;">
+		<input type="checkbox" id="p3-resume-scan-submit" checked="checked" /><label for="p3-resume-scan-submit">Resume</label>
+		<input type="checkbox" id="p3-view-incomplete-results-submit" checked="checked" data-scan-name="" /><label for="p3-view-incomplete-results-submit">View Results</label>
 	</div>
 	
 	<!-- View results button -->
-	<div class="p3-big-button" id="wpp-view-results-buttonset" style="display: none;">
-		<input type="checkbox" id="wpp-view-results-submit" checked="checked" data-scan-name="" /><label for="wpp-view-results-submit">View Results</label>
+	<div class="p3-big-button" id="p3-view-results-buttonset" style="display: none;">
+		<input type="checkbox" id="p3-view-results-submit" checked="checked" data-scan-name="" /><label for="p3-view-results-submit">View Results</label>
 	</div>	
 </div>

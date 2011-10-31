@@ -4,9 +4,9 @@
  *
  * @author Kurt Payne, GoDaddy.com
  * @version 1.0
- * @package WP_Profiler
+ * @package P3_Profiler
  */
-class wpp_profiler {
+class p3_profiler {
 
 	/**
 	 * Time spent in WordPress Core
@@ -112,7 +112,7 @@ class wpp_profiler {
 	 * Constructor
 	 * Initialize the object, figure out if profiling is enabled, and if so,
 	 * start the profile.
-	 * @return wpp_profiler
+	 * @return p3_profiler
 	 */
 	public function __construct() {
 
@@ -121,12 +121,12 @@ class wpp_profiler {
 		$this->_P3_FLAG_FILE = $this->_P3_PATH . DIRECTORY_SEPARATOR . '.profiling_enabled';
 
 		// Check to see if we should profile
-		$wpp_json = (file_exists($this->_P3_FLAG_FILE) ? json_decode(file_get_contents($this->_P3_FLAG_FILE)) : null);
-		if (empty($wpp_json)) {
+		$p3_json = (file_exists($this->_P3_FLAG_FILE) ? json_decode(file_get_contents($this->_P3_FLAG_FILE)) : null);
+		if (empty($p3_json)) {
 			return $this;
 		}
 		$found = false;
-		foreach ($wpp_json as $k => $v) {
+		foreach ($p3_json as $k => $v) {
 			if (0 === strpos($_SERVER['REQUEST_URI'], $v->site_url) && preg_match('/' . preg_quote($v->ip) . '/', $this->get_ip())) {
 				$found = true;
 				break;

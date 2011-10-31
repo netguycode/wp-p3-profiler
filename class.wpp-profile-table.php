@@ -4,9 +4,9 @@
  *
  * @author Kurt Payne, GoDaddy.com
  * @version 1.0
- * @package WP_Profiler
+ * @package P3_Profiler
  */
-class wpp_profile_table extends WP_List_Table {
+class p3_profile_table extends WP_List_Table {
 
 	/**************************************************************************/
 	/**        SETUP                                                         **/
@@ -14,7 +14,7 @@ class wpp_profile_table extends WP_List_Table {
 
 	/**
 	 * Constructor
-	 * @return wpp_profile_table
+	 * @return p3_profile_table
 	 */
 	public function __construct() {
 		parent::__construct(array(
@@ -167,7 +167,7 @@ class wpp_profile_table extends WP_List_Table {
 		<a href="$url" data-name="$key" title="View the results of this scan" class="view-results">View</a> |
 	</span>
 	<span>
-		<a href="javascript:;" data-name="$key" title="Continue this scan" class="wpp-continue-scan">Continue</a> |
+		<a href="javascript:;" data-name="$key" title="Continue this scan" class="p3-continue-scan">Continue</a> |
 	</span>
 	<span class="delete">
 		<a href="javascript:;" data-name="$key" title="Delete this scan" class="delete-scan delete">Delete</a>
@@ -198,7 +198,7 @@ EOD;
     public function do_bulk_action() {
 		global $p3_profiler_plugin;
         if ('delete' === $this->current_action() && !empty($_REQUEST['scan'])) {
-			if (!wp_verify_nonce($_REQUEST['wpp_nonce'], 'delete_scans'))
+			if (!wp_verify_nonce($_REQUEST['p3_nonce'], 'delete_scans'))
 				wp_die('Invalid nonce');
 			foreach ($_REQUEST['scan'] as $scan) {
 				$file = P3_PROFILES_PATH  . DIRECTORY_SEPARATOR . basename($scan);
@@ -241,7 +241,7 @@ EOD;
 				$field = '_filesize';
 				break;
 		}
-		$sorter = new wpp_profile_table_sorter($data, $field);
+		$sorter = new p3_profile_table_sorter($data, $field);
 		return $sorter->sort($direction);
 	}
 
@@ -253,8 +253,8 @@ EOD;
 	 * @return type 
 	 */
 	private function _get_profiles() {
-		$wpp_profile_dir = P3_PROFILES_PATH;
-		$files = list_files($wpp_profile_dir);
+		$p3_profile_dir = P3_PROFILES_PATH;
+		$files = list_files($p3_profile_dir);
 		$files = array_filter($files, array(&$this, '_filter_json_files'));
 		$ret = array();
 		foreach ($files as $file) {

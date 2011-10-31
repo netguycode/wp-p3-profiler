@@ -4,9 +4,9 @@
  *
  * @author Kurt Payne, GoDaddy.com
  * @version 1.0
- * @package WP_Profiler
+ * @package P3_Profiler
  */
-class wpp_profile_table_sorter {
+class p3_profile_table_sorter {
 
 	/**
 	 * The field name to sort by

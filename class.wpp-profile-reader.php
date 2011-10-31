@@ -4,9 +4,9 @@
  *
  * @author Kurt Payne, GoDaddy.com
  * @version 1.0
- * @package WP_Profiler
+ * @package P3_Profiler
  */
- class wpp_profile_reader {
+ class p3_profile_reader {
 
 	/**
 	 * Total site load time (profile + theme + core + plugins)
@@ -130,7 +130,7 @@
 	/**
 	 * Constructor
 	 * @param string $file Full path to the profile json file
-	 * @return wpp_profile_reader
+	 * @return p3_profile_reader
 	 */
 	public function __construct($file) {
 
