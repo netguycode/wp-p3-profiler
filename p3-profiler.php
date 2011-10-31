@@ -36,7 +36,7 @@ require_once(P3_PATH . '/start-profile.php');
 /**************************************************************************/
 
 // Global plugin object
-$p3_profiler_plugin = new P3_Profiler();
+$p3_profiler_plugin = new P3_Profiler_Plugin();
 
 // Admin hooks
 if (is_admin()) {
@@ -64,7 +64,7 @@ if (defined('WPP_PROFILING_STARTED')) {
 // Install / uninstall hooks
 register_activation_hook(P3_PATH . DIRECTORY_SEPARATOR . 'p3-profiler.php', array($p3_profiler_plugin, 'activate'));
 register_deactivation_hook(P3_PATH . DIRECTORY_SEPARATOR . 'p3-profiler.php', array($p3_profiler_plugin, 'deactivate'));
-register_uninstall_hook(P3_PATH . DIRECTORY_SEPARATOR . 'p3-profiler.php', array('P3_Profiler', 'uninstall'));
+register_uninstall_hook(P3_PATH . DIRECTORY_SEPARATOR . 'p3-profiler.php', array('P3_Profiler_Plugin', 'uninstall'));
 if (function_exists('is_multisite') && is_multisite()) {
 	add_action('wpmu_add_blog', array($p3_profiler_plugin, 'sync_profiles_folder'));
 	add_action('wpmu_delete_blog', array($p3_profiler_plugin, 'sync_profiles_folder'));
@@ -77,7 +77,7 @@ if (function_exists('is_multisite') && is_multisite()) {
  * @version 1.0
  * @package P3_Profiler
  */
-class P3_Profiler {
+class P3_Profiler_Plugin {
 	
 	/**
 	 * List table of the profile scans
@@ -171,9 +171,9 @@ class P3_Profiler {
 	 * @return void
 	 */
 	public function load_styles() {
-		wp_enqueue_style('p3_jquery_ui_css', plugins_url () . '/p3_profiler/css/custom-theme/jquery-ui-1.8.16.custom.css');
-		wp_enqueue_style('p3_qtip_css', plugins_url () . '/p3_profiler/css/jquery.qtip.min.css');
-		wp_enqueue_style('p3_css', plugins_url () . '/p3_profiler/css/p3.css');
+		wp_enqueue_style('p3_jquery_ui_css', plugins_url () . '/p3-profiler/css/custom-theme/jquery-ui-1.8.16.custom.css');
+		wp_enqueue_style('p3_qtip_css', plugins_url () . '/p3-profiler/css/jquery.qtip.min.css');
+		wp_enqueue_style('p3_css', plugins_url () . '/p3-profiler/css/p3.css');
 	}
 	
 	/**

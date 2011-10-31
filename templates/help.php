@@ -86,7 +86,7 @@
 $htaccess_file = P3_PATH . '/../../../.htaccess';
 $htaccess_content = '';
 if (file_exists($htaccess_file)) {
-	$htaccess_content = extract_from_markers($htaccess_file, 'wp-profiler');
+	$htaccess_content = extract_from_markers($htaccess_file, 'p3-profiler');
 	foreach ($htaccess_content as $k => $v) {
 		if ('#' == substr(trim($v), 0, 1)) {
 			unset($htaccess_content[$k]); // Get rid of comment lines
@@ -96,7 +96,7 @@ if (file_exists($htaccess_file)) {
 }
 
 // must-use plugin file
-$mu_file = P3_PATH . '/../../mu-plugins/wp-profiler.php';
+$mu_file = P3_PATH . '/../../mu-plugins/p3-profiler.php';
 
 // List php ini files
 $ini_files = array_filter(
@@ -131,7 +131,7 @@ $ini_files = array_filter(
 <?php /* default, using this plugin file */ ?>
 <?php else: ?>
 	<a href="http://codex.wordpress.org/Plugins" target="_blank">plugin</a>
-	- <code><?php echo realpath(P3_PATH . '/wp-profiler.php'); ?></code>
+	- <code><?php echo realpath(P3_PATH . '/p3-profiler.php'); ?></code>
 <?php endif; ?>
 </blockquote>
 
