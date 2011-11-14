@@ -81,7 +81,7 @@ class P3_Profiler_Plugin {
 	
 	/**
 	 * List table of the profile scans
-	 * @var p3_profile_table
+	 * @var P3_Profile_Table
 	 */
 	public $scan_table = null;
 	
@@ -189,7 +189,7 @@ class P3_Profiler_Plugin {
 		if (isset($_REQUEST['page']) && basename(__FILE__) == $_REQUEST['page']) {
 
 			// Load the list table, let it handle any bulk actions
-			$this->scan_table = new p3_profile_table();
+			$this->scan_table = new P3_Profile_Table();
 			$this->scan_table->prepare_items();
 
 			// Usability message
@@ -450,10 +450,10 @@ class P3_Profiler_Plugin {
 	/**
 	 * Show a list of available scans.
 	 * Uses WP List table to handle UI and sorting.
-	 * Uses p3_profile_table to handle deleting
+	 * Uses P3_Profile_Table to handle deleting
 	 * @uses WP_List_Table
 	 * @uses jquery
-	 * @uses p3_profile_table
+	 * @uses P3_Profile_Table
 	 * @return void
 	 */
 	public function list_scans() {

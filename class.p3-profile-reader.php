@@ -6,7 +6,7 @@
  * @version 1.0
  * @package P3_Profiler
  */
- class p3_profile_reader {
+ class P3_Profile_Reader {
 
 	/**
 	 * Total site load time (profile + theme + core + plugins)
@@ -118,7 +118,7 @@
 		'observed' => 0,
 		'expected' => 0,
 		'drift' => 0,
-		'plugin_impact' => 0
+		'plugin_impact' => 0,
 	);
 
 	/**
@@ -130,33 +130,33 @@
 	/**
 	 * Constructor
 	 * @param string $file Full path to the profile json file
-	 * @return p3_profile_reader
+	 * @return P3_Profile_Reader
 	 */
-	public function __construct($file) {
+	public function __construct( $file ) {
 
 		// Open the file
-		$fp = fopen($file, 'r');
-		if (FALSE === $fp) {
-			throw new Exception('Cannot open ' . $file);
+		$fp = fopen( $file, 'r' );
+		if ( FALSE === $fp ) {
+			throw new Exception( 'Cannot open ' . $file );
 		}
 		
 		// Decode each line.  Each line is a separate json object.  Whenever a
 		// a visit is recorded, a new line is added to the file.		
-		while (!feof($fp)) {
-			$line = fgets($fp);
-			if (empty($line)) {
+		while ( !feof( $fp ) ) {
+			$line = fgets( $fp );
+			if ( empty( $line) ) {
 				continue;
 			}
-			$tmp = json_decode($line);
-			if (null === $tmp) {
-				throw new Exception('Cannot parse ' . $file);
-				fclose($fp);
+			$tmp = json_decode( $line );
+			if ( null === $tmp ) {
+				throw new Exception( 'Cannot parse ' . $file );
+				fclose( $fp );
 			}
 			$this->_data[] = $tmp;
 		}
 		
 		// Close the file
-		fclose($fp);
+		fclose( $fp );
 		
 		// Parse the data
 		$this->_parse();
@@ -167,29 +167,31 @@
 	 * @return void
 	 */
 	private function _parse() {
-		foreach ($this->_data as $o) {
-			
+		foreach ( $this->_data as $o ) {
 			// Set report meta-data
-			if (empty($this->report_date)) {
-				$this->report_date = strtotime($o->date);
-				$this->report_url = sprintf('%s://%s%s', parse_url($o->url, PHP_URL_SCHEME), parse_url($o->url, PHP_URL_HOST), parse_url($o->url, PHP_URL_PATH));
-				$this->visits = count($this->_data);
+			if ( empty( $this->report_date ) ) {
+				$this->report_date = strtotime( $o->date );
+				$scheme            = parse_url( $o->url, PHP_URL_SCHEME );
+				$host              = parse_url( $o->url, PHP_URL_HOST );
+				$path              = parse_url( $o->url, PHP_URL_PATH );
+				$this->report_url  = sprintf( '%s://%s%s', $scheme, $host, $path );
+				$this->visits      = count( $this->_data );
 			}
 			
 			// Set total times / queries / function calls
-			$this->total_time += $o->runtime->total;
-			$this->site_time += ($o->runtime->total - $o->runtime->profile);
-			$this->theme_time += $o->runtime->theme;
-			$this->plugin_time += $o->runtime->plugins;
+			$this->total_time   += $o->runtime->total;
+			$this->site_time    += ( $o->runtime->total - $o->runtime->profile );
+			$this->theme_time   += $o->runtime->theme;
+			$this->plugin_time  += $o->runtime->plugins;
 			$this->profile_time += $o->runtime->profile;
-			$this->core_time += $o->runtime->wordpress;
-			$this->memory += $o->memory;
+			$this->core_time    += $o->runtime->wordpress;
+			$this->memory       += $o->memory;
 			$this->plugin_calls += $o->stacksize;
-			$this->queries += $o->queries;
+			$this->queries      += $o->queries;
 			
 			// Loop through the plugin data
-			foreach ($o->runtime->breakdown as $k => $v) {
-				if (!array_key_exists($k, $this->plugin_times)) {
+			foreach ( $o->runtime->breakdown as $k => $v ) {
+				if ( !array_key_exists( $k, $this->plugin_times ) ) {
 					$this->plugin_times[$k] = 0;
 				}
 				$this->plugin_times[$k] += $v;
@@ -197,16 +199,16 @@
 		}
 
 		// Fix plugin names and average out plugin times
-		$tmp = $this->plugin_times;
+		$tmp                = $this->plugin_times;
 		$this->plugin_times = array();
-		foreach ($tmp as $k => $v) {
-			$k = ucwords(str_replace(array('-', '_'), ' ', $k));
+		foreach ( $tmp as $k => $v ) {
+			$k = ucwords( str_replace( array( '-', '_' ), ' ', $k ) );
 			$this->plugin_times[$k] = $v / $this->visits;
 		}
 
 		// Get a list of the plugins we detected
-		$this->detected_plugins = array_keys($this->plugin_times);
-		sort($this->detected_plugins);
+		$this->detected_plugins = array_keys( $this->plugin_times );
+		sort( $this->detected_plugins );
 
 		// Calculate the averages
 		$this->_get_averages();
@@ -217,21 +219,21 @@
 	 * @return void
 	 */
 	private function _get_averages() {
-		if ($this->visits <= 0) {
+		if ( $this->visits <= 0 ) {
 			return;
 		}
 		$this->averages = array(
-			'total'         => $this->total_time   / $this->visits,
-			'site'          => ($this->total_time - $this->profile_time) / $this->visits,
-			'core'          => $this->core_time    / $this->visits,
-			'plugins'       => $this->plugin_time  / $this->visits,
+			'total'         => $this->total_time / $this->visits,
+			'site'          => ( $this->total_time - $this->profile_time) / $this->visits,
+			'core'          => $this->core_time / $this->visits,
+			'plugins'       => $this->plugin_time / $this->visits,
 			'profile'       => $this->profile_time / $this->visits,
-			'theme'         => $this->theme_time   / $this->visits,
-			'memory'        => $this->memory       / $this->visits,
+			'theme'         => $this->theme_time / $this->visits,
+			'memory'        => $this->memory / $this->visits,
 			'plugin_calls'  => $this->plugin_calls / $this->visits,
-			'queries'       => $this->queries      / $this->visits,
-			'observed'      => $this->total_time   / $this->visits,
-			'expected'      => ($this->theme_time + $this->core_time + $this->profile_time + $this->plugin_time) / $this->visits,
+			'queries'       => $this->queries / $this->visits,
+			'observed'      => $this->total_time / $this->visits,
+			'expected'      => ( $this->theme_time + $this->core_time + $this->profile_time + $this->plugin_time) / $this->visits,
 		);
 		$this->averages['drift']         = $this->averages['observed'] - $this->averages['expected'];
 		$this->averages['plugin_impact'] = $this->averages['plugins'] / $this->averages['site'] * 100;
@@ -245,7 +247,7 @@
 	 */
 	public function get_stats_by_url() {
 		$ret = array();
-		foreach ($this->_data as $o) {
+		foreach ( $this->_data as $o ) {
 			$tmp = array(
 				'url'       => $o->url,
 				'core'      => $o->runtime->wordpress,
@@ -255,9 +257,9 @@
 				'queries'   => $o->queries,
 				'breakdown' => array()
 			);
-			foreach ($o->runtime->breakdown as $k => $v) {
-				$name = ucwords(str_replace(array('-', '_'), ' ', $k));
-				if (!array_key_exists($name, $tmp['breakdown'])) {
+			foreach ( $o->runtime->breakdown as $k => $v ) {
+				$name = ucwords( str_replace( array( '-', '_' ), ' ', $k ) );
+				if ( !array_key_exists( $name, $tmp['breakdown'] ) ) {
 					$tmp['breakdown'][$name] = 0;
 				}
 				$tmp['breakdown'][$name] += $v;

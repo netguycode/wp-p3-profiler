@@ -6,7 +6,7 @@
  * @version 1.0
  * @package P3_Profiler
  */
-class p3_profile_table_sorter {
+class P3_Profile_Table_Sorter {
 
 	/**
 	 * The field name to sort by
@@ -25,8 +25,8 @@ class p3_profile_table_sorter {
 	 * @param array $data
 	 * @param string $field Default is 'name'
 	 */
-	public function __construct(array $data, $field = 'name') {
-		$this->data = $data;
+	public function __construct( array $data, $field = 'name' ) {
+		$this->data  = $data;
 		$this->field = $field;
 	}
 
@@ -35,9 +35,9 @@ class p3_profile_table_sorter {
 	 * @param string $direction Default is 'asc'
 	 * @return array
 	 */
-	public function sort($direction = 'asc') {
-		usort(&$this->data, array(&$this, '_compare'));
-		return ('asc' == $direction) ? $this->data : array_reverse($this->data);
+	public function sort( $direction = 'asc' ) {
+		usort( &$this->data, array( &$this, '_compare' ) );
+		return ( 'asc' == $direction ) ? $this->data : array_reverse( $this->data );
 	}
 	
 	/**
@@ -47,11 +47,11 @@ class p3_profile_table_sorter {
 	 * @param type $b
 	 * @return bool
 	 */
-	private function _compare($a, $b) {
-		if ('_filesize' == $this->field) {
+	private function _compare( $a, $b ) {
+		if ( '_filesize' == $this->field ) {
 			return $a[$this->field] < $b[$this->field];
 		} else {
-			return strcmp($a[$this->field], $b[$this->field]);
+			return strcmp( $a[$this->field], $b[$this->field] );
 		}
 	}
 }
