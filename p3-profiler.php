@@ -333,7 +333,7 @@ class P3_Profiler_Plugin {
 	public function ajax_stop_scan() {
 
 		// Check nonce
-		if ( wp_verify_nonce( $_POST ['p3_nonce'], 'p3_ajax_stop_scan' ) ) {
+		if ( !wp_verify_nonce( $_POST ['p3_nonce'], 'p3_ajax_stop_scan' ) ) {
 			wp_die( 'Invalid nonce' );
 		}
 
