@@ -31,7 +31,7 @@
 			// Turn on the profiler
 			jQuery.post( ajaxurl, data, function( response ) {
 				if ( 1 != response ) {
-					alert( "Error response.  Code: " + response );
+					alert( "There was an error processing your request.  Please reload the page and try again. [" + response + "]");
 				} else {
 
 					// Start scanning pages
@@ -54,7 +54,7 @@
 			}
 			jQuery.post( ajaxurl, data, function( response ) {
 				if ( response.indexOf( '.json' ) < 0 ) {
-					alert( "Error response.  Code: " + response );
+					alert( "There was an error processing your request.  Please reload the page and try again. [" + response + "]");
 				}
 
 				// Hide the cancel button
@@ -87,7 +87,7 @@
 			// Turn on the profiler
 			jQuery.post( ajaxurl, data, function( response ) {
 				if ( 1 != response ) {
-					alert( "Error response.  Code: " + response );
+					alert( "There was an error processing your request.  Please reload the page and try again. [" + response + "]");
 				} else {
 
 					// Show the cancel button
@@ -111,7 +111,7 @@
 			}
 			jQuery.post( ajaxurl, data, function( response ) {
 				if ( response.indexOf( '.json' ) < 0 ) {
-					alert( "Error response.  Code: " + response );
+					alert( "There was an error processing your request.  Please reload the page and try again. [" + response + "]");
 				}
 				
 				// Hide the cancel button
@@ -253,8 +253,17 @@
 			// Stay checked to keep the styling
 			$( this ).prop( "checked", true );
 			$( this ).button( "refresh" );
-			
-			$( "#p3-scan-frame" ).attr( "src", $( "#p3-scan-frame" ).attr( "data-defaultsrc" ) );
+
+			url = $( "#p3-scan-frame" ).attr( "data-defaultsrc" );
+			if ( url.indexOf('?') >= 0 || url.indexOf('&') >= 0 ) {
+				url += '&P3_HIDE_ADMIN_BAR=1';
+			} else if ( url.charAt(url.length - 1) != '/' ) {
+				url += '/?P3_HIDE_ADMIN_BAR=1';
+			} else {
+				url += '?P3_HIDE_ADMIN_BAR=1';
+			}
+
+			$( "#p3-scan-frame" ).attr( "src", url );
 			$( "#p3-scanner-dialog" ).dialog( "open" );
 			$( "#p3-scan-name-dialog" ).dialog( "open" );
 		});
@@ -273,7 +282,7 @@
 			}
 			jQuery.post( ajaxurl, data, function( response ) {
 				if ( response.indexOf( '.json' ) < 0 ) {
-					alert( "Error response.  Code: " + response );
+					alert( "There was an error processing your request.  Please reload the page and try again. [" + response + "]");
 				}
 				location.reload();
 			});
@@ -320,7 +329,7 @@
 			// Turn on the profiler
 			jQuery.post( ajaxurl, data, function( response ) {
 				if ( 1 != response ) {
-					alert( "Error response.  Code: " + response );
+					alert( "There was an error processing your request.  Please reload the page and try again. [" + response + "]");
 				}
 			});
 
@@ -337,7 +346,7 @@
 			}
 			jQuery.post( ajaxurl, data, function( response ) {
 				if ( response.indexOf( '.json' ) < 0 ) {
-					alert( "Error response.  Code: " + response );
+					alert( "There was an error processing your request.  Please reload the page and try again. [" + response + "]");
 				} else {
 					location.href = "<?php echo add_query_arg( array( 'p3_action' => 'view-scan' ) ); ?>&name=" + response;
 				}

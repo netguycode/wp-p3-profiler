@@ -56,7 +56,7 @@ if ( is_admin() ) {
 }
 
 // Remove the admin bar when in profiling mode
-if ( defined( 'WPP_PROFILING_STARTED' ) ) {
+if ( defined( 'WPP_PROFILING_STARTED' ) || isset( $_GET['P3_HIDE_ADMIN_BAR'] ) ) {
 	add_action( 'plugins_loaded', array( $p3_profiler_plugin, 'remove_admin_bar' ) );
 }
 
