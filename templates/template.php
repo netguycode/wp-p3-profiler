@@ -18,7 +18,7 @@ $button_history_checked = '';
 $button_help_checked    = '';
 if ( 'current-scan' == $p3_action ) {
 	$button_current_checked = 'checked="checked"';
-} elseif ( 'help' == $p3_action ) {
+} elseif ( 'help' == $p3_action || 'fix-flag-file' == $p3_action ) {
 	$button_help_checked = 'checked="checked"';
 } else {
 	$button_history_checked = 'checked="checked"';
@@ -98,6 +98,8 @@ if ( 'current-scan' == $p3_action ) {
 		<?php include_once P3_PATH . '/templates/view-scan.php'; ?>
 	<?php } elseif ( 'help' == $p3_action ) { ?>
 		<?php include_once P3_PATH . '/templates/help.php'; ?>
+	<?php } elseif ( 'fix-flag-file' == $p3_action ) { ?>
+		<?php include_once P3_PATH . '/templates/fix-flag-file.php'; ?>
 	<?php } else { ?>
 		<?php include_once P3_PATH . '/templates/list-scans.php'; ?>
 	<?php } ?>
