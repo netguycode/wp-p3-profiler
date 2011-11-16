@@ -251,26 +251,23 @@ class P3_Profiler_Plugin {
 		
 		// Define the URL to post back to (this one)
 		$url = wp_nonce_url( add_query_arg( array( 'p3_action' => 'fix-flag-file' ) ), 'p3-fix-flag-file' );
-		
+
 		// Ask for credentials, if necessary
 		if ( false === ( $creds = request_filesystem_credentials( $url, $method, false, false, $form_fields ) ) ) {
 			return true; 
-		}
-		
-		// If the credentials are bad, ask again
-		if ( ! WP_Filesystem($creds) ) {
+		} elseif ( ! WP_Filesystem($creds) ) {
+			// The credentials are bad, ask again
 			request_filesystem_credentials( $url, $method, true, false, $form_fields );
 			return true;
+		} else {
+			// Once we get here, we should have credentials, do the file system operations
+			global $wp_filesystem;
+			if ( $wp_filesystem->put_contents( $wp_filesystem->wp_plugins_dir() . '/p3-profiler/.profiling_enabled' , '[]', FS_CHMOD_FILE | 0222) ) {
+				include_once P3_PATH . '/templates/template.php';
+			} else {
+				wp_die( 'Error saving file!' );
+			}
 		}
-		
-		// Once we get here, we should have credentials, do the file system operations
-		global $wp_filesystem;
-		if ( ! $wp_filesystem->put_contents( P3_FLAG_FILE, '[]', FS_CHMOD_FILE & 0222) ) {
-			wp_die( 'Error saving file!' );
-		}
-		
-		// Done, go back to the main page
-		wp_redirect( add_query_arg( array( 'p3_action' => 'current-scan' ) ) );
 	}
 
 	/**
@@ -569,6 +566,12 @@ class P3_Profiler_Plugin {
 	 * @return voide
 	 */
 	public function show_notices() {
+
+		// Skip notices if we're fixing the flag file
+		if ( isset( $_REQUEST['p3_action'] ) && 'fix-flag-file' == $_REQUEST['p3_action'] ) {
+			return true;
+		}
+		
 		$notices = get_transient( 'p3_notices' );
 		if ( !empty( $notices ) ) {
 			$notices = array_unique( $notices );
@@ -582,10 +585,10 @@ class P3_Profiler_Plugin {
 		}
 		
 		// Check that we can write .profiling_enabled
-		if ( !isset( $_REQUEST['p3_action'] ) || 'fix-flag-file' != $_REQUEST['p3_action'] ) {
+		if ( isset( $_REQUEST['page'] ) && basename( __FILE__ ) == $_REQUEST['page'] && ( !isset( $_REQUEST['p3_action'] ) || 'fix-flag-file' != $_REQUEST['p3_action'] ) ) {
 			if ( !file_exists( P3_FLAG_FILE ) || !is_writable( P3_FLAG_FILE ) ) {
 				@touch( P3_FLAG_FILE );
-				if ( !file_exists( P3_FLAG_FILE ) ) {
+				if ( !file_exists( P3_FLAG_FILE ) || !is_writable( P3_FLAG_FILE ) ) {
 					echo '<div class="error"><p>Cannot set profile flag file <input type="button" onclick="location.href=\'' . add_query_arg( array( 'p3_action' => 'fix-flag-file' ) ) . '\';" class="button" value="click here to fix" /></p></div>';
 				}
 			}
