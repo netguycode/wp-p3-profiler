@@ -1,6 +1,6 @@
 <?php
 /*
-Plugin Name: P3 ( Plugin Performance Profiler )
+Plugin Name: P3 (Plugin Performance Profiler)
 Plugin URI: http://wordpress.org/extend/plugins/p3_profiler/
 Description: See which plugins are slowing down your site.  This plugin creates a performance report for your site.
 Author: Starfield Technologies, Inc.
