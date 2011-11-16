@@ -225,12 +225,52 @@ class P3_Profiler_Plugin {
 			case 'start-scan' :
 				$this->start_scan();
 				break;
+			case 'fix-flag-file' :
+				$this->fix_flag_file();
+				break;
 			case 'help' :
 				$this->show_help();
 				break;
 			default :
 				$this->scan_settings_page();
 		}
+	}
+
+	/**
+	 * Write .profiling_enabled file, uses request_filesystem_credentials, if
+	 * necessary, to create the file and make it writable
+	 * @return void
+	 */
+	public function fix_flag_file() {
+
+		// Don't force a specific file system method
+		$method = '';
+		
+		// Define any extra pass-thru fields (none)
+		$form_fields = array();
+		
+		// Define the URL to post back to (this one)
+		$url = wp_nonce_url( add_query_arg( array( 'p3_action' => 'fix-flag-file' ) ), 'p3-fix-flag-file' );
+		
+		// Ask for credentials, if necessary
+		if ( false === ( $creds = request_filesystem_credentials( $url, $method, false, false, $form_fields ) ) ) {
+			return true; 
+		}
+		
+		// If the credentials are bad, ask again
+		if ( ! WP_Filesystem($creds) ) {
+			request_filesystem_credentials( $url, $method, true, false, $form_fields );
+			return true;
+		}
+		
+		// Once we get here, we should have credentials, do the file system operations
+		global $wp_filesystem;
+		if ( ! $wp_filesystem->put_contents( P3_FLAG_FILE, '[]', FS_CHMOD_FILE & 0222) ) {
+			wp_die( 'Error saving file!' );
+		}
+		
+		// Done, go back to the main page
+		wp_redirect( add_query_arg( array( 'p3_action' => 'current-scan' ) ) );
 	}
 
 	/**
@@ -350,7 +390,7 @@ class P3_Profiler_Plugin {
 		if ( null === $site_url ) {
 			$site_url = '/';
 		}
-		foreach ( $json as $k => $v ) {
+		foreach ( (array) $json as $k => $v ) {
 			if ( $site_url == $v->site_url ) {
 				unset( $json[$k] );
 			}
@@ -533,12 +573,22 @@ class P3_Profiler_Plugin {
 		if ( !empty( $notices ) ) {
 			$notices = array_unique( $notices );
 			foreach ( $notices as $notice ) {
-				echo '<div id="message" class="updated"><p>' . htmlentities( $notice ) . '</p></div>';
+				echo '<div class="updated"><p>' . htmlentities( $notice ) . '</p></div>';
 			}
 		}
 		set_transient( 'p3_notices', array() );
 		if ( false !== $this->scan_enabled() ) {
-			echo '<div id="message" class="updated"><p>Performance scanning is enabled.</p></div>';
+			echo '<div class="updated"><p>Performance scanning is enabled.</p></div>';
+		}
+		
+		// Check that we can write .profiling_enabled
+		if ( !isset( $_REQUEST['p3_action'] ) || 'fix-flag-file' != $_REQUEST['p3_action'] ) {
+			if ( !file_exists( P3_FLAG_FILE ) || !is_writable( P3_FLAG_FILE ) ) {
+				@touch( P3_FLAG_FILE );
+				if ( !file_exists( P3_FLAG_FILE ) ) {
+					echo '<div class="error"><p>Cannot set profile flag file <input type="button" onclick="location.href=\'' . add_query_arg( array( 'p3_action' => 'fix-flag-file' ) ) . '\';" class="button" value="click here to fix" /></p></div>';
+				}
+			}
 		}
 	}
 
@@ -619,14 +669,6 @@ class P3_Profiler_Plugin {
 		if ( file_exists( $file ) && array() !== extract_from_markers( $file, 'p3-profiler' ) ) {
 			insert_with_markers( $file, 'p3-profiler', array( '# removed during uninstall' ) );
 		}
-
-		// Can't use this until there's a way to foce php to reload .user.ini settings
-		// Remove any .user.ini modifications
-		#$file = P3_PATH . '/../../../.user.ini';
-		#$ini = file_get_contents( $file );
-		#if ( file_exists( $file ) && preg_match( '/auto_prepend_file\s*=\s*".*start-profile\.php"/', $ini ) ) {
-		#	file_put_contents( $file, preg_replace( '/[\r\n]*auto_prepend_file\s*=\s*".*start-profile\.php"[\r\n]*/', '', $ini ) );
-		#}
 
 		// Remove mu-plugin
 		if ( file_exists( P3_PATH . '/../../mu-plugins/p3-profiler.php' ) ) {
@@ -726,7 +768,7 @@ class P3_Profiler_Plugin {
 			$site_url = '/';
 		}
 		$json = json_decode( file_get_contents( P3_FLAG_FILE ), true );
-		foreach ( $json as $v ) {
+		foreach ( (array) $json as $v ) {
 			if ( $site_url == $v['site_url'] ) {
 				return $v;
 			}
