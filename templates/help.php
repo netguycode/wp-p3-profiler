@@ -459,3 +459,24 @@
 		</div>
 	</blockquote>
 </div>
+
+<div class="p3-question">
+	<h2 class="p3-help-question">License</h2>
+	<blockquote>
+		<strong>P3 (Plugin Performance Profiler)</strong>
+		<br />
+		<?php if ( date( 'Y' ) > 2011 ) { ?>
+			Copyright &copy; 2011-<?php echo date( 'Y' ); ?> Starfield Technologies, Inc. All rights reserved.
+		<?php } else { ?>
+			Copyright &copy; 2011 Starfield Technologies, Inc. All rights reserved.
+		<?php } ?>
+		<br /><br />
+		This program is offered under the terms of the GNU General Public License Version 2 as published by the Free Software Foundation.
+		<br /><br />
+		This program offered WITHOUT WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+		See the GNU General Public License Version 2 for the specific terms.
+		<br /><br />
+		A copy of the GNU General Public License has been provided with this program.  Alternatively, you may find a copy of the license here:
+		<a href="http://www.gnu.org/licenses/gpl-2.0.html" target="_blank">http://www.gnu.org/licenses/gpl-2.0.html</a>.
+	</blockquote>
+</div>
