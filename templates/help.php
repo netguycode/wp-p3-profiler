@@ -433,7 +433,7 @@
 											<tr>
 												<td class="term"><strong>Memory Usage</strong>
 													<div id="memory-usage-definition" style="display: none;" class="definition">
-														The amount of RAM usage observed. This is reporeted by
+														The amount of RAM usage observed. This is reported by
 														<a href="http://php.net/memory_get_peak_usage"
 														target="_blank">memory_get_peak_usage()</a>.  Lower is better.
 													</div>

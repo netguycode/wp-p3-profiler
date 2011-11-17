@@ -891,7 +891,7 @@
 							</td>
 						</tr>
 						<tr>
-							<td class="qtip-tip" title="The amount of RAM usage observed.  This is reporeted by memory_get_peak_usage().
+							<td class="qtip-tip" title="The amount of RAM usage observed.  This is reported by memory_get_peak_usage().
 											Lower is better.">
 								<strong>Memory Usage: </strong>
 							</td>
