@@ -793,9 +793,9 @@
 				<table class="p3-results-table" id="p3-results-table" cellpadding="0" cellspacing="0" border="0">
 					<tbody>
 						<tr class="advanced">
-							<td class="qtip-tip" title="How long the site took to load.  This is an observed measurement ( start timing
-											when the page was requested, stop timing when the page was delivered to the browser, calcuate
-											the difference ).  Lower is better.">
+							<td class="qtip-tip" title="The length of time the site took to load. This is an observed measurement (start
+											timing when the page was requested, stop timing when the page was delivered to the browser,
+											calculate the difference). Lower is better.">
 								<strong>Total Load Time: </strong>
 							</td>
 							<td>
@@ -803,8 +803,8 @@
 							</td>
 						</tr>
 						<tr>
-							<td class="qtip-tip" title="The calculated total load time minus the profile overhead.  This is closer to your
-											site's real-life load time.  Lower is better.">
+							<td class="qtip-tip" title="The calculated total load time minus the profile overhead. This is closer to your
+											site's real-life load time. Lower is better.">
 								<strong>Site Load Time</small></em></strong>
 							</td>
 							<td>
@@ -812,9 +812,9 @@
 							</td>
 						</tr>
 						<tr class="advanced">
-							<td class="qtip-tip" title="The load time spent in the profiling code.  Since using the profiler will slow down
-											your load time, it is important to know how much impact the profiler is having on your site.
-											This won't impact your site's real-life load time.">
+							<td class="qtip-tip" title="The load time spent profiling code. Because the profiler slows down your load time,
+											it is important to know how much impact the profiler has. However, it doesn't impact your site's
+											real-life load time.">
 								<strong>Profile Overhead: </strong>
 							</td>
 							<td>
@@ -822,9 +822,9 @@
 							</td>
 						</tr>
 						<tr>
-							<td class="qtip-tip" title="The load time spent in plugins.  Because of the way WordPress is built, a function call
-											can be traced from a plugin through a theme through the core.  The profiler prioritizes plugin calls
-											first, theme calls second, and core calls last.  Lower is better.">
+							<td class="qtip-tip" title="The load time caused by plugins. Because of WordPress’ construction, we can trace a
+											function call  from a plugin through a theme through the core. The profiler prioritizes plugin calls
+											first, theme calls second, and core calls last. Lower is better.">
 								<strong>Plugin Load Time: </strong>
 							</td>
 							<td>
@@ -832,9 +832,9 @@
 							</td>
 						</tr>
 						<tr>
-							<td class="qtip-tip" title="The load time spent in the theme.  Because of the way WordPress is built, a function call
-											can be traced from a plugin through a theme through the core.  The profiler prioritizes plugin calls
-											first, theme calls second, and core calls last.  Lower is better.">
+							<td class="qtip-tip" title="The load time spent applying the theme. Because of WordPress’ construction, we can trace
+											a function call from a plugin through a theme through the core. The profiler prioritizes plugin calls
+											first, theme calls second, and core calls last. Lower is better.">
 								<strong>Theme Load Time: </strong>
 							</td>
 							<td>
@@ -842,9 +842,9 @@
 							</td>
 						</tr>
 						<tr>
-							<td class="qtip-tip" title="The load time spent in the WordPress core.  Because of the way WordPress is built, a
-											function call can be traced from a plugin through a theme through the core.  The profiler prioritizes
-											plugin calls first, theme calls second, and core calls last.  This will probably be constant.">
+							<td class="qtip-tip" title="The load time caused by the WordPress core. Because of WordPress’ construction, we can
+											trace a function call from a plugin through a theme through the core. The profiler prioritizes plugin
+											calls first, theme calls second, and core calls last. This will probably be constant.">
 								<strong>Core Load Time: </strong>
 							</td>
 							<td>
@@ -852,23 +852,24 @@
 							</td>
 						</tr>
 						<tr class="advanced">
-							<td class="qtip-tip" title="This is the difference between the observed runtime ( what actually happened ) and expected
-											runtime ( adding up the plugin runtime, theme runtime, core runtime, and profiler overhead ).  There are
-											several reasons this margin of error can exist. Most likely, the profiler is missing microsends while
-											it's doing math to add up the runtime it just observed.  Using a network clock to set the time ( NTP )
-											can also cause minute timing changes.  Ideally, this number should be zero, but there's nothing you can
-											do to change it.  It will give you an idea of how accurate the other results are.">
+							<td class="qtip-tip" title="This is the difference between the observed runtime (what actually happened) and expected
+											runtime (adding the plugin runtime, theme runtime, core runtime, and profiler overhead).
+											There are several reasons this margin of error can exist. Most likely, the profiler is
+											missing microseconds while adding the runtime it observed. Using a network clock to set the
+											time (NTP) can also cause minute timing changes.
+											Ideally, this number should be zero, but there's nothing you can do to change it. It
+											will give you an idea of how accurate the other results are.">
 								<strong>Margin of Error: </strong>
 							</td>
 							<td>
 								<?php printf( '%.4f', $profile->averages['drift'] ); ?> seconds <em class="p3-em">avg.</em>
 								<br />
 								<em class="p3-em">
-									(<span class="qtip-tip" title="How long the site took to load.  This is an observed measurement ( start timing
-											when the page was requested, stop timing when the page was delivered to the browser, calcuate the
-											difference )."><?php printf( '%.4f', $profile->averages['observed'] ); ?> observed<span>,
-											<span class="qtip-tip" title="The expected site load time calculated by adding plugin load time
-											+ core load time + theme load time + profiler overhead.">
+									(<span class="qtip-tip" title="How long the site took to load. This is an observed measurement (start timing
+											when the page was requested, stop timing when the page was delivered to the browser, calculate the
+											difference)."><?php printf( '%.4f', $profile->averages['observed'] ); ?> observed<span>,
+											<span class="qtip-tip" title="The expected site load time calculated by adding plugin load time, core
+											load time, theme load time, and profiler overhead.">
 											<?php printf( '%.4f', $profile->averages['expected'] ); ?> expected</span>)
 								</em>
 							</td>
@@ -883,7 +884,7 @@
 							</td>
 						</tr>
 						<tr class="advanced">
-							<td class="qtip-tip" title="The number of php function calls generated by a plugin.  Lower is better.">
+							<td class="qtip-tip" title="The number of PHP function calls generated by a plugin. Fewer is better.">
 								<strong>Number of Plugin Function Calls: </strong>
 							</td>
 							<td>

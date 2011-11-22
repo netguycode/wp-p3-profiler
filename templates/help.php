@@ -61,31 +61,32 @@
 <div class="p3-question">
 	<h2 class="p3-help-question">What does the P3 plugin do?</h2>
 	<blockquote>
-		This plugin does just what its name says, it creates a profile of your WordPress site’s plugin’s performance by measuring their impact on
-		your site’s load time.  Often times, WordPress sites load slowly because of poorly configured plugins or because there are so many of
-		them. By using the P3 plugin, you can narrow down anything causing slowness on your site.
+		This plugin does just what its name says, it creates a profile of your WordPress site’s plugin’s performance
+		by measuring their impact on your site’s load time.
+		<br /><br />
+		Often times, WordPress sites load slowly because of poorly-configured plugins or because there are so many of
+		them. This plugin can help you narrow down the cause of your site’s slowness.
 	</blockquote>
 </div>
 
 <div class="p3-question">
 	<h2 class="p3-help-question">How do I use this?</h2>
 	<blockquote>
-		Simply click "Start Scan" to run an automated scan of your site.
-		The scanner generates some traffic on your site and monitors your site's
-		performance on the server, then shows you the results.  With this information, you
-		can then decide what action to take.
+		Simply click "Start Scan" to run an automated scan of your site. The scanner generates some traffic on your
+		site and monitors your site's performance on the server, then shows you the results. With this information,
+		you can decide what action to take.
 	</blockquote>
 </div>
 
 <div class="p3-question">
 	<h2 class="p3-help-question">What do I do with these results?</h2>
 	<blockquote>
-		If your site loads in an acceptable time (usually < 0.5 seconds), you might consider other explanations for sluggish
-		loading.  For example, loading large images, large videos, or a lot of content
-		can cause slowness.  Tools like <a href="http://www.webpagetest.org/" target="_blank">webpagetest.org</a>,
-		<a href="http://getfirebug.com/" target="_blank">Firebug</a>, <a href="http://tools.pingdom.com/" target="_blank">Pingdom tools</a>,
-		or <a href="http://developer.apple.com/technologies/safari/developer-tools.html" target="_blank">Safari Developer Tools</a>
-		or <a href="http://code.google.com/chrome/devtools/docs/overview.html" target="_blank">Chrome Developer Tools</a> can
+		If your site loads in an acceptable time (usually &lt; 0.5 seconds), you might consider other explanation for
+		sluggish loading. For example, loading large images, large videos, or a lot of content can cause slowness.
+		Tools like <a href="http://www.webpagetest.org/" target="_blank">webpagetest.org</a>, <a href="http://getfirebug.com/"
+		target="_blank">Firebug</a>, <a href="http://tools.pingdom.com/" target="_blank">Pingdom tools</a>, or
+		<a href="http://developer.apple.com/technologies/safari/developer-tools.html" target="_blank">Safari Developer Tools</a>
+		or <a href="http://code.google.com/chrome/devtools/docs/overview.html" target="_blank">Chrome Developer Tools</a> can
 		show you a connection breakdown of your site's content.
 	</blockquote>
 </div>
@@ -93,27 +94,24 @@
 <div class="p3-question">
 	<h2 class="p3-help-question">How does this work?</h2>
 	<blockquote>
-		When you activate the plugin by clicking "Start Scan," it detects visits from your IP address.
-		and actively monitors all function calls while the server generates your WordPress page. 
-		It then	records the information in a report file you can view later.
-		When the scan is complete, or you click "Stop Scan," the plugin
-		becomes dormant again.
+		When you activate the plugin by clicking “Start Scan,” it detects visits from your IP address, and actively monitors
+		all <a href="http://php.net/functions" target="_blank">php user defined function calls</a> while the server generates
+		your WordPress pages. It then records the information in a report file you can view later. When the scan is complete,
+		or you click "Stop Scan," the plugin becomes dormant again.
 	</blockquote>
 </div>
 
 <div class="p3-question">
 	<h2 class="p3-help-question">Which loader am I using?</h2>
 	<blockquote>
-		The plugin should be active at the earliest point in the code execution.
-		If the plugin can be loaded through an <code>auto_prepend_file</code> configuration
-		directive from a .htaccess file or a <a href="http://php.net/manual/en/configuration.file.per-user.php" target="_blank">.user.ini</a>
-		file, but be careful.  The .user.ini files are cached, so you must remove the
-		entry from your .user.ini file before you remove this plugin.
+		The plugin should be active at the earliest point in the code execution. The plugin can be loaded through an
+		auto_prepend_file configuration directive from a .htaccess file or a <a href="http://php.net/manual/en/configuration.file.per-user.php"
+		target="_blank">.user.ini</a> file, but be careful. The .user.ini files are cached, so you must remove the entry from your
+		.user.ini file before you remove this plugin.
 		<br /><br />
-		This plugin will automatically enable itself in .htaccess if possible, and if
-		not, it will create a <a href="http://codex.wordpress.org/Must_Use_Plugins" target="_blank">must-use</a>
-		plugin to load before other plugins.  If all else fails, it will run like a
-		regular plugin.
+		This plugin automatically enables itself in .htaccess if possible, or,  if that doesn’t succeed,, it creates a
+		<a href="http://codex.wordpress.org/Must_Use_Plugins" target="_blank">must-use</a> plugin to load before other plugins.
+		If neither of those methods work, it runs like a regular plugin.
 		<br /><br />
 		You are currently using: 
 	<?php
@@ -178,73 +176,61 @@
 <div class="p3-question">
 	<h2 class="p3-help-question">How accurate are these results?</h2>
 	<blockquote>
-		The results have an inherent margin of error because of the nature of the tool and its
-		multi-layered design.  The plugin changes the environment to measure it, and that makes
-		it impossible to get completely accurate results.
+		The results have an inherent margin of error because of the nature of the tool and its multi-layered design.
+		The plugin changes the environment to measure it, and that makes it impossible to get completely accurate results.
 		<br /><br />
-		It gets really close, though!  The "margin of error" on the Advanced Metrics page displays
-		the discrepancy between the measured results (the time for your site's PHP code to completely
-		run) and the expected results (sum of all of the plugins, core, theme, profile load times)
-		to show you the plugin's accuracy.
+		It gets really close, though! The "margin of error" on the Advanced Metrics page displays  the discrepancy between
+		the measured results (the time for your site’s PHP code to completely run) and the expected results (sum  of the plugins,
+		core, theme, profile load times) to show you the plugin’s accuracy.
 		<br /><br />
-		If you want more accurate results, you'll need to resort to a different profiler
-		like <a href="http://xdebug.org/" target="_blank">xdebug</a>, but this will
-		not break down results by plugin.
+		If you want more accurate results, you'll need to resort to a different profiler like <a href="http://xdebug.org/" target="_blank">xdebug</a>,
+		but this will not break down results by plugin.
 	</blockquote>
 </div>
 
 <div class="p3-question">
-	<h2 class="p3-help-question">Why is <em>some plugin name</em> slow?</h2>
+	<h2 class="p3-help-question">Why are some plugins slow?</h2>
 	<blockquote>
-		WordPress is a complex ecosystem of plugins and themes, and it lives on a
-		complex ecosystem of software on your web server.
+		WordPress is a complex ecosystem of plugins and themes, and it lives on a complex ecosystem of software on your web server.
 		<br /><br />
-		If a plugin runs slowly just once, it's probably just an anomaly, a transient
-		hiccup, and you can safely ignore it.
+		If a plugin runs slowly just once, it’s  probably an anomaly, a transient hiccup, and you can safely ignore it.
 		<br /><br />
-		If a plugin shows slowness once on a reguarly basis (e.g. every
-		time you run a scan, once a day, once an hour), a scheduled task might be
-		causing it.  Plugins that backup your site, monitor your site for changes,
-		contact outside sources (e.g. RSS feeds), warm up caches, etc. can exhibit
-		this kind of behavior.
+		If a plugin shows slowness once on a reguarly basis (e.g. every time you run a scan, once a day, once an hour), a scheduled
+		task might be causing it. Plugins that backup your site, monitor your site for changes, contact outside sources (e.g. RSS feeds),
+		warm up caches, etc. can exhibit this kind of behavior.
 		<br /><br />
-		If a plugin is shows as fast-slow-fast-slow-fast-slow, it could be caused
-		as the plugin loads its main code, then a follow-up piece of code, like a
-		piece of generated javascript.
+		If a plugin shows as fast-slow-fast-slow-fast-slow,  it could be caused as the plugin loads its main code, then a follow-up piece
+		of code, like a piece of generated JavaScript.
 		<br /><br />
-		If a plugin consistently shows slowness, then you might want to contact
-		the plugin author or try deactivating the plugin temporarily to see if
-		it makes a difference on your site.
+		If a plugin is consistently shows slowness,  you might want to contact the plugin author or try deactivating the plugin temporarily
+		to see if it makes a difference on your site.
 	</blockquote>
 </div>
 
 <div class="p3-question">
 	<h2 class="p3-help-question">How are these results different from YSlow / PageSpeed / Webpagetest.org / Pingdom Tools?</h2>
 	<blockquote>
-		This plugin measures how your site was generated on the server.  Tools like
-		YSlow!, PageSpeed, Webpagetest.org, and Pingdom Tools measure how your site looks
-		to the browser.
+		This plugin measures how your site was generated on the server. Tools like <a href="http://developer.yahoo.com/yslow/"
+		target="_blank">YSlow</a>, <a href="https://developers.google.com/pagespeed/" target="_blank">PageSpeed</a>,
+		<a href="http://www.webpagetest.org/" target="_blank">Webpagetest.org</a>, and <a href="http://tools.pingdom.com/fpt/"
+		target="_blank">Pingdom Tools</a> measure how your site looks to the browser.
 	</blockquote>
 </div>
 
 <div class="p3-question">
 	<h2 class="p3-help-question">What can interfere with testing?</h2>
 	<blockquote>
-		Opcode caches can interfere with php backtraces.  Leaving opcode caches turned
-		on will result in timing that more accurately reflects your site's real performance,
-		but the function calls to plugins may be "optimized" out of the backtraces and
-		some plugins (especially those with only one hook) mightnot show up.  Disabling
-		opcode caches results in slower times, but shows all plugins.
+		Opcode caches can interfere with PHP backtraces. Leaving opcode caches turned on will result in timing that more accurately
+		reflects your site's real performance, but the function calls to plugins may be "optimized" out of the backtraces and some
+		plugins (especially those with only one hook) might not show up. Disabling opcode caches results in slower times, but shows all plugins.
 		<br /><br />
-		By default, this plugin attempts to clear any opcode caches before it runs.
-		You can change this setting by clicking "Advanced Settings" under "Start Scan."
+		By default, this plugin attempts to clear any opcode caches before it runs. You can change this setting by clicking "Advanced
+		Settings" under "Start Scan." 
 		<br /><br />
-		Caching plugins that have an option to disable caches for logged in users will not
-		give you the same performance profile that an anonymous users experience.  To
-		get around this, you should select a manual scan, then run an incognito browser
-		window, or run another browser, and browse your site as a logged out user.  When you're
-		finished, click "I'm done," and your scan should show the performance of an
-		anonymous user.
+		Caching plugins that have an option to disable caches for logged in users will not give you the same performance profile that
+		an anonymous users experience. To get around this, you should select a manual scan, then run an incognito browser window, or run
+		another browser, and browse your site as a logged out user. When you're finished, click "I'm done," and your scan should show the
+		performance of an anonymous user.
 	</blockquote>
 </div>
 
@@ -272,15 +258,16 @@
 <div class="p3-question">
 	<h2 class="p3-help-question">Is this plugin always running?</h2>
 	<blockquote>
-		The short answer is no.
+		The short answer is no. 
 		<br /><br />
-		The more detailed answer is the loader is always running, but checks very early in the page loading
-		process to see if you've enabled profiling mode and if the user's IP address matches the IP address the plugin is
-		monitoring.  For multisite installations, it also matches site URL.  If all these match, the plugin becomes active
-		and profiles.  Otherwise, your site loads as normal with no other code overhead.
+		The more detailed answer is the loader is always running, but checks very early in the page
+		loading process to see if you’ve enabled profiling mode and if the user's IP address matches
+		the IP address the plugin’s monitoring. For multisite installations, it also matches the site URL.
+		If all these match, the plugin becomes active and profiles. Otherwise, your site loads as normal
+		with no other code overhead. 
 		<br /><br />
-		Deactivating the plugin ensures it's not running at all, and does not delete your scans.  However, uninstalling
-		the plugin deletes your scans.
+		Deactivating the plugin ensures it's not running at all, and does not delete your scans. However,
+		uninstalling the plugin does deletes your scans.
 	</blockquote>
 </div>
 
@@ -288,35 +275,36 @@
 	<h2 class="p3-help-question">How can I test specific pages on my site?</h2>
 	<blockquote>
 		When you start a scan, choose "Manual Scan" and then you can visit specific links on your site that
-		you' want to profile.  If you want to profile the admin section, just click the "X" in the top right
-		of the scan window and you'll be returned to your admin section.  You can browse as normal, then come
+		you want to profile. If you want to profile the admin section, just click the "X" in the top right
+		of the scan window and you'll be returned to your admin section. You can browse as normal, then come
 		back to the profile page and click "Stop Scan" when you're ready to view the results.
 		<br /><br />
 		To scan your site as an anonymous user, select "Manual Mode" as above, but instead of clicking your
-		site in the scan window, open a different browser (or an incognito window) and browse your site
-		as a logged out user.  When you're done, close that browser and return to your admin.  Click "I'm done"
-		and view your scan results.
+		site in the scan window, open a different browser (or an incognito window) and browse your site as a
+		logged out user. When you're done, close that browser and return to your admin. Click "I'm done" and
+		view your scan results.
 	</blockquote>
 </div>
 
 <div class="p3-question">
 	<h2 class="p3-help-question">My plugins don't seem to cause site slowness.  Why is my site still slow?</h2>
 	<blockquote>
-		Your site can be slow for a number of reasons.  Your site have a lot of traffic, other
-		sites on your server could have a lot of traffic, you could be referencing content from 
-		other sites that are slow, your internet connection could be slow, your server could be out of RAM,
-		your site could be very image heavy, your site could require a lot of HTTP requests, etc.
-		In short, a lot of factors can cause slowness on your site.
+		Your site can be slow for a number of reasons. Your site could have a lot of traffic, other sites on
+		your server could have a lot of traffic, you could be referencing content from other sites that are slow,
+		your internet connection could be slow, your server could be out of RAM, your site could be very image
+		heavy, your site could require a lot of HTTP requests, etc. In short, a lot of factors can cause slowness
+		on your site
 		<br /><br />
-		Your next stop should be to <a href="http://tools.pingdom.com/" target="_blank">Pingdom Tools</a>,
-		<a href="http://webpagetest.org/" target="_blank">Webpage Test</a>, <a href="http://developer.yahoo.com/yslow/" target="_blank">YSlow</a>,
-		<a href="http://code.google.com/speed/page-speed/download.html" target="_blank">Google PageSpeed</a>, and
-		your browser's development tools like <a href="http://getfirebug.com/" target="_blank">Firebug</a> for Firefox,
-		<a href="http://code.google.com/chrome/devtools/docs/overview.html" target="_blank">Chrome Developer Tools</a> for Chrome, or
-		<a href="http://developer.apple.com/technologies/safari/developer-tools.html" target="_blank">Safari Developer Tools</a> for Safari.
+		Your next stop should be to <a href="http://tools.pingdom.com/" target="_blank">Pingdom Tools</a>,
+		<a href="http://webpagetest.org/" target="_blank">Webpage Test</a>, <a href="http://developer.yahoo.com/yslow/"
+		target="_blank">YSlow</a>, <a href="https://developers.google.com/pagespeed/" target="_blank">Google PageSpeed</a>,
+		and your browser's development tools like <a href="http://getfirebug.com/" target="_blank">Firebug</a> for Firefox,
+		<a href="http://code.google.com/chrome/devtools/docs/overview.html" target="_blank">Chrome Developer Tools</a> for
+		Chrome, or <a href="http://developer.apple.com/technologies/safari/developer-tools.html" target="_blank">Safari
+		Developer Tools</a> for Safari.
 		<br /><br />
-		After you've tuned your site up as much as possible, if you're still not happy with its performance,
-		you should consult your site/server administrator or hosting support.
+		After you've tuned your site up as much as possible, if you're still not happy with its performance, you should
+		consult your site/server administrator or hosting support.
 	</blockquote>
 </div>
 
@@ -341,9 +329,9 @@
 											<tr>
 												<td width="200" class="term"><strong>Total Load Time</strong>
 													<div id="total-load-time-definition" style="display: none;" class="definition">
-														How long the site took to load.  This is an observed measurement ( start timing when
-														the page was requested, stop timing when the page was delivered to the browser, calcuate
-														the difference ).  Lower is better.
+														The length of time the site took to load. This is an observed measurement (start timing when
+														the page was requested, stop timing when the page was delivered to the browser, calculate the
+														difference). Lower is better.
 													</div>
 												</td>
 												<td width="400" rowspan="12" id="p3-glossary-term-display">&nbsp;</td>
@@ -351,82 +339,83 @@
 											<tr>
 												<td class="term"><strong>Site Load Time</strong>
 													<div id="site-load-time-definition" style="display: none;" class="definition">
-														The calculated total load time minus the profile overhead.  This is closer to your site's
-														real-life load time.  Lower is better.
+														The calculated total load time minus the profile overhead. This is closer to your site's
+														real-life load time. Lower is better.
 													</div>
 												</td>
 											</tr>
 											<tr>
 												<td class="term"><strong>Profile Overhead</strong>
 													<div id="profile-overhead-definition" style="display: none;" class="definition">
-														The load time spent in the profiling code.  Since using the profiler will slow down your load
-														time, it is important to know how much impact the profiler is having on your site.  This
-														won't impact your site's real-life load time.
+														The load time spent profiling code. Because the profiler slows down your load time, it is
+														important to know how much impact the profiler has. However, it doesn't impact your site's
+														real-life load time.
 													</div>
 												</td>
 											</tr>
 											<tr>
 												<td class="term"><strong>Plugin Load Time</strong>
 													<div id="plugin-load-time-definition" style="display: none;" class="definition">
-														The load time spent in plugins.  Because of the way WordPress is built, a function call can be
-														traced from a plugin through a theme through the core.  The profiler prioritizes plugin calls
-														first, theme calls second, and core calls last.  Lower is better.
+														The load time caused by plugins. Because of WordPress’ construction, we can trace a
+														function call from a plugin through a theme through the core. The profiler prioritizes
+														plugin calls first, theme calls second, and core calls last. Lower is better.
 													</div>
 												</td>
 											</tr>
 											<tr>
 												<td class="term"><strong>Theme Load Time</strong>
 													<div id="theme-load-time-definition" style="display: none;" class="definition">
-														The load time spent in the theme.  Because of the way WordPress is built, a function call can
-														be traced from a plugin through a theme through the core.  The profiler prioritizes plugin
-														calls first, theme calls second, and core calls last.  Lower is better.
+														The load time spent applying the theme. Because of WordPress’ construction, we can trace a
+														function call from a plugin through a theme through the core. The profiler prioritizes
+														plugin calls first, theme calls second, and core calls last. Lower is better.
 													</div>
 												</td>
 											</tr>
 											<tr>
 												<td class="term"><strong>Core Load Time</strong>
 													<div id="core-load-time-definition" style="display: none;" class="definition">
-														The load time spent in the WordPress core.  Because of the way WordPress is built, a function
-														call can be traced from a plugin through a theme through the core.  The profiler prioritizes
-														plugin calls first, theme calls second, and core calls last.  This will probably be constant.
+														The load time caused by the WordPress core. Because of WordPress’ construction, we can trace
+														a function call from a plugin through a theme through the core. The profiler prioritizes
+														plugin calls first, theme calls second, and core calls last. This will probably be constant.
 													</div>
 												</td>
 											</tr>
 											<tr>
 												<td class="term"><strong>Margin of Error</strong>
 													<div id="drift-definition" style="display: none;" class="definition">
-														This is the difference between the observed runtime ( what actually happened ) and expected
-														runtime ( adding up the plugin runtime, theme runtime, core runtime, and profiler overhead ).
+														This is the difference between the observed runtime (what actually happened) and expected
+														runtime (adding the plugin runtime, theme runtime, core runtime, and profiler overhead).
+														<br /><br />
 														There are several reasons this margin of error can exist. Most likely, the profiler is
-														missing microsends while it's doing math to add up the runtime it just observed.  Using a
-														network clock to set the time ( NTP ) can also cause minute timing changes.  Ideally, this
-														number should be zero, but there's nothing you can do to change it.  It will give you an
-														idea of how accurate the other results are.
-														</ul>
+														missing microseconds while adding the runtime it observed. Using a network clock to set the
+														time (NTP) can also cause minute timing changes.
+														<br /><br />
+														Ideally, this number should be zero, but there's nothing you can do to change it. It
+														will give you an idea of how accurate the other results are.
 													</div>
 												</td>
 											</tr>
 											<tr>
 												<td class="term"><strong>Observed</strong>
 													<div id="observed-definition" style="display: none;" class="definition">
-														How long the site took to load.  This is an observed measurement ( start timing when the page
-														was requested, stop timing when the page was delivered to the browser, calcuate the
-														difference ).
+														How long the site took to load. This is an observed measurement (start timing when the
+														page was requested, stop timing when the page was delivered to the browser, calculate the
+														difference).
 													</div>
 												</td>
 											</tr>
 											<tr>
 												<td class="term"><strong>Expected</strong>
 													<div id="expected-definition" style="display: none;" class="definition">
-														The expected site load time calculated by adding plugin load time + core load time + theme
-														load time + profiler overhead.
+														The expected site load time calculated by adding plugin load time, core load time, theme
+														load time, and profiler overhead.
 													</div>
 												</td>
 											</tr>
 											<tr>
 												<td class="term"><strong>Plugin Function Calls</strong>
 													<div id="plugin-funciton-calls-definition" style="display: none;" class="definition">
-														The number of php function calls generated by a plugin.  Lower is better.
+														The number of PHP function calls generated by a plugin. Fewer is better.
 													</div>
 												</td>
 											</tr>
@@ -442,9 +431,9 @@
 											<tr>
 												<td class="term"><strong>MySQL Queries</strong>
 													<div id="mysql-queries-definition" style="display: none;" class="definition">
-														The count of queries sent to the database.  This reported by the
-														WordPress function <a href="http://codex.wordpress.org/Function_Reference/get_num_queries"
-														target="_new">get_num_queries()</a>.  Lower is better.
+														The number of queries sent to the database. This reported by the WordPress function
+														<a href="http://codex.wordpress.org/Function_Reference/get_num_queries"
+														target="_new">get_num_queries()</a>.  Fewer is better.
 													</div>
 												</td>
 											</tr>
