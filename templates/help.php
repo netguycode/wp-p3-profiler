@@ -61,11 +61,11 @@
 <div class="p3-question">
 	<h2 class="p3-help-question">What does the P3 plugin do?</h2>
 	<blockquote>
-		This plugin does just what its name says, it creates a profile of your WordPress site’s plugin’s performance
-		by measuring their impact on your site’s load time.
+		This plugin does just what its name says, it creates a profile of your WordPress site's plugin's performance
+		by measuring their impact on your site's load time.
 		<br /><br />
 		Often times, WordPress sites load slowly because of poorly-configured plugins or because there are so many of
-		them. This plugin can help you narrow down the cause of your site’s slowness.
+		them. This plugin can help you narrow down the cause of your site's slowness.
 	</blockquote>
 </div>
 
@@ -94,7 +94,7 @@
 <div class="p3-question">
 	<h2 class="p3-help-question">How does this work?</h2>
 	<blockquote>
-		When you activate the plugin by clicking “Start Scan,” it detects visits from your IP address, and actively monitors
+		When you activate the plugin by clicking "Start Scan," it detects visits from your IP address, and actively monitors
 		all <a href="http://php.net/functions" target="_blank">php user defined function calls</a> while the server generates
 		your WordPress pages. It then records the information in a report file you can view later. When the scan is complete,
 		or you click "Stop Scan," the plugin becomes dormant again.
@@ -109,7 +109,7 @@
 		target="_blank">.user.ini</a> file, but be careful. The .user.ini files are cached, so you must remove the entry from your
 		.user.ini file before you remove this plugin.
 		<br /><br />
-		This plugin automatically enables itself in .htaccess if possible, or,  if that doesn’t succeed,, it creates a
+		This plugin automatically enables itself in .htaccess if possible, or,  if that doesn't succeed,, it creates a
 		<a href="http://codex.wordpress.org/Must_Use_Plugins" target="_blank">must-use</a> plugin to load before other plugins.
 		If neither of those methods work, it runs like a regular plugin.
 		<br /><br />
@@ -180,8 +180,8 @@
 		The plugin changes the environment to measure it, and that makes it impossible to get completely accurate results.
 		<br /><br />
 		It gets really close, though! The "margin of error" on the Advanced Metrics page displays  the discrepancy between
-		the measured results (the time for your site’s PHP code to completely run) and the expected results (sum  of the plugins,
-		core, theme, profile load times) to show you the plugin’s accuracy.
+		the measured results (the time for your site's PHP code to completely run) and the expected results (sum  of the plugins,
+		core, theme, profile load times) to show you the plugin's accuracy.
 		<br /><br />
 		If you want more accurate results, you'll need to resort to a different profiler like <a href="http://xdebug.org/" target="_blank">xdebug</a>,
 		but this will not break down results by plugin.
@@ -193,7 +193,7 @@
 	<blockquote>
 		WordPress is a complex ecosystem of plugins and themes, and it lives on a complex ecosystem of software on your web server.
 		<br /><br />
-		If a plugin runs slowly just once, it’s  probably an anomaly, a transient hiccup, and you can safely ignore it.
+		If a plugin runs slowly just once, it's  probably an anomaly, a transient hiccup, and you can safely ignore it.
 		<br /><br />
 		If a plugin shows slowness once on a reguarly basis (e.g. every time you run a scan, once a day, once an hour), a scheduled
 		task might be causing it. Plugins that backup your site, monitor your site for changes, contact outside sources (e.g. RSS feeds),
@@ -261,8 +261,8 @@
 		The short answer is no. 
 		<br /><br />
 		The more detailed answer is the loader is always running, but checks very early in the page
-		loading process to see if you’ve enabled profiling mode and if the user's IP address matches
-		the IP address the plugin’s monitoring. For multisite installations, it also matches the site URL.
+		loading process to see if you've enabled profiling mode and if the user's IP address matches
+		the IP address the plugin's monitoring. For multisite installations, it also matches the site URL.
 		If all these match, the plugin becomes active and profiles. Otherwise, your site loads as normal
 		with no other code overhead. 
 		<br /><br />
@@ -356,7 +356,7 @@
 											<tr>
 												<td class="term"><strong>Plugin Load Time</strong>
 													<div id="plugin-load-time-definition" style="display: none;" class="definition">
-														The load time caused by plugins. Because of WordPress’ construction, we can trace a
+														The load time caused by plugins. Because of WordPress' construction, we can trace a
 														function call from a plugin through a theme through the core. The profiler prioritizes
 														plugin calls first, theme calls second, and core calls last. Lower is better.
 													</div>
@@ -365,7 +365,7 @@
 											<tr>
 												<td class="term"><strong>Theme Load Time</strong>
 													<div id="theme-load-time-definition" style="display: none;" class="definition">
-														The load time spent applying the theme. Because of WordPress’ construction, we can trace a
+														The load time spent applying the theme. Because of WordPress' construction, we can trace a
 														function call from a plugin through a theme through the core. The profiler prioritizes
 														plugin calls first, theme calls second, and core calls last. Lower is better.
 													</div>
@@ -374,7 +374,7 @@
 											<tr>
 												<td class="term"><strong>Core Load Time</strong>
 													<div id="core-load-time-definition" style="display: none;" class="definition">
-														The load time caused by the WordPress core. Because of WordPress’ construction, we can trace
+														The load time caused by the WordPress core. Because of WordPress' construction, we can trace
 														a function call from a plugin through a theme through the core. The profiler prioritizes
 														plugin calls first, theme calls second, and core calls last. This will probably be constant.
 													</div>

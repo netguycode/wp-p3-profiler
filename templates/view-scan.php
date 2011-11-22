@@ -822,7 +822,7 @@
 							</td>
 						</tr>
 						<tr>
-							<td class="qtip-tip" title="The load time caused by plugins. Because of WordPress’ construction, we can trace a
+							<td class="qtip-tip" title="The load time caused by plugins. Because of WordPress' construction, we can trace a
 											function call  from a plugin through a theme through the core. The profiler prioritizes plugin calls
 											first, theme calls second, and core calls last. Lower is better.">
 								<strong>Plugin Load Time: </strong>
@@ -832,7 +832,7 @@
 							</td>
 						</tr>
 						<tr>
-							<td class="qtip-tip" title="The load time spent applying the theme. Because of WordPress’ construction, we can trace
+							<td class="qtip-tip" title="The load time spent applying the theme. Because of WordPress' construction, we can trace
 											a function call from a plugin through a theme through the core. The profiler prioritizes plugin calls
 											first, theme calls second, and core calls last. Lower is better.">
 								<strong>Theme Load Time: </strong>
@@ -842,7 +842,7 @@
 							</td>
 						</tr>
 						<tr>
-							<td class="qtip-tip" title="The load time caused by the WordPress core. Because of WordPress’ construction, we can
+							<td class="qtip-tip" title="The load time caused by the WordPress core. Because of WordPress' construction, we can
 											trace a function call from a plugin through a theme through the core. The profiler prioritizes plugin
 											calls first, theme calls second, and core calls last. This will probably be constant.">
 								<strong>Core Load Time: </strong>
