@@ -875,7 +875,7 @@
 							</td>
 						</tr>
 						<tr class="advanced">
-							<td class="qtip-tip" title="The number of visits registered during the profiling session.  More visits will give a more
+							<td class="qtip-tip" title="The number of visits registered during a profiling session.  More visits produce a more
 											accurate summary.">
 								<strong>Visits: </strong>
 							</td>
