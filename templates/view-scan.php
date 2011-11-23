@@ -793,7 +793,7 @@
 				<table class="p3-results-table" id="p3-results-table" cellpadding="0" cellspacing="0" border="0">
 					<tbody>
 						<tr class="advanced">
-							<td class="qtip-tip" title="The length of time the site took to load. This is an observed measurement (start
+							<td class="qtip-tip" title="The time the site took to load. This is an observed measurement (start
 											timing when the page was requested, stop timing when the page was delivered to the browser,
 											calculate the difference). Lower is better.">
 								<strong>Total Load Time: </strong>

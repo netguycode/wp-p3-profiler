@@ -102,14 +102,14 @@
 </div>
 
 <div class="p3-question">
-	<h2 class="p3-help-question">Which loader am I using?</h2>
+	<h2 class="p3-help-question">How does my site load the plugin?</h2>
 	<blockquote>
 		The plugin should be active at the earliest point in the code execution. The plugin can be loaded through an
 		auto_prepend_file configuration directive from a .htaccess file or a <a href="http://php.net/manual/en/configuration.file.per-user.php"
 		target="_blank">.user.ini</a> file, but be careful. The .user.ini files are cached, so you must remove the entry from your
 		.user.ini file before you remove this plugin.
 		<br /><br />
-		This plugin automatically enables itself in .htaccess if possible, or,  if that doesn't succeed,, it creates a
+		This plugin automatically enables itself in .htaccess if possible, or, if that doesn't succeed, it creates a
 		<a href="http://codex.wordpress.org/Must_Use_Plugins" target="_blank">must-use</a> plugin to load before other plugins.
 		If neither of those methods work, it runs like a regular plugin.
 		<br /><br />
@@ -179,8 +179,8 @@
 		The results have an inherent margin of error because of the nature of the tool and its multi-layered design.
 		The plugin changes the environment to measure it, and that makes it impossible to get completely accurate results.
 		<br /><br />
-		It gets really close, though! The "margin of error" on the Advanced Metrics page displays  the discrepancy between
-		the measured results (the time for your site's PHP code to completely run) and the expected results (sum  of the plugins,
+		It gets really close, though! The "margin of error" on the Advanced Metrics page displays the discrepancy between
+		the measured results (the time for your site's PHP code to completely run) and the expected results (sum of the plugins,
 		core, theme, profile load times) to show you the plugin's accuracy.
 		<br /><br />
 		If you want more accurate results, you'll need to resort to a different profiler like <a href="http://xdebug.org/" target="_blank">xdebug</a>,
@@ -193,16 +193,16 @@
 	<blockquote>
 		WordPress is a complex ecosystem of plugins and themes, and it lives on a complex ecosystem of software on your web server.
 		<br /><br />
-		If a plugin runs slowly just once, it's  probably an anomaly, a transient hiccup, and you can safely ignore it.
+		If a plugin runs slowly just once, it's probably an anomaly, a transient hiccup, and you can safely ignore it.
 		<br /><br />
 		If a plugin shows slowness once on a reguarly basis (e.g. every time you run a scan, once a day, once an hour), a scheduled
 		task might be causing it. Plugins that backup your site, monitor your site for changes, contact outside sources (e.g. RSS feeds),
 		warm up caches, etc. can exhibit this kind of behavior.
 		<br /><br />
-		If a plugin shows as fast-slow-fast-slow-fast-slow,  it could be caused as the plugin loads its main code, then a follow-up piece
+		If a plugin shows as fast-slow-fast-slow-fast-slow, it could be caused as the plugin loads its main code, then a follow-up piece
 		of code, like a piece of generated JavaScript.
 		<br /><br />
-		If a plugin is consistently shows slowness,  you might want to contact the plugin author or try deactivating the plugin temporarily
+		If a plugin is consistently shows slowness, you might want to contact the plugin author or try deactivating the plugin temporarily
 		to see if it makes a difference on your site.
 	</blockquote>
 </div>
@@ -398,7 +398,7 @@
 											<tr>
 												<td class="term"><strong>Observed</strong>
 													<div id="observed-definition" style="display: none;" class="definition">
-														How long the site took to load. This is an observed measurement (start timing when the
+														The time the site took to load. This is an observed measurement (start timing when the
 														page was requested, stop timing when the page was delivered to the browser, calculate the
 														difference).
 													</div>
