@@ -170,8 +170,8 @@
 			'draggable' : false,
 			'resizable' : false,
 			'modal' : true,
-			'width' : 425,
-			'height' : 265,
+			'width' : 450,
+			'height' : 255,
 			'title' : "Advanced Settings",
 			'buttons' :
 			[
