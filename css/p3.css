@@ -284,9 +284,6 @@ div.p3-y-axis-label {
 	/* Firefox */
 	-moz-transform: rotate(-90deg);
 
-	/* IE */
-	-ms-transform: rotate(-90deg);
-
 	/* Opera */
 	-o-transform: rotate(-90deg);
 
@@ -321,8 +318,8 @@ div.p3-x-axis-label {
 	left: 4px;
 }
 #p3-email-sending-dialog img {
-	left: 125px;
-	top: 38px;
+	left: 132px;
+	top: 40px;
 	position: relative;
 }
 #p3-email-sending-close {

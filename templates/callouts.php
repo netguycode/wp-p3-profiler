@@ -170,8 +170,8 @@
 			'draggable' : false,
 			'resizable' : false,
 			'modal' : true,
-			'width' : 400,
-			'height' : 240,
+			'width' : 425,
+			'height' : 265,
 			'title' : "Advanced Settings",
 			'buttons' :
 			[
@@ -212,8 +212,8 @@
 			'draggable' : false,
 			'resizable' : false,
 			'modal' : true,
-			'width' : 410,
-			'height' : 170,
+			'width' : 425,
+			'height' : 180,
 			'title' : 'Scan Name'
 			// 'dialogClass' : 'noTitle'
 		});
@@ -226,7 +226,7 @@
 			'resizable' : false,
 			'modal' : true,
 			'width' : 450,
-			'height' : 115,
+			'height' : 117,
 			'dialogClass' : 'noTitle'
 		});
 

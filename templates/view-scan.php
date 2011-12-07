@@ -35,8 +35,8 @@
 			'draggable' : false,
 			'resizable' : false,
 			'modal' : true,
-			'width' : 300,
-			'height' : 115,
+			'width' : 325,
+			'height' : 120,
 			'dialogClass' : 'noTitle'
 		});
 		$( "#p3-email-results-dialog" ).dialog({
@@ -46,7 +46,7 @@
 			'resizable' : false,
 			'modal' : true,
 			'width' : 500,
-			'height' : 550,
+			'height' : 560,
 			'title' : "Email Report",
 			'buttons' :
 			[
