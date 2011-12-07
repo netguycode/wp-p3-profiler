@@ -15,6 +15,8 @@ load slowly because of poorly configured plugins or because there are so many of
 them. By using the P3 plugin, you can narrow down anything causing slowness on
 your site.
 
+Requires Firefox, Chrome, Safari, or IE9 or later.
+
 == Installation ==
 Extract the zip file and just drop the contents in the wp-content/plugins/
 directory of your WordPress installation and then activate the Plugin from
