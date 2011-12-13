@@ -108,8 +108,8 @@ if ( 'current-scan' == $p3_action ) {
 
 <div id="p3-copyright">
 	<?php if (date('Y') > 2011) : ?>
-		Copyright &copy; 2011-<?php echo date('Y'); ?> <a href="http://www.godaddy.com/" target="_blank">GoDaddy.com</a>, Inc.  All rights reserved.
+		Copyright &copy; 2011-<?php echo date('Y'); ?> <a href="http://www.godaddy.com/" target="_blank">GoDaddy.com</a>.  All rights reserved.
 	<?php else : ?>
-		Copyright &copy; 2011 <a href="http://www.godaddy.com/" target="_blank">GoDaddy.com</a>, Inc.  All rights reserved.
+		Copyright &copy; 2011 <a href="http://www.godaddy.com/" target="_blank">GoDaddy.com</a>.  All rights reserved.
 	<?php endif; ?>
 </div>

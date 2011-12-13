@@ -2,7 +2,7 @@
 /**
  * Lists the performance profiles
  *
- * @author Kurt Payne, GoDaddy.com
+ * @author GoDaddy.com
  * @version 1.0
  * @package P3_Profiler
  */
