@@ -262,12 +262,12 @@
 		<br /><br />
 		The more detailed answer is the loader is always running, but checks very early in the page
 		loading process to see if you've enabled profiling mode and if the user's IP address matches
-		the IP address the plugin's monitoring. For multisite installations, it also matches the site URL.
+		the IP address the plugin is monitoring. For multisite installations, it also matches the site URL.
 		If all these match, the plugin becomes active and profiles. Otherwise, your site loads as normal
 		with no other code overhead. 
 		<br /><br />
 		Deactivating the plugin ensures it's not running at all, and does not delete your scans. However,
-		uninstalling the plugin does deletes your scans.
+		uninstalling the plugin does delete your scans.
 	</blockquote>
 </div>
 
