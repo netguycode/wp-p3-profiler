@@ -1,5 +1,5 @@
 === P3 (Plugin Performance Profiler) ===
-Contributors: kurtpayne
+Contributors: StarfieldTech
 Tags: plugin, performance
 Requires at least: 3.3
 Tested up to: 3.3
