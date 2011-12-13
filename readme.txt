@@ -26,6 +26,7 @@ Requires Firefox, Chrome, Opera, Safari, or IE9 or later.
 5. The query timeline gives you the number of database queries for every page during the profile.  Find out which pages generate the most database queries.
 6. Keep a history of your performance scans, compare your current performance with your previous performance.
 7. Full in-app help documentation
+8. Send a summary of your performance profile via e-mail.  If you want to show your developer, site admin, hosting support, or a plugin developer what's going on with your site, this is good way to start the conversation.
 
 == Installation ==
 Extract the zip file and just drop the contents in the wp-content/plugins/
