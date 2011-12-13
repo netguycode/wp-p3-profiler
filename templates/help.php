@@ -454,11 +454,11 @@
 	<blockquote>
 		<strong>P3 (Plugin Performance Profiler)</strong>
 		<br />
-		<?php if ( date( 'Y' ) > 2011 ) { ?>
-			Copyright &copy; 2011-<?php echo date( 'Y' ); ?> Starfield Technologies, Inc. All rights reserved.
-		<?php } else { ?>
-			Copyright &copy; 2011 Starfield Technologies, Inc. All rights reserved.
-		<?php } ?>
+		<?php if (date('Y') > 2011) : ?>
+			Copyright &copy; 2011-<?php echo date('Y'); ?> <a href="http://www.godaddy.com/" target="_blank">GoDaddy.com</a>, Inc.  All rights reserved.
+		<?php else : ?>
+			Copyright &copy; 2011 <a href="http://www.godaddy.com/" target="_blank">GoDaddy.com</a>, Inc.  All rights reserved.
+		<?php endif; ?>
 		<br /><br />
 		This program is offered under the terms of the GNU General Public License Version 2 as published by the Free Software Foundation.
 		<br /><br />
