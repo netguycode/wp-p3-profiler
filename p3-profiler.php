@@ -162,12 +162,15 @@ class P3_Profiler_Plugin {
 	 * @return void
 	 */
 	public function load_scripts() {
-		wp_enqueue_script( 'flot', plugins_url() . '/p3-profiler/js/jquery.flot.min.js', array( 'jquery' ) );
-		wp_enqueue_script( 'flot.pie', plugins_url() . '/p3-profiler/js/jquery.flot.pie.min.js', array( 'jquery', 'flot' ) );
-		wp_enqueue_script( 'flot.navigate', plugins_url() . '/p3-profiler/js/jquery.flot.navigate.js', array( 'jquery', 'flot' ) );
-		wp_enqueue_script( 'p3_jquery_ui', plugins_url() . '/p3-profiler/js/jquery-ui-1.8.16.custom.min.js', array( 'jquery' ) );
-		wp_enqueue_script( 'p3_corners', plugins_url() . '/p3-profiler/js/jquery.corner.js', array( 'jquery' ) );
-		wp_enqueue_script( 'p3_qtip', plugins_url() . '/p3-profiler/js/jquery.qtip.min.js', array( 'jquery', 'p3_jquery_ui' ) );
+		wp_enqueue_script( 'jquery' );
+		wp_enqueue_script( 'jquery-ui-dialog' );
+		wp_enqueue_script( 'jquery-ui-tabs' );
+		wp_enqueue_script( 'jquery-ui-progressbar' );
+		wp_enqueue_script( 'flot', plugins_url() . '/p3-profiler/js/jquery.flot.min.js', array( 'jquery-ui-core' ) );
+		wp_enqueue_script( 'flot.pie', plugins_url() . '/p3-profiler/js/jquery.flot.pie.min.js', array( 'flot' ) );
+		wp_enqueue_script( 'flot.navigate', plugins_url() . '/p3-profiler/js/jquery.flot.navigate.js', array( 'flot' ) );
+		wp_enqueue_script( 'p3_corners', plugins_url() . '/p3-profiler/js/jquery.corner.js', array( 'jquery-ui-core' ) );
+		wp_enqueue_script( 'p3_qtip', plugins_url() . '/p3-profiler/js/jquery.qtip.min.js', array( 'jquery-ui-core' ) );
 	}
 
 	/**
