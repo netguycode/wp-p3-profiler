@@ -48,7 +48,7 @@ class P3_Profile_Table_Sorter {
 	 * @return bool
 	 */
 	private function _compare( $a, $b ) {
-		if ( '_filesize' == $this->field ) {
+		if ( in_array( $this->field, array( '_filesize', '_count', '_date' ) ) ) {
 			return $a[$this->field] < $b[$this->field];
 		} else {
 			return strcmp( $a[$this->field], $b[$this->field] );
