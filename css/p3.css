@@ -267,7 +267,12 @@ p3-glossary-container {
 /** Copyright notice **/
 #p3-copyright {
 	text-align: center;
-	margin: 60px auto 20px auto;
+	margin: 45px auto 5px auto;
+}
+#p3-copyright img {
+	margin-bottom: 7px;
+	height: 47px;
+	width: 125px;
 }
 
 

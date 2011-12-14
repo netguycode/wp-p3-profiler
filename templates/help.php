@@ -61,7 +61,7 @@
 <div class="p3-question">
 	<h2 class="p3-help-question">What does the P3 plugin do?</h2>
 	<blockquote>
-		This plugin does just what its name says, it creates a profile of your WordPress site's plugin's performance
+		This plugin does just what its name says, it creates a profile of your WordPress site's plugins' performance
 		by measuring their impact on your site's load time.
 		<br /><br />
 		Often times, WordPress sites load slowly because of poorly-configured plugins or because there are so many of
