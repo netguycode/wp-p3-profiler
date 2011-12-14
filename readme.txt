@@ -37,7 +37,24 @@ Plugins page.
 No FAQs yet.
 
 == Upgrade Notice ==
-1.0 - Initial release
+
+= 1.0 =
+Initial release.
 
 == Changelog ==
-1.0 - Initial release
+
+= 1.0 =
+ * Automatic site profiling
+ * Manual site profiling
+ * Profile history
+ * Continue a profile session
+ * Clear opcode caches (if possible) to improve plugin function detection
+ * Limit profiling by IP address (regex pattern)
+ * Limit profiling by site URL (for MS compatibility)
+ * Rewrite http URLs to https to avoid SSL warnings when using wp-admin over SSL
+ * Hide the admin toolbar on the front-end when profiling to prevent extra plugin scripts/styles from loading
+ * In-app help / glossary page
+ * Activate / deactivate hooks to try different loader methods so the profiler runs as early as possible
+ * Uninstall hooks to clean up profiles
+ * Hooks add/delete blog to clean up profiles
+ * Send profile summary via e-mail
