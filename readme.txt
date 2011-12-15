@@ -1,9 +1,9 @@
 ﻿=== P3 (Plugin Performance Profiler) ===
 Contributors: Godaddy, StarfieldTech
-Tags: debug, debugging, developer, development, performance, plugin, profiler, speed
+Tags: admin, benchmark, benchmarking, debug, debugging, developer, development, performance, plugin, profiler, speed
 Requires at least: 3.3
 Tested up to: 3.3
-Stable tag: 1.0.1
+Stable tag: 1.0.2
 
 See which plugins are slowing down your site.  This plugin creates a performance report for your site.
 
@@ -43,15 +43,11 @@ Manual installation:
 == Frequently Asked Questions ==
 No FAQs yet.
 
-== Upgrade Notice ==
-
-= 1.0.1 =
- * readme.txt updates
-
-= 1.0 =
- * Initial release
-
 == Changelog ==
+
+= 1.0.2 =
+ * Fixed an error message when clicking "stop scan" too fast
+ * Brought plugin version from php file in line with version from readme.txt and tag
 
 = 1.0.1 =
  * readme.txt changes
