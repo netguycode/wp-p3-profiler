@@ -346,6 +346,10 @@ class P3_Profiler {
 		// timing plugins over themes, and thems over the core.
 		} elseif ( FALSE !== $is_a_theme ) {
 			$this->_last_call_category = self::CATEGORY_THEME;
+			if ( !isset( $this->_profile['theme_name'] ) ) {
+				$this->_profile['theme_name'] = $file;
+			}
+
 		// We must be in the core
 		} else {
 			$this->_last_call_category = self::CATEGORY_CORE;

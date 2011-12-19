@@ -105,6 +105,12 @@ if ( !defined('P3_PATH') )
 	public $plugin_times = array();
 
 	/**
+	 * Theme name, as determined from the file path
+	 * @var string
+	 */
+	public $theme_name = '';
+
+	/**
 	 * Averaged values for the report
 	 * @var array
 	 */
@@ -215,6 +221,14 @@ if ( !defined('P3_PATH') )
 
 		// Calculate the averages
 		$this->_get_averages();
+		
+		// Get theme name
+		if ( property_exists( $this->_data[0], 'theme_name') ) {
+			$this->theme_name = str_replace( realpath( WP_CONTENT_DIR . '/themes/' ), '', realpath( $this->_data[0]->theme_name ) );
+			$this->theme_name = preg_replace('|^[\\\/]*([^\\\/]+)[\\\/]*$|', '$1', $this->theme_name);
+		} else {
+			$this->theme_name = 'unknown';
+		}
 	}
 
 	/**

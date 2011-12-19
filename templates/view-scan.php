@@ -959,6 +959,7 @@ to share the results with you.  Please take a look at the information below:</te
 			echo "WordPress Plugin Profile Report\n";
 			echo "===========================================\n";
 			echo 'Report date: ' . date( 'D M j, Y', $profile->report_date ) . "\n";
+			echo 'Theme name: ' . $profile->theme_name . "\n";
 			echo 'Pages browsed: ' . $profile->visits . "\n";
 			echo 'Avg. load time: ' . sprintf( '%.4f', $profile->averages['site'] ) . " sec\n";
 			echo 'Number of plugins: ' . count( $profile->detected_plugins ) . " \n";
@@ -972,7 +973,9 @@ to share the results with you.  Please take a look at the information below:</te
 			echo 'Margin of error : ' . sprintf( '%.4f', $profile->averages['drift'] ) . " sec\n";
 			echo "\nPlugin list:\n";
 			echo "===========================================\n";
-			echo implode( "\n", $profile->detected_plugins ) . "\n";
+			foreach ( $profile->plugin_times as $k => $v) {
+				echo $k . ' - ' . sprintf('%.4f sec', $v) . ' - ' . sprintf( '%.2f%%', $v * 100 / array_sum( $profile->plugin_times ) ) . "\n";
+			}
 			?></textarea>
 		</div>
 		<input type="hidden" id="p3-email-results-scan" value="<?php echo basename( $scan ); ?>" />
