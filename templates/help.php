@@ -206,7 +206,7 @@ if ( !defined('P3_PATH') )
 		If a plugin shows as fast-slow-fast-slow-fast-slow, it could be caused as the plugin loads its main code, then a follow-up piece
 		of code, like a piece of generated JavaScript.
 		<br /><br />
-		If a plugin is consistently shows slowness, you might want to contact the plugin author or try deactivating the plugin temporarily
+		If a plugin consistently shows slowness, you might want to contact the plugin author or try deactivating the plugin temporarily
 		to see if it makes a difference on your site.
 	</blockquote>
 </div>
@@ -306,11 +306,11 @@ if ( !defined('P3_PATH') )
 	<blockquote>
 		Your site can be slow for a number of reasons. Your site could have a lot of traffic, other sites on
 		your server could have a lot of traffic, you could be referencing content from other sites that are slow,
-		your internet connection could be slow, your server could be out of RAM, your site could be very image
+		your Internet connection could be slow, your server could be out of RAM, your site could be very image
 		heavy, your site could require a lot of HTTP requests, etc. In short, a lot of factors can cause slowness
 		on your site
 		<br /><br />
-		Your next stop should be to <a href="http://tools.pingdom.com/" target="_blank">Pingdom Tools</a>,
+		Your next stop should be to use <a href="http://tools.pingdom.com/" target="_blank">Pingdom Tools</a>,
 		<a href="http://webpagetest.org/" target="_blank">Webpage Test</a>, <a href="http://developer.yahoo.com/yslow/"
 		target="_blank">YSlow</a>, <a href="https://developers.google.com/pagespeed/" target="_blank">Google PageSpeed</a>,
 		and your browser's development tools like <a href="http://getfirebug.com/" target="_blank">Firebug</a> for Firefox,
@@ -446,7 +446,7 @@ if ( !defined('P3_PATH') )
 											<tr>
 												<td class="term"><strong>MySQL Queries</strong>
 													<div id="mysql-queries-definition" style="display: none;" class="definition">
-														The number of queries sent to the database. This reported by the WordPress function
+														The number of queries sent to the database. This is reported by the WordPress function
 														<a href="http://codex.wordpress.org/Function_Reference/get_num_queries"
 														target="_new">get_num_queries()</a>.  Fewer is better.
 													</div>

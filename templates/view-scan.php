@@ -903,7 +903,7 @@ $component_runtime_chart_id   = substr( md5( uniqid() ), -8 );
 							</td>
 						</tr>
 						<tr>
-							<td class="qtip-tip" title="The count of queries sent to the database.  This reported by the WordPress function
+							<td class="qtip-tip" title="The count of queries sent to the database.  This is reported by the WordPress function
 											get_num_queries(). Lower is better.">
 								<strong>MySQL Queries: </strong>
 							</td>
