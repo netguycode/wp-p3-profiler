@@ -464,7 +464,7 @@ if ( !defined('P3_PATH') )
 		<td class="p3-callout">
 			<div class="p3-callout-outer-wrapper qtip-tip" title="Total number of active plugins, including must-use plugins, on your site.">
 				<div class="p3-callout-inner-wrapper">
-					<div class="p3-callout-caption">Total plugins:</div>
+					<div class="p3-callout-caption">Total Plugins:</div>
 					<div class="p3-callout-data">
 						<?php
 						// Get the total number of plugins
@@ -487,7 +487,7 @@ if ( !defined('P3_PATH') )
 			<div class="p3-callout-outer-wrapper qtip-tip" title="Total number of seconds dedicated to plugin code per visit on your site."
 				<?php if ( !empty( $scan ) ) { ?>title="From <?php echo basename( $scan ); ?><?php } ?>">
 				<div class="p3-callout-inner-wrapper">
-					<div class="p3-callout-caption">Plugin load time</div>
+					<div class="p3-callout-caption">Plugin Load Time</div>
 					<div class="p3-callout-data">
 						<?php if ( null === $profile ) { ?>
 							<span class="p3-faded-grey">n/a</span>
@@ -505,7 +505,7 @@ if ( !defined('P3_PATH') )
 			<div class="p3-callout-outer-wrapper qtip-tip" title="Percent of load time on your site dedicated to plugin code."
 				<?php if ( !empty( $scan ) ) { ?>title="From <?php echo basename( $scan ); ?><?php } ?>">
 				<div class="p3-callout-inner-wrapper">
-					<div class="p3-callout-caption">Plugin impact</div>
+					<div class="p3-callout-caption">Plugin Impact</div>
 					<div class="p3-callout-data">
 						<?php if ( null === $profile ) { ?>
 							<span class="p3-faded-grey">n/a</span>
@@ -531,7 +531,7 @@ if ( !defined('P3_PATH') )
 							<?php echo round( $profile->averages['queries'] ); ?>
 						<?php } ?>
 					</div>
-					<div class="p3-callout-caption">Per visit</div>
+					<div class="p3-callout-caption">per visit</div>
 				</div>
 			</div>
 		</td>
