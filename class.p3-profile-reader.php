@@ -225,7 +225,7 @@ if ( !defined('P3_PATH') )
 		// Get theme name
 		if ( property_exists( $this->_data[0], 'theme_name') ) {
 			$this->theme_name = str_replace( realpath( WP_CONTENT_DIR . '/themes/' ), '', realpath( $this->_data[0]->theme_name ) );
-			$this->theme_name = preg_replace('|^[\\\/]*([^\\\/]+)[\\\/]*$|', '$1', $this->theme_name);
+			$this->theme_name = preg_replace('|^[\\\/]+([^\\\/]+)[\\\/]+.*|', '$1', $this->theme_name);
 		} else {
 			$this->theme_name = 'unknown';
 		}
