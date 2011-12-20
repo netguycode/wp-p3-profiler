@@ -3,7 +3,7 @@ Contributors: Godaddy, StarfieldTech
 Tags: debug, debugging, developer, development, performance, plugin, profiler, speed
 Requires at least: 3.3
 Tested up to: 3.3
-Stable tag: 1.0.5
+Stable tag: 1.1.0
 
 See which plugins are slowing down your site.  This plugin creates a performance report for your site.
 
@@ -42,6 +42,9 @@ Manual installation:
 
 == Upgrade Notice ==
 
+= 1.1.0 =
+Several usability enhancements and bugfixes.
+
 = 1.0.5 =
 This version addresses a path disclosure issue.  Users are encouraged to upgrade.
 
@@ -53,9 +56,22 @@ Warning messages like this: `Warning: usort() [function.usort]: Array was modifi
 
 == Changelog ==
 
+= 1.1.0 =
+ * Including plugin usage percentage / seconds in e-mail report
+ * Including theme name in e-mail report.  Profiles created in older versions will show "unknown"
+ * Grammar / wording changes
+ * Remembering "disable opcode cache" in options table
+ * New option: use my ip.  If this is set, the current IP will be used, if not, the stored IP pattern will be used
+ * IP patterns will be stored as an option
+ * Fixed:  IP patterns were being incorrectly escaped
+ * Displaying profile name in the top right
+ * If the profile didn't record any visits (e.g. wrong IP pattern) then an error will be displayed
+ * Fixing pagination on the history page
+
 = 1.0.5 =
  * Security - Fixed a path disclosure vulnerability
  * Security - sanitized user input before it gets back to the browser
+ * Thanks to Julio Potier from [Boiteaweb.fr](http://www.boiteaweb.fr/)
 
 = 1.0.4 =
  * Bugfix - uninstalling the plugin when it hasn't been activated can result in an error message
