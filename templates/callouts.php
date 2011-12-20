@@ -377,7 +377,7 @@ if ( !defined('P3_PATH') )
 				if ( response.indexOf( '.json' ) < 0 ) {
 					alert( "There was an error processing your request.  Please reload the page and try again. [" + response + "]");
 				} else {
-					location.href = "<?php echo add_query_arg( array( 'p3_action' => 'current-scan' ) ); ?>&name=" + response;
+					location.href = "<?php echo add_query_arg( array( 'p3_action' => 'current-scan', 'current_scan' => 1 ) ); ?>&name=" + response;
 				}
 			})
 			$( "#p3-scanner-dialog" ).dialog( "close" );
@@ -421,7 +421,7 @@ if ( !defined('P3_PATH') )
 			jQuery( "#p3-progress-dialog" ).dialog( "close" );
 
 			// View the scan
-			location.href = "<?php echo add_query_arg( array( 'p3_action' => 'current-scan' ) ); ?>&name=" + $( this ).attr( "data-scan-name" );
+			location.href = "<?php echo add_query_arg( array( 'p3_action' => 'view-scan', 'current_scan' => '1' ) ); ?>&name=" + $( this ).attr( "data-scan-name" );
 		});
 		$( "#p3-view-incomplete-results-submit" ).click( function() {
 			$( "#p3-view-results-submit" ).trigger( "click" );

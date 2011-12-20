@@ -18,7 +18,7 @@ if ( empty( $p3_action ) || 'current-scan' == $p3_action ) {
 $button_current_checked = '';
 $button_history_checked = '';
 $button_help_checked    = '';
-if ( 'current-scan' == $p3_action ) {
+if ( 'current-scan' == $p3_action || !empty( $_REQUEST['current_scan'] ) ) {
 	$button_current_checked = 'checked="checked"';
 } elseif ( 'help' == $p3_action || 'fix-flag-file' == $p3_action ) {
 	$button_help_checked = 'checked="checked"';
@@ -46,13 +46,13 @@ if ( !empty( $scan ) ) {
 <script type="text/javascript">
 	jQuery( document ).ready( function( $) {
 		$( "#button-current-scan" ).click( function() {
-			location.href = "<?php echo add_query_arg( array( 'p3_action' => 'current-scan', 'name' => null ) ); ?>";
+			location.href = "<?php echo add_query_arg( array( 'p3_action' => 'current-scan', 'name' => null, 'current_scan' => null ) ); ?>";
 		});
 		$( "#button-history-scans" ).click( function() {
-			location.href = "<?php echo add_query_arg( array( 'p3_action' => 'list-scans', 'name' => null ) ); ?>";
+			location.href = "<?php echo add_query_arg( array( 'p3_action' => 'list-scans', 'name' => null, 'current_scan' => null ) ); ?>";
 		});
 		$( "#button-help" ).click( function() {
-			location.href = "<?php echo add_query_arg( array( 'p3_action' => 'help', 'name' => null ) ); ?>";
+			location.href = "<?php echo add_query_arg( array( 'p3_action' => 'help', 'name' => null, 'current_scan' => null ) ); ?>";
 		})
 		$( ".p3-button" ).button();
 		$( "#p3-navbar" ).buttonset();
