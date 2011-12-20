@@ -5,8 +5,8 @@ $p3_action = '';
 if ( !empty( $_REQUEST['p3_action'] ) ) {
 	$p3_action = $_REQUEST['p3_action'];
 }
-$scan = $this->get_latest_profile();
 if ( empty( $p3_action ) || 'current-scan' == $p3_action ) {
+	$scan = $this->get_latest_profile();
 	$p3_action = 'current-scan';
 } elseif ( 'view-scan' == $p3_action && !empty( $_REQUEST['name'] ) ) {
 	$scan = sanitize_file_name( basename( $_REQUEST['name'] ) );
@@ -25,17 +25,34 @@ if ( 'current-scan' == $p3_action ) {
 } else {
 	$button_history_checked = 'checked="checked"';
 }
+
+// If there's a scan, create a viewer object
+if ( !empty( $scan ) ) {
+	try {
+		$profile = new P3_Profile_Reader( $scan );
+	} catch ( P3_Profile_No_Data_Exception $e ) {
+		echo '<div class="error"><p>' . $e->getMessage() . '</p></div>';
+		$scan = null;
+		$profile = null;
+		$p3_action = 'list-scans';
+	} catch ( Exception $e ) {
+		wp_die( '<div id="message" class="error"><p>Error reading scan</p></div>' );
+	}
+} else {
+	$profile = null;
+}
+
 ?>
 <script type="text/javascript">
 	jQuery( document ).ready( function( $) {
 		$( "#button-current-scan" ).click( function() {
-			location.href = "<?php echo add_query_arg( array( 'p3_action' => 'current-scan' ) ); ?>";
+			location.href = "<?php echo add_query_arg( array( 'p3_action' => 'current-scan', 'name' => null ) ); ?>";
 		});
 		$( "#button-history-scans" ).click( function() {
-			location.href = "<?php echo add_query_arg( array( 'p3_action' => 'list-scans' ) ); ?>";
+			location.href = "<?php echo add_query_arg( array( 'p3_action' => 'list-scans', 'name' => null ) ); ?>";
 		});
 		$( "#button-help" ).click( function() {
-			location.href = "<?php echo add_query_arg( array( 'p3_action' => 'help' ) ); ?>";
+			location.href = "<?php echo add_query_arg( array( 'p3_action' => 'help', 'name' => null ) ); ?>";
 		})
 		$( ".p3-button" ).button();
 		$( "#p3-navbar" ).buttonset();
@@ -75,25 +92,16 @@ if ( 'current-scan' == $p3_action ) {
 		<input type="radio" name="p3-nav" id="button-history-scans" <?php echo $button_history_checked; ?> />
 		<label for="button-history-scans">History</label>
 		<input type="radio" name="p3-nav" id="button-help" <?php echo $button_help_checked; ?> /><label for="button-help">Help</label>
+		
+		<div id="p3-scan-label">
+			<?php if ( !empty( $profile ) ) : ?>
+				Scan name: <?php echo $profile->profile_name; ?>
+			<?php endif; ?>
+		</div>
 	</div>
 
 	<!-- Start / stop button and callouts -->
-	<?php
-
-	// If there's a scan, create a viewer object
-	if ( !empty( $scan ) ) {
-		try {
-			$profile = new P3_Profile_Reader( $scan );
-		} catch ( Exception $e ) {
-			wp_die( '<div id="message" class="error"><p>Error reading scan</p></div>' );
-		}
-	} else {
-		$profile = null;
-	}
-	
-	// Show the callouts bar
-	require_once P3_PATH . '/templates/callouts.php';
-	?>
+	<?php require_once P3_PATH . '/templates/callouts.php'; ?>
 
 	<!-- View scan or show a list of scans -->
 	<?php if ( ( 'current-scan' == $p3_action && !empty( $scan ) ) || 'view-scan' == $p3_action ) { ?>

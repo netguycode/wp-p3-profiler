@@ -157,6 +157,9 @@ class P3_Profiler_Plugin {
 		include_once P3_PATH . '/class.p3-profile-table-sorter.php';
 		include_once P3_PATH . '/class.p3-profile-table.php';
 		include_once P3_PATH . '/class.p3-profile-reader.php';
+		
+		// Load exceptions
+		include_once P3_PATH . '/exceptions/class.p3-profiler-no-data-exception.php';
 	}
 	
 	/**
@@ -550,7 +553,7 @@ class P3_Profiler_Plugin {
 		// Loop through the files, get the path and the last modified time
 		$files = array();
 		while ( false !== ( $file = readdir( $dir ) ) ) {
-			if ( '.json' == substr( $file, -5 ) ) {
+			if ( '.json' == substr( $file, -5 ) && filesize( P3_PROFILES_PATH . '/' . $file ) > 0 ) {
 				$files[filemtime( P3_PROFILES_PATH . "/$file" )] = P3_PROFILES_PATH . "/$file";
 			}
 		}
@@ -570,9 +573,10 @@ class P3_Profiler_Plugin {
 	 * Add a notices
 	 * @uses transients
 	 * @param string $notice
+	 * @param bool $error Default false.  If true, this is a red error.  If false, this is a yellow notice.
 	 * @return void
 	 */
-	public function add_notice( $notice ) {
+	public function add_notice( $notice, $error = false ) {
 
 		// Get any notices on the stack
 		$notices = get_transient( 'p3_notices' );
@@ -581,7 +585,10 @@ class P3_Profiler_Plugin {
 		}
 
 		// Add the notice to the stack
-		$notices[] = $notice;
+		$notices[] = array(
+			'msg'   => $notice,
+			'error' => $error,
+		);
 
 		// Save the stack
 		set_transient( 'p3_notices', $notices );
@@ -603,7 +610,7 @@ class P3_Profiler_Plugin {
 		if ( !empty( $notices ) ) {
 			$notices = array_unique( $notices );
 			foreach ( $notices as $notice ) {
-				echo '<div class="updated"><p>' . htmlentities( $notice ) . '</p></div>';
+				echo '<div class="' . ( ( $notice['error'] ) ? 'error' : 'updated' ) . '"><p>' . htmlentities( $notice['msg'] ) . '</p></div>';
 			}
 		}
 		set_transient( 'p3_notices', array() );

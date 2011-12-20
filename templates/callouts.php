@@ -572,7 +572,7 @@ if ( !defined('P3_PATH') )
 <div id="p3-ip-dialog" class="p3-dialog">
 	<div>
 		IP address or pattern:<br /><br />
-		<input type="checkbox" id="p3-use-current-ip" <?php if ( true === get_option( 'p3-profiler_use_current_ip' ) ) : ?>checked="checked"<?php endif; ?> />
+		<input type="checkbox" id="p3-use-current-ip" <?php if ( true == get_option( 'p3-profiler_use_current_ip' ) ) : ?>checked="checked"<?php endif; ?> />
 		<label for="p3-use-current-ip">Use my IP address</label>
 		<br />
 		<input type="text" id="p3-advanced-ip" style="width:90%;" size="35" value="" title="Enter IP address or regular expression pattern" />
@@ -581,7 +581,7 @@ if ( !defined('P3_PATH') )
 	</div>
 	<br />
 	<div>
-		<input type="checkbox" id="p3-disable-opcode-cache" <?php if ( true === get_option( 'p3-profiler_disable_opcode_cache' ) ) : ?>checked="checked"<?php endif; ?> />
+		<input type="checkbox" id="p3-disable-opcode-cache" <?php if ( true == get_option( 'p3-profiler_disable_opcode_cache' ) ) : ?>checked="checked"<?php endif; ?> />
 		<label for="p3-disable-opcode-cache">Attempt to disable opcode caches <em>( recommended )</em></label>
 		<br />
 		<em class="p3-em">This can increase accuracy in plugin detection, but decrease accuracy in timing</em>

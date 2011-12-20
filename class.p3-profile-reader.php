@@ -135,6 +135,12 @@ if ( !defined('P3_PATH') )
 	 * @var array
 	 */
 	private $_data = array();
+	
+	/**
+	 * Scan name, correlates to a file name, with .json stripped off
+	 * @var string
+	 */
+	public $profile_name = '';
 
 	/**
 	 * Constructor
@@ -167,6 +173,9 @@ if ( !defined('P3_PATH') )
 		// Close the file
 		fclose( $fp );
 		
+		// Set the profile name
+		$this->profile_name = preg_replace( '/\.json$/', '', basename ( $file ) );
+		
 		// Parse the data
 		$this->_parse();
 	}
@@ -176,6 +185,12 @@ if ( !defined('P3_PATH') )
 	 * @return void
 	 */
 	private function _parse() {
+
+		// Check for empty data
+		if ( empty( $this->_data ) ) {
+			throw new P3_Profile_No_Data_Exception('No visits in this profile');
+		}
+		
 		foreach ( $this->_data as $o ) {
 			// Set report meta-data
 			if ( empty( $this->report_date ) ) {
