@@ -159,6 +159,17 @@ if ( !defined('P3_PATH') )
 		}
 	};
 
+	// Sync save settings
+	function p3_sync_advanced_settings() {
+		if ( jQuery( "#p3-use-current-ip" ).prop( "checked" ) ) {
+			jQuery( "#p3-advanced-ip" ).val( "<?php echo esc_js( $GLOBALS['p3_profiler']->get_ip() ); ?>" );
+			jQuery( "#p3-advanced-ip" ).prop( "disabled", true );
+		} else {
+			<?php $ip = get_option( 'p3-profiler_ip_address' ); if ( empty( $ip ) ) { $ip = $GLOBALS['p3_profiler']->get_ip(); } ?>
+			jQuery( "#p3-advanced-ip" ).val( "<?php echo esc_js( $ip ); ?>" );
+			jQuery( "#p3-advanced-ip" ).prop( "disabled", false );
+		}
+	}
 
 	// Onload functionality
 	jQuery( document ).ready( function( $) {
@@ -175,7 +186,7 @@ if ( !defined('P3_PATH') )
 			'resizable' : false,
 			'modal' : true,
 			'width' : 450,
-			'height' : 255,
+			'height' : 305,
 			'title' : "Advanced Settings",
 			'buttons' :
 			[
@@ -183,7 +194,21 @@ if ( !defined('P3_PATH') )
 					text: 'OK',
 					'class' : 'button-secondary',
 					click: function() {
-						$( this ).dialog( "close" );
+						
+						// Save settings
+						data = {
+							'action' : 'p3_save_settings',
+							'p3_disable_opcode_cache' : $( '#p3-disable-opcode-cache' ).prop( 'checked' ),
+							'p3_use_current_ip' : $( '#p3-use-current-ip' ).prop( 'checked' ),
+							'p3_ip_address' : $( '#p3-advanced-ip' ).val(),
+							'p3_nonce' : '<?php echo wp_create_nonce( 'p3_save_settings' ); ?>'
+						}
+						$.post( ajaxurl, data, function( response ) {
+							if ( 1 != response ) {
+								alert( "There was an error saving your settings.  Please reload the page and try again. [" + response + "]");
+							}
+							$( "#p3-ip-dialog" ).dialog( "close" );
+						});
 					}
 				},
 				{
@@ -352,7 +377,7 @@ if ( !defined('P3_PATH') )
 				if ( response.indexOf( '.json' ) < 0 ) {
 					alert( "There was an error processing your request.  Please reload the page and try again. [" + response + "]");
 				} else {
-					location.href = "<?php echo add_query_arg( array( 'p3_action' => 'view-scan' ) ); ?>&name=" + response;
+					location.href = "<?php echo add_query_arg( array( 'p3_action' => 'current-scan' ) ); ?>&name=" + response;
 				}
 			})
 			$( "#p3-scanner-dialog" ).dialog( "close" );
@@ -396,7 +421,7 @@ if ( !defined('P3_PATH') )
 			jQuery( "#p3-progress-dialog" ).dialog( "close" );
 
 			// View the scan
-			location.href = "<?php echo add_query_arg( array( 'p3_action' => 'view-scan' ) ); ?>&name=" + $( this ).attr( "data-scan-name" );
+			location.href = "<?php echo add_query_arg( array( 'p3_action' => 'current-scan' ) ); ?>&name=" + $( this ).attr( "data-scan-name" );
 		});
 		$( "#p3-view-incomplete-results-submit" ).click( function() {
 			$( "#p3-view-results-submit" ).trigger( "click" );
@@ -417,6 +442,10 @@ if ( !defined('P3_PATH') )
 			}
 		});
 		
+		// Enable / disable the IP text based on the "use current ip" checkbox
+		$( "#p3-use-current-ip").live( "click", p3_sync_advanced_settings );
+		p3_sync_advanced_settings();
+
 		// Callouts
 		$( "div.p3-callout-inner-wrapper" )
 		.corner( "round 8px" )
@@ -542,15 +571,17 @@ if ( !defined('P3_PATH') )
 <!-- Dialog for IP settings -->
 <div id="p3-ip-dialog" class="p3-dialog">
 	<div>
-		IP address or pattern:<br />
-		<input type="text" id="p3-advanced-ip" style="width:90%;" size="35"
-			value="<?php echo $GLOBALS['p3_profiler']->get_ip(); ?>" title="Enter IP address or regular expression pattern" />
+		IP address or pattern:<br /><br />
+		<input type="checkbox" id="p3-use-current-ip" <?php if ( true === get_option( 'p3-profiler_use_current_ip' ) ) : ?>checked="checked"<?php endif; ?> />
+		<label for="p3-use-current-ip">Use my IP address</label>
+		<br />
+		<input type="text" id="p3-advanced-ip" style="width:90%;" size="35" value="" title="Enter IP address or regular expression pattern" />
 		<br />
 		<em class="p3-em">Example: 1.2.3.4 or ( 1.2.3.4|4.5.6.7 )</em>
 	</div>
 	<br />
 	<div>
-		<input type="checkbox" id="p3-disable-opcode-cache" checked="checked" />
+		<input type="checkbox" id="p3-disable-opcode-cache" <?php if ( true === get_option( 'p3-profiler_disable_opcode_cache' ) ) : ?>checked="checked"<?php endif; ?> />
 		<label for="p3-disable-opcode-cache">Attempt to disable opcode caches <em>( recommended )</em></label>
 		<br />
 		<em class="p3-em">This can increase accuracy in plugin detection, but decrease accuracy in timing</em>

@@ -51,6 +51,7 @@ if ( is_admin() ) {
 	add_action( 'wp_ajax_p3_start_scan', array( $p3_profiler_plugin, 'ajax_start_scan' ) );
 	add_action( 'wp_ajax_p3_stop_scan', array( $p3_profiler_plugin, 'ajax_stop_scan' ) );
 	add_action( 'wp_ajax_p3_send_results', array( $p3_profiler_plugin, 'ajax_send_results' ) );
+	add_action( 'wp_ajax_p3_save_settings', array( $p3_profiler_plugin, 'ajax_save_settings' ) );
 
 	// Show any notices
 	add_action( 'admin_notices', array( $p3_profiler_plugin, 'show_notices' ) );
@@ -346,7 +347,7 @@ class P3_Profiler_Plugin {
 
 		// Add the entry ( multisite installs can run more than one concurrent profile )
 		$json[] = array(
-			'ip'                   => $_POST['p3_ip'],
+			'ip'                   => stripslashes( $_POST['p3_ip'] ),
 			'disable_opcode_cache' => ( 'true' == $_POST['p3_disable_opcode_cache'] ),
 			'site_url'             => $site_url,
 			'name'                 => $filename,
@@ -418,6 +419,25 @@ class P3_Profiler_Plugin {
 		}
 	}
 
+	/**
+	 * Save advanced settings
+	 * @return void
+	 */
+	public function ajax_save_settings() {
+		
+		// Check nonce
+		if ( !wp_verify_nonce( $_POST ['p3_nonce'], 'p3_save_settings' ) ) {
+			wp_die( 'Invalid nonce' );
+		}
+
+		// Save the new options
+		update_option( 'p3-profiler_disable_opcode_cache', 'true' == $_POST['p3_disable_opcode_cache'] );
+		update_option( 'p3-profiler_use_current_ip', 'true' == $_POST['p3_use_current_ip'] );
+		update_option( 'p3-profiler_ip_address', $_POST['p3_ip_address'] );
+	
+		die( '1' );
+	}
+	
 
 	/**************************************************************/
 	/** EMAIL RESULTS                                            **/
@@ -642,6 +662,11 @@ class P3_Profiler_Plugin {
 			);
 		}
 		
+		// Add the "disable opcode cache" option
+		add_option( 'p3-profiler_disable_opcode_cache', true );
+		add_option( 'p3-profiler_use_current_ip', true );
+		add_option( 'p3-profiler_ip_address', '' );
+
 		// Create the profiles folder
 		$this->sync_profiles_folder();
 	}
@@ -770,10 +795,20 @@ class P3_Profiler_Plugin {
 				$uploads_dir = wp_upload_dir();
 				$folder      = $uploads_dir['basedir'] . DIRECTORY_SEPARATOR . 'profiles' . DIRECTORY_SEPARATOR;
 				$me->_delete_profiles_folder( $folder );
+
+				// Remove any options
+				delete_option( 'p3-profiler_disable_opcode_cache' );
+				delete_option( 'p3-profiler_use_current_ip' );
+				delete_option( 'p3-profiler_ip_address' );
 			}
 			restore_current_blog();
 		} else {
 			$me->_delete_profiles_folder( P3_PROFILES_PATH );
+			
+			// Remove any options
+			delete_option( 'p3-profiler_disable_opcode_cache' );
+			delete_option( 'p3-profiler_use_current_ip' );
+			delete_option( 'p3-profiler_ip_address' );
 		}
 	}
 

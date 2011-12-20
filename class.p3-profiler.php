@@ -130,7 +130,7 @@ class P3_Profiler {
 		}
 		$found = false;
 		foreach ( (array) $p3_json as $k => $v ) {
-			if ( 0 === strpos( $_SERVER['REQUEST_URI'], $v->site_url ) && preg_match( '/' . preg_quote( $v->ip ) . '/', $this->get_ip() ) ) {
+			if ( 0 === strpos( $_SERVER['REQUEST_URI'], $v->site_url ) && preg_match( '/' . $v->ip . '/', $this->get_ip() ) ) {
 				$found = true;
 				break;
 			}
