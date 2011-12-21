@@ -124,11 +124,11 @@ button.p3-cancel-button{
 /** Charts and graphs **/
 div.p3-plugin-graph {
 	margin: 10px auto 20px auto;
-	width: 700px;
+	width: auto;
 	height: 320px;
 }
 div.p3-graph-holder {
-	width: 500px;
+	width: 550px;
 	height: 300px;
 	margin: auto;
 }
@@ -291,7 +291,7 @@ div.p3-y-axis-label {
 
 	position: relative;
 	top: 135px;
-	left: -20px;
+	left: 10px;
 
 	/* Safari */
 	-webkit-transform: rotate(-90deg);
