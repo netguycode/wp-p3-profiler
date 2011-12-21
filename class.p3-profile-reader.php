@@ -226,7 +226,29 @@ if ( !defined('P3_PATH') )
 		$tmp                = $this->plugin_times;
 		$this->plugin_times = array();
 		foreach ( $tmp as $k => $v ) {
-			$k = ucwords( str_replace( array( '-', '_' ), ' ', $k ) );
+			
+			$plugin_info = array();
+			if ( function_exists( 'get_plugin_data' ) ) {
+				$possible_paths = array(
+					WP_PLUGIN_DIR . "/$k.php",
+					WP_PLUGIN_DIR . "/$k/$k.php",
+					WPMU_PLUGIN_DIR . "/$k.php"
+				);
+				foreach ( $possible_paths as $path ) {
+					if ( file_exists( $path ) ) {
+						$plugin_info = get_plugin_data( $path );
+						if ( !empty( $plugin_info ) ) {
+							break;
+						}
+					}
+				}
+			}
+
+			if ( empty( $plugin_info ) || empty( $plugin_info['Name'] ) ) {
+				$k = ucwords( str_replace( array( '-', '_' ), ' ', $k ) );
+			} else {
+				$k = $plugin_info['Name'];
+			}
 			$this->plugin_times[$k] = $v / $this->visits;
 		}
 
@@ -241,6 +263,14 @@ if ( !defined('P3_PATH') )
 		if ( property_exists( $this->_data[0], 'theme_name') ) {
 			$this->theme_name = str_replace( realpath( WP_CONTENT_DIR . '/themes/' ), '', realpath( $this->_data[0]->theme_name ) );
 			$this->theme_name = preg_replace('|^[\\\/]+([^\\\/]+)[\\\/]+.*|', '$1', $this->theme_name);
+			
+			if ( function_exists( 'get_theme_data' ) && file_exists( WP_CONTENT_DIR . '/themes/' . $this->theme_name . '/style.css' ) ) {
+				$theme_info = get_theme_data( WP_CONTENT_DIR . '/themes/' . $this->theme_name . '/style.css' );
+				if ( !empty( $theme_info['Name'] ) ) {
+					$this->theme_name = $theme_info['Name'];
+				}
+			}
+			
 		} else {
 			$this->theme_name = 'unknown';
 		}
