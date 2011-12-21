@@ -10,7 +10,7 @@ See which plugins are slowing down your site.  This plugin creates a performance
 == Description ==
 This plugin creates a profile of your WordPress site's plugins' performance by measuring their impact on your site's load time.  Often times, WordPress sites load slowly because of poorly configured plugins or because there are so many of them. By using the P3 plugin, you can narrow down anything causing slowness on your site.
 
-Requires Firefox, Chrome, Opera, Safari, or IE9 or later.
+This plugin uses the canvas element for drawing charts and requires requires Firefox, Chrome, Opera, Safari, or IE9 or later.  Will not work in IE8 or lower.
 
 == Screenshots ==
 
@@ -67,6 +67,11 @@ Warning messages like this: `Warning: usort() [function.usort]: Array was modifi
  * Displaying profile name in the top right
  * If the profile didn't record any visits (e.g. wrong IP pattern) then an error will be displayed
  * Fixing pagination on the history page
+ * Made the legends on the charts a bit wider for sites with a lot of plugins, plugins with long names
+ * Added the ability to toggle series on/off in the "detailed timeline" chart
+ * Removed network wide activation code - each site will be "activated" when the admin logs in
+ * Removed "sync all profile folders whenever a blog is added/deleted" code.  Profile folders will be added when admins log in, removed when blogs are removed
+ * When uninstalling, all profile folders and options will be removed
 
 = 1.0.5 =
  * Security - Fixed a path disclosure vulnerability
