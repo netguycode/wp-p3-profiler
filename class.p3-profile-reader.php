@@ -268,7 +268,11 @@ if ( !defined('P3_PATH') )
 				$theme_info = get_theme_data( WP_CONTENT_DIR . '/themes/' . $this->theme_name . '/style.css' );
 				if ( !empty( $theme_info['Name'] ) ) {
 					$this->theme_name = $theme_info['Name'];
+				} else {
+					$this->theme_name = ucwords( str_replace( array( '-', '_' ), ' ', $this->theme_name ) );
 				}
+			} else {
+				$this->theme_name = ucwords( str_replace( array( '-', '_' ), ' ', $this->theme_name ) );
 			}
 			
 		} else {
