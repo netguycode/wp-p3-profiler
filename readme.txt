@@ -54,6 +54,10 @@ This version addresses a path disclosure issue.  Users are encouraged to upgrade
 
 Warning messages like this: `Warning: usort() [function.usort]: Array was modified by the user comparison function` are due to a known php bug.  See [php bug #50688](https://bugs.php.net/bug.php?id=50688) for more information.  This warning does not affect the functionality of your site and it is not visible to your users.
 
+= In the e-mail report, why is my theme detected as "unknown?" =
+
+Previous version of the plugin (before 1.1.0) did not have theme name detection support.  If you performed a scan with a previous version, then upgraded to 1.1.0+ to view the scan, the theme name will show as "unknown."
+
 == Changelog ==
 
 = 1.1.0 =
