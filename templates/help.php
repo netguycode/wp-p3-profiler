@@ -291,17 +291,6 @@ if ( !defined('P3_PATH') )
 </div>
 
 <div class="p3-question">
-	<h2 class="p3-help-question">What if I get a warning about usort()?</h2>
-	<blockquote>
-		Warning messages like this:
-		<code>Warning: usort() [function.usort]: Array was modified by the user comparison function</code> are due
-		to a known php bug.  See <a href="https://bugs.php.net/bug.php?id=50688" target="_blank">php bug #50688</a>
-		for more information.  This warning does not affect the functionality of your site and it is not visible
-		to your users.
-	</blockquote>
-</div>
-
-<div class="p3-question">
 	<h2 class="p3-help-question">My plugins don't seem to cause site slowness.  Why is my site still slow?</h2>
 	<blockquote>
 		Your site can be slow for a number of reasons. Your site could have a lot of traffic, other sites on
@@ -320,6 +309,28 @@ if ( !defined('P3_PATH') )
 		<br /><br />
 		After you've tuned your site up as much as possible, if you're still not happy with its performance, you should
 		consult your site/server administrator or hosting support.
+	</blockquote>
+</div>
+
+
+<div class="p3-question">
+	<h2 class="p3-help-question">What if I get a warning about usort()?</h2>
+	<blockquote>
+		Warning messages like this:
+		<code>Warning: usort() [function.usort]: Array was modified by the user comparison function</code> are due
+		to a known php bug.  See <a href="https://bugs.php.net/bug.php?id=50688" target="_blank">php bug #50688</a>
+		for more information.  This warning does not affect the functionality of your site and it is not visible
+		to your users.
+	</blockquote>
+</div>
+
+<div class="p3-question">
+	<h2 class="p3-help-question">Does this plugin increase memory usage on my site?</h2>
+	<blockquote>
+		When you run a performance scan on your site, the memory requirements go up during the scan.  Accordingly, P3 sets your
+		<a href="http://www.php.net/manual/en/ini.core.php#ini.memory-limit" target="_blank">memory limit</a> to 128
+		MB and <a href="http://php.net/set_time_limit" target="_blank">request timeout</a> to 90 seconds during a
+		performance scan.  These changes are not permanent and are only in effect when a performance scan is actively running.
 	</blockquote>
 </div>
 
