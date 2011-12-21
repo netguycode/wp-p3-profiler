@@ -29,7 +29,6 @@ $component_runtime_chart_id   = substr( md5( uniqid() ), -8 );
 
 	// Set up the tabs
 	jQuery( document ).ready( function( $) {
-		$( "#p3-tabs" ).tabs();
 		$( "#results-table tr:even" ).addClass( "even" );
 		$( "#p3-email-sending-dialog" ).dialog({
 			'autoOpen' : false,
@@ -280,12 +279,12 @@ $component_runtime_chart_id   = substr( md5( uniqid() ), -8 );
 		});
 
 		// zoom buttons
-		$( '<div class="button" style="float: left; position: relative; left: 440px; top: -290px;">-</div>' )
+		$( '<div class="button" style="float: left; position: relative; left: 490px; top: -290px;">-</div>' )
 			.appendTo( $( "#p3-holder_<?php echo $runtime_chart_id; ?>" ).parent() ).click( function ( e ) {
 			e.preventDefault();
 			chart_<?php echo $runtime_chart_id; ?>.zoomOut();
 		});
-		$( '<div class="button" style="float: left; position: relative; left: 440px; top: -290px;">+</div>' )
+		$( '<div class="button" style="float: left; position: relative; left: 490px; top: -290px;">+</div>' )
 			.appendTo( $( "#p3-holder_<?php echo $runtime_chart_id; ?>" ).parent() ).click( function ( e ) {
 			e.preventDefault();
 			chart_<?php echo $runtime_chart_id; ?>.zoom();
@@ -366,12 +365,12 @@ $component_runtime_chart_id   = substr( md5( uniqid() ), -8 );
 		});
 
 		// zoom buttons
-		$( '<div class="button" style="float: left; position: relative; left: 440px; top: -290px;">-</div>' )
+		$( '<div class="button" style="float: left; position: relative; left: 490px; top: -290px;">-</div>' )
 			.appendTo( $( "#p3-holder_<?php echo $query_chart_id; ?>" ).parent() ).click( function ( e ) {
 			e.preventDefault();
 			chart_<?php echo $query_chart_id; ?>.zoomOut();
 		});
-		$( '<div class="button" style="float: left; position: relative; left: 440px; top: -290px;">+</div>' )
+		$( '<div class="button" style="float: left; position: relative; left: 490px; top: -290px;">+</div>' )
 			.appendTo( $( "#p3-holder_<?php echo $query_chart_id; ?>" ).parent() ).click( function ( e ) {
 			e.preventDefault();
 			chart_<?php echo $query_chart_id; ?>.zoom();
@@ -506,12 +505,12 @@ $component_runtime_chart_id   = substr( md5( uniqid() ), -8 );
 		});
 
 		// zoom buttons
-		$( '<div class="button" style="float: left; position: relative; left: 440px; top: -290px;">-</div>' )
+		$( '<div class="button" style="float: left; position: relative; left: 490px; top: -290px;">-</div>' )
 			.appendTo( $( "#p3-holder_<?php echo $component_breakdown_chart_id; ?>" ).parent() ).click( function ( e ) {
 			e.preventDefault();
 			chart_<?php echo $component_breakdown_chart_id; ?>.zoomOut();
 		});
-		$( '<div class="button" style="float: left; position: relative; left: 440px; top: -290px;">+</div>' )
+		$( '<div class="button" style="float: left; position: relative; left: 490px; top: -290px;">+</div>' )
 			.appendTo( $( "#p3-holder_<?php echo $component_breakdown_chart_id; ?>" ).parent() ).click( function ( e ) {
 			e.preventDefault();
 			chart_<?php echo $component_breakdown_chart_id; ?>.zoom();
@@ -668,22 +667,26 @@ $component_runtime_chart_id   = substr( md5( uniqid() ), -8 );
 		});
 		
 		// zoom buttons
-		$( '<div class="button" style="float: left; position: relative; left: 410px; top: -290px;">-</div>' )
+		$( '<div class="button" style="float: left; position: relative; left: 460px; top: -290px;">-</div>' )
 			.appendTo( $( "#p3-holder_<?php echo $component_runtime_chart_id; ?>" ).parent() ).click( function ( e ) {
 			e.preventDefault();
 			chart_<?php echo $component_runtime_chart_id; ?>.zoomOut();
 		});
-		$( '<div class="button" style="float: left; position: relative; left: 410px; top: -290px;">+</div>' )
+		$( '<div class="button" style="float: left; position: relative; left: 460px; top: -290px;">+</div>' )
 			.appendTo( $( "#p3-holder_<?php echo $component_runtime_chart_id; ?>" ).parent() ).click( function ( e ) {
 			e.preventDefault();
 			chart_<?php echo $component_runtime_chart_id; ?>.zoom();
 		});
-		$( '<div class="button" style="float: left; position: relative; left: 410px; top: -290px;"><input type="checkbox" checked="checked" /></div>' )
+		$( '<div class="button" style="float: left; position: relative; left: 460px; top: -290px;"><input type="checkbox" checked="checked" /></div>' )
 			.appendTo( $( "#p3-holder_<?php echo $component_runtime_chart_id; ?>" ).parent() ).click( function ( e ) {
 			e.preventDefault();
 			$( "#p3-detailed-series-toggle" ).dialog( "open" );
 		});
 
+	});
+	
+	jQuery( document ).ready( function( $ ) {
+		$( "#p3-tabs" ).tabs();
 	});
 
 </script>
