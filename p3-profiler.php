@@ -46,6 +46,9 @@ $p3_profiler_plugin = new P3_Profiler_Plugin();
 if ( is_admin() ) {
 	// Show the 'Profiler' option under the 'Plugins' menu
 	add_action( 'admin_menu', array( $p3_profiler_plugin, 'settings_menu' ) );
+	
+	// Upgrade routine
+	add_action( 'admin_init', array( $p3_profiler_plugin, 'upgrade' ) );
 
 	// Ajax actions
 	add_action( 'wp_ajax_p3_start_scan', array( $p3_profiler_plugin, 'ajax_start_scan' ) );
