@@ -124,7 +124,7 @@ button.p3-cancel-button{
 /** Charts and graphs **/
 div.p3-plugin-graph {
 	margin: 10px auto 20px auto;
-	width: 620px;
+	width: 700px;
 	height: 320px;
 }
 div.p3-graph-holder {
@@ -134,7 +134,7 @@ div.p3-graph-holder {
 }
 div.p3-custom-legend {
 	float: left;
-	width: 120px;
+	width: 200px;
 	height: 280px;
 	overflow: auto;
 }

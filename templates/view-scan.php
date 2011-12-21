@@ -41,6 +41,26 @@ $component_runtime_chart_id   = substr( md5( uniqid() ), -8 );
 			'height' : 120,
 			'dialogClass' : 'noTitle'
 		});
+		$( "#p3-detailed-series-toggle" ).dialog({
+			'autoOpen' : false,
+			'closeOnEscape' : true,
+			'draggable' : false,
+			'resizable' : false,
+			'modal' : true,
+			'width' : 400,
+			'height' : 'auto',
+			'title' : "Toggle Series",
+			'buttons' :
+			[
+				{
+					text: 'Ok',
+					'class' : 'button-secondary',
+					click: function() {
+						$(this).dialog( "close" );
+					}
+				}
+			]
+		});
 		$( "#p3-email-results-dialog" ).dialog({
 			'autoOpen' : false,
 			'closeOnEscape' : true,
@@ -547,32 +567,80 @@ $component_runtime_chart_id   = substr( md5( uniqid() ), -8 );
 			<?php } ?>
 		<?php } ?>
 	];
-	jQuery( document ).ready( function( $) {
+	
+	var detailed_timeline_options = {};
+
+	jQuery( document ).ready( function ( $ ) {
+		<?php if ( !empty( $profile ) && !empty( $profile->detected_plugins ) ) { ?>
+			jQuery( "#p3-detailed-series-toggle" ).append( '<div><label><input type="checkbox" checked="checked" class="p3-detailed-series-toggle" data-key="WP Core Time" />WP Core Time</label></div>' );
+			jQuery( "#p3-detailed-series-toggle" ).append( '<div><label><input type="checkbox" checked="checked" class="p3-detailed-series-toggle" data-key="Theme" />Theme</label></div>' );
+			<?php foreach ( $profile->detected_plugins as $plugin ) { ?>
+				jQuery( "#p3-detailed-series-toggle" ).append( '<div><label><input type="checkbox" checked="checked" class="p3-detailed-series-toggle" data-key="<?php echo $plugin; ?>" /><?php echo $plugin ;?></label></div>' );
+			<?php } ?>
+		<?php } ?>
+		jQuery( "input.p3-detailed-series-toggle" ).click( function() {
+			data = [];
+			keys = [];
+			jQuery( "input.p3-detailed-series-toggle:checked" ).each(function() {
+				keys.push( $( this ).attr( "data-key" ) );
+			});
+			for ( i = 0 ; i < keys.length ; i++ ) {
+				tmp = [];
+				for ( j = 0 ; j < data_<?php echo $component_runtime_chart_id; ?>.length ; j++ ) {
+					if ( keys[i] == data_<?php echo $component_runtime_chart_id; ?>[j]['label'] ) {
+						for ( k = 0 ; k < data_<?php echo $component_runtime_chart_id; ?>[j]['data'].length ; k++ ) {
+							tmp.push( data_<?php echo $component_runtime_chart_id; ?>[j]['data'][k] );
+						}
+					}
+				}
+				data.push( {
+					data: tmp,
+					label: keys[i]
+				} );
+			}
+			if ( data.length == 0 ) {
+				data = [
+					{
+						data: [],
+						label: 'No data'
+					}
+				]
+			}
+			chart_<?php echo $component_runtime_chart_id; ?> = $.plot(
+				$( "#p3-holder_<?php echo $component_runtime_chart_id; ?>" ),
+				data,
+				detailed_timeline_options
+			);
+		});
+	});
+	jQuery( document ).ready( function( $ ) {
+		detailed_timeline_options = {
+			series: {
+				lines: { show: true },
+				points: { show: true }
+			},
+			grid: {
+				hoverable: true,
+				clickable: true
+			},
+			legend : {
+				container: jQuery( "#p3-legend_<?php echo $component_runtime_chart_id; ?>" )
+			},
+			zoom: {
+				interactive: true
+			},
+			pan: {
+				interactive: true
+			},
+			xaxis: {
+				show: false
+			}
+		}
 		chart_<?php echo $component_runtime_chart_id; ?> = $.plot(
 			$( "#p3-holder_<?php echo $component_runtime_chart_id; ?>" ),
 			data_<?php echo $component_runtime_chart_id; ?>,
-		{
-				series: {
-					lines: { show: true },
-					points: { show: true }
-				},
-				grid: {
-					hoverable: true,
-					clickable: true
-				},
-				legend : {
-					container: $( "#p3-legend_<?php echo $component_runtime_chart_id; ?>" )
-				},
-				zoom: {
-					interactive: true
-				},
-				pan: {
-					interactive: true
-				},
-				xaxis: {
-					show: false
-				}
-		});
+			detailed_timeline_options
+		);
 
 		$( "#p3-holder_<?php echo $component_runtime_chart_id; ?>" ).bind( "plothover", function ( event, pos, item ) {
 			if ( item ) {
@@ -600,16 +668,22 @@ $component_runtime_chart_id   = substr( md5( uniqid() ), -8 );
 		});
 		
 		// zoom buttons
-		$( '<div class="button" style="float: left; position: relative; left: 440px; top: -290px;">-</div>' )
+		$( '<div class="button" style="float: left; position: relative; left: 410px; top: -290px;">-</div>' )
 			.appendTo( $( "#p3-holder_<?php echo $component_runtime_chart_id; ?>" ).parent() ).click( function ( e ) {
 			e.preventDefault();
 			chart_<?php echo $component_runtime_chart_id; ?>.zoomOut();
 		});
-		$( '<div class="button" style="float: left; position: relative; left: 440px; top: -290px;">+</div>' )
+		$( '<div class="button" style="float: left; position: relative; left: 410px; top: -290px;">+</div>' )
 			.appendTo( $( "#p3-holder_<?php echo $component_runtime_chart_id; ?>" ).parent() ).click( function ( e ) {
 			e.preventDefault();
 			chart_<?php echo $component_runtime_chart_id; ?>.zoom();
 		});
+		$( '<div class="button" style="float: left; position: relative; left: 410px; top: -290px;"><input type="checkbox" checked="checked" /></div>' )
+			.appendTo( $( "#p3-holder_<?php echo $component_runtime_chart_id; ?>" ).parent() ).click( function ( e ) {
+			e.preventDefault();
+			$( "#p3-detailed-series-toggle" ).dialog( "open" );
+		});
+
 	});
 
 </script>
@@ -635,7 +709,7 @@ $component_runtime_chart_id   = substr( md5( uniqid() ), -8 );
 						</div>
 					</td>
 					<td rowspan="2">
-						<div class="p3-line p3-graph-holder" id="p3-holder_<?php echo $component_breakdown_chart_id; ?>"></div>
+						<div class="p3-graph-holder" id="p3-holder_<?php echo $component_breakdown_chart_id; ?>"></div>
 					</td>
 					<td>
 						<h3>Legend</h3>
@@ -661,11 +735,11 @@ $component_runtime_chart_id   = substr( md5( uniqid() ), -8 );
 	<!-- Plugin pie chart div -->
 	<div id="p3-tabs-1">
 		<h2>Runtime by Plugin</h2>
-		<div class="p3-plugin-graph">
+		<div class="p3-plugin-graph" style="width: 570px;">
 			<table>
 				<tr>
 					<td rowspan="2">
-						<div style="width: 370px;" class="p3-line p3-graph-holder" id="p3-holder_<?php echo $pie_chart_id; ?>"></div>
+						<div style="width: 370px;" class="p3-graph-holder" id="p3-holder_<?php echo $pie_chart_id; ?>"></div>
 					</td>
 					<td>
 						<h3>Legend</h3>
@@ -673,7 +747,7 @@ $component_runtime_chart_id   = substr( md5( uniqid() ), -8 );
 				</tr>
 				<tr>
 					<td>
-						<div style="width: 250px;" class="p3-custom-legend" id="p3-legend_<?php echo $pie_chart_id;?>"></div>
+						<div class="p3-custom-legend" id="p3-legend_<?php echo $pie_chart_id;?>"></div>
 					</td>
 				</tr>
 			</table>
@@ -692,7 +766,7 @@ $component_runtime_chart_id   = substr( md5( uniqid() ), -8 );
 						</div>
 					</td>
 					<td rowspan="2">
-						<div class="p3-line p3-graph-holder" id="p3-holder_<?php echo $runtime_chart_id; ?>"></div>
+						<div class="p3-graph-holder" id="p3-holder_<?php echo $runtime_chart_id; ?>"></div>
 					</td>
 					<td>
 						<h3>Legend</h3>
@@ -727,7 +801,7 @@ $component_runtime_chart_id   = substr( md5( uniqid() ), -8 );
 						</div>
 					</td>
 					<td rowspan="2">
-						<div class="p3-line p3-graph-holder" id="p3-holder_<?php echo $query_chart_id; ?>"></div>
+						<div class="p3-graph-holder" id="p3-holder_<?php echo $query_chart_id; ?>"></div>
 					</td>
 					<td>
 						<h3>Legend</h3>
@@ -762,7 +836,7 @@ $component_runtime_chart_id   = substr( md5( uniqid() ), -8 );
 						</div>
 					</td>
 					<td rowspan="2">
-						<div class="p3-line p3-graph-holder" id="p3-holder_<?php echo $component_runtime_chart_id; ?>"></div>
+						<div class="p3-graph-holder" id="p3-holder_<?php echo $component_runtime_chart_id; ?>"></div>
 					</td>
 					<td>
 						<h3>Legend</h3>
@@ -996,3 +1070,9 @@ to share the results with you.  Please take a look at the information below:</te
 			<input type="checkbox" id="p3-email-sending-close-submit" checked="checked" /><label for="p3-email-sending-close-submit">Done</label>
 		</div>
 	</div>
+
+	<!-- Enable / disable series dialog -->
+	<div id="p3-detailed-series-toggle" class="p3-dialog">
+		
+	</div>
+</div>
