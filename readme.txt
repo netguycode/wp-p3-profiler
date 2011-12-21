@@ -65,13 +65,13 @@ Previous version of the plugin (before 1.1.0) did not have theme name detection 
  * Including theme name in e-mail report.  Profiles created in older versions will show "unknown"
  * Grammar / wording changes
  * Remembering "disable opcode cache" in options table
- * New option: use my ip.  If this is set, the current IP will be used, if not, the stored IP pattern will be used
+ * New option for "use my IP."  If this is set, the current user's IP address will be used, if not, the stored IP pattern will be used
  * IP patterns will be stored as an option
- * Fixed:  IP patterns were being incorrectly escaped
- * Displaying profile name in the top right
+ * Fixed:  IP patterns were incorrectly escaped
+ * Now displaying profile name in the top right
  * If the profile didn't record any visits (e.g. wrong IP pattern) then an error will be displayed
  * Fixing pagination on the history page
- * Made the legends on the charts a bit wider for sites with a lot of plugins, plugins with long names
+ * Made the legends on the charts a bit wider for sites with a lot of plugins and plugins with long names
  * Added the ability to toggle series on/off in the "detailed timeline" chart
  * Removed network wide activation code - each site will be "activated" when the admin logs in
  * Removed "sync all profile folders whenever a blog is added/deleted" code.  Profile folders will be added when admins log in, removed when blogs are removed
