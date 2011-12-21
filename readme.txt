@@ -76,6 +76,7 @@ Previous version of the plugin (before 1.1.0) did not have theme name detection 
  * Removed network wide activation code - each site will be "activated" when the admin logs in
  * Removed "sync all profile folders whenever a blog is added/deleted" code.  Profile folders will be added when admins log in, removed when blogs are removed
  * When uninstalling, all profile folders and options will be removed
+ * Using get_plugin_data() to get plugin names.  If the plugin doesn't exist anymore, or there's a problem getting the plugin name, the old formatting code is used
 
 = 1.0.5 =
  * Security - Fixed a path disclosure vulnerability
