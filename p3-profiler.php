@@ -64,7 +64,7 @@ if ( is_admin() ) {
 }
 
 // Remove the admin bar when in profiling mode
-if ( defined( 'WPP_PROFILING_STARTED' ) || ( is_user_logged_in() && isset( $_GET['P3_HIDE_ADMIN_BAR'] ) ) ) {
+if ( defined( 'WPP_PROFILING_STARTED' ) || isset( $_GET['P3_HIDE_ADMIN_BAR'] ) ) {
 	add_action( 'plugins_loaded', array( $p3_profiler_plugin, 'remove_admin_bar' ) );
 }
 
@@ -99,7 +99,7 @@ class P3_Profiler_Plugin {
 	 * @return void
 	 */
 	public function remove_admin_bar() {
-		if ( !is_admin() ) {
+		if ( !is_admin() && is_user_logged_in() ) {
 			remove_action( 'wp_footer', 'wp_admin_bar_render', 1000 );
 			if ( true === force_ssl_admin() ) {
 				add_filter( 'site_url', array( $this, '_fix_url' ) );
