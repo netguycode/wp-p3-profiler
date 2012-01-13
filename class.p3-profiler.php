@@ -129,7 +129,7 @@ class P3_Profiler {
 			return $this;
 		}
 		$found = false;
-		foreach ( (array) $p3_json as $k => $v ) {
+		foreach ( (array) $p3_json as $v ) {
 			if ( 0 === strpos( $_SERVER['REQUEST_URI'], $v->site_url ) && preg_match( '/' . $v->ip . '/', $this->get_ip() ) ) {
 				$found = true;
 				break;
@@ -534,7 +534,7 @@ class P3_Profiler {
 			( FALSE !== strpos( $_SERVER['SCRIPT_FILENAME'], '/themes/' ) || FALSE !== stripos( $_SERVER['SCRIPT_FILENAME'], '\\themes\\' ) ) &&
 			(
 				FALSE !== strpos( $_SERVER['SCRIPT_FILENAME'], '/' . basename( WP_CONTENT_DIR ) . '/' ) ||
-				FALSE !== stripos( $file, '\\' . basename( WP_CONTENT_DIR ) . '\\' )
+				FALSE !== stripos( $_SERVER['SCRIPT_FILENAME'], '\\' . basename( WP_CONTENT_DIR ) . '\\' )
 			)
 			) {
 			$this->_profile['runtime'] = array(
