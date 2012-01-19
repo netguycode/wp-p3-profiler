@@ -316,13 +316,6 @@ class P3_Profiler_Plugin {
 			}
 		}
 
-		// Add a cache-buster
-		if ( get_option('p3-profiler_cache_buster') ) {
-			foreach ( $pages as $k => $v ) {
-				$pages[$k] = add_query_arg( 'r', substr( md5( uniqid() ), -8 ), $v );
-			}
-		}
-
 		// Done
 		return $pages;
 	}

@@ -20,9 +20,30 @@ if ( !defined('P3_PATH') )
 		// Pause flag
 		paused: false,
 
+		// Create a random string
+		random: function(length) {
+			var ret = "";
+			var alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+			for ( var i = 0 ; i < length ; i++ ) {
+				ret += alphabet.charAt( Math.floor( Math.random() * alphabet.length ) );
+			}
+			return ret;
+		},
+
 		// Start
 		start: function() {
 			
+			// If cache busting is disabled, remove P3_NOCACHE from the pages
+			if ( jQuery( '#p3-cache-buster' ).prop( 'checked' ) ) {
+				for ( i = 0 ; i < P3_Scan.pages.length ; i++ ) {
+					if ( P3_Scan.pages[i].indexOf('?') > -1 ) {
+						P3_Scan.pages[i] += '&P3_NOCACHE=' + P3_Scan.random(8);
+					} else {
+						P3_Scan.pages[i] += '?P3_NOCACHE=' + P3_Scan.random(8);
+					}
+				}
+			}
+
 			// Form data
 			data = {
 				'p3_ip' : jQuery( '#p3-advanced-ip' ).val(),
