@@ -98,7 +98,7 @@ if ( !defined('P3_PATH') )
 <div class="p3-question">
 	<h2 class="p3-help-question">How do I fix "No visits in this profile..." ?</h2>
 	<blockquote>
-		This error message means that after being disabled, the profiler did not record any traffic on your site.  There are three common
+		This error message means that after being disabled, the profiler did not record any traffic on your site.  There are several common
 		causes for this:
 		<ul>
 			<li>
@@ -120,6 +120,15 @@ if ( !defined('P3_PATH') )
 				<strong>Solution:</strong> Try the automated scan.
 			</li>
 		</ul>
+	</blockquote>
+</div>
+
+<div class="p3-question">
+	<h2 class="p3-help-question">Why did P3 only record 2 or 3 visits during the scan?</h2>
+	<blockquote>
+		If your site is using a caching plugin, some pages might be cached in your browser or on the server and are loading before before WordPress
+		can generate them.  When this happens, the P3 plugin doesn't load and doesn't record any traffic.  Please enable the "Attempt to circumvent
+		browser cache" option in the advanced settings.
 	</blockquote>
 </div>
 
