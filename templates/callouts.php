@@ -27,6 +27,7 @@ if ( !defined('P3_PATH') )
 			data = {
 				'p3_ip' : jQuery( '#p3-advanced-ip' ).val(),
 				'p3_disable_opcode_cache' : jQuery( '#p3-disable-opcode-cache' ).prop( 'checked' ),
+				'p3_cache_buster' : jQuery( '#p3-cache-buster' ).prop( 'checked' ),
 				'p3_scan_name' : jQuery( "#p3-scan-name" ).val(),
 				'action' : 'p3_start_scan',
 				'p3_nonce' : jQuery( "#p3_nonce" ).val()
@@ -83,6 +84,7 @@ if ( !defined('P3_PATH') )
 			data = {
 				'p3_ip' : jQuery( '#p3-advanced-ip' ).val(),
 				'p3_disable_opcode_cache' : jQuery( '#p3-disable-opcode-cache' ).prop( 'checked' ),
+				'p3_cache_buster' : jQuery( '#p3-cache-buster' ).prop( 'checked' ),
 				'p3_scan_name' : jQuery( "#p3-scan-name" ).val(),
 				'action' : 'p3_start_scan',
 				'p3_nonce' : jQuery( "#p3_nonce" ).val()
@@ -186,7 +188,7 @@ if ( !defined('P3_PATH') )
 			'resizable' : false,
 			'modal' : true,
 			'width' : 450,
-			'height' : 305,
+			'height' : 340,
 			'title' : "Advanced Settings",
 			'buttons' :
 			[
@@ -201,6 +203,7 @@ if ( !defined('P3_PATH') )
 							'p3_disable_opcode_cache' : $( '#p3-disable-opcode-cache' ).prop( 'checked' ),
 							'p3_use_current_ip' : $( '#p3-use-current-ip' ).prop( 'checked' ),
 							'p3_ip_address' : $( '#p3-advanced-ip' ).val(),
+							'p3_cache_buster' : $( '#p3-cache-buster' ).prop( 'checked' ),
 							'p3_nonce' : '<?php echo wp_create_nonce( 'p3_save_settings' ); ?>'
 						}
 						$.post( ajaxurl, data, function( response ) {
@@ -350,6 +353,7 @@ if ( !defined('P3_PATH') )
 			data = {
 				'p3_ip' : jQuery( '#p3-advanced-ip' ).val(),
 				'p3_disable_opcode_cache' : jQuery( '#p3-disable-opcode-cache' ).prop( 'checked' ),
+				'p3_cache_buster' : jQuery( '#p3-cache-buster' ).prop( 'checked' ),
 				'p3_scan_name' : jQuery( "#p3-scan-name" ).val(),
 				'action' : 'p3_start_scan',
 				'p3_nonce' : jQuery( "#p3_nonce" ).val()
@@ -421,7 +425,7 @@ if ( !defined('P3_PATH') )
 			jQuery( "#p3-progress-dialog" ).dialog( "close" );
 
 			// View the scan
-			location.href = "<?php echo add_query_arg( array( 'p3_action' => 'view-scan', 'current_scan' => '1' ) ); ?>&name=" + $( this ).attr( "data-scan-name" );
+			location.href = "<?php echo add_query_arg( array( 'p3_action' => 'view-scan', 'current_scan' => '1', 'name' => null ) ); ?>&name=" + $( this ).attr( "data-scan-name" );
 		});
 		$( "#p3-view-incomplete-results-submit" ).click( function() {
 			$( "#p3-view-results-submit" ).trigger( "click" );
@@ -585,7 +589,14 @@ if ( !defined('P3_PATH') )
 		<label for="p3-disable-opcode-cache">Attempt to disable opcode caches <em>( recommended )</em></label>
 		<br />
 		<em class="p3-em">This can increase accuracy in plugin detection, but decrease accuracy in timing</em>
-	</div>		
+	</div>
+	<br />
+	<div>
+		<input type="checkbox" id="p3-cache-buster" <?php if ( true == get_option( 'p3-profiler_cache_buster' ) ) : ?>checked="checked"<?php endif; ?> />
+		<label for="p3-cache-buster">Attempt to circumvent browser cache</label>
+		<br />
+		<em class="p3-em">This may help fix a "No visits in this profile" error message.  See the <a href="<?php echo add_query_arg( 'p3_action', 'help' ); ?>">help</a> page for details.</em>
+	</div>
 </div>
 
 <!-- Dialog for iframe scanner -->
