@@ -96,6 +96,34 @@ if ( !defined('P3_PATH') )
 </div>
 
 <div class="p3-question">
+	<h2 class="p3-help-question">How do I fix "No visits in this profile..." ?</h2>
+	<blockquote>
+		This error message means that after being disabled, the profiler did not record any traffic on your site.  There are three common
+		causes for this:
+		<ul>
+			<li>
+				<strong>Cause:</strong> Your site is using a caching plugin.  The pages that are being scanned aren't actually loading on
+				the server because they're cached in your browser or on the server before WordPress can generate them.  The P3 plugin doesn't
+				load and doesn't record any traffic.
+				<br />
+				<strong>Solution:</strong> Enable the "Attempt to circumvent browser cache" option in the advanced settings.
+			</li>
+			<li>
+				<strong>Cause:</strong> The IP address you've entered in the advanced settings dialog doesn't match the IP address you're
+				scanning from.
+				<br />
+				<strong>Solution:</strong> Check the IP address you've entered and try again.				
+			</li>
+			<li>
+				<strong>Cause:</strong> You've selected a manual scan, but haven't generated any traffic.
+				<br />
+				<strong>Solution:</strong> Try the automated scan.
+			</li>
+		</ul>
+	</blockquote>
+</div>
+
+<div class="p3-question">
 	<h2 class="p3-help-question">How does this work?</h2>
 	<blockquote>
 		When you activate the plugin by clicking "Start Scan," it detects visits from your IP address, and actively monitors
