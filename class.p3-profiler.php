@@ -140,8 +140,8 @@ class P3_Profiler {
 		}
 
 		// Kludge memory limit / time limit
-		ini_set( 'memory_limit', '128M' );
-		set_time_limit( 90 );
+		@ini_set( 'memory_limit', '128M' );
+		@set_time_limit( 90 );
 		
 		// Set the profile file
 		$this->_profile_filename = $v->name . '.json';
@@ -310,6 +310,13 @@ class P3_Profiler {
 		} else {
 			$file = $_SERVER['SCRIPT_FILENAME'];
 		}
+		
+		// Check for "eval()'d code"
+		if ( strpos( $file, "eval()'d" ) ) {
+			list($file, $junk) = explode(': eval(', $str, 2);
+			$file = preg_replace('/\(\d*\)$/', '', $file);
+		}
+		
 		unset( $bt );
 
 		// Is it a plugin?
