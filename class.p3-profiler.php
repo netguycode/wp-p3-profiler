@@ -608,7 +608,7 @@ class P3_Profiler {
 		if ( !empty( $_SERVER['REQUEST_URI'] ) ) {
 			$file         = '';
 			$query_string = '';
-			$path         = $_SERVER['REQUEST_URI'];
+			$path         = preg_replace( '/[?&]P3_NOCACHE=[a-zA-Z0-9]+/', '', $_SERVER['REQUEST_URI'] );
 		} else {
 			$file = '';
 			if ( !empty( $_SERVER['SCRIPT_NAME'] ) ) {
@@ -622,7 +622,7 @@ class P3_Profiler {
 			}
 			$query_string = '';
 			if ( !empty( $_SERVER['QUERY_STRING'] ) ) {
-				$query_string = '?' . $_SERVER['QUERY_STRING'];
+				$query_string = '?' . preg_replace( '/[?&]P3_NOCACHE=[a-zA-Z0-9]+/', '', $_SERVER['QUERY_STRING'] );
 			}
 		}
 		return $protocol.$domain.$file.$path.$query_string;
