@@ -80,6 +80,13 @@ if ( !empty( $scan ) ) {
 				}
 			});
 		});
+		
+		// Callouts
+		$( "div#p3-reminder-wrapper" )
+			.corner( "round 8px" )
+			.parent()
+			.css( "padding", "4px" )
+			.corner( "round 10px" );
 	});
 </script>
 <div class="wrap">
@@ -120,7 +127,13 @@ if ( !empty( $scan ) ) {
 </div>
 
 <div id="p3-reminder">
-	Did you like this plugin?  You 
+	<div id="p3-reminder-wrapper">
+		Do you like this plugin?
+		<ul>
+			<li><a href="http://twitter.com/home?status=<?php echo rawurlencode(htmlentities('I just optimized my WordPress site with #p3plugin http://wordpress.org/extend/plugins/p3-profiler/ ')); ?>" target="_blank">Tweet</a> about it</li>
+			<li><a href="http://wordpress.org/extend/plugins/p3-profiler/" target="_blank">Rate</a> it on the repository</li>
+		</ul>
+	</div>
 </div>
 
 <div id="p3-copyright">
