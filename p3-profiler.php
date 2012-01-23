@@ -3,7 +3,7 @@
 Plugin Name: P3 (Plugin Performance Profiler)
 Plugin URI: http://support.godaddy.com/godaddy/wordpress-p3-plugin/
 Description: See which plugins are slowing down your site.  Create a profile of your WordPress site's plugins' performance by measuring their impact on your site's load time.
-Author: GoDaddy.com
+Author: GoDaddy.com, LLC
 Version: 1.1.2
 Author URI: http://www.godaddy.com/
 */
@@ -80,7 +80,7 @@ if ( function_exists( 'is_multisite' ) && is_multisite() ) {
 /**
  * P3 Plugin Performance Profiler Plugin Controller
  *
- * @author GoDaddy.com
+ * @author GoDaddy.com, LLC
  * @version 1.0
  * @package P3_Profiler
  */
@@ -207,9 +207,13 @@ class P3_Profiler_Plugin {
 
 		// Only for our page
 		if ( isset( $_REQUEST['page'] ) && basename( __FILE__ ) == $_REQUEST['page'] ) {
-			// Load the list table, let it handle any bulk actions
-			$this->scan_table = new P3_Profile_Table();
-			$this->scan_table->prepare_items();
+			
+			if ( isset( $_REQUEST['p3_action'] ) && 'list-scans' == $_REQUEST['p3_action'] ) {
+
+				// Load the list table, let it handle any bulk actions
+				$this->scan_table = new P3_Profile_Table();
+				$this->scan_table->prepare_items();
+			}
 
 			// Usability message
 			if ( !defined( 'WPP_PROFILING_STARTED' ) ) {
@@ -249,6 +253,29 @@ class P3_Profiler_Plugin {
 				$this->scan_settings_page();
 		}
 	}
+	
+	/**
+	 * Explain why P3 is asking for FTP credentials
+	 * @return string
+	 */
+	public function fix_flag_file_help() {
+		?>
+		<div class="wrap">
+		<strong>Why am I being asked for this information?</strong>
+		<blockquote>
+			P3 cannot write to this file:<br />
+			<code><?php echo P3_FLAG_FILE; ?></code>
+			<br />
+			P3 needs to write to this file to toggle profiling for your site.
+			If you want to fix this manually, please ensure the file is readable
+			and writable by the web server.
+		</blockquote>
+		<div class="updated">
+			<p>P3 does <strong>not</strong> store or re-transmit this information.</p>
+		</div>
+		</div>
+		<?php
+	}	
 
 	/**
 	 * Write .profiling_enabled file, uses request_filesystem_credentials, if
@@ -268,10 +295,12 @@ class P3_Profiler_Plugin {
 
 		// Ask for credentials, if necessary
 		if ( false === ( $creds = request_filesystem_credentials( $url, $method, false, false, $form_fields ) ) ) {
+			$this->fix_flag_file_help();
 			return true; 
 		} elseif ( ! WP_Filesystem($creds) ) {
 			// The credentials are bad, ask again
 			request_filesystem_credentials( $url, $method, true, false, $form_fields );
+			$this->fix_flag_file_help();
 			return true;
 		} else {
 			// Once we get here, we should have credentials, do the file system operations
