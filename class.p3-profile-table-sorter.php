@@ -5,7 +5,7 @@ if ( !defined('P3_PATH') )
 /**
  * Profile table sorter
  *
- * @author GoDaddy.com
+ * @author GoDaddy.com, LLC
  * @version 1.0
  * @package P3_Profiler
  */

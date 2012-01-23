@@ -6,7 +6,7 @@ if ( !defined('P3_PATH') )
 /**
  * Exception when no data is found
  *
- * @author GoDaddy.com
+ * @author GoDaddy.com, LLC
  * @version 1.0
  * @package P3_Profiler
  */

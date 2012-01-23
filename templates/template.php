@@ -122,9 +122,5 @@ if ( !empty( $scan ) ) {
 <div id="p3-copyright">
 	<img src="<?php echo plugins_url() . '/p3-profiler/logo.gif'; ?>" alt="GoDaddy.com logo" title="GoDaddy.com logo" />
 	<br />
-	<?php if (date('Y') > 2011) : ?>
-		Copyright &copy; 2011-<?php echo date('Y'); ?> <a href="http://www.godaddy.com/" target="_blank">GoDaddy.com</a>.  All rights reserved.
-	<?php else : ?>
-		Copyright &copy; 2011 <a href="http://www.godaddy.com/" target="_blank">GoDaddy.com</a>.  All rights reserved.
-	<?php endif; ?>
+	Copyright &copy; 2011-<?php echo date('Y'); ?> <a href="http://www.godaddy.com/" target="_blank">GoDaddy.com, LLC</a>.  All rights reserved.
 </div>

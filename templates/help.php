@@ -517,11 +517,7 @@ if ( !defined('P3_PATH') )
 	<blockquote>
 		<strong>P3 (Plugin Performance Profiler)</strong>
 		<br />
-		<?php if (date('Y') > 2011) : ?>
-			Copyright &copy; 2011-<?php echo date('Y'); ?> <a href="http://www.godaddy.com/" target="_blank">GoDaddy.com</a>.  All rights reserved.
-		<?php else : ?>
-			Copyright &copy; 2011 <a href="http://www.godaddy.com/" target="_blank">GoDaddy.com</a>.  All rights reserved.
-		<?php endif; ?>
+		Copyright &copy; 2011-<?php echo date('Y'); ?> <a href="http://www.godaddy.com/" target="_blank">GoDaddy.com, LLC</a>.  All rights reserved.
 		<br /><br />
 		This program is offered under the terms of the GNU General Public License Version 2 as published by the Free Software Foundation.
 		<br /><br />
