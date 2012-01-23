@@ -5,7 +5,7 @@ if ( basename( __FILE__ ) ==  basename( $_SERVER['SCRIPT_FILENAME'] ) )
 /**
  * Profiles a WordPress site
  *
- * @author GoDaddy.com, LLC
+ * @author GoDaddy.com
  * @version 1.0
  * @package P3_Profiler
  */

@@ -119,8 +119,12 @@ if ( !empty( $scan ) ) {
 
 </div>
 
+<div id="p3-reminder">
+	Did you like this plugin?  You 
+</div>
+
 <div id="p3-copyright">
 	<img src="<?php echo plugins_url() . '/p3-profiler/logo.gif'; ?>" alt="GoDaddy.com logo" title="GoDaddy.com logo" />
 	<br />
-	Copyright &copy; 2011-<?php echo date('Y'); ?> <a href="http://www.godaddy.com/" target="_blank">GoDaddy.com, LLC</a>.  All rights reserved.
+	Copyright &copy; 2011-<?php echo date('Y'); ?> <a href="http://www.godaddy.com/" target="_blank">GoDaddy.com</a>.  All rights reserved.
 </div>
