@@ -277,7 +277,12 @@ p3-glossary-container {
 /** Copyright notice **/
 #p3-copyright {
 	text-align: center;
-	margin: 45px auto 5px auto;
+	position: absolute;
+	float: left;
+	margin-top: 45px;
+	margin-left: -158px;
+	width: 315px;
+	left: 50%;
 }
 #p3-copyright img {
 	margin-bottom: 7px;
@@ -359,9 +364,9 @@ div.p3-question h2.p3-help-question {
 div#p3-reminder {
 	position: relative;
 	z-index: 10;
-	float: right;
+	float: left;
 	bottom: 0;
-	right: 15px;
+	left: 0;
 	height: 75px;
 	width: 200px;
 	margin-top: 30px;
