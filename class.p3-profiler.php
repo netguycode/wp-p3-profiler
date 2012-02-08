@@ -159,6 +159,7 @@ class P3_Profiler {
 			$debug_entry['recording'] = defined( 'WPP_PROFILING_STARTED' );
 			array_unshift( $debug_log, $debug_entry );
 			if ( count( $debug_log ) >= 100 ) {
+				$debug_log = array_slice( $debug_log, 0, 100 );
 				add_action( 'shutdown', array( $this, 'disable_debug' ) );
 			}
 			update_option( 'p3-profiler_debug_log', $debug_log );
