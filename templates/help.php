@@ -288,7 +288,8 @@ if ( !defined('P3_PATH') )
 			Your site is using the Zend Optimizer.  This extension has not been tested with P3.  Please report any problems.<br />
 		<?php } ?>
 		<?php if ( !$detected ) { ?>
-			Your site is not using any opcode optimizers that have been detected by P3.
+			P3 has not detected any opcode optimizers on your site.  Although none were detected, an opcode optimizer may still be present.
+			Contact your server administrator with any questions.
 		<?php } ?>
 	</blockquote>
 </div>
