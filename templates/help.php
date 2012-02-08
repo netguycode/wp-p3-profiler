@@ -260,10 +260,10 @@ if ( !defined('P3_PATH') )
 		<?php if ( extension_loaded( 'apc' ) ) { $detected++; ?>
 			Your site is using APC.  This has not been known to cause problems with P3.<br />
 		<?php } ?>
-		<?php if ( true or extension_loaded( 'eaccelerator' ) && ini_get( 'eaccelerator.optimizer' ) ) { $detected++; ?>
+		<?php if ( extension_loaded( 'eaccelerator' ) && ini_get( 'eaccelerator.optimizer' ) ) { $detected++; ?>
 			Your site is using eaccelerator with optimization enabled.  This has been known to cause problems with P3.  To temporarily
 			disable the optimizer
-			<?php if ( false and 'apache2handler' == strtolower( php_sapi_name() ) ) { ?>
+			<?php if ( 'apache2handler' == strtolower( php_sapi_name() ) ) { ?>
 				you can add <code>php_flag eaccelerator.optimizer Off</code> to your site's .htaccess file.
 			<?php } elseif ( version_compare( PHP_VERSION, '5.3.0' ) >= 0 ) { ?>
 				you can add <code>eaccelerator.optimizer = 0</code> to your site's <a href="http://php.net/manual/en/configuration.file.per-user.php" target="_blank"><?php echo ini_get( 'user_ini.filename' ); ?> file</a>.
