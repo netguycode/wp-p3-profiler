@@ -869,23 +869,9 @@ class P3_Profiler_Plugin {
 
 		// Get the current version
 		$version = get_option( 'p3-profiler_version' );
-		
-		// Upgrading from < 1.1.0
-		if ( empty( $version ) || version_compare( $version, '1.1.0' ) < 0 ) {
-			update_option( 'p3-profiler_disable_opcode_cache', true );
-			update_option( 'p3-profiler_use_current_ip', true );
-			update_option( 'p3-profiler_ip_address', '' );
-			update_option( 'p3-profiler_version', '1.1.0' );
-		}
-		
-		// Upgrading from < 1.1.2
-		elseif ( version_compare( $version, '1.1.2' ) < 0 ) {
-			update_option( 'p3-profiler_cache_buster', true );
-			update_option( 'p3-profiler_version', '1.1.2' );
-		}
 
 		// Upgrading from < 1.2.0
-		elseif ( version_compare( $version, '1.2.0' ) < 0 ) {
+		if ( version_compare( $version, '1.2.0' ) < 0 ) {
 
 			// Remove any .htaccess modifications
 			$file = ABSPATH . '/.htaccess';
