@@ -749,6 +749,8 @@ class P3_Profiler_Plugin {
 		global $p3_profiler;
 
 		// Unhook the profiler
+		update_option( 'p3-profiler_debug', false );
+		update_option( 'p3-profiler_debug_log', array() );
 		remove_action( 'shutdown', array( $p3_profiler, 'shutdown_handler' ) );
 
 		// Remove mu-plugin
@@ -770,6 +772,8 @@ class P3_Profiler_Plugin {
 		global $p3_profiler;
 
 		// Unhook the profiler
+		update_option( 'p3-profiler_debug', false );
+		update_option( 'p3-profiler_debug_log', array() );
 		remove_action( 'shutdown', array( $p3_profiler, 'shutdown_handler' ) );
 
 		// This is a static function so it needs an instance
