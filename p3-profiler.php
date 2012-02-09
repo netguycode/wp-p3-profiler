@@ -46,7 +46,7 @@ if ( is_admin() ) {
 	
 	// Upgrade routine
 	add_action( 'admin_init', array( $p3_profiler_plugin, 'upgrade' ) );
-	
+
 	// Figure out the action
 	add_action( 'admin_init', array( $p3_profiler_plugin, 'action_init' ) );
 
@@ -242,6 +242,8 @@ class P3_Profiler_Plugin {
 			// Download the debug logs before output is sent
 			if ( 'download-debug-log' == $this->action ) {
 				$this->download_debug_log();
+			} elseif ( 'clear-debug-log' == $this->action ) {
+				$this->clear_debug_log();
 			}
 		}
 	}
@@ -308,9 +310,6 @@ class P3_Profiler_Plugin {
 				break;
 			case 'help' :
 				$this->show_help();
-				break;
-			case 'clear-debug-log' :
-				$this->clear_debug_log();
 				break;
 			default :
 				$this->scan_settings_page();
@@ -747,6 +746,10 @@ class P3_Profiler_Plugin {
 	 * @return void
 	 */
 	public function deactivate() {
+		global $p3_profiler;
+
+		// Unhook the profiler
+		remove_action( 'shutdown', array( $p3_profiler, 'shutdown_handler' ) );
 
 		// Remove mu-plugin
 		if ( file_exists( WPMU_PLUGIN_DIR . '/p3-profiler.php' ) ) {
@@ -764,6 +767,11 @@ class P3_Profiler_Plugin {
 	 * @return void
 	 */
 	public static function uninstall() {
+		global $p3_profiler;
+
+		// Unhook the profiler
+		remove_action( 'shutdown', array( $p3_profiler, 'shutdown_handler' ) );
+
 		// This is a static function so it needs an instance
 		// Since I'm myself, I can call my own private methods
 		$class = __CLASS__;
