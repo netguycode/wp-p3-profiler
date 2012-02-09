@@ -438,7 +438,7 @@ class P3_Profiler_Plugin {
 		update_option( 'p3-profiler_cache_buster', 'true' == $_POST['p3_cache_buster'] );
 		update_option( 'p3-profiler_use_current_ip', 'true' == $_POST['p3_use_current_ip'] );
 		update_option( 'p3-profiler_ip_address', $_POST['p3_ip_address'] );
-		update_option( 'p3-profiler_debug', $_POST['p3_debug'] );
+		update_option( 'p3-profiler_debug', 'true' == $_POST['p3_debug'] );
 
 		// Clear the debug log if it's full
 		if ( 'true' === $_POST['p3_debug'] ) {
