@@ -750,6 +750,7 @@ class P3_Profiler_Plugin {
 
 		// Unhook the profiler
 		remove_action( 'shutdown', array( $p3_profiler, 'shutdown_handler' ) );
+		remove_action( 'shutdown', array( $p3_profiler, 'write_debug_log' ) );
 
 		// Remove mu-plugin
 		if ( file_exists( WPMU_PLUGIN_DIR . '/p3-profiler.php' ) ) {
@@ -771,6 +772,7 @@ class P3_Profiler_Plugin {
 
 		// Unhook the profiler
 		remove_action( 'shutdown', array( $p3_profiler, 'shutdown_handler' ) );
+		remove_action( 'shutdown', array( $p3_profiler, 'write_debug_log' ) );
 
 		// This is a static function so it needs an instance
 		// Since I'm myself, I can call my own private methods
