@@ -2,7 +2,7 @@
 /*
 Plugin Name: P3 (Plugin Performance Profiler)
 Plugin URI: http://support.godaddy.com/godaddy/wordpress-p3-plugin/
-Description: See which plugins are slowing down your site.  Create a profile of your WordPress site's plugins' performance by measuring their impact on your site's load time.
+Description: See which plugins are slowing down your site.  Create a profile of your WordPress site's plugins' performance by measuring their impact onÂ your site's load time.
 Author: GoDaddy.com
 Version: 1.2.0
 Author URI: http://www.godaddy.com/
@@ -870,8 +870,28 @@ class P3_Profiler_Plugin {
 		// Get the current version
 		$version = get_option( 'p3-profiler_version' );
 
+		// Upgrading from < 1.1.0
+		if ( empty( $version ) || version_compare( $version, '1.1.0' ) < 0 ) {
+			update_option( 'p3-profiler_disable_opcode_cache', true );
+			update_option( 'p3-profiler_use_current_ip', true );
+			update_option( 'p3-profiler_ip_address', '' );
+			update_option( 'p3-profiler_version', '1.1.0' );
+		}
+		
+		// Upgrading from < 1.1.2
+		if ( empty( $version) || version_compare( $version, '1.1.2' ) < 0 ) {
+			update_option( 'p3-profiler_cache_buster', true );
+			update_option( 'p3-profiler_version', '1.1.2' );
+		}
+
 		// Upgrading from < 1.2.0
-		if ( version_compare( $version, '1.2.0' ) < 0 ) {
+		if ( empty( $version) || version_compare( $version, '1.2.0' ) < 0 ) {
+
+			// Set profiling option
+			update_option( 'p3-profiler_profiling_enabled', false );
+			update_option( 'p3-profiler_version', '1.2.0' );
+			update_option( 'p3-profiler_debug', false );
+			update_option( 'p3-profiler_debug_log', array() );
 
 			// Remove any .htaccess modifications
 			$file = ABSPATH . '/.htaccess';
@@ -883,12 +903,6 @@ class P3_Profiler_Plugin {
 			if ( file_exists( P3_PATH . '/.profiling_enabled' ) ) {
 				@unlink( P3_PATH . '/.profiling_enabled' );
 			}
-
-			// Set profiling option
-			add_option( 'p3-profiler_profiling_enabled', false, false, true );
-			update_option( 'p3-profiler_version', '1.2.0' );
-			add_option( 'p3-profiler_debug', false, false, true );
-			update_option( 'p3-profiler_debug_log', array() );
 		}
 
 		// Ensure the profiles folder is there
