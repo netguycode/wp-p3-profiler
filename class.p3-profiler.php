@@ -156,9 +156,6 @@ class P3_Profiler {
 
 		// Save the debug info
 		$this->_debug_entry['recording'] = defined( 'WPP_PROFILING_STARTED' );
-		if ( get_option( 'p3-profiler_debug' ) ) {
-			add_action( 'shutdown', array( $this, 'write_debug_log') );
-		}
 
 		// Check the profiling flag
 		if ( !defined( 'WPP_PROFILING_STARTED' ) ) {
@@ -487,6 +484,11 @@ class P3_Profiler {
 	 */
 	public function shutdown_handler() {
 
+		// Write debug log
+		if ( get_option( 'p3-profiler_debug' ) ) {
+			$this->_write_debug_log();
+		}
+
 		// Make sure we've actually started ( wp-cron??)
 		if ( !defined( 'WPP_PROFILING_STARTED' ) || !WPP_PROFILING_STARTED ) {
 			return;
@@ -664,8 +666,8 @@ class P3_Profiler {
 	/**
 	 * Disable debug mode
 	 */
-	public function write_debug_log() {
-		
+	private function _write_debug_log() {
+
 		// Get the existing log
 		$debug_log = get_option( 'p3-profiler_debug_log' );
 		if ( empty( $debug_log) ) {

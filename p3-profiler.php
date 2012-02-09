@@ -750,7 +750,6 @@ class P3_Profiler_Plugin {
 
 		// Unhook the profiler
 		remove_action( 'shutdown', array( $p3_profiler, 'shutdown_handler' ) );
-		remove_action( 'shutdown', array( $p3_profiler, 'write_debug_log' ) );
 
 		// Remove mu-plugin
 		if ( file_exists( WPMU_PLUGIN_DIR . '/p3-profiler.php' ) ) {
@@ -772,7 +771,6 @@ class P3_Profiler_Plugin {
 
 		// Unhook the profiler
 		remove_action( 'shutdown', array( $p3_profiler, 'shutdown_handler' ) );
-		remove_action( 'shutdown', array( $p3_profiler, 'write_debug_log' ) );
 
 		// This is a static function so it needs an instance
 		// Since I'm myself, I can call my own private methods
@@ -796,7 +794,7 @@ class P3_Profiler_Plugin {
 				delete_option( 'p3-profiler_cache_buster' );
 				delete_option( 'p3-profiler_profiling_enabled' );
 				delete_option( 'p3-profiler_debug' );
-				delete_option( 'p3_profiler_debug_log' );
+				delete_option( 'p3-profiler_debug_log' );
 			}
 			restore_current_blog();
 		} else {
@@ -810,7 +808,7 @@ class P3_Profiler_Plugin {
 			delete_option( 'p3-profiler_cache_buster' );
 			delete_option( 'p3-profiler_profiling_enabled' );
 			delete_option( 'p3-profiler_debug' );
-			delete_option( 'p3_profiler_debug_log' );
+			delete_option( 'p3-profiler_debug_log' );
 		}
 	}
 
@@ -855,7 +853,7 @@ class P3_Profiler_Plugin {
 		delete_option( 'p3-profiler_cache_buster' );
 		delete_option( 'p3-profiler_profiling_enabled' );
 		delete_option( 'p3-profiler_debug' );
-		delete_option( 'p3_profiler_debug_log' );
+		delete_option( 'p3-profiler_debug_log' );
 	}
 
 	/**
@@ -900,7 +898,7 @@ class P3_Profiler_Plugin {
 			add_option( 'p3-profiler_profiling_enabled', false, false, true );
 			update_option( 'p3-profiler_version', '1.2.0' );
 			add_option( 'p3-profiler_debug', false, false, true );
-			update_option( 'p3_profiler_debug_log', array() );
+			update_option( 'p3-profiler_debug_log', array() );
 		}
 
 		// Ensure the profiles folder is there
