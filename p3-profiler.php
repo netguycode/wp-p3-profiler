@@ -867,6 +867,11 @@ class P3_Profiler_Plugin {
 	 */
 	public function upgrade() {
 
+		// Only for our page
+		if ( !isset( $_REQUEST['page'] ) || basename( __FILE__ ) != $_REQUEST['page'] ) {
+			return;
+		}
+		
 		// Get the current version
 		$version = get_option( 'p3-profiler_version' );
 
