@@ -584,8 +584,11 @@ class P3_Profiler {
 		// Throw away unneeded information to make the profiles smaller
 		unset( $this->_profile['stack'] );
 
-		// Store the profile in a transient until the profiling mode is stopped, then flush it out to a file
-		set_transient( $this->_profile_filename, trim( get_transient( $this->_profile_filename ) . "\n" . json_encode( $this->_profile ) ) , 0 );
+		// Open the file and acquire an exclusive lock ( prevent multiple hits from stomping on our
+		// previous profiles
+		$uploads_dir = wp_upload_dir();
+		$path        = $uploads_dir['basedir'] . DIRECTORY_SEPARATOR . 'profiles' . DIRECTORY_SEPARATOR . $this->_profile_filename;
+		file_put_contents( $path, json_encode( $this->_profile ) . PHP_EOL, FILE_APPEND );
 	}
 	
 	/**

@@ -415,11 +415,6 @@ class P3_Profiler_Plugin {
 
 		// Return the last filename
 		if ( !empty( $opts ) && is_array( $opts ) && array_key_exists( 'name', $opts ) ) {
-			
-			// Flush the results to the file
-			file_put_contents( P3_PROFILES_PATH . '/' . $opts['name'] . '.json', trim( get_transient( $opts['name'] . '.json' ) ) );
-
-			// Let the UI know which file to load
 			echo $opts['name'] . '.json';
 			die();
 		} else {
