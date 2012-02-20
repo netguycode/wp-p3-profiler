@@ -325,11 +325,9 @@ class P3_Profiler_Plugin {
 		// Start off the scan with the home page
 		$pages = array( get_home_url() ); // Home page
 
-		// Get the default RSS feed
-		$pages[] = get_feed_link();
-
-		// Search for 'e'
-		$pages[] = home_url( '?s=e' );
+		// Search for a word from the blog description
+		$words = array_merge( explode( ' ', get_bloginfo( 'name' ) ), explode( ' ', get_bloginfo( 'description' ) ) );
+		$pages[] = home_url( '?s=' . $words[ mt_rand( 0, count( $words ) - 1 ) ] );
 
 		// Get the latest 10 posts
 		$tmp = preg_split( '/\s+/', wp_get_archives( 'type=postbypost&limit=10&echo=0' ) );
