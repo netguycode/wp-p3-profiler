@@ -117,7 +117,7 @@ class P3_Profiler_Plugin {
 	 */
 	public function remove_admin_bar() {
 		if ( !is_admin() && is_user_logged_in() ) {
-			remove_action( 'wp_footer', 'wp_admin_bar_render', 1000 );
+			remove_action( 'init', '_wp_admin_bar_init' );
 			if ( true === force_ssl_admin() ) {
 				add_filter( 'site_url', array( $this, '_fix_url' ) );
 				add_filter( 'admin_url', array( $this, '_fix_url' ) );
