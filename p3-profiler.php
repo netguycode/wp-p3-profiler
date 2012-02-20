@@ -329,8 +329,20 @@ class P3_Profiler_Plugin {
 		$words = array_merge( explode( ' ', get_bloginfo( 'name' ) ), explode( ' ', get_bloginfo( 'description' ) ) );
 		$pages[] = home_url( '?s=' . $words[ mt_rand( 0, count( $words ) - 1 ) ] );
 
-		// Get the latest 10 posts
-		$tmp = preg_split( '/\s+/', wp_get_archives( 'type=postbypost&limit=10&echo=0' ) );
+		// Get 5 random tags
+		$terms = get_terms( 'post_tag', 'number=4&orderby=rand()' );
+		foreach ( (array) $terms as $term ) {
+			$pages[] = get_term_link( $term );
+		}
+
+		// Get 5 random categories
+		$cats = get_terms( 'category', 'number=4&orderby=rand()');
+		foreach ( (array) $cats as $cat ) {
+			$pages[] = get_term_link( $cat );
+		}
+
+		// Get the latest 5 posts
+		$tmp = preg_split( '/\s+/', wp_get_archives( 'type=postbypost&limit=4&echo=0' ) );
 		if ( !empty( $tmp ) ) {
 			foreach ( $tmp as $page ) {
 				if ( preg_match( "/href='([^']+)'/", $page, $matches ) ) {
