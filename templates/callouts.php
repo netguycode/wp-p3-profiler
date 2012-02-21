@@ -91,7 +91,7 @@ if ( !defined('P3_PATH') )
 				
 				// Show the view results button
 				jQuery( "#p3-view-incomplete-results-submit" ).attr( "data-scan-name", response );
-
+				
 				// Pause
 				P3_Scan.paused = true;
 				
