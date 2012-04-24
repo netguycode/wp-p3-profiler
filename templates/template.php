@@ -59,15 +59,15 @@ if ( 'current-scan' == $this->action || !empty( $_REQUEST['current_scan'] ) ) {
 
 	<!-- Header icon / title -->
 	<div id="icon-plugins" class="icon32"><br/></div>
-	<h2>P3 - Plugin Performance Profiler</h2>
+	<h2><?php _e( 'P3 - Plugin Performance Profiler', 'p3-profiler' ); ?></h2>
 
 	<!-- Header navbar -->
 	<div class="ui-widget-header" id="p3-navbar">
 		<input type="radio" name="p3-nav" id="button-current-scan" <?php echo $button_current_checked; ?> />
-		<label for="button-current-scan">Current</label>
+		<label for="button-current-scan"><?php _e( 'Current', 'p3-profiler' ); ?></label>
 		<input type="radio" name="p3-nav" id="button-history-scans" <?php echo $button_history_checked; ?> />
-		<label for="button-history-scans">History</label>
-		<input type="radio" name="p3-nav" id="button-help" <?php echo $button_help_checked; ?> /><label for="button-help">Help</label>
+		<label for="button-history-scans"><?php _e( 'History', 'p3-profiler' ); ?></label>
+		<input type="radio" name="p3-nav" id="button-help" <?php echo $button_help_checked; ?> /><label for="button-help"><?php _e( 'Help', 'p3-profiler' ); ?></label>
 		
 		<div id="p3-scan-label">
 			<?php if ( !empty( $this->profile ) ) : ?>
@@ -92,9 +92,9 @@ if ( 'current-scan' == $this->action || !empty( $_REQUEST['current_scan'] ) ) {
 
 <div id="p3-reminder">
 	<div id="p3-reminder-wrapper">
-		Do you like this plugin?
+		<?php _e( 'Do you like this plugin?', 'p3-profiler' ); ?>
 		<ul>
-			<li><a href="http://twitter.com/home?status=<?php echo rawurlencode(htmlentities('I just optimized my WordPress site with #p3plugin http://wordpress.org/extend/plugins/p3-profiler/ ')); ?>" target="_blank">Tweet</a> about it</li>
+			<li><a href="http://twitter.com/home?status=<?php echo rawurlencode( htmlentities( sprintf( __( 'I just optimized my WordPress site with %s %s', 'p3-profiler' ), '#p3plugin', 'http://wordpress.org/extend/plugins/p3-profiler/') ) ); ?>" target="_blank">Tweet</a> about it</li>
 			<li><a href="http://wordpress.org/extend/plugins/p3-profiler/" target="_blank">Rate</a> it on the repository</li>
 		</ul>
 	</div>
@@ -103,5 +103,5 @@ if ( 'current-scan' == $this->action || !empty( $_REQUEST['current_scan'] ) ) {
 <div id="p3-copyright">
 	<img src="<?php echo plugins_url() . '/p3-profiler/logo.gif'; ?>" alt="GoDaddy.com logo" title="GoDaddy.com logo" />
 	<br />
-	Copyright &copy; 2011-<?php echo date('Y'); ?> <a href="http://www.godaddy.com/" target="_blank">GoDaddy.com</a>.  All rights reserved.
+	<?php _e( 'Copyright', 'p3-profiler' ) ?> &copy; 2011-<?php echo date('Y'); ?> <a href="http://www.godaddy.com/" target="_blank">GoDaddy.com</a>.  <?php _e( 'All rights reserved.', 'p3-profiler' ); ?>
 </div>

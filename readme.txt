@@ -2,8 +2,8 @@
 Contributors: Godaddy, StarfieldTech
 Tags: debug, debugging, developer, development, performance, plugin, profiler, speed
 Requires at least: 3.3
-Tested up to: 3.3.1
-Stable tag: 1.2.0
+Tested up to: 3.4.0
+Stable tag: 1.3.0
 
 See which plugins are slowing down your site.  This plugin creates a performance report for your site.
 
@@ -43,6 +43,9 @@ Manual installation:
 
 == Upgrade Notice ==
 
+= 1.3.0 =
+Added localization support and tested with WordPress 3.4.0.
+
 = 1.2.0 =
 Many compatibility fixes based on user feedback.  Upgrading is recommended.
 
@@ -78,6 +81,11 @@ We love to make P3 better.  When reporting a bug, please visit this page so we c
 Thanks!
 
 == Changelog ==
+
+= 1.3.0 =
+ * Added localization support (_e(), __())
+ * Tested with WordPress 3.4.0
+ * Fixed a bug with European decimalization (0,00 vs. 0.00)
 
 = 1.2.0 =
  * Remove .profiling_enabled file, store profiling flag as a WordPress option

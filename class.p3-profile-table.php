@@ -22,8 +22,8 @@ class P3_Profile_Table extends WP_List_Table {
 	public function __construct() {
 		parent::__construct(
 			array(
-				'singular'  => 'scan',
-				'plural'    => 'scans',
+				'singular'  => _n( 'scan', 'scans', 1, 'p3-profiler' ),
+				'plural'    => _n( 'scan', 'scans', 2, 'p3-profiler' ),
 			)
 		);
 	}
@@ -103,7 +103,7 @@ class P3_Profile_Table extends WP_List_Table {
 	 */
     public function column_title( $item ) {
         $actions = array(
-            'delete' => sprintf( '<a href="?page=%s&action=%s&name=%s">Delete</a>', sanitize_text_field( $_REQUEST['name'] ), 'delete', $item['name'] ),
+            'delete' => sprintf( '<a href="?page=%s&action=%s&name=%s">' . __( 'Delete', 'p3-profiler' ) . '</a>', sanitize_text_field( $_REQUEST['name'] ), 'delete', $item['name'] ),
         );
 
         //Return the title contents
@@ -135,10 +135,10 @@ class P3_Profile_Table extends WP_List_Table {
     public function get_columns() {
         $columns = array(
             'cb'       => '<input type="checkbox" />',
-            'name'     => 'Name',
-            'date'     => 'Date',
-            'count'    => 'Visits',
-			'filesize' => 'Size',
+            'name'     => __( 'Name', 'p3-profiler' ),
+            'date'     => __( 'Date', 'p3-profiler' ),
+            'count'    => __( 'Visits', 'p3-profiler' ),
+			'filesize' => __( 'Size', 'p3-profiler' ),
         );
         return $columns;
     }
@@ -171,20 +171,19 @@ class P3_Profile_Table extends WP_List_Table {
 				'current_scan' => null,
 			)
 		);
-		return <<<EOD
-<a href="$url" title="View the results of this scan"><strong>$display</strong></a>
-<div class="row-actions-visible">
-	<span class="view">
-		<a href="$url" data-name="$key" title="View the results of this scan" class="view-results">View</a> |
-	</span>
-	<span>
-		<a href="javascript:;" data-name="$key" title="Continue this scan" class="p3-continue-scan">Continue</a> |
-	</span>
-	<span class="delete">
-		<a href="javascript:;" data-name="$key" title="Delete this scan" class="delete-scan delete">Delete</a>
-	</span>
-</div>
-EOD;
+		$ret  = '<a href="$url" title="' . __( 'View the results of this scan', 'p3-profiler' ) . '"><strong>$display</strong></a>';
+		$ret .= '<div class="row-actions-visible">';
+		$ret .= '  <span class="view">';
+		$ret .= '    <a href="$url" data-name="$key" title="' . __( 'View the results of this scan', 'p3-profiler' ) . '" class="view-results">' . __( 'View', 'p3-profiler' ) . '</a> |';
+		$ret .= '  </span>';
+		$ret .= '  <span>';
+		$ret .= '    <a href="javascript:;" data-name="$key" title="' . __( 'Continue this scan', 'p3-profiler' ) . '" class="p3-continue-scan">' . __( 'Continue', 'p3-profiler' ) . '</a> |';
+		$ret .= '  </span>';
+		$ret .= '  <span class="delete">';
+		$ret .= '    <a href="javascript:;" data-name="$key" title="' . __( 'Delete this scan', 'p3-profiler' ) . '" class="delete-scan delete">' . __( 'Delete', 'p3-profiler' ) . '</a>';
+		$ret .= '  </span>';
+		$ret .= '</div>';
+		return $ret;
 	}
 	
 	/**************************************************************************/
@@ -196,7 +195,7 @@ EOD;
 	 * @return string 
 	 */
     public function get_bulk_actions() {
-        $actions = array( 'delete' => 'Delete' );
+        $actions = array( 'delete' => __( 'Delete', 'p3-profiler' ) );
         return $actions;
     }
 
@@ -208,16 +207,18 @@ EOD;
 		global $p3_profiler_plugin;
         if ( 'delete' === $this->current_action() && !empty( $_REQUEST['scan'] ) ) {
 			if ( !wp_verify_nonce( $_REQUEST['p3_nonce'], 'delete_scans' ) ) {
-				wp_die( 'Invalid nonce' );
+				wp_die( __( 'You do not have sufficient permissions to access this page.' ) );
 			}
 			foreach ( $_REQUEST['scan'] as $scan ) {
 				$file = P3_PROFILES_PATH  . DIRECTORY_SEPARATOR . basename( $scan );
 				if ( !file_exists( $file ) || !is_writable( $file ) || !unlink( $file ) ) {
-					wp_die( 'Error removing file ' . $file );
+					wp_die( __( 'Error removing file: ', 'p3-profiler' ) . $file );
 				}
 			}
 			$count = count( $_REQUEST['scan'] );
-			printf('<div id="updated"><p>Deleted %d %s.</p></div>', $count, ($count == 1) ? 'scan' : 'scans' );
+			echo '<div id="updated"><p>'
+				. sprintf( _n( 'Deleted %d scan. ', 'Deleted %d scans' , $count, 'p3-profiler' ), $count )
+				. '</p></div>';
 		}
     }
 

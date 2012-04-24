@@ -152,7 +152,7 @@ if ( !defined('P3_PATH') )
 		// Open the file
 		$fp = fopen( $file, 'r' );
 		if ( FALSE === $fp ) {
-			throw new Exception( 'Cannot open ' . $file );
+			throw new Exception( __( 'Cannot open file: ', 'p3-profiler' ) . $file );
 		}
 		
 		// Decode each line.  Each line is a separate json object.  Whenever a
@@ -164,7 +164,7 @@ if ( !defined('P3_PATH') )
 			}
 			$tmp = json_decode( $line );
 			if ( null === $tmp ) {
-				throw new Exception( 'Cannot parse ' . $file );
+				throw new Exception( __( 'Cannot parse file: ', 'p3-profiler' ) . $file );
 				fclose( $fp );
 			}
 			$this->_data[] = $tmp;
@@ -188,7 +188,7 @@ if ( !defined('P3_PATH') )
 
 		// Check for empty data
 		if ( empty( $this->_data ) ) {
-			throw new P3_Profile_No_Data_Exception('No visits recorded during this profiling session.');
+			throw new P3_Profile_No_Data_Exception( __( 'No visits recorded during this profiling session.', 'p3-profiler' ) );
 		}
 		
 		foreach ( $this->_data as $o ) {

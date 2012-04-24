@@ -4,7 +4,7 @@ Plugin Name: P3 (Plugin Performance Profiler)
 Plugin URI: http://support.godaddy.com/godaddy/wordpress-p3-plugin/
 Description: See which plugins are slowing down your site.  Create a profile of your WordPress site's plugins' performance by measuring their impact on your site's load time.
 Author: GoDaddy.com
-Version: 1.2.0
+Version: 1.3.0
 Author URI: http://www.godaddy.com/
 */
 
@@ -41,6 +41,10 @@ $p3_profiler_plugin = new P3_Profiler_Plugin();
 
 // Admin hooks
 if ( is_admin() ) {
+
+	// Localization
+	load_plugin_textdomain( 'p3-profiler', false, dirname( plugin_basename( __FILE__ ) ) . '/lang/' );
+	
 	// Show the 'Profiler' option under the 'Plugins' menu
 	add_action( 'admin_menu', array( $p3_profiler_plugin, 'settings_menu' ) );
 	
@@ -152,8 +156,8 @@ class P3_Profiler_Plugin {
 		if ( function_exists( 'add_submenu_page' ) ) {
 			$page = add_submenu_page(
 				'tools.php',
-				'P3 Plugin Profiler',
-				'P3 Plugin Profiler',
+				__( 'P3 Plugin Profiler', 'p3-profiler' ),
+				__( 'P3 Plugin Profiler', 'p3-profiler' ),
 				'manage_options',
 				basename( __FILE__ ),
 				array( $this, 'dispatcher' )
@@ -234,7 +238,7 @@ class P3_Profiler_Plugin {
 					$this->scan = sanitize_file_name( basename( $_REQUEST['name'] ) );
 				}
 				if ( empty( $this->scan ) || !file_exists( P3_PROFILES_PATH . "/{$this->scan}" ) ) {
-					wp_die( '<div id="message" class="error"><p>Scan does not exist</p></div>' );
+					wp_die( '<div id="message" class="error"><p>' . __( 'Scan does not exist', 'p3-profiler' ) . '</p></div>' );
 				}
 				$this->scan = P3_PROFILES_PATH . "/{$this->scan}";
 			}
@@ -265,14 +269,16 @@ class P3_Profiler_Plugin {
 				try {
 					$this->profile = new P3_Profile_Reader( $this->scan );
 				} catch ( P3_Profile_No_Data_Exception $e ) {
-					echo '<div class="error"><p>No visits recorded during this profiling session.  Check the <a href="' .
-						  add_query_arg( array( 'p3_action' => 'help', 'current_scan' => null ) ) . '#q-circumvent-cache"' .
-						  '>help</a> page for more information</p></div>';
+					echo '<div class="error"><p>' .
+							sprintf( __( 'No visits recorded during this profiling session.  Check the <a href="%s">help</a> page for more information', 'p3-profiler' ),
+								add_query_arg( array( 'p3_action' => 'help', 'current_scan' => null ) ) . '#q-circumvent-cache"'
+							) .
+						 '</p></div>';
 					$this->scan = null;
 					$this->profile = null;
 					$this->action = 'list-scans';
 				} catch ( Exception $e ) {
-					wp_die( '<div id="message" class="error"><p>Error reading scan</p></div>' );
+					wp_die( '<div id="message" class="error"><p>' . __( 'Error reading scan', 'p3-profiler' ) . '</p></div>' );
 				}
 			} else {
 				$this->profile = null;
@@ -287,7 +293,7 @@ class P3_Profiler_Plugin {
 
 			// Usability message
 			if ( !defined( 'WPP_PROFILING_STARTED' ) ) {
-				$this->add_notice( 'Click "Start Scan" to run a performance scan of your website.' );
+				$this->add_notice( __( 'Click "Start Scan" to run a performance scan of your website.', 'p3-profiler' ) );
 			}
 		}
 	}
@@ -382,9 +388,9 @@ class P3_Profiler_Plugin {
 	 */
 	public function ajax_start_scan() {
 
-		// Check nonce
-		if ( !wp_verify_nonce( $_POST ['p3_nonce'], 'p3_ajax_start_scan' ) ) {
-			wp_die( 'Invalid nonce' );
+		// Check nonce		
+		if ( !check_admin_referer( 'p3_ajax_start_scan', 'p3_nonce' ) ) {
+			wp_die( __( 'You do not have sufficient permissions to access this page.' ) );
 		}
 
 		// Sanitize the file name
@@ -410,8 +416,7 @@ class P3_Profiler_Plugin {
 		if ( false === $flag ) {
 			wp_die( 0 );
 		} else {
-			echo 1;
-			die();
+			wp_die( 1 );
 		}
 	}
 
@@ -422,8 +427,8 @@ class P3_Profiler_Plugin {
 	public function ajax_stop_scan() {
 
 		// Check nonce
-		if ( !wp_verify_nonce( $_POST ['p3_nonce'], 'p3_ajax_stop_scan' ) ) {
-			wp_die( 'Invalid nonce' );
+		if ( !check_admin_referer( 'p3_ajax_stop_scan', 'p3_nonce' ) ) {
+			wp_die( __( 'You do not have sufficient permissions to access this page.' ) );
 		}
 
 		// Turn off scanning
@@ -431,12 +436,12 @@ class P3_Profiler_Plugin {
 		update_option( 'p3-profiler_profiling_enabled', false );
 
 		// Tell the user what happened
-		$this->add_notice( 'Turned off performance scanning.' );
+		$this->add_notice( __( 'Turned off performance scanning.', 'p3-profiler' ) );
 
 		// Return the last filename
 		if ( !empty( $opts ) && is_array( $opts ) && array_key_exists( 'name', $opts ) ) {
 			echo $opts['name'] . '.json';
-			die();
+			wp_die();
 		} else {
 			wp_die( 0 );
 		}
@@ -449,8 +454,8 @@ class P3_Profiler_Plugin {
 	public function ajax_save_settings() {
 		
 		// Check nonce
-		if ( !wp_verify_nonce( $_POST ['p3_nonce'], 'p3_save_settings' ) ) {
-			wp_die( 'Invalid nonce' );
+		if ( !check_admin_referer( 'p3_save_settings', 'p3_nonce' ) ) {
+			wp_die( __( 'You do not have sufficient permissions to access this page.' ) );
 		}
 
 		// Save the new options
@@ -468,7 +473,7 @@ class P3_Profiler_Plugin {
 			}
 		}
 
-		die( '1' );
+		wp_die( 1 );
 	}
 	
 
@@ -483,8 +488,8 @@ class P3_Profiler_Plugin {
 	public function ajax_send_results() {
 
 		// Check nonce
-		if ( !wp_verify_nonce( $_POST ['p3_nonce'], 'p3_ajax_send_results' ) ) {
-			wp_die( 'Invalid nonce' );
+		if ( !check_admin_referer( 'p3_ajax_send_results', 'p3_nonce' ) ) {
+			wp_die( __( 'You do not have sufficient permissions to access this page.' ) );
 		}
 
 		// Check fields
@@ -503,15 +508,21 @@ class P3_Profiler_Plugin {
 
 		// Check for errors and send message
 		if ( !is_email( $to ) || !is_email( $from ) ) {
-			echo '0|Invalid e-mail';
+			echo '0|';
+			_e( 'Invalid subject', 'p3-profiler' );
 		} elseif ( empty( $subject ) ) {
-			echo '0|Invalid subject';
+			echo '0|';
+			_e( 'Invalid subject', 'p3-profiler' );
 		} elseif ( false === wp_mail( $to, $subject, $message, "From: $from" ) ) {
-			echo '0|<a href="http://codex.wordpress.org/Function_Reference/wp_mail" target="_blank">wp_mail()</a> function returned false';
+			echo '0|';
+			printf(
+				__( '<a href="%s" target="_blank">wp_mail()</a> function returned false', 'p3-profiler' ),
+				'http://codex.wordpress.org/Function_Reference/wp_mail'
+			);
 		} else {
 			echo '1';
 		}
-		die();
+		wp_die();
 	}
 
 
@@ -549,7 +560,7 @@ class P3_Profiler_Plugin {
 	 */
 	public function clear_debug_log() {
 		if ( !check_admin_referer( 'p3-clear-debug-log' ) ) {
-			wp_die( 'Invalid access' );
+			wp_die( __( 'You do not have sufficient permissions to access this page.' ) );
 		}
 		update_option( 'p3-profiler_debug_log', array() );
 		wp_redirect( add_query_arg( array( 'p3_action' => 'help' ) ) );
@@ -560,7 +571,7 @@ class P3_Profiler_Plugin {
 	 */
 	public function download_debug_log() {
 		if ( !check_admin_referer( 'p3-download-debug-log' ) ) {
-			wp_die( 'Invalid access' );
+			wp_die( __( 'You do not have sufficient permissions to access this page.' ) );
 		}
 		$log = get_option( 'p3-profiler_debug_log' );
 		if ( empty( $log ) ) {
@@ -576,7 +587,17 @@ class P3_Profiler_Plugin {
 		header('Content-Transfer-Encoding: binary');
 		
 		// File header
-		echo '"Profiling Enabled","Recording IP","Scan Name","Recording","Disable Optimizers","URL","Visitor IP","Time","PID"' . "\n";
+		printf('"%s","%s","%s","%s","%s","%s","%s","%s","%s"' . "\n",
+			__( 'Profiling Enabled',  'p3-profiler' ),
+			__( 'Recording IP',       'p3-profiler' ),
+			__( 'Scan Name',          'p3-profiler' ),
+			__( 'Recording',          'p3-profiler' ),
+			__( 'Disable Optimizers', 'p3-profiler' ),
+			__( 'URL',                'p3-profiler' ),
+			__( 'Visitor IP',         'p3-profiler' ),
+			__( 'Time',               'p3-profiler' ),
+			_x( 'PID',   'Abbreviation for process id', 'p3-profiler' )
+		);		
 
 		foreach ( (array) $log as $entry ) {
 			printf('"%s","%s","%s","%s","%s","%s","%s","%s","%d"' . "\n",
@@ -632,7 +653,7 @@ class P3_Profiler_Plugin {
 		// Open the directory
 		$dir = opendir( P3_PROFILES_PATH );
 		if ( false === $dir ) {
-			wp_die( 'Cannot read profiles directory' );
+			wp_die( __( 'Cannot read profiles directory', 'p3-profiler' ) );
 		}
 
 		// Loop through the files, get the path and the last modified time
@@ -694,7 +715,7 @@ class P3_Profiler_Plugin {
 		}
 		set_transient( 'p3_notices', array() );
 		if ( false !== $this->scan_enabled() ) {
-			echo '<div class="updated"><p>Performance scanning is enabled.</p></div>';
+			echo '<div class="updated"><p>' . __( 'Performance scanning is enabled.', 'p3-profiler' ) . '</p></div>';
 		}
 	}
 
@@ -852,7 +873,13 @@ class P3_Profiler_Plugin {
 	 * @return string
 	 */
 	public function readable_size( $size ) {
-		$units = array( 'B', 'KB', 'MB', 'GB', 'TB' );
+		$units = array(
+			_x( 'B',  'Abbreviation for bytes',     'p3-profiler' ),
+			_x( 'KB', 'Abbreviation for kilobytes', 'p3-profiler' ),
+			_x( 'MB', 'Abbreviation for megabytes', 'p3-profiler' ),
+			_x( 'GB', 'Abbreviation for gigabytes', 'p3-profiler' ),
+			_x( 'TB', 'Abbreviation for terabytes', 'p3-profiler' )
+		);
 		$size  = max( $size, 0 );
 		$pow   = floor( ( $size ? log( $size ) : 0 ) / log( 1024 ) );
 		$pow   = min( $pow, count( $units ) - 1 );
@@ -926,6 +953,11 @@ class P3_Profiler_Plugin {
 			if ( file_exists( P3_PATH . '/.profiling_enabled' ) ) {
 				@unlink( P3_PATH . '/.profiling_enabled' );
 			}
+		}
+		
+		// Upgrading from < 1.3.0
+		if ( empty( $version) || version_compare( $version, '1.3.0' ) < 0 ) {
+			update_option( 'p3-profiler_version', '1.3.0' );
 		}
 
 		// Ensure the profiles folder is there
