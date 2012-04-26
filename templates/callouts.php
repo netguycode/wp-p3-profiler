@@ -543,7 +543,7 @@ if ( !defined('P3_PATH') )
 
 		<!-- Second callout cell -->
 		<td class="p3-callout">
-			<div class="p3-callout-outer-wrapper qtip-tip" title="<?php esc_attr_e( 'Total number of seconds dedicated to plugin code per visit on your site.', 'p3-profiler' ); ?>">
+			<div class="p3-callout-outer-wrapper qtip-tip" title="<?php esc_attr_e( 'Total number of seconds dedicated to plugin code per visit on your site.', 'p3-profiler' ); ?>"
 				<?php if ( !empty( $this->scan ) ) { ?>title="<?php esc_attr_e( 'From', 'p3-profiler' ); ?> <?php echo basename( $this->scan ); ?><?php } ?>">
 				<div class="p3-callout-inner-wrapper">
 					<div class="p3-callout-caption"><?php _e( 'Plugin Load Time', 'p3-profiler' ); ?></div>

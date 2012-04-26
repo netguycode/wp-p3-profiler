@@ -171,16 +171,16 @@ class P3_Profile_Table extends WP_List_Table {
 				'current_scan' => null,
 			)
 		);
-		$ret  = '<a href="$url" title="' . esc_attr_e( 'View the results of this scan', 'p3-profiler' ) . '"><strong>$display</strong></a>';
+		$ret  = '<a href="$url" title="' . esc_attr__( 'View the results of this scan', 'p3-profiler' ) . '"><strong>' . $display . '</strong></a>';
 		$ret .= '<div class="row-actions-visible">';
 		$ret .= '  <span class="view">';
-		$ret .= '    <a href="$url" data-name="$key" title="' . esc_attr_e( 'View the results of this scan', 'p3-profiler' ) . '" class="view-results">' . __( 'View', 'p3-profiler' ) . '</a> |';
+		$ret .= '    <a href="$url" data-name="$key" title="' . esc_attr__( 'View the results of this scan', 'p3-profiler' ) . '" class="view-results">' . __( 'View', 'p3-profiler' ) . '</a> |';
 		$ret .= '  </span>';
 		$ret .= '  <span>';
-		$ret .= '    <a href="javascript:;" data-name="$key" title="' . esc_attr_e( 'Continue this scan', 'p3-profiler' ) . '" class="p3-continue-scan">' . __( 'Continue', 'p3-profiler' ) . '</a> |';
+		$ret .= '    <a href="javascript:;" data-name="$key" title="' . esc_attr__( 'Continue this scan', 'p3-profiler' ) . '" class="p3-continue-scan">' . __( 'Continue', 'p3-profiler' ) . '</a> |';
 		$ret .= '  </span>';
 		$ret .= '  <span class="delete">';
-		$ret .= '    <a href="javascript:;" data-name="$key" title="' . esc_attr_e( 'Delete this scan', 'p3-profiler' ) . '" class="delete-scan delete">' . __( 'Delete', 'p3-profiler' ) . '</a>';
+		$ret .= '    <a href="javascript:;" data-name="$key" title="' . esc_attr__( 'Delete this scan', 'p3-profiler' ) . '" class="delete-scan delete">' . __( 'Delete', 'p3-profiler' ) . '</a>';
 		$ret .= '  </span>';
 		$ret .= '</div>';
 		return $ret;
