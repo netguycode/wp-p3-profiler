@@ -212,7 +212,7 @@ if ( !defined('P3_PATH') )
 			'modal' : true,
 			'width' : 450,
 			'height' : 425,
-			'title' : "Advanced Settings",
+			'title' : "<?php _e( 'Advanced Settings', 'p3-profiler' ); ?>",
 			'buttons' :
 			[
 				{
@@ -257,7 +257,7 @@ if ( !defined('P3_PATH') )
 			'modal' : true,
 			'width': 800,
 			'height' : 600,
-			'title' : "Performance Scan",
+			'title' : "<?php _e( 'Performance Scan', 'p3-profiler' ); ?>",
 			'dialogClass' : 'noPadding'
 		});
 
@@ -270,7 +270,7 @@ if ( !defined('P3_PATH') )
 			'modal' : true,
 			'width' : 425,
 			'height' : 180,
-			'title' : 'Scan Name'
+			'title' : '<?php _e( 'Scan Name', 'p3-profiler' ); ?>'
 			// 'dialogClass' : 'noTitle'
 		});
 
@@ -521,7 +521,7 @@ if ( !defined('P3_PATH') )
 
 		<!-- First callout cell -->
 		<td class="p3-callout">
-			<div class="p3-callout-outer-wrapper qtip-tip" title="<?php _e( 'Total number of active plugins, including must-use plugins, on your site.', 'p3-profiler' ); ?>">
+			<div class="p3-callout-outer-wrapper qtip-tip" title="<?php esc_attr_e( 'Total number of active plugins, including must-use plugins, on your site.', 'p3-profiler' ); ?>">
 				<div class="p3-callout-inner-wrapper">
 					<div class="p3-callout-caption"><?php _e( 'Total Plugins:', 'p3-profiler' ); ?></div>
 					<div class="p3-callout-data">
@@ -543,8 +543,8 @@ if ( !defined('P3_PATH') )
 
 		<!-- Second callout cell -->
 		<td class="p3-callout">
-			<div class="p3-callout-outer-wrapper qtip-tip" title="<?php _e( 'Total number of seconds dedicated to plugin code per visit on your site.', 'p3-profiler' ); ?>">
-				<?php if ( !empty( $this->scan ) ) { ?>title="<?php _e( 'From', 'p3-profiler' ); ?> <?php echo basename( $this->scan ); ?><?php } ?>">
+			<div class="p3-callout-outer-wrapper qtip-tip" title="<?php esc_attr_e( 'Total number of seconds dedicated to plugin code per visit on your site.', 'p3-profiler' ); ?>">
+				<?php if ( !empty( $this->scan ) ) { ?>title="<?php esc_attr_e( 'From', 'p3-profiler' ); ?> <?php echo basename( $this->scan ); ?><?php } ?>">
 				<div class="p3-callout-inner-wrapper">
 					<div class="p3-callout-caption"><?php _e( 'Plugin Load Time', 'p3-profiler' ); ?></div>
 					<div class="p3-callout-data">
@@ -561,8 +561,8 @@ if ( !defined('P3_PATH') )
 
 		<!-- Third callout cell -->
 		<td class="p3-callout">
-			<div class="p3-callout-outer-wrapper qtip-tip" title="<?php _e( 'Percent of load time on your site dedicated to plugin code', 'p3-profiler' ); ?>"
-				<?php if ( !empty( $this->scan ) ) { ?>title="<?php _e( 'From', 'p3-profiler' ); ?> <?php echo basename( $this->scan ); ?><?php } ?>">
+			<div class="p3-callout-outer-wrapper qtip-tip" title="<?php esc_attr_e( 'Percent of load time on your site dedicated to plugin code', 'p3-profiler' ); ?>"
+				<?php if ( !empty( $this->scan ) ) { ?>title="<?php esc_attr_e( 'From', 'p3-profiler' ); ?> <?php echo basename( $this->scan ); ?><?php } ?>">
 				<div class="p3-callout-inner-wrapper">
 					<div class="p3-callout-caption"><?php _e( 'Plugin Impact', 'p3-profiler' ); ?></div>
 					<div class="p3-callout-data">
@@ -579,8 +579,8 @@ if ( !defined('P3_PATH') )
 
 		<!-- Fourth callout cell -->
 		<td class="p3-callout">
-			<div class="p3-callout-outer-wrapper qtip-tip" title="<?php _e( 'Total number of database queries per visit', 'p3-profiler' ); ?>"
-				<?php if ( !empty( $this->scan ) ) { ?>title="<?php _e( 'From', 'p3-profiler' ); ?> <?php echo basename( $this->scan ); ?><?php } ?>">
+			<div class="p3-callout-outer-wrapper qtip-tip" title="<?php esc_attr_e( 'Total number of database queries per visit', 'p3-profiler' ); ?>"
+				<?php if ( !empty( $this->scan ) ) { ?>title="<?php esc_attr_e( 'From', 'p3-profiler' ); ?> <?php echo basename( $this->scan ); ?><?php } ?>">
 				<div class="p3-callout-inner-wrapper">
 					<div class="p3-callout-caption"><?php _e( 'MySQL Queries', 'p3-profiler' ); ?></div>
 					<div class="p3-callout-data">
@@ -605,7 +605,7 @@ if ( !defined('P3_PATH') )
 		<input type="checkbox" id="p3-use-current-ip" <?php if ( true == get_option( 'p3-profiler_use_current_ip' ) ) : ?>checked="checked"<?php endif; ?> />
 		<label for="p3-use-current-ip"><?php _e( 'Use my IP address', 'p3-profiler' ); ?></label>
 		<br />
-		<input type="text" id="p3-advanced-ip" style="width:90%;" size="35" value="" title="<?php _e( 'Enter IP address or regular expression pattern', 'p3-profiler' ); ?>" />
+		<input type="text" id="p3-advanced-ip" style="width:90%;" size="35" value="" title="<?php esc_attr_e( 'Enter IP address or regular expression pattern', 'p3-profiler' ); ?>" />
 		<br />
 		<em class="p3-em"><?php _e( 'Example: 1.2.3.4 or ( 1.2.3.4|4.5.6.7 )', 'p3-profiler' ); ?></em>
 	</div>
@@ -666,7 +666,7 @@ if ( !defined('P3_PATH') )
 <!-- Dialog for choose manual or auto scan  -->
 <div id="p3-scan-name-dialog" class="p3-dialog">
 	<div style="padding-top: 10px;"><?php _e( 'Scan name:', 'p3-profiler' ); ?>
-		<input type="text" name="p3_scan_name" id="p3-scan-name" title="<?php _e( 'Enter scan name here', 'p3-profiler' ); ?>"
+		<input type="text" name="p3_scan_name" id="p3-scan-name" title="<?php esc_attr_e( 'Enter scan name here', 'p3-profiler' ); ?>"
 			value="scan_<?php echo date( 'Y-m-d' ); ?>_<?php echo substr( md5( uniqid() ), -8 );?>" size="35" maxlength="100" />
 	</div>
 	<div style="padding-top: 10px;"><em class="p3-em"><?php _e( 'Enter the name of a previous scan to continue scanning', 'p3-profiler' ); ?></em></div>

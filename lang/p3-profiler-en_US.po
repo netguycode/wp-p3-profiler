@@ -2,14 +2,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: P3 Profiler\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-04-25 16:26-0700\n"
-"PO-Revision-Date: 2012-04-25 16:26-0700\n"
+"POT-Creation-Date: 2012-04-26 13:13-0700\n"
+"PO-Revision-Date: 2012-04-26 13:14-0700\n"
 "Last-Translator: Kurt Payne <kpayne@godaddy.com>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Poedit-KeywordsList: __;_e;_n;_x;_ex\n"
+"X-Poedit-KeywordsList: __;_e;_n;_x;_ex;esc_attr_e;esc_attr_ex;esc_html_e;esc_html_ex\n"
 "X-Poedit-Basepath: .\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Poedit-Language: English\n"
@@ -146,6 +146,7 @@ msgid "Recording IP"
 msgstr ""
 
 #: ../p3-profiler.php:593
+#: ../templates/callouts.php:273
 #: ../templates/help.php:368
 #: ../templates/help.php:408
 msgid "Scan Name"
@@ -204,6 +205,7 @@ msgid "KB"
 msgstr ""
 
 #: ../p3-profiler.php:879
+#: ../templates/view-scan.php:961
 msgid "MB"
 msgstr ""
 
@@ -234,6 +236,15 @@ msgstr ""
 msgid "Scanning is complete."
 msgstr ""
 
+#: ../templates/callouts.php:215
+#: ../templates/callouts.php:516
+msgid "Advanced Settings"
+msgstr ""
+
+#: ../templates/callouts.php:260
+msgid "Performance Scan"
+msgstr ""
+
 #: ../templates/callouts.php:506
 #: ../templates/callouts.php:689
 msgid "Stop Scan"
@@ -245,10 +256,6 @@ msgstr ""
 
 #: ../templates/callouts.php:515
 msgid "Start Scan"
-msgstr ""
-
-#: ../templates/callouts.php:516
-msgid "Advanced Settings"
 msgstr ""
 
 #: ../templates/callouts.php:524
@@ -364,6 +371,7 @@ msgid "Click the links and pages of your site, and the scanner will analyze the 
 msgstr ""
 
 #: ../templates/callouts.php:654
+#: ../templates/view-scan.php:121
 msgid "Cancel"
 msgstr ""
 
@@ -744,10 +752,14 @@ msgid "The length of time the site took to load. This is an observed measurement
 msgstr ""
 
 #: ../templates/help.php:469
+#: ../templates/view-scan.php:414
+#: ../templates/view-scan.php:472
+#: ../templates/view-scan.php:887
 msgid "Site Load Time"
 msgstr ""
 
 #: ../templates/help.php:471
+#: ../templates/view-scan.php:886
 msgid "The calculated total load time minus the profile overhead. This is closer to your site's real-life load time. Lower is better."
 msgstr ""
 
@@ -768,6 +780,7 @@ msgid "Theme Load Time"
 msgstr ""
 
 #: ../templates/help.php:492
+#: ../templates/view-scan.php:910
 msgid "The load time spent applying the theme. Because of WordPress' construction, we can trace a function call from a plugin through a theme through the core. The profiler prioritizes plugin calls first, theme calls second, and core calls last. Lower is better."
 msgstr ""
 
@@ -776,6 +789,7 @@ msgid "Core Load Time"
 msgstr ""
 
 #: ../templates/help.php:499
+#: ../templates/view-scan.php:918
 msgid "The load time caused by the WordPress core. Because of WordPress' construction, we can trace a function call from a plugin through a theme through the core. The profiler prioritizes plugin calls first, theme calls second, and core calls last. This will probably be constant."
 msgstr ""
 
@@ -805,6 +819,7 @@ msgid "Expected"
 msgstr ""
 
 #: ../templates/help.php:524
+#: ../templates/view-scan.php:935
 msgid "The expected site load time calculated by adding plugin load time, core load time, theme load time, and profiler overhead."
 msgstr ""
 
@@ -885,5 +900,331 @@ msgstr ""
 #: ../templates/template.php:97
 #, php-format
 msgid "I just optimized my WordPress site with %s %s"
+msgstr ""
+
+#: ../templates/view-scan.php:51
+msgid "Toggle Series"
+msgstr ""
+
+#: ../templates/view-scan.php:71
+msgid "Email Report"
+msgstr ""
+
+#: ../templates/view-scan.php:176
+msgid "No plugins"
+msgstr ""
+
+#: ../templates/view-scan.php:206
+#: ../templates/view-scan.php:311
+#: ../templates/view-scan.php:501
+#: ../templates/view-scan.php:664
+#: ../templates/view-scan.php:882
+#: ../templates/view-scan.php:890
+#: ../templates/view-scan.php:898
+#: ../templates/view-scan.php:906
+#: ../templates/view-scan.php:914
+#: ../templates/view-scan.php:922
+#: ../templates/view-scan.php:930
+msgid "seconds"
+msgstr ""
+
+#: ../templates/view-scan.php:222
+msgid "WP Core time"
+msgstr ""
+
+#: ../templates/view-scan.php:233
+msgid "Theme time"
+msgstr ""
+
+#: ../templates/view-scan.php:244
+msgid "Plugin time"
+msgstr ""
+
+#: ../templates/view-scan.php:328
+msgid "# of Queries"
+msgstr ""
+
+#: ../templates/view-scan.php:394
+msgid "query"
+msgstr ""
+
+#: ../templates/view-scan.php:394
+#: ../templates/view-scan.php:969
+msgid "queries"
+msgstr ""
+
+#: ../templates/view-scan.php:429
+#: ../templates/view-scan.php:473
+#: ../templates/view-scan.php:527
+#: ../templates/view-scan.php:577
+msgid "WP Core Time"
+msgstr ""
+
+#: ../templates/view-scan.php:433
+#: ../templates/view-scan.php:474
+#: ../templates/view-scan.php:540
+#: ../templates/view-scan.php:578
+msgid "Theme"
+msgstr ""
+
+#: ../templates/view-scan.php:607
+msgid "No data"
+msgstr ""
+
+#: ../templates/view-scan.php:698
+msgid "Runtime By Plugin"
+msgstr ""
+
+#: ../templates/view-scan.php:699
+#: ../templates/view-scan.php:708
+msgid "Detailed Breakdown"
+msgstr ""
+
+#: ../templates/view-scan.php:700
+msgid "Simple Timeline"
+msgstr ""
+
+#: ../templates/view-scan.php:701
+#: ../templates/view-scan.php:835
+msgid "Detailed Timeline"
+msgstr ""
+
+#: ../templates/view-scan.php:702
+#: ../templates/view-scan.php:800
+msgid "Query Timeline"
+msgstr ""
+
+#: ../templates/view-scan.php:703
+#: ../templates/view-scan.php:872
+msgid "Advanced Metrics"
+msgstr ""
+
+#: ../templates/view-scan.php:714
+#: ../templates/view-scan.php:771
+#: ../templates/view-scan.php:841
+msgid "Seconds"
+msgstr ""
+
+#: ../templates/view-scan.php:721
+#: ../templates/view-scan.php:751
+#: ../templates/view-scan.php:778
+#: ../templates/view-scan.php:813
+#: ../templates/view-scan.php:848
+msgid "Legend"
+msgstr ""
+
+#: ../templates/view-scan.php:733
+msgid "Component"
+msgstr ""
+
+#: ../templates/view-scan.php:743
+msgid "Runtime by Plugin"
+msgstr ""
+
+#: ../templates/view-scan.php:765
+msgid "Summary Timeline"
+msgstr ""
+
+#: ../templates/view-scan.php:806
+msgid "Queries"
+msgstr ""
+
+#: ../templates/view-scan.php:878
+msgid "The time the site took to load. This is an observed measurement (start timing when the page was requested, stop timing when the page was delivered to the browser, calculate the difference). Lower is better."
+msgstr ""
+
+#: ../templates/view-scan.php:879
+msgid "Total Load Time:"
+msgstr ""
+
+#: ../templates/view-scan.php:882
+#: ../templates/view-scan.php:890
+#: ../templates/view-scan.php:898
+#: ../templates/view-scan.php:906
+#: ../templates/view-scan.php:914
+#: ../templates/view-scan.php:922
+#: ../templates/view-scan.php:930
+#: ../templates/view-scan.php:953
+#: ../templates/view-scan.php:961
+#: ../templates/view-scan.php:969
+msgid "avg."
+msgstr ""
+
+#: ../templates/view-scan.php:894
+msgid "The load time spent profiling code. Because the profiler slows down your load time, it is important to know how much impact the profiler has. However, it doesn't impact your site's\treal-life load time."
+msgstr ""
+
+#: ../templates/view-scan.php:895
+msgid "Profile Overhead:"
+msgstr ""
+
+#: ../templates/view-scan.php:902
+msgid "The load time caused by plugins. Because of WordPress' construction, we can trace a function call  from a plugin through a theme through the core. The profiler prioritizes plugin calls first, theme calls second, and core calls last. Lower is better."
+msgstr ""
+
+#: ../templates/view-scan.php:903
+msgid "Plugin Load Time:"
+msgstr ""
+
+#: ../templates/view-scan.php:911
+msgid "Theme Load Time:"
+msgstr ""
+
+#: ../templates/view-scan.php:919
+msgid "Core Load Time:"
+msgstr ""
+
+#: ../templates/view-scan.php:926
+msgid "This is the difference between the observed runtime (what actually happened) and expected runtime (adding the plugin runtime, theme runtime, core runtime, and profiler overhead). There are several reasons this margin of error can exist. Most likely, the profiler is missing microseconds while adding the runtime it observed. Using a network clock to set the time (NTP) can also cause minute timing changes. Ideally, this number should be zero, but there's nothing you can do to change it. It will give you an idea of how accurate the other results are."
+msgstr ""
+
+#: ../templates/view-scan.php:927
+msgid "Margin of Error:"
+msgstr ""
+
+#: ../templates/view-scan.php:933
+msgid "How long the site took to load. This is an observed measurement (start timing when the page was requested, stop timing when the page was delivered to the browser, calculate the difference)."
+msgstr ""
+
+#: ../templates/view-scan.php:934
+msgid "observed"
+msgstr ""
+
+#: ../templates/view-scan.php:936
+msgid "expected"
+msgstr ""
+
+#: ../templates/view-scan.php:941
+msgid "The number of visits registered during a profiling session.  More visits produce a more accurate summary."
+msgstr ""
+
+#: ../templates/view-scan.php:942
+msgid "Visits:"
+msgstr ""
+
+#: ../templates/view-scan.php:949
+msgid "The number of PHP ticks recorded during the profiling session.  A tick a loosely correlated to a PHP statement or function call.  Fewer is better.  Fewer is better."
+msgstr ""
+
+#: ../templates/view-scan.php:950
+msgid "Number of PHP ticks:"
+msgstr ""
+
+#: ../templates/view-scan.php:953
+msgid "calls"
+msgstr ""
+
+#: ../templates/view-scan.php:957
+msgid "The amount of RAM usage observed.  This is reported by memory_get_peak_usage(). Lower is better."
+msgstr ""
+
+#: ../templates/view-scan.php:958
+msgid "Memory Usage:"
+msgstr ""
+
+#: ../templates/view-scan.php:965
+msgid "The count of queries sent to the database.  This is reported by the WordPress function get_num_queries(). Lower is better."
+msgstr ""
+
+#: ../templates/view-scan.php:966
+msgid "MySQL Queries:"
+msgstr ""
+
+#: ../templates/view-scan.php:981
+#: ../templates/view-scan.php:982
+msgid "Email these results"
+msgstr ""
+
+#: ../templates/view-scan.php:988
+msgid "From:"
+msgstr ""
+
+#: ../templates/view-scan.php:990
+msgid "Enter the e-mail address to send from"
+msgstr ""
+
+#: ../templates/view-scan.php:994
+msgid "Recipient:"
+msgstr ""
+
+#: ../templates/view-scan.php:997
+msgid "Enter the e-mail address where you would like to send these results"
+msgstr ""
+
+#: ../templates/view-scan.php:1001
+msgid "Subject:"
+msgstr ""
+
+#: ../templates/view-scan.php:1003
+#, php-format
+msgid "Performance Profile Results for %s"
+msgstr ""
+
+#: ../templates/view-scan.php:1003
+msgid "Enter the e-mail subject"
+msgstr ""
+
+#: ../templates/view-scan.php:1007
+msgid "Message:"
+msgstr ""
+
+#: ../templates/view-scan.php:1007
+msgid "(optional)"
+msgstr ""
+
+#: ../templates/view-scan.php:1008
+msgid ""
+"Hello,\n"
+"\n"
+"I profiled my WordPress site's performance using the Profile Plugin and I wanted\n"
+"to share the results with you.  Please take a look at the information below:"
+msgstr ""
+
+#: ../templates/view-scan.php:1015
+msgid "Results:"
+msgstr ""
+
+#: ../templates/view-scan.php:1015
+msgid "(system generated, do not edit)"
+msgstr ""
+
+#: ../templates/view-scan.php:1021
+#, php-format
+msgid ""
+"WordPress Plugin Profile Report\n"
+"===========================================\n"
+"Report date: %1$s\n"
+"Theme name: %2$s\n"
+"Pages browsed: %3$s\n"
+"Avg. load time: %4$s sec\n"
+"Number of plugins: %5$s\n"
+"Plugin impact: %6$s %% of load time\n"
+"Avg. plugin time: %7$s sec\n"
+"Avg. core time: %8$s sec\n"
+"Avg. theme time: %9$s sec\n"
+"Avg. mem usage: %10$s MB\n"
+"Avg. ticks: %11$s\n"
+"Avg. db queries : %12$s\n"
+"Margin of error : %13$s sec\n"
+"\n"
+"Plugin list:\n"
+"===========================================\n"
+"%14$s\n"
+msgstr ""
+
+#: ../templates/view-scan.php:1063
+msgid "Loading"
+msgstr ""
+
+#: ../templates/view-scan.php:1066
+msgid "There was a problem sending the e-mail:"
+msgstr ""
+
+#: ../templates/view-scan.php:1069
+msgid "Your report was sent successfully to"
+msgstr ""
+
+#: ../templates/view-scan.php:1072
+msgid "Done"
 msgstr ""
 
