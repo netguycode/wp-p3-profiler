@@ -52,7 +52,7 @@ $component_runtime_chart_id   = substr( md5( uniqid() ), -8 );
 			'buttons' :
 			[
 				{
-					text: 'Ok',
+					text: '<?php _e( 'OK', 'p3-profiler' ); ?>',
 					'class' : 'button-secondary',
 					click: function() {
 						$(this).dialog( "close" );
@@ -72,7 +72,7 @@ $component_runtime_chart_id   = substr( md5( uniqid() ), -8 );
 			'buttons' :
 			[
 				{
-					text: 'Send',
+					text: '<?php _e( 'Send', 'p3-profiler' ); ?>',
 					'class' : 'button-secondary',
 					click: function() {
 						data = {
@@ -958,7 +958,7 @@ $component_runtime_chart_id   = substr( md5( uniqid() ), -8 );
 								<strong><?php _e( 'Memory Usage:', 'p3-profiler' ); ?></strong>
 							</td>
 							<td>
-								<?php echo number_format( $this->profile->averages['memory'] / 1024 / 1024, 2 ); ?> <?php _e( 'MB', 'Abbreviation for megabytes', 'p3-profiler' ); ?> <em class="p3-em"><?php _ex( 'avg.', "Abbreviation for 'average'", 'p3-profiler' ); ?></em>
+								<?php echo number_format( $this->profile->averages['memory'] / 1024 / 1024, 2 ); ?> <?php _ex( 'MB', 'Abbreviation for megabytes', 'p3-profiler' ); ?> <em class="p3-em"><?php _ex( 'avg.', "Abbreviation for 'average'", 'p3-profiler' ); ?></em>
 							</td>
 						</tr>
 						<tr>
@@ -1000,7 +1000,7 @@ $component_runtime_chart_id   = substr( md5( uniqid() ), -8 );
 		<div>
 			<span id="p3-email-subject-label"><?php _e( 'Subject:', 'p3-profiler' ); ?></span><br />
 			<input type="text" id="p3-email-results-subject" style="width:95%;" size="35"
-				value="<?php echo esc_attr( sprintf( __( 'Performance Profile Results for %s', 'p3-profiler' ), bloginfo( 'name' ) ) ); ?>" title="<?php esc_attr_e( 'Enter the e-mail subject', 'p3-profiler' ); ?>" />
+				value="<?php echo esc_attr_e( sprintf( __( 'Performance Profile Results for %s', 'p3-profiler' ), get_bloginfo( 'name' ) ) ); ?>" title="<?php esc_attr_e( 'Enter the e-mail subject', 'p3-profiler' ); ?>" />
 		</div>
 		<br />
 		<div>

@@ -170,7 +170,7 @@ Often times, WordPress sites load slowly because of poorly-configured plugins or
 		?>
 		<?php /* must-use plugin file is there and not-empty */ ?>
 		<?php if ( file_exists( $mu_file ) && filesize( $mu_file ) > 0 ){ ?>
-			<a href="http://codex.wordpress.org/Must_Use_Plugins" target="_blank"><?php _e( 'must-use plugin', 'p3-plugin' ); ?></a>
+			<a href="http://codex.wordpress.org/Must_Use_Plugins" target="_blank"><?php _e( 'must-use plugin', 'p3-profiler' ); ?></a>
 			- <code><?php echo realpath( $mu_file ); ?></code>
 		<?php /* default, using this plugin file */ ?>
 		<?php } else { ?>
@@ -371,7 +371,7 @@ After you've tuned your site up as much as possible, if you're still not happy w
 							<td><strong><?php _e( 'URL', 'p3-profiler' ); ?></strong></td>
 							<td><strong><?php _e( 'Visitor IP', 'p3-profiler' ); ?></strong></td>
 							<td><strong><?php _e( 'Time', 'p3-profiler' ); ?></strong></td>
-							<td><strong><?php _ex( 'PID',   'Abbreviation for process id', 'p3-profiler' ); ?></strong></td>
+							<td><strong><?php _ex( 'PID', 'Abbreviation for process id', 'p3-profiler' ); ?></strong></td>
 						</tr>
 					</thead>
 					<tbody>
@@ -411,7 +411,7 @@ After you've tuned your site up as much as possible, if you're still not happy w
 							<td><strong><?php _e( 'URL', 'p3-profiler' ); ?></strong></td>
 							<td><strong><?php _e( 'Visitor IP', 'p3-profiler' ); ?></strong></td>
 							<td><strong><?php _e( 'Time', 'p3-profiler' ); ?></strong></td>
-							<td><strong><?php _ex( 'PID',   'Abbreviation for process id', 'p3-profiler' ); ?></strong></td>
+							<td><strong><?php _ex( 'PID', 'Abbreviation for process id', 'p3-profiler' ); ?></strong></td>
 						</tr>
 					</tfoot>
 				</table>

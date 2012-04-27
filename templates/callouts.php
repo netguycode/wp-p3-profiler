@@ -216,7 +216,7 @@ if ( !defined('P3_PATH') )
 			'buttons' :
 			[
 				{
-					text: 'OK',
+					text: '<?php _e( 'OK', 'p3-profiler' ); ?>',
 					'class' : 'button-secondary',
 					click: function() {
 						
@@ -229,7 +229,7 @@ if ( !defined('P3_PATH') )
 							'p3_cache_buster' : $( '#p3-cache-buster' ).prop( 'checked' ),
 							'p3_debug' : $( '#p3-debug' ).prop( 'checked' ),
 							'p3_nonce' : '<?php echo wp_create_nonce( 'p3_save_settings' ); ?>'
-						}
+						};
 						$.post( ajaxurl, data, function( response ) {
 							if ( 1 != response ) {
 								alert( "<?php _e( 'There was an error processing your request.  Please reload the page and try again.', 'p3-profiler' ); ?> [" + response + "]");
@@ -239,7 +239,7 @@ if ( !defined('P3_PATH') )
 					}
 				},
 				{
-					text: 'Cancel',
+					text: '<?php _e( 'Cancel', 'p3-profiler'); ?>',
 					'class': 'p3-cancel-button',
 					click: function() {
 						$( this ).dialog( "close" );
@@ -619,7 +619,7 @@ if ( !defined('P3_PATH') )
 	<br />
 	<div>
 		<input type="checkbox" id="p3-cache-buster" <?php if ( true == get_option( 'p3-profiler_cache_buster' ) ) : ?>checked="checked"<?php endif; ?> />
-		<label for="p3-cache-buster">Attempt to circumvent browser cache</label>
+		<label for="p3-cache-buster"><?php _e( 'Attempt to circumvent browser cache', 'p3-profiler' ); ?></label>
 		<br />
 		<em class="p3-em"><?php printf( __('This may help fix a "No visits recorded" error message.  See the <a href="%s">help</a> page for details.', 'p3-profiler' ),
 			add_query_arg( array( 'p3_action' => 'help', 'current_scan' => null ) ) . '#q-debug-log'

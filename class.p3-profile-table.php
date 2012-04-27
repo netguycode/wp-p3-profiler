@@ -217,7 +217,7 @@ class P3_Profile_Table extends WP_List_Table {
 			}
 			$count = count( $_REQUEST['scan'] );
 			echo '<div id="updated"><p>'
-				. sprintf( _n( 'Deleted %d scan. ', 'Deleted %d scans' , $count, 'p3-profiler' ), $count )
+				. sprintf( _n( 'Deleted %d scan. ', 'Deleted %d scans.' , $count, 'p3-profiler' ), $count )
 				. '</p></div>';
 		}
     }

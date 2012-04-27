@@ -43,7 +43,7 @@ $p3_profiler_plugin = new P3_Profiler_Plugin();
 if ( is_admin() ) {
 
 	// Localization
-	load_plugin_textdomain( 'p3-profiler', false, dirname( plugin_basename( __FILE__ ) ) . '/lang/' );
+	load_plugin_textdomain( 'p3-profiler', false, dirname( plugin_basename( __FILE__ ) ) . '/languages/' );
 	
 	// Show the 'Profiler' option under the 'Plugins' menu
 	add_action( 'admin_menu', array( $p3_profiler_plugin, 'settings_menu' ) );
