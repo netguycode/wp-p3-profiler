@@ -158,7 +158,7 @@ if ( !defined('P3_PATH') )
 
 		// Update the display
 		update_display : function() {
-			jQuery( "#p3-scanning-caption" ).html( 'Scanning ' + P3_Scan.pages[P3_Scan.current_page] ).css( "color", "" );
+			jQuery( "#p3-scanning-caption" ).html( '<?php _e( 'Scanning', 'p3-profiler' ); ?> ' + P3_Scan.pages[P3_Scan.current_page] ).css( "color", "" );
 			jQuery( "#p3-progress" ).progressbar( "value", ( P3_Scan.current_page / ( P3_Scan.pages.length - 1 ) ) * 100 );
 		},
 
