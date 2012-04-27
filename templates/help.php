@@ -565,9 +565,7 @@ Ideally, this number should be zero, but there's nothing you can do to change it
 <div class="p3-question">
 	<h2 class="p3-help-question"><?php _e( "License", 'p3-profiler' ); ?></h2>
 	<blockquote>
-		<strong><?php _e( 'P3 (Plugin Performance Profiler)', 'p3-profiler' ); ?></strong>
-		<br />
-		<?php _e( 'Copyright', 'p3-profiler' ); ?> &copy; 2011-<?php echo date('Y'); ?> <a href="http://www.godaddy.com/" target="_blank">GoDaddy.com</a>.  <?php _e( 'All rights reserved.', 'p3-profiler' ); ?>
+		<?php printf( __( 'P3 (Plugin Performance Profiler) is Copyright &copy; %s - %s <a href="%s" target="_blank">GoDaddy.com</a>.  All rights reserved.', 'p3-profiler' ), 2011, date( 'Y' ), 'http://www.godaddy.com/' ); ?>
 		<br /><br />
 		<?php printf( __( "This program is offered under the terms of the GNU General Public License Version 2 as published by the Free Software Foundation.
 <br /><br />
