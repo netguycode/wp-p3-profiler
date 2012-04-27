@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: P3 (Plugin Performance Profiler) 1.3.0\n"
 "Report-Msgid-Bugs-To: http://wordpress.org/tag/p3-profiler\n"
-"POT-Creation-Date: 2012-04-27 17:56:37+00:00\n"
+"POT-Creation-Date: 2012-04-27 19:31:39+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -464,6 +464,26 @@ msgid ""
 "%10$s</a> can show you a connection breakdown of your site's content."
 msgstr ""
 
+#: templates/help.php:104
+msgid "webpagetest.org"
+msgstr ""
+
+#: templates/help.php:105 templates/help.php:339
+msgid "Firebug"
+msgstr ""
+
+#: templates/help.php:106
+msgid "Pingdom tools"
+msgstr ""
+
+#: templates/help.php:107 templates/help.php:341
+msgid "Safari Developer Tools"
+msgstr ""
+
+#: templates/help.php:108 templates/help.php:340
+msgid "Chrome Developer Tools"
+msgstr ""
+
 #: templates/help.php:114
 msgid "How do I fix \"No visits recorded...\" ?"
 msgstr ""
@@ -586,6 +606,10 @@ msgid ""
 "break down results by plugin."
 msgstr ""
 
+#: templates/help.php:191
+msgid "xdebug"
+msgstr ""
+
 #: templates/help.php:197
 msgid "Why are some plugins slow?"
 msgstr ""
@@ -625,6 +649,22 @@ msgid ""
 "<a href=\"%1$s\" target=\"_blank\">%2$s</a>, <a href=\"%3$s\" target=\"_blank"
 "\">%4$s</a>, <a href=\"%5$s\" target=\"_blank\">%6$s</a>, and <a href=\"%7$s"
 "\" target=\"_blank\">%8$s</a> measure how your site looks to the browser."
+msgstr ""
+
+#: templates/help.php:215 templates/help.php:337
+msgid "YSlow"
+msgstr ""
+
+#: templates/help.php:216
+msgid "PageSpeed"
+msgstr ""
+
+#: templates/help.php:217
+msgid "Webpagetest.org"
+msgstr ""
+
+#: templates/help.php:218 templates/help.php:335
+msgid "Pingdom Tools"
 msgstr ""
 
 #: templates/help.php:224
@@ -804,6 +844,14 @@ msgid ""
 "administrator or hosting support."
 msgstr ""
 
+#: templates/help.php:336
+msgid "Webpage Test"
+msgstr ""
+
+#: templates/help.php:338
+msgid "Google PageSpeed"
+msgstr ""
+
 #: templates/help.php:347
 msgid "Where can I view the debug log?"
 msgstr ""
@@ -855,6 +903,14 @@ msgid ""
 "\">%2$s</a> to 128 MB and <a href=\"%3$s\" target=\"_blank\">%4$s</a> to 90 "
 "seconds during a performance scan.  These changes are not permanent and are "
 "only in effect when a performance scan is actively running."
+msgstr ""
+
+#: templates/help.php:436
+msgid "memory limit"
+msgstr ""
+
+#: templates/help.php:437
+msgid "time limit"
 msgstr ""
 
 #: templates/help.php:443 templates/help.php:448
@@ -1327,6 +1383,10 @@ msgstr ""
 
 #: templates/view-scan.php:1001
 msgid "Subject:"
+msgstr ""
+
+#: templates/view-scan.php:1003
+msgid "Performance Profile Results for %s"
 msgstr ""
 
 #: templates/view-scan.php:1003

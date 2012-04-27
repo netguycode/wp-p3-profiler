@@ -101,11 +101,11 @@ Often times, WordPress sites load slowly because of poorly-configured plugins or
 	<h2 class="p3-help-question"><?php _e( 'What do I do with these results?', 'p3-profiler' ); ?></h2>
 	<blockquote>
 		<?php printf( __("If your site loads in an acceptable time (usually &lt; 0.5 seconds), you might consider other explanation for sluggish loading. For example, loading large images, large videos, or a lot of content can cause slowness. Tools like <a href=\"%1\$s\" target=\"_blank\">%2\$s</a>, <a href=\"%3\$s\" target=\"_blank\">%4\$s</a>, <a href=\"%5\$s\" target=\"_blank\">%6\$s</a>, or <a href=\"%7\$s\" target=\"_blank\">%8\$s</a> or <a href=\"%9\$s\" target=\"_blank\">%10\$s</a> can show you a connection breakdown of your site's content.", 'p3-profiler' ),
-		'http://www.webpagetest.org/',                                         'webpagetest.org',
-		'http://getfirebug.com/',                                              'Firebug',
-		'http://tools.pingdom.com/',                                           'Pingdom tools',
-		'http://developer.apple.com/technologies/safari/developer-tools.html', 'Safari Developer Tools',
-		'http://code.google.com/chrome/devtools/docs/overview.html',           'Chrome Developer Tools'
+		'http://www.webpagetest.org/',                                         __( 'webpagetest.org', 'p3-profiler' ),
+		'http://getfirebug.com/',                                              __( 'Firebug', 'p3-profiler' ),
+		'http://tools.pingdom.com/',                                           __( 'Pingdom tools', 'p3-profiler' ),
+		'http://developer.apple.com/technologies/safari/developer-tools.html', __( 'Safari Developer Tools', 'p3-profiler' ),
+		'http://code.google.com/chrome/devtools/docs/overview.html',           __( 'Chrome Developer Tools', 'p3-profiler' )
 		); ?>
 	</blockquote>
 </div>
@@ -188,7 +188,7 @@ Often times, WordPress sites load slowly because of poorly-configured plugins or
 It gets really close, though! The \"margin of error\" on the Advanced Metrics page displays the discrepancy between the measured results (the time for your site's PHP code to completely run) and the expected results (sum of the plugins, core, theme, profile load times) to show you the plugin's accuracy.
 <br /><br />
 If you want more accurate results, you'll need to resort to a different profiler like <a href=\"%1\$s\" target=\"_blank\">%2\$s</a>, but this will not break down results by plugin.", 'p3-profiler' ),
-			'http://xdebug.org/', 'xdebug'
+			'http://xdebug.org/', __( 'xdebug', 'p3-profiler' )
 		); ?>
 	</blockquote>
 </div>
@@ -212,10 +212,10 @@ If a plugin consistently shows slowness, you might want to contact the plugin au
 	<h2 class="p3-help-question"><?php _e( "How are these results different from YSlow / PageSpeed / Webpagetest.org / Pingdom Tools?", 'p3-profiler' ); ?></h2>
 	<blockquote>
 		<?php printf( __("This plugin measures how your site was generated on the server. Tools like <a href=\"%1\$s\" target=\"_blank\">%2\$s</a>, <a href=\"%3\$s\" target=\"_blank\">%4\$s</a>, <a href=\"%5\$s\" target=\"_blank\">%6\$s</a>, and <a href=\"%7\$s\" target=\"_blank\">%8\$s</a> measure how your site looks to the browser.", 'p3-profiler'),
-			'http://developer.yahoo.com/yslow/',         'YSlow',
-			'https://developers.google.com/pagespeed/',  'PageSpeed',
-			'http://www.webpagetest.org/',               'Webpagetest.org',
-			'http://tools.pingdom.com/fpt/',             'Pingdom Tools'
+			'http://developer.yahoo.com/yslow/',         __( 'YSlow', 'p3-profiler' ),
+			'https://developers.google.com/pagespeed/',  __( 'PageSpeed', 'p3-profiler' ),
+			'http://www.webpagetest.org/',               __( 'Webpagetest.org', 'p3-profiler' ),
+			'http://tools.pingdom.com/fpt/',             __( 'Pingdom Tools', 'p3-profiler' )
 		); ?>
 	</blockquote>
 </div>
@@ -332,13 +332,13 @@ To scan your site as an anonymous user, select \"Manual Mode\" as above, but ins
 Your next stop should be to use <a href=\"%1\$s\" target=\"_blank\">%2\$s</a>, <a href=\"%3\$s\" target=\"_blank\">%4\$s</a>, <a href=\"%5\$s\" target=\"_blank\">%6\$s</a>, <a href=\"%7\$s\" target=\"_blank\">%8\$s</a>, and your browser's development tools like <a href=\"%9\$s\" target=\"_blank\">%10\$s</a> for Firefox, <a href=\"%11\$s\" target=\"_blank\">%12\$s</a> for Chrome, or <a href=\"%13\$s\" target=\"_blank\">%14\$s</a> for Safari.
 <br /><br />
 After you've tuned your site up as much as possible, if you're still not happy with its performance, you should consult your site/server administrator or hosting support.", 'p3-profiler'),
-			'http://tools.pingdom.com/',                                           'Pingdom Tools',
-			'http://webpagetest.org/',                                             'Webpage Test',
-			'http://developer.yahoo.com/yslow/',                                   'YSlow',
-			'https://developers.google.com/pagespeed/',                            'Google PageSpeed',
-			'http://getfirebug.com/',                                              'Firebug',
-			'http://code.google.com/chrome/devtools/docs/overview.html',           'Chrome Developer Tools',
-			'http://developer.apple.com/technologies/safari/developer-tools.html', 'Safari Developer Tools'
+			'http://tools.pingdom.com/',                                           __( 'Pingdom Tools', 'p3-profiler' ),
+			'http://webpagetest.org/',                                             __( 'Webpage Test', 'p3-profiler' ),
+			'http://developer.yahoo.com/yslow/',                                   __( 'YSlow', 'p3-profiler' ),
+			'https://developers.google.com/pagespeed/',                            __( 'Google PageSpeed', 'p3-profiler' ),
+			'http://getfirebug.com/',                                              __( 'Firebug', 'p3-profiler' ),
+			'http://code.google.com/chrome/devtools/docs/overview.html',           __( 'Chrome Developer Tools', 'p3-profiler' ),
+			'http://developer.apple.com/technologies/safari/developer-tools.html', __( 'Safari Developer Tools', 'p3-profiler' )
 		); ?>
 	</blockquote>
 </div>
@@ -433,8 +433,8 @@ After you've tuned your site up as much as possible, if you're still not happy w
 	<h2 class="p3-help-question"><?php _e( "Does this plugin increase memory usage on my site?", 'p3-profiler' ); ?></h2>
 	<blockquote>
 		<?php printf( __( "When you run a performance scan on your site, the memory requirements go up during the scan.  Accordingly, P3 sets your <a href=\"%1\$s\" target=\"_blank\">%2\$s</a> to 128 MB and <a href=\"%3\$s\" target=\"_blank\">%4\$s</a> to 90 seconds during a performance scan.  These changes are not permanent and are only in effect when a performance scan is actively running.", 'p3-profiler' ), 			
-			'http://www.php.net/manual/en/ini.core.php#ini.memory-limit',  'memory limit',
-			'http://php.net/set_time_limit',                               'time limit'
+			'http://www.php.net/manual/en/ini.core.php#ini.memory-limit',  __( 'memory limit', 'p3-profiler' ),
+			'http://php.net/set_time_limit',                               __( 'time limit', 'p3-profiler' )
 		); ?>
 	</blockquote>
 </div>

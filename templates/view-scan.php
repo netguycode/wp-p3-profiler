@@ -1000,7 +1000,7 @@ $component_runtime_chart_id   = substr( md5( uniqid() ), -8 );
 		<div>
 			<span id="p3-email-subject-label"><?php _e( 'Subject:', 'p3-profiler' ); ?></span><br />
 			<input type="text" id="p3-email-results-subject" style="width:95%;" size="35"
-				value="<?php echo esc_attr_e( sprintf( __( 'Performance Profile Results for %s', 'p3-profiler' ), get_bloginfo( 'name' ) ) ); ?>" title="<?php esc_attr_e( 'Enter the e-mail subject', 'p3-profiler' ); ?>" />
+				value="<?php echo esc_attr( sprintf( __( 'Performance Profile Results for %s', 'p3-profiler' ), get_bloginfo( 'name' ) ) ); ?>" title="<?php esc_attr_e( 'Enter the e-mail subject', 'p3-profiler' ); ?>" />
 		</div>
 		<br />
 		<div>
