@@ -1,2 +1,1 @@
-<?php header( 'Status: 404 Not found' ); ?>
-Not found
+<?php header( 'Status: 404 Not found' ); ?>Not found
