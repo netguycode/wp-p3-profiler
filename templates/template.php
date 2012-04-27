@@ -95,13 +95,13 @@ if ( 'current-scan' == $this->action || !empty( $_REQUEST['current_scan'] ) ) {
 		<?php _e( 'Do you like this plugin?', 'p3-profiler' ); ?>
 		<ul>
 			<li><a href="http://twitter.com/home?status=<?php echo rawurlencode( htmlentities( sprintf( __( 'I just optimized my WordPress site with %1$s %2$s', 'p3-profiler' ), '#p3plugin', 'http://wordpress.org/extend/plugins/p3-profiler/') ) ); ?>" target="_blank"><?php _e( 'Tweet about it', 'p3-profiler' ); ?></a></li>
-			<li><a href="http://wordpress.org/extend/plugins/p3-profiler/" target="_blank"><?php _e( 'Rate it on the repository', 'p3-profiler' ); ?></li>
+			<li><a href="http://wordpress.org/extend/plugins/p3-profiler/" target="_blank"><?php _e( 'Rate it on the repository', 'p3-profiler' ); ?></a></li>
 		</ul>
 	</div>
 </div>
 
 <div id="p3-copyright">
-	<img src="<?php echo plugins_url() . '/p3-profiler/logo.gif'; ?>" alt="GoDaddy.com logo" title="GoDaddy.com logo" />
+	<img src="<?php echo plugins_url() . '/p3-profiler/logo.gif'; ?>" alt="<?php esc_attr_e( 'Logo', 'p3-profiler' ); ?>" title="<?php esc_attr_e( 'Logo', 'p3-profiler' ); ?>" />
 	<br />
-	<?php _e( 'Copyright', 'p3-profiler' ) ?> &copy; 2011-<?php echo date('Y'); ?> <a href="http://www.godaddy.com/" target="_blank">GoDaddy.com</a>.  <?php _e( 'All rights reserved.', 'p3-profiler' ); ?>
+	<?php printf( __( 'P3 (Plugin Performance Profiler) is Copyright &copy; %s - %s <a href="%s" target="_blank">GoDaddy.com</a>.  All rights reserved.', 'p3-profiler' ), 2011, date( 'Y' ), 'http://www.godaddy.com/' ); ?>
 </div>
