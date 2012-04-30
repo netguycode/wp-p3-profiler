@@ -38,13 +38,6 @@ define( 'P3_PLUGIN_SLUG', 'p3-profiler' );
 /**        PLUGIN HOOKS                                                  **/
 /**************************************************************************/
 
-/**
- * TODO
- * Make admin_notices more specific
- * Make action_init cleaner
- * Make use of die vs. wp_die in ajax calls conditional on wp version
- */
-
 // Localization
 load_plugin_textdomain( 'p3-profiler', false, dirname( plugin_basename( __FILE__ ) ) . '/languages/' );
 
@@ -68,16 +61,19 @@ if ( is_admin() ) {
 		// Show any notices
 		add_action( 'admin_notices', array( 'P3_Profiler_Plugin', 'show_notices' ) );
 	}
+	
+	// Ajax actions
+	add_action( 'wp_ajax_p3_start_scan', array( 'P3_Profiler_Plugin', 'ajax_start_scan' ) );
+	add_action( 'wp_ajax_p3_stop_scan', array( 'P3_Profiler_Plugin', 'ajax_stop_scan' ) );
+	add_action( 'wp_ajax_p3_send_results', array( 'P3_Profiler_Plugin', 'ajax_send_results' ) );
+	add_action( 'wp_ajax_p3_save_settings', array( 'P3_Profiler_Plugin', 'ajax_save_settings' ) );
 }
 
-// Ajax actions
-add_action( 'wp_ajax_p3_start_scan', array( 'P3_Profiler_Plugin', 'ajax_start_scan' ) );
-add_action( 'wp_ajax_p3_stop_scan', array( 'P3_Profiler_Plugin', 'ajax_stop_scan' ) );
-add_action( 'wp_ajax_p3_send_results', array( 'P3_Profiler_Plugin', 'ajax_send_results' ) );
-add_action( 'wp_ajax_p3_save_settings', array( 'P3_Profiler_Plugin', 'ajax_save_settings' ) );
-
 // Remove the admin bar when in profiling mode
-if ( defined( 'WPP_PROFILING_STARTED' ) || isset( $_GET['P3_HIDE_ADMIN_BAR'] ) ) {
+elseif ( defined( 'WPP_PROFILING_STARTED' ) || isset( $_GET['P3_HIDE_ADMIN_BAR'] ) ) {
+
+	// Global plugin object
+	require_once P3_PATH . '/classes/class.p3-profiler-plugin.php';
 	add_action( 'plugins_loaded', array( 'P3_Profiler_Plugin', 'remove_admin_bar' ) );
 }
 
