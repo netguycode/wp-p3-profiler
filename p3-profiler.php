@@ -28,11 +28,25 @@ unset( $uploads_dir );
 define( 'P3_PLUGIN_SLUG', 'p3-profiler' );
 
 /**************************************************************************/
+/**        AUTOLOADING                                                   **/
+/**************************************************************************/
+
+// Autoload classes, if possible
+if ( function_exists( 'spl_autoload_register') ) {
+	spl_autoload_register( 'p3_profiler_autoload' );
+} else {
+	require_once( P3_PATH . '/classes/class.p3-profile-reader.php' );
+	require_once( P3_PATH . '/classes/class.p3-profile-table-sorter.php' );
+	require_once( P3_PATH . '/classes/class.p3-profile-table.php' );
+	require_once( P3_PATH . '/classes/class.p3-profiler-plugin.php' );
+}
+
+/**************************************************************************/
 /**        START PROFILING                                               **/
 /**************************************************************************/
 
 // Start profiling.  If it's already been started, this line won't do anything
-// require_once P3_PATH . '/start-profile.php';
+require_once P3_PATH . '/start-profile.php';
 
 /**************************************************************************/
 /**        PLUGIN HOOKS                                                  **/
@@ -43,9 +57,6 @@ load_plugin_textdomain( 'p3-profiler', false, dirname( plugin_basename( __FILE__
 
 // Admin hooks
 if ( is_admin() ) {
-
-	// Global plugin object
-	require_once P3_PATH . '/classes/class.p3-profiler-plugin.php';
 
 	// Localization
 	load_plugin_textdomain( 'p3-profiler', false, dirname( plugin_basename( __FILE__ ) ) . '/languages/' );
@@ -63,17 +74,16 @@ if ( is_admin() ) {
 	}
 	
 	// Ajax actions
-	add_action( 'wp_ajax_p3_start_scan', array( 'P3_Profiler_Plugin', 'ajax_start_scan' ) );
-	add_action( 'wp_ajax_p3_stop_scan', array( 'P3_Profiler_Plugin', 'ajax_stop_scan' ) );
-	add_action( 'wp_ajax_p3_send_results', array( 'P3_Profiler_Plugin', 'ajax_send_results' ) );
-	add_action( 'wp_ajax_p3_save_settings', array( 'P3_Profiler_Plugin', 'ajax_save_settings' ) );
+	if ( 'admin-ajax.php' == end( explode( '/', $_SERVER['PHP_SELF'] ) ) ) {
+		add_action( 'wp_ajax_p3_start_scan', array( 'P3_Profiler_Plugin', 'ajax_start_scan' ) );
+		add_action( 'wp_ajax_p3_stop_scan', array( 'P3_Profiler_Plugin', 'ajax_stop_scan' ) );
+		add_action( 'wp_ajax_p3_send_results', array( 'P3_Profiler_Plugin', 'ajax_send_results' ) );
+		add_action( 'wp_ajax_p3_save_settings', array( 'P3_Profiler_Plugin', 'ajax_save_settings' ) );
+	}
 }
 
 // Remove the admin bar when in profiling mode
 elseif ( defined( 'WPP_PROFILING_STARTED' ) || isset( $_GET['P3_HIDE_ADMIN_BAR'] ) ) {
-
-	// Global plugin object
-	require_once P3_PATH . '/classes/class.p3-profiler-plugin.php';
 	add_action( 'plugins_loaded', array( 'P3_Profiler_Plugin', 'remove_admin_bar' ) );
 }
 
@@ -82,4 +92,26 @@ register_activation_hook( P3_PATH . DIRECTORY_SEPARATOR . 'p3-profiler.php', arr
 register_deactivation_hook( P3_PATH . DIRECTORY_SEPARATOR . 'p3-profiler.php', array( 'P3_Profiler_Plugin', 'deactivate' ) );
 if ( function_exists( 'is_multisite' ) && is_multisite() ) {
 	add_action( 'wpmu_delete_blog', array( 'P3_Profiler_Plugin', 'delete_blog' ) );
+}
+
+/**
+ * Autoloader ... very little logic needed
+ * @param string $className 
+ * @return 
+ */
+function p3_profiler_autoload( $className ) {
+	switch ( $className ) {
+		case 'P3_Profile_Reader' :
+			require_once( P3_PATH . '/classes/class.p3-profile-reader.php' );
+			break;
+		case 'P3_Profile_Table_Sorter' :
+			require_once( P3_PATH . '/classes/class.p3-profile-table-sorter.php' );
+			break;
+		case 'P3_Profile_Table' :
+			require_once( P3_PATH . '/classes/class.p3-profile-table.php' );
+			break;
+		case 'P3_Profiler_Plugin' :
+			require_once( P3_PATH . '/classes/class.p3-profiler-plugin.php' );
+			break;
+	}
 }
