@@ -123,6 +123,9 @@ class P3_Profiler_Plugin {
 	 */
 	public static function action_init() {
 
+		// Upgrade
+		self::upgrade();
+		
 		// Set up the request based on p3_action
 		if ( !empty( $_REQUEST['p3_action'] ) ) {
 			self::$action = $_REQUEST['p3_action'];
@@ -158,9 +161,6 @@ class P3_Profiler_Plugin {
 		
 		// Load libraries
 		self::load_libraries();
-		
-		// Upgrade
-		self::upgrade();
 
 		// If there's a scan, create a viewer object
 		if ( !empty( self::$scan ) ) {
