@@ -930,10 +930,8 @@ $component_runtime_chart_id   = substr( md5( uniqid() ), -8 );
 								<?php printf( '%.4f', self::$profile->averages['drift'] ); ?><?php _e( 'seconds', 'p3-profiler' ); ?> <em class="p3-em"><?php _ex( 'avg.', "Abbreviation for 'average'", 'p3-profiler' ); ?></em>
 								<br />
 								<em class="p3-em">
-									(<span class="qtip-tip" title="<?php esc_attr_e( "How long the site took to load. This is an observed measurement (start timing when the page was requested, stop timing when the page was delivered to the browser, calculate the difference).", 'p3-profiler' ); ?>">
-									<?php printf( '%.4f', self::$profile->averages['observed'] ); ?> <?php _e( 'observed', 'p3-profiler' ); ?></span>,
-									<span class="qtip-tip" title="<?php esc_attr_e( "The expected site load time calculated by adding plugin load time, core load time, theme load time, and profiler overhead.", 'p3-profiler' ); ?>">
-									<?php printf( '%.4f', self::$profile->averages['expected'] ); ?> <?php _e( 'expected', 'p3-profiler' ); ?></span>)
+									(<span class="qtip-tip" title="<?php esc_attr_e( "How long the site took to load. This is an observed measurement (start timing when the page was requested, stop timing when the page was delivered to the browser, calculate the difference).", 'p3-profiler' ); ?>"><?php printf( '%.4f', self::$profile->averages['observed'] ); ?> <?php _e( 'observed', 'p3-profiler' ); ?></span>,
+									<span class="qtip-tip" title="<?php esc_attr_e( "The expected site load time calculated by adding plugin load time, core load time, theme load time, and profiler overhead.", 'p3-profiler' ); ?>"><?php printf( '%.4f', self::$profile->averages['expected'] ); ?> <?php _e( 'expected', 'p3-profiler' ); ?></span>)
 								</em>
 							</td>
 						</tr>
