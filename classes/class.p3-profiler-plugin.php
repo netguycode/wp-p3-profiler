@@ -135,10 +135,10 @@ class P3_Profiler_Plugin {
 			if ( !empty( $_REQUEST['name'] ) ) {
 				self::$scan = sanitize_file_name( basename( $_REQUEST['name'] ) );
 			}
-			if ( empty( self::$scan ) || !file_exists( P3_PROFILES_PATH . "/{self::$scan}" ) ) {
+			if ( empty( self::$scan ) || !file_exists( P3_PROFILES_PATH . DIRECTORY_SEPARATOR . self::$scan ) ) {
 				wp_die( '<div id="message" class="error"><p>' . __( 'Scan does not exist', 'p3-profiler' ) . '</p></div>' );
 			}
-			self::$scan = P3_PROFILES_PATH . "/{self::$scan}";
+			self::$scan = P3_PROFILES_PATH . DIRECTORY_SEPARATOR . self::$scan;
 		}
 
 		// Download the debug logs before output is sent
@@ -261,6 +261,19 @@ class P3_Profiler_Plugin {
 	/**************************************************************/
 
 	/**
+	 * Ajax die
+	 * @param string $message
+	 */
+	public static function ajax_die( $message ) {
+		global $wp_version;	
+		if ( version_compare( $wp_version, '3.4-dev' ) >= 0 ) {
+			wp_die( $message );
+		} else {
+			die( $message );
+		}
+	}
+
+	/**
 	 * Start scan
 	 */
 	public static function ajax_start_scan() {
@@ -291,9 +304,9 @@ class P3_Profiler_Plugin {
 
 		// Check if either operation failed
 		if ( false === $flag ) {
-			wp_die( 0 );
+			self::ajax_die( 0 );
 		} else {
-			wp_die( 1 );
+			self::ajax_die( 1 );
 		}
 	}
 
@@ -317,9 +330,9 @@ class P3_Profiler_Plugin {
 		// Return the last filename
 		if ( !empty( $opts ) && is_array( $opts ) && array_key_exists( 'name', $opts ) ) {
 			echo $opts['name'] . '.json';
-			wp_die();
+			self::ajax_die( '' );
 		} else {
-			wp_die( 0 );
+			self::ajax_die( 0 );
 		}
 	}
 
@@ -348,7 +361,7 @@ class P3_Profiler_Plugin {
 			}
 		}
 
-		wp_die( 1 );
+		self::ajax_die( 1 );
 	}
 	
 
@@ -396,7 +409,7 @@ class P3_Profiler_Plugin {
 		} else {
 			echo '1';
 		}
-		wp_die();
+		self::ajax_die( '' );
 	}
 	
 	/**************************************************************/
