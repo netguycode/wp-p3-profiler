@@ -46,7 +46,7 @@ Manual installation:
 == Upgrade Notice ==
 
 = 1.3.0 =
-Added localization support and tested with WordPress 3.4.0.
+Internationalized P3, major refactoring for lower memory usage and fewer hooks, compatibility with WordPress 3.4.
 
 = 1.2.0 =
 Many compatibility fixes based on user feedback.  Upgrading is recommended.
@@ -85,9 +85,10 @@ Thanks!
 == Changelog ==
 
 = 1.3.0 =
- * Added localization support (_e(), __())
- * Tested with WordPress 3.4.0
+ * Internationalized P3
+ * Compatibility with WordPress 3.4.0
  * Fixed a bug with European decimalization (0,00 vs. 0.00)
+ * Major refactoring for better adherence to best practices, using fewer hooks, and consuming less memory
 
 = 1.2.0 =
  * Remove .profiling_enabled file, store profiling flag as a WordPress option
