@@ -4,6 +4,8 @@ Tags: debug, debugging, developer, development, performance, plugin, profiler, s
 Requires at least: 3.3
 Tested up to: 3.4.0
 Stable tag: 1.3.0
+License: GPLv2
+License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
 See which plugins are slowing down your site.  This plugin creates a performance report for your site.
 

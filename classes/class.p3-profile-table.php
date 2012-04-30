@@ -171,10 +171,10 @@ class P3_Profile_Table extends WP_List_Table {
 				'current_scan' => null,
 			)
 		);
-		$ret  = '<a href="$url" title="' . esc_attr__( 'View the results of this scan', 'p3-profiler' ) . '"><strong>' . $display . '</strong></a>';
+		$ret  = '<a href="' . esc_attr( $url ). '" title="' . esc_attr__( 'View the results of this scan', 'p3-profiler' ) . '"><strong>' . $display . '</strong></a>';
 		$ret .= '<div class="row-actions-visible">';
 		$ret .= '  <span class="view">';
-		$ret .= '    <a href="$url" data-name="' . esc_attr( $key ) . '" title="' . esc_attr__( 'View the results of this scan', 'p3-profiler' ) . '" class="view-results">' . __( 'View', 'p3-profiler' ) . '</a> |';
+		$ret .= '    <a href="' . esc_attr( $url ) . '" data-name="' . esc_attr( $key ) . '" title="' . esc_attr__( 'View the results of this scan', 'p3-profiler' ) . '" class="view-results">' . __( 'View', 'p3-profiler' ) . '</a> |';
 		$ret .= '  </span>';
 		$ret .= '  <span>';
 		$ret .= '    <a href="javascript:;" data-name="' . esc_attr( $key ) . '" title="' . esc_attr__( 'Continue this scan', 'p3-profiler' ) . '" class="p3-continue-scan">' . __( 'Continue', 'p3-profiler' ) . '</a> |';
@@ -274,7 +274,7 @@ class P3_Profile_Table extends WP_List_Table {
 				'name'      => $this->_action_links( $key, $name ),
 				'date'      => date( 'D, M jS', $time ) . ' at ' . date( 'g:i a', $time ),
 				'count'     => number_format( $count ),
-				'filesize'  => $GLOBALS['p3_profiler_plugin']->readable_size( filesize( $file ) ),
+				'filesize'  => P3_Profiler_Plugin::readable_size( filesize( $file ) ),
 				'_filesize' => filesize( $file ),
 				'_date'     => $time,
 				'_count'    => $count,

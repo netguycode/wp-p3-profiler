@@ -12,7 +12,7 @@ if ( !defined('P3_PATH') )
 	var P3_Scan = {
 
 		// List of pages to scan
-		pages: <?php echo json_encode( $this->list_of_pages() ); ?>,
+		pages: <?php echo json_encode( self::list_of_pages() ); ?>,
 
 		// Current page
 		current_page: 0,
@@ -187,10 +187,10 @@ if ( !defined('P3_PATH') )
 	// Sync save settings
 	function p3_sync_advanced_settings() {
 		if ( jQuery( "#p3-use-current-ip" ).prop( "checked" ) ) {
-			jQuery( "#p3-advanced-ip" ).val( "<?php echo esc_js( $GLOBALS['p3_profiler']->get_ip() ); ?>" );
+			jQuery( "#p3-advanced-ip" ).val( "<?php echo esc_js( p3_profiler_get_ip() ); ?>" );
 			jQuery( "#p3-advanced-ip" ).prop( "disabled", true );
 		} else {
-			<?php $ip = get_option( 'p3-profiler_ip_address' ); if ( empty( $ip ) ) { $ip = $GLOBALS['p3_profiler']->get_ip(); } ?>
+			<?php $ip = get_option( 'p3-profiler_ip_address' ); if ( empty( $ip ) ) { $ip = p3_profiler_get_ip(); } ?>
 			jQuery( "#p3-advanced-ip" ).val( "<?php echo esc_js( $ip ); ?>" );
 			jQuery( "#p3-advanced-ip" ).prop( "disabled", false );
 		}
@@ -498,7 +498,7 @@ if ( !defined('P3_PATH') )
 
 		<td>
 			<div class="ui-widget-header" id="p3-scan-form-wrapper">
-				<?php if ( false !== ( $info = $this->scan_enabled() ) ) { ?>
+				<?php if ( false !== ( $info = self::scan_enabled() ) ) { ?>
 					<!-- Stop scan button -->
 
 					<strong>IP:</strong><?php echo htmlentities( $info['ip'] ); ?>
@@ -510,7 +510,7 @@ if ( !defined('P3_PATH') )
 
 					<!-- Start scan button -->
 					<?php echo wp_nonce_field( 'p3_ajax_start_scan', 'p3_nonce' ); ?>
-					<strong><?php _e( 'My IP:', 'p3-profiler' ); ?></strong><?php echo htmlentities( $GLOBALS['p3_profiler']->get_ip() ); ?>
+					<strong><?php _e( 'My IP:', 'p3-profiler' ); ?></strong><?php echo htmlentities( p3_profiler_get_ip() ); ?>
 					<div class="p3-big-button"><input type="checkbox" checked="checked" id="p3-start-scan-submit" />
 					<label for="p3-start-scan-submit"><?php _e( 'Start Scan', 'p3-profiler' ); ?></label></div>
 					<a href="javascript:;" id="p3-advanced-settings"><?php _e( 'Advanced Settings', 'p3-profiler' ); ?></a>
@@ -544,14 +544,14 @@ if ( !defined('P3_PATH') )
 		<!-- Second callout cell -->
 		<td class="p3-callout">
 			<div class="p3-callout-outer-wrapper qtip-tip" title="<?php esc_attr_e( 'Total number of seconds dedicated to plugin code per visit on your site.', 'p3-profiler' ); ?>"
-				<?php if ( !empty( $this->scan ) ) { ?>title="<?php esc_attr_e( 'From', 'p3-profiler' ); ?> <?php echo basename( $this->scan ); ?><?php } ?>">
+				<?php if ( !empty( self::$scan ) ) { ?>title="<?php esc_attr_e( 'From', 'p3-profiler' ); ?> <?php echo basename( self::$scan ); ?><?php } ?>">
 				<div class="p3-callout-inner-wrapper">
 					<div class="p3-callout-caption"><?php _e( 'Plugin Load Time', 'p3-profiler' ); ?></div>
 					<div class="p3-callout-data">
-						<?php if ( null === $this->profile ) { ?>
+						<?php if ( null === self::$profile ) { ?>
 							<span class="p3-faded-grey"><?php _e( 'n/a', 'p3-profiler' ); ?></span>
 						<?php } else { ?>
-							<?php printf( '%.3f', $this->profile->averages['plugins'] ); ?>
+							<?php printf( '%.3f', self::$profile->averages['plugins'] ); ?>
 						<?php } ?>
 					</div>
 					<div class="p3-callout-caption">(<?php _e( 'sec. per visit', 'p3-profiler' ); ?>)</div>
@@ -562,14 +562,14 @@ if ( !defined('P3_PATH') )
 		<!-- Third callout cell -->
 		<td class="p3-callout">
 			<div class="p3-callout-outer-wrapper qtip-tip" title="<?php esc_attr_e( 'Percent of load time on your site dedicated to plugin code', 'p3-profiler' ); ?>"
-				<?php if ( !empty( $this->scan ) ) { ?>title="<?php esc_attr_e( 'From', 'p3-profiler' ); ?> <?php echo basename( $this->scan ); ?><?php } ?>">
+				<?php if ( !empty( self::$scan ) ) { ?>title="<?php esc_attr_e( 'From', 'p3-profiler' ); ?> <?php echo basename( self::$scan ); ?><?php } ?>">
 				<div class="p3-callout-inner-wrapper">
 					<div class="p3-callout-caption"><?php _e( 'Plugin Impact', 'p3-profiler' ); ?></div>
 					<div class="p3-callout-data">
-						<?php if ( null === $this->profile ) { ?>
+						<?php if ( null === self::$profile ) { ?>
 							<span class="p3-faded-grey"><?php _e( 'n/a', 'p3-profiler' ); ?></span>
 						<?php } else { ?>
-							<?php printf( '%.1f%%', $this->profile->averages['plugin_impact'] ); ?>
+							<?php printf( '%.1f%%', self::$profile->averages['plugin_impact'] ); ?>
 						<?php } ?>
 					</div>
 					<div class="p3-callout-caption">(<?php _e( 'of page load time', 'p3-profiler' ); ?>)</div>
@@ -580,14 +580,14 @@ if ( !defined('P3_PATH') )
 		<!-- Fourth callout cell -->
 		<td class="p3-callout">
 			<div class="p3-callout-outer-wrapper qtip-tip" title="<?php esc_attr_e( 'Total number of database queries per visit', 'p3-profiler' ); ?>"
-				<?php if ( !empty( $this->scan ) ) { ?>title="<?php esc_attr_e( 'From', 'p3-profiler' ); ?> <?php echo basename( $this->scan ); ?><?php } ?>">
+				<?php if ( !empty( self::$scan ) ) { ?>title="<?php esc_attr_e( 'From', 'p3-profiler' ); ?> <?php echo basename( self::$scan ); ?><?php } ?>">
 				<div class="p3-callout-inner-wrapper">
 					<div class="p3-callout-caption"><?php _e( 'MySQL Queries', 'p3-profiler' ); ?></div>
 					<div class="p3-callout-data">
-						<?php if ( null === $this->profile ) { ?>
+						<?php if ( null === self::$profile ) { ?>
 							<span class="p3-faded-grey"><?php _e( 'n/a', 'p3-profiler' ); ?></span>
 						<?php } else { ?>
-							<?php echo round( $this->profile->averages['queries'] ); ?>
+							<?php echo round( self::$profile->averages['queries'] ); ?>
 						<?php } ?>
 					</div>
 					<div class="p3-callout-caption"><?php _e( 'per visit', 'p3-profiler' ); ?></div>

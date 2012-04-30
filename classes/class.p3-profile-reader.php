@@ -335,7 +335,10 @@ if ( !defined('P3_PATH') )
 	 * @return string
 	 */
 	private function _get_theme_name( $theme ) {
-		if ( function_exists( 'get_theme_data' ) && file_exists( WP_CONTENT_DIR . '/themes/' . $theme . '/style.css' ) ) {
+		if ( function_exists( 'wp_get_theme') ) {
+			$theme_info = wp_get_theme( WP_CONTENT_DIR . '/themes/' . $theme . '/style.css' );
+			return $theme_info->get('Name');
+		} elseif ( function_exists( 'get_theme_data' ) && file_exists( WP_CONTENT_DIR . '/themes/' . $theme . '/style.css' ) ) {
 			$theme_info = get_theme_data( WP_CONTENT_DIR . '/themes/' . $theme . '/style.css' );
 			if ( !empty( $theme_info ) && !empty( $theme_info['Name'] ) ) {
 				return $theme_info['Name'];

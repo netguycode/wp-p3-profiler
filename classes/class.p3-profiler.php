@@ -121,7 +121,7 @@ class P3_Profiler {
 
 		// Set up paths
 		$this->_P3_PATH      = realpath( dirname( __FILE__ ) );
-
+		
 		// Debug mode
 		$this->_debug_entry = array(
 			'profiling_enabled'  => false,
@@ -130,7 +130,7 @@ class P3_Profiler {
 			'recording'          => false,
 			'disable_optimizers' => false,
 			'url'                => $this->_get_url(),
-			'visitor_ip'         => $this->get_ip(),
+			'visitor_ip'         => p3_profiler_get_ip(),
 			'time'               => time(),
 			'pid'                => getmypid()
 		);
@@ -150,7 +150,7 @@ class P3_Profiler {
 		}
 		
 		// Add a global flag to let everyone know we're profiling
-		if ( !empty( $opts ) && preg_match( '/' . $opts['ip'] . '/', $this->get_ip() ) ) {
+		if ( !empty( $opts ) && preg_match( '/' . $opts['ip'] . '/', p3_profiler_get_ip() ) ) {
 			define( 'WPP_PROFILING_STARTED', true );
 		}
 
@@ -185,7 +185,7 @@ class P3_Profiler {
 		// Add some startup information
 		$this->_profile = array(
 			'url'   => $this->_get_url(),
-			'ip'    => $this->get_ip(),
+			'ip'    => p3_profiler_get_ip(),
 			'pid'   => getmypid(),
 			'date'  => @date( 'c' ),
 			'stack' => array()
@@ -628,26 +628,6 @@ class P3_Profiler {
 		}
 		$url = $protocol.$domain.$file.$path.$query_string;
 		return $url;
-	}
-	
-	/**
-	 * Get the user's IP
-	 * @return string
-	 */
-	public function get_ip() {
-		static $ip = '';
-		if ( !empty( $ip ) ) {
-			return $ip;
-		} else {
-			if ( !empty( $_SERVER['HTTP_X_FORWARDED_FOR'] ) ) {
-				$ip = $_SERVER['HTTP_X_FORWARDED_FOR'];
-			} elseif ( !empty ( $_SERVER['HTTP_X_REAL_IP'] ) ) {
-				$ip = $_SERVER['HTTP_X_REAL_IP'];
-			} else {
-				$ip = $_SERVER['REMOTE_ADDR'];
-			}
-			return $ip;
-		}
 	}
 	
 	/**

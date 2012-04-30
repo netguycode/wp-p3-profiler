@@ -299,7 +299,7 @@ Caching plugins that have an option to disable caches for logged in users will n
 		?>
 		<?php printf( __( "The scans are stored in <code>%1\$s</code> and take up %2\$s of disk space.  Each time you run a scan, this storage requirement goes up, and each time you delete a scan, it goes down.", 'p3-profiler' ),
 			realpath( P3_PROFILES_PATH ),
-			$this->readable_size( $total_size )
+			self::readable_size( $total_size )
 		); ?>
 	</blockquote>
 </div>

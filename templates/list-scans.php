@@ -5,7 +5,7 @@ if ( !defined('P3_PATH') )
 <form id="scans-filter" method="post">
 	<input type="hidden" name="page" value="<?php echo sanitize_text_field( $_REQUEST ['page'] ); ?>" />
 	<?php echo wp_nonce_field( 'delete_scans', 'p3_nonce' ); ?>
-	<?php $this->scan_table->display(); ?>
+	<?php self::$scan_table->display(); ?>
 </form>
 <script type="text/javascript">
 	jQuery(document).ready(function($) {

@@ -3,9 +3,9 @@
 $button_current_checked = '';
 $button_history_checked = '';
 $button_help_checked    = '';
-if ( 'current-scan' == $this->action || !empty( $_REQUEST['current_scan'] ) ) {
+if ( 'current-scan' == self::$action || !empty( $_REQUEST['current_scan'] ) ) {
 	$button_current_checked = 'checked="checked"';
-} elseif ( 'help' == $this->action ) {
+} elseif ( 'help' == self::$action ) {
 	$button_help_checked = 'checked="checked"';
 } else {
 	$button_history_checked = 'checked="checked"';
@@ -70,8 +70,8 @@ if ( 'current-scan' == $this->action || !empty( $_REQUEST['current_scan'] ) ) {
 		<input type="radio" name="p3-nav" id="button-help" <?php echo $button_help_checked; ?> /><label for="button-help"><?php _e( 'Help', 'p3-profiler' ); ?></label>
 		
 		<div id="p3-scan-label">
-			<?php if ( !empty( $this->profile ) ) : ?>
-				<?php _e( 'Scan name:', 'p3-profiler' ); ?> <?php echo $this->profile->profile_name; ?>
+			<?php if ( !empty( self::$profile ) ) : ?>
+				<?php _e( 'Scan name:', 'p3-profiler' ); ?> <?php echo self::$profile->profile_name; ?>
 			<?php endif; ?>
 		</div>
 	</div>
@@ -80,12 +80,12 @@ if ( 'current-scan' == $this->action || !empty( $_REQUEST['current_scan'] ) ) {
 	<?php require_once P3_PATH . '/templates/callouts.php'; ?>
 
 	<!-- View scan or show a list of scans -->
-	<?php if ( ( 'current-scan' == $this->action && !empty( $this->scan ) ) || 'view-scan' == $this->action ) { ?>
-		<?php include_once P3_PATH . '/templates/view-scan.php'; ?>
-	<?php } elseif ( 'help' == $this->action ) { ?>
-		<?php include_once P3_PATH . '/templates/help.php'; ?>
+	<?php if ( ( 'current-scan' == self::$action && !empty( self::$scan ) ) || 'view-scan' == self::$action ) { ?>
+		<?php require_once P3_PATH . '/templates/view-scan.php'; ?>
+	<?php } elseif ( 'help' == self::$action ) { ?>
+		<?php require_once P3_PATH . '/templates/help.php'; ?>
 	<?php } else { ?>
-		<?php include_once P3_PATH . '/templates/list-scans.php'; ?>
+		<?php require_once P3_PATH . '/templates/list-scans.php'; ?>
 	<?php } ?>
 
 </div>
@@ -101,7 +101,7 @@ if ( 'current-scan' == $this->action || !empty( $_REQUEST['current_scan'] ) ) {
 </div>
 
 <div id="p3-copyright">
-	<img src="<?php echo plugins_url() . '/p3-profiler/logo.gif'; ?>" alt="<?php esc_attr_e( 'Logo', 'p3-profiler' ); ?>" title="<?php esc_attr_e( 'Logo', 'p3-profiler' ); ?>" />
+	<img src="<?php echo plugins_url() . '/p3-profiler/css/logo.gif'; ?>" alt="<?php esc_attr_e( 'Logo', 'p3-profiler' ); ?>" title="<?php esc_attr_e( 'Logo', 'p3-profiler' ); ?>" />
 	<br />
 	<?php printf( __( 'P3 (Plugin Performance Profiler) is Copyright &copy; %1$s - %2$s <a href="%3$s" target="_blank">GoDaddy.com</a>.  All rights reserved.', 'p3-profiler' ), 2011, date( 'Y' ), 'http://www.godaddy.com/' ); ?>
 </div>
