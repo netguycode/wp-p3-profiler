@@ -2,8 +2,8 @@
 
 // If profiling hasn't started, start it
 if ( !isset( $GLOBALS['p3_profiler'] ) && basename( __FILE__ ) !=  basename( $_SERVER['SCRIPT_FILENAME'] ) ) {
-	$opts = get_option( 'p3-profiler_profiling_enabled' );
-	if ( !empty( $opts ) ) {
+	$opts = get_option( 'p3-profiler_options' );
+	if ( !empty( $opts['profiling_enabled'] ) ) {
 		$file = realpath( dirname( __FILE__ ) ) . '/classes/class.p3-profiler.php';
 		if ( !file_exists( $file ) ) {
 			return;

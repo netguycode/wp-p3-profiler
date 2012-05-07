@@ -287,13 +287,13 @@ class P3_Profiler_Plugin {
 		$filename = sanitize_file_name( basename( $_POST['p3_scan_name'] ) );
 
 		// Add the entry ( multisite installs can run more than one concurrent profile )
-		$opts = array(
+		$opts = get_option( 'p3-profiler_options' );
+		$opts['profiling_enabled'] = array(
 			'ip'                   => stripslashes( $_POST['p3_ip'] ),
 			'disable_opcode_cache' => ( 'true' == $_POST['p3_disable_opcode_cache'] ),
 			'name'                 => $filename,
 		);
-
-		update_option( 'p3-profiler_profiling_enabled', $opts );
+		update_option( 'p3-profiler_options', $opts );
 
 		// Kick start the profile file
 		if ( !file_exists( P3_PROFILES_PATH . "/$filename.json" ) ) {
@@ -321,15 +321,17 @@ class P3_Profiler_Plugin {
 		}
 
 		// Turn off scanning
-		$opts = get_option( 'p3-profiler_profiling_enabled' );
-		update_option( 'p3-profiler_profiling_enabled', false );
+		$opts = get_option( 'p3-profiler_options' );
+		$tmp = $opts['profiling_enabled'];   // Copy out the current info
+		$opts['profiling_enabled'] = false;  // Disable scanning
+		update_option( 'p3-profiler_options', $opts );
 		
 		// Tell the user what happened
 		self::add_notice( __( 'Turned off performance scanning.', 'p3-profiler' ) );
 
 		// Return the last filename
-		if ( !empty( $opts ) && is_array( $opts ) && array_key_exists( 'name', $opts ) ) {
-			echo $opts['name'] . '.json';
+		if ( !empty( $tmp ) && is_array( $tmp ) && array_key_exists( 'name', $tmp ) ) {
+			echo $tmp['name'] . '.json';
 			self::ajax_die( '' );
 		} else {
 			self::ajax_die( 0 );
@@ -347,12 +349,14 @@ class P3_Profiler_Plugin {
 		}
 
 		// Save the new options
-		update_option( 'p3-profiler_disable_opcode_cache', 'true' == $_POST['p3_disable_opcode_cache'] );
-		update_option( 'p3-profiler_cache_buster', 'true' == $_POST['p3_cache_buster'] );
-		update_option( 'p3-profiler_use_current_ip', 'true' == $_POST['p3_use_current_ip'] );
-		update_option( 'p3-profiler_ip_address', $_POST['p3_ip_address'] );
-		update_option( 'p3-profiler_debug', 'true' == $_POST['p3_debug'] );
-
+		$opts = get_option( 'p3-profiler_options' );
+		$opts['disable_opcode_cache'] = ( 'true' == $_POST['p3_disable_opcode_cache'] );
+		$opts['cache_buster']         = ( 'true' == $_POST['p3_cache_buster'] );
+		$opts['use_current_ip']       = ( 'true' == $_POST['p3_use_current_ip'] );
+		$opts['ip_address']           = ( $_POST['p3_ip_address'] );
+		$opts['debug']                = ('true' == $_POST['p3_debug'] );
+		update_option( 'p3-profiler_options', $opts );
+		
 		// Clear the debug log if it's full
 		if ( 'true' === $_POST['p3_debug'] ) {
 			$log = get_option( 'p3-profiler_debug_log' );
@@ -624,7 +628,9 @@ class P3_Profiler_Plugin {
 		global $p3_profiler;
 
 		// Unhook the profiler
-		update_option( 'p3-profiler_debug', false );
+		$opts = get_option( 'p3-profiler_options' );
+		$opts['debug'] = false;
+		update_option( 'p3-profiler_options', $opts );
 		update_option( 'p3-profiler_debug_log', array() );
 		if ( !empty( $p3_profiler ) ) {
 			remove_action( 'shutdown', array( $p3_profiler, 'shutdown_handler' ) );
@@ -645,9 +651,9 @@ class P3_Profiler_Plugin {
 	 * @return array|false
 	 */
 	public static function scan_enabled() {
-		$opts = get_option( 'p3-profiler_profiling_enabled' );
-		if ( !empty( $opts ) ) {
-			return $opts;			
+		$opts = get_option( 'p3-profiler_options' );
+		if ( !empty( $opts['profiling_enabled'] ) ) {
+			return $opts['profiling_enabled'];
 		}
 		return false;
 	}
@@ -679,13 +685,8 @@ class P3_Profiler_Plugin {
 		$uploads_dir = wp_upload_dir();
 		$folder      = $uploads_dir['basedir'] . DIRECTORY_SEPARATOR . 'profiles' . DIRECTORY_SEPARATOR;
 		self::delete_profiles_folder( $folder );
-		delete_option( 'p3-profiler_disable_opcode_cache' );
-		delete_option( 'p3-profiler_use_current_ip' );
-		delete_option( 'p3-profiler_ip_address' );
 		delete_option( 'p3-profiler_version' );
-		delete_option( 'p3-profiler_cache_buster' );
-		delete_option( 'p3-profiler_profiling_enabled' );
-		delete_option( 'p3-profiler_debug' );
+		delete_option( 'p3-profiler_options' );
 		delete_option( 'p3-profiler_debug_log' );
 	}
 
@@ -736,6 +737,25 @@ class P3_Profiler_Plugin {
 		// Upgrading from < 1.3.0
 		if ( empty( $version) || version_compare( $version, '1.3.0' ) < 0 ) {
 			update_option( 'p3-profiler_version', '1.3.0' );
+			
+			// Move to a serialized single option
+			$opts = array(
+				'profiling_enabled'    => get_option( 'p3-profiler_profiling_enabled' ),
+				'disable_opcode_cache' => get_option( 'p3-profiler_disable_opcode_cache' ),
+				'use_current_ip'       => get_option( 'p3-profiler_use_current_ip' ),
+				'ip_address'           => get_option( 'p3-profiler_ip_address' ),
+				'cache_buster'         => get_option( 'p3-profiler_cache_buster' ),
+				'debug'                => get_option( 'p3-profiler_debug' )				
+			);
+			update_option( 'p3-profiler_options', $opts );
+
+			// Delete the extra options
+			delete_option( 'p3-profiler_disable_opcode_cache' );
+			delete_option( 'p3-profiler_use_current_ip' );
+			delete_option( 'p3-profiler_ip_address' );
+			delete_option( 'p3-profiler_cache_buster' );
+			delete_option( 'p3-profiler_debug' );
+			delete_option( 'p3-profiler_profiling_enabled' );
 		}
 
 		// Ensure the profiles folder is there

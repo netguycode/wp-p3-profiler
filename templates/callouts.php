@@ -1,6 +1,8 @@
 <?php
 if ( !defined('P3_PATH') )
 	die( 'Forbidden ');
+
+$opts = get_option( 'p3-profiler_options' );
 ?>
 <script type="text/javascript">
 
@@ -190,7 +192,7 @@ if ( !defined('P3_PATH') )
 			jQuery( "#p3-advanced-ip" ).val( "<?php echo esc_js( p3_profiler_get_ip() ); ?>" );
 			jQuery( "#p3-advanced-ip" ).prop( "disabled", true );
 		} else {
-			<?php $ip = get_option( 'p3-profiler_ip_address' ); if ( empty( $ip ) ) { $ip = p3_profiler_get_ip(); } ?>
+			<?php $ip = $opts['ip_address']; if ( empty( $ip ) ) { $ip = p3_profiler_get_ip(); } ?>
 			jQuery( "#p3-advanced-ip" ).val( "<?php echo esc_js( $ip ); ?>" );
 			jQuery( "#p3-advanced-ip" ).prop( "disabled", false );
 		}
@@ -602,7 +604,7 @@ if ( !defined('P3_PATH') )
 <div id="p3-ip-dialog" class="p3-dialog">
 	<div>
 		<?php _e( 'IP address or pattern:', 'p3-profiler' ); ?><br /><br />
-		<input type="checkbox" id="p3-use-current-ip" <?php if ( true == get_option( 'p3-profiler_use_current_ip' ) ) : ?>checked="checked"<?php endif; ?> />
+		<input type="checkbox" id="p3-use-current-ip" <?php if ( true == $opts['use_current_ip'] ) : ?>checked="checked"<?php endif; ?> />
 		<label for="p3-use-current-ip"><?php _e( 'Use my IP address', 'p3-profiler' ); ?></label>
 		<br />
 		<input type="text" id="p3-advanced-ip" style="width:90%;" size="35" value="" title="<?php esc_attr_e( 'Enter IP address or regular expression pattern', 'p3-profiler' ); ?>" />
@@ -611,14 +613,14 @@ if ( !defined('P3_PATH') )
 	</div>
 	<br />
 	<div>
-		<input type="checkbox" id="p3-disable-opcode-cache" <?php if ( true == get_option( 'p3-profiler_disable_opcode_cache' ) ) : ?>checked="checked"<?php endif; ?> />
+		<input type="checkbox" id="p3-disable-opcode-cache" <?php if ( true == $opts['disable_opcode_cache'] ) : ?>checked="checked"<?php endif; ?> />
 		<label for="p3-disable-opcode-cache"><?php _e( 'Attempt to disable opcode optimizers', 'p3-profiler' ); ?> <em>(<?php _e( 'recommended', 'p3-profiler' ); ?>)</em></label>
 		<br />
 		<em class="p3-em"><?php _e( 'This can increase accuracy in plugin detection, but decrease accuracy in timing', 'p3-profiler' ); ?></em>
 	</div>
 	<br />
 	<div>
-		<input type="checkbox" id="p3-cache-buster" <?php if ( true == get_option( 'p3-profiler_cache_buster' ) ) : ?>checked="checked"<?php endif; ?> />
+		<input type="checkbox" id="p3-cache-buster" <?php if ( true == $opts['cache_buster'] ) : ?>checked="checked"<?php endif; ?> />
 		<label for="p3-cache-buster"><?php _e( 'Attempt to circumvent browser cache', 'p3-profiler' ); ?></label>
 		<br />
 		<em class="p3-em"><?php printf( __('This may help fix a "No visits recorded" error message.  See the <a href="%s">help</a> page for details.', 'p3-profiler' ),
@@ -627,7 +629,7 @@ if ( !defined('P3_PATH') )
 	</div>
 	<br />
 	<div>
-		<input type="checkbox" id="p3-debug" <?php if ( true == get_option( 'p3-profiler_debug' ) ) : ?>checked="checked"<?php endif; ?> />
+		<input type="checkbox" id="p3-debug" <?php if ( true == $opts['debug'] ) : ?>checked="checked"<?php endif; ?> />
 		<label for="p3-debug"><?php _e( 'Debug mode', 'p3-profiler' ); ?></label>
 		<br />
 		<em class="p3-em"><?php printf( __('This will log the last 100 visits.  Check the <a href="%s">help</a> page to view log messages.', 'p3-profiler' ),

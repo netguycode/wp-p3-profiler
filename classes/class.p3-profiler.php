@@ -138,19 +138,19 @@ class P3_Profiler {
 		// Check to see if we should profile
 		$opts = array();
 		if ( function_exists( 'get_option') ) {
-			$opts = get_option('p3-profiler_profiling_enabled');
-			if ( !empty( $opts ) ) {
+			$opts = get_option('p3-profiler_options' );
+			if ( !empty( $opts['profiling_enabled'] ) ) {
 				if ( isset( $this->_debug_entry ) ) {
 					$this->_debug_entry['profiling_enabled']  = true;
-					$this->_debug_entry['scan_name']          = $opts['name'];
-					$this->_debug_entry['recording_ip']       = $opts['ip'];
-					$this->_debug_entry['disable_optimizers'] = $opts['disable_opcode_cache'];
+					$this->_debug_entry['scan_name']          = $opts['profiling_enabled']['name'];
+					$this->_debug_entry['recording_ip']       = $opts['profiling_enabled']['ip'];
+					$this->_debug_entry['disable_optimizers'] = $opts['profiling_enabled']['disable_opcode_cache'];
 				}
 			}
 		}
 		
 		// Add a global flag to let everyone know we're profiling
-		if ( !empty( $opts ) && preg_match( '/' . $opts['ip'] . '/', p3_profiler_get_ip() ) ) {
+		if ( !empty( $opts ) && preg_match( '/' . $opts['profiling_enabled']['ip'] . '/', p3_profiler_get_ip() ) ) {
 			define( 'WPP_PROFILING_STARTED', true );
 		}
 
@@ -167,7 +167,7 @@ class P3_Profiler {
 		@set_time_limit( 90 );
 		
 		// Set the profile file
-		$this->_profile_filename = $opts['name'] . '.json';
+		$this->_profile_filename = $opts['profiling_enabled']['name'] . '.json';
 
 		// Start timing
 		$this->_start_time      = microtime( true );
@@ -193,7 +193,7 @@ class P3_Profiler {
 
 		// Disable opcode optimizers.  These "optimize" calls out of the stack
 		// and hide calls from the tick handler and backtraces
-		if ( $opts['disable_opcode_cache'] ) {
+		if ( $opts['profiling_enabled']['disable_opcode_cache'] ) {
 			if ( extension_loaded( 'xcache' ) ) {
 				@ini_set( 'xcache.optimizer', false ); // Will be implemented in 2.0, here for future proofing
 				// XCache seems to do some optimizing, anyway.  The recorded stack size is smaller with xcache.cacher enabled than without.
@@ -486,7 +486,8 @@ class P3_Profiler {
 	public function shutdown_handler() {
 
 		// Write debug log
-		if ( get_option( 'p3-profiler_debug' ) ) {
+		$opts = get_option('p3-profiler_options' );
+		if ( !empty( $opts['debug'] ) ) {
 			$this->_write_debug_log();
 		}
 
@@ -645,7 +646,9 @@ class P3_Profiler {
 		array_unshift( $debug_log, $this->_debug_entry );
 		if ( count( $debug_log ) >= 100 ) {
 			$debug_log = array_slice( $debug_log, 0, 100 );
-			update_option( 'p3-profiler_debug', false );
+			$opts = get_option( 'p3-profiler_options' );
+			$opts['debug'] = false;
+			update_option( 'p3-profiler_options', $opts );
 		}
 
 		// Write the log

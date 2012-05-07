@@ -14,28 +14,34 @@ if ( function_exists( 'is_multisite' ) && is_multisite() ) {
 		$folder      = $uploads_dir['basedir'] . DIRECTORY_SEPARATOR . 'profiles' . DIRECTORY_SEPARATOR;
 		p3_profiler_uninstall_delete_profiles_folder( $folder );
 
-		// Remove any options
+		// Remove any options - pre 1.3.0
 		delete_option( 'p3-profiler_disable_opcode_cache' );
 		delete_option( 'p3-profiler_use_current_ip' );
 		delete_option( 'p3-profiler_ip_address' );
-		delete_option( 'p3-profiler_version' );
 		delete_option( 'p3-profiler_cache_buster' );
-		delete_option( 'p3-profiler_profiling_enabled' );
 		delete_option( 'p3-profiler_debug' );
+		delete_option( 'p3-profiler_profiling_enabled' );
+
+		// 1.3.0 and later
+		delete_option( 'p3-profiler_version' );
+		delete_option( 'p3-profiler_options' );
 		delete_option( 'p3-profiler_debug_log' );
 	}
 	restore_current_blog();
 } else {
 	p3_profiler_uninstall_delete_profiles_folder( P3_PROFILES_PATH );
 
-	// Remove any options
+	// Remove any options - pre.1.3.0
 	delete_option( 'p3-profiler_disable_opcode_cache' );
 	delete_option( 'p3-profiler_use_current_ip' );
 	delete_option( 'p3-profiler_ip_address' );
-	delete_option( 'p3-profiler_version' );
 	delete_option( 'p3-profiler_cache_buster' );
-	delete_option( 'p3-profiler_profiling_enabled' );
 	delete_option( 'p3-profiler_debug' );
+	delete_option( 'p3-profiler_profiling_enabled' );
+	
+	// 1.3.0 and later
+	delete_option( 'p3-profiler_version' );
+	delete_option( 'p3-profiler_options' );
 	delete_option( 'p3-profiler_debug_log' );
 }
 
