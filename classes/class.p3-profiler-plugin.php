@@ -184,7 +184,7 @@ class P3_Profiler_Plugin {
 
 		// Usability message
 		if ( !defined( 'WPP_PROFILING_STARTED' ) ) {
-			echo '<div class="updated"><p>"' . __( 'Click "Start Scan" to run a performance scan of your website.', 'p3-profiler' ) . '</p></div>';
+			echo '<div class="updated"><p>' . __( 'Click "Start Scan" to run a performance scan of your website.', 'p3-profiler' ) . '</p></div>';
 		}
 		
 		// Load the list table, let it handle any bulk actions
