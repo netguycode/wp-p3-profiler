@@ -944,7 +944,7 @@ $component_runtime_chart_id   = substr( md5( uniqid() ), -8 );
 							</td>
 						</tr>
 						<tr class="advanced">
-							<td class="qtip-tip" title="<?php esc_attr_e( "The number of PHP ticks recorded during the profiling session.  A tick a loosely correlated to a PHP statement or function call.  Fewer is better.  Fewer is better.", 'p3-profiler' ); ?>">
+							<td class="qtip-tip" title="<?php esc_attr_e( "The number of PHP ticks recorded during the profiling session.  A tick is loosely correlated to a PHP statement or function call.  Fewer is better.", 'p3-profiler' ); ?>">
 								<strong><?php _e ( 'Number of PHP ticks:', 'p3-profiler' ); ?></strong>
 							</td>
 							<td>
