@@ -1,5 +1,8 @@
 <?php
 
+if( !defined( 'ABSPATH' ) && !defined( 'WP_UNINSTALL_PLUGIN' ) )
+    exit();
+
 // Unhook the profiler
 update_option( 'p3-profiler_debug', false );
 update_option( 'p3-profiler_debug_log', array() );
