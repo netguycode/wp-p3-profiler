@@ -36,3 +36,13 @@ function p3_profiler_get_ip() {
 		return $ip;
 	}
 }
+
+/**
+ * Disable profiling
+ * @return void
+ */
+function p3_profiler_disable() {
+	$opts = get_option( 'p3-profiler_options' );
+	$opts['profiling_enabled'] = false;
+	update_option( 'p3-profiler_options', $opts );
+}

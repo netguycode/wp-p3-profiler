@@ -162,9 +162,30 @@ class P3_Profiler {
 			return $this;
 		}
 		
+		// Emergency shut off switch
+		if ( isset( $_REQUEST['P3_SHUTOFF'] ) && !empty( $_REQUEST['P3_SHUTOFF'] ) ) {
+			p3_profiler_disable();
+			return $this;
+		}
+		
+		// Error detection
+		if ( !get_transient( 'p3_profiler-error_detection' ) ) {
+			p3_profiler_disable();
+			set_transient( 'p3_notices', array( array(
+				'msg'   => __( 'A fatal error occurred during profiling.  Please check your error logs and correct the error before profiling again.', 'p3-profiler'),
+				'error' => true,
+			) ) );
+			return $this;
+		}
+
 		// Kludge memory limit / time limit
-		@ini_set( 'memory_limit', '128M' );
+		if ( (int) @ini_get( 'memory_limit' ) < 256 ) {
+			@ini_set( 'memory_limit', '256M' );
+		}
 		@set_time_limit( 90 );
+		
+		// Set the error detection flag
+		set_transient( 'p3_profiler-error_detction', 1 );
 		
 		// Set the profile file
 		$this->_profile_filename = $opts['profiling_enabled']['name'] . '.json';
@@ -591,6 +612,9 @@ class P3_Profiler {
 		$uploads_dir = wp_upload_dir();
 		$path        = $uploads_dir['basedir'] . DIRECTORY_SEPARATOR . 'profiles' . DIRECTORY_SEPARATOR . $this->_profile_filename;
 		file_put_contents( $path, json_encode( $this->_profile ) . PHP_EOL, FILE_APPEND );
+		
+		// Clear the error detection flag
+		delete_transient( 'p3_profiler-error_detction' );
 	}
 	
 	/**
@@ -602,35 +626,10 @@ class P3_Profiler {
 		if ( !empty( $url ) ) {
 			return $url;
 		}
-		$protocol = 'http://';
-		if ( ( !empty( $_SERVER['HTTPS'] ) && 'on' == strtolower( $_SERVER['HTTPS'] ) ) || 443 == $_SERVER['SERVER_PORT'] ) {
-			$protocol = 'https://';
-		}
-		$domain = $_SERVER['HTTP_HOST'];
-		if ( !empty( $_SERVER['REQUEST_URI'] ) ) {
-			$file         = '';
-			$query_string = '';
-			$path         = preg_replace( '/[?&]P3_NOCACHE=[a-zA-Z0-9]+/', '', $_SERVER['REQUEST_URI'] );
-		} else {
-			$file = '';
-			if ( !empty( $_SERVER['SCRIPT_NAME'] ) ) {
-				$file = $_SERVER['SCRIPT_NAME'];
-			}
-			$path = '';
-			if ( !empty( $_SERVER['PATH_INFO'] ) ) {
-				$path = $_SERVER['PATH_INFO'];
-			} elseif ( !empty( $_SERVER['REDIRECT_URL'] ) ) {
-				$path = $_SERVER['REDIRECT_URL'];
-			}
-			$query_string = '';
-			if ( !empty( $_SERVER['QUERY_STRING'] ) ) {
-				$query_string = '?' . preg_replace( '/[?&]P3_NOCACHE=[a-zA-Z0-9]+/', '', $_SERVER['QUERY_STRING'] );
-			}
-		}
-		$url = $protocol.$domain.$file.$path.$query_string;
+		$url = remove_query_arg( 'P3_NOCACHE', $_SERVER['REQUEST_URI'] );
 		return $url;
 	}
-	
+
 	/**
 	 * Disable debug mode
 	 */

@@ -9,7 +9,7 @@ if ( !defined('P3_PATH') )
  * @version 1.0
  * @package P3_Profiler
  */
- class P3_Profile_Reader {
+ class P3_Profiler_Reader {
 
 	/**
 	 * Total site load time (profile + theme + core + plugins)
@@ -145,7 +145,7 @@ if ( !defined('P3_PATH') )
 	/**
 	 * Constructor
 	 * @param string $file Full path to the profile json file
-	 * @return P3_Profile_Reader
+	 * @return P3_Profiler_Reader
 	 */
 	public function __construct( $file ) {
 
@@ -188,7 +188,7 @@ if ( !defined('P3_PATH') )
 
 		// Check for empty data
 		if ( empty( $this->_data ) ) {
-			throw new P3_Profile_No_Data_Exception( __( 'No visits recorded during this profiling session.', 'p3-profiler' ) );
+			throw new P3_Profiler_No_Data_Exception( __( 'No visits recorded during this profiling session.', 'p3-profiler' ) );
 		}
 		
 		foreach ( $this->_data as $o ) {

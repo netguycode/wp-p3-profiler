@@ -432,7 +432,7 @@ After you've tuned your site up as much as possible, if you're still not happy w
 <div class="p3-question">
 	<h2 class="p3-help-question"><?php _e( "Does this plugin increase memory usage on my site?", 'p3-profiler' ); ?></h2>
 	<blockquote>
-		<?php printf( __( "When you run a performance scan on your site, the memory requirements go up during the scan.  Accordingly, P3 sets your <a href=\"%1\$s\" target=\"_blank\">%2\$s</a> to 128 MB and <a href=\"%3\$s\" target=\"_blank\">%4\$s</a> to 90 seconds during a performance scan.  These changes are not permanent and are only in effect when a performance scan is actively running.", 'p3-profiler' ), 			
+		<?php printf( __( "When you run a performance scan on your site, the memory requirements go up during the scan.  Accordingly, P3 sets your <a href=\"%1\$s\" target=\"_blank\">%2\$s</a> to 256 MB and <a href=\"%3\$s\" target=\"_blank\">%4\$s</a> to 90 seconds during a performance scan.  These changes are not permanent and are only in effect when a performance scan is actively running.", 'p3-profiler' ),
 			'http://www.php.net/manual/en/ini.core.php#ini.memory-limit',  __( 'memory limit', 'p3-profiler' ),
 			'http://php.net/set_time_limit',                               __( 'time limit', 'p3-profiler' )
 		); ?>

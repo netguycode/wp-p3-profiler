@@ -9,7 +9,7 @@ if ( !defined('P3_PATH') )
  * @version 1.0
  * @package P3_Profiler
  */
-class P3_Profile_Table extends WP_List_Table {
+class P3_Profiler_Table extends WP_List_Table {
 
 	/**************************************************************************/
 	/**        SETUP                                                         **/
@@ -17,7 +17,7 @@ class P3_Profile_Table extends WP_List_Table {
 
 	/**
 	 * Constructor
-	 * @return P3_Profile_Table
+	 * @return P3_Profiler_Table
 	 */
 	public function __construct() {
 		parent::__construct(
@@ -248,7 +248,7 @@ class P3_Profile_Table extends WP_List_Table {
 				$field = '_filesize';
 				break;
 		}
-		$sorter = new P3_Profile_Table_Sorter( $data, $field );
+		$sorter = new P3_Profiler_Table_Sorter( $data, $field );
 		return $sorter->sort( $direction );
 	}
 
@@ -274,7 +274,7 @@ class P3_Profile_Table extends WP_List_Table {
 				'name'      => $this->_action_links( $key, $name ),
 				'date'      => date( 'D, M jS', $time ) . ' at ' . date( 'g:i a', $time ),
 				'count'     => number_format( $count ),
-				'filesize'  => P3_Profiler_Plugin::readable_size( filesize( $file ) ),
+				'filesize'  => P3_Profiler_Plugin_Admin::readable_size( filesize( $file ) ),
 				'_filesize' => filesize( $file ),
 				'_date'     => $time,
 				'_count'    => $count,

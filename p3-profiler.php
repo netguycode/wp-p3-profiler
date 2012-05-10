@@ -35,10 +35,12 @@ define( 'P3_PLUGIN_SLUG', 'p3-profiler' );
 if ( function_exists( 'spl_autoload_register') ) {
 	spl_autoload_register( 'p3_profiler_autoload' );
 } else {
-	require_once( P3_PATH . '/classes/class.p3-profile-reader.php' );
-	require_once( P3_PATH . '/classes/class.p3-profile-table-sorter.php' );
-	require_once( P3_PATH . '/classes/class.p3-profile-table.php' );
+	require_once( P3_PATH . '/classes/class.p3-profiler-reader.php' );
+	require_once( P3_PATH . '/classes/class.p3-profiler-table-sorter.php' );
+	require_once( P3_PATH . '/classes/class.p3-profiler-table.php' );
 	require_once( P3_PATH . '/classes/class.p3-profiler-plugin.php' );
+	require_once( P3_PATH . '/classes/class.p3-profiler-plugin-admin.php' );
+	require_once( P3_PATH . '/exceptions/class.p3-profiler-no-data-exception.php' );
 }
 
 /**************************************************************************/
@@ -52,39 +54,35 @@ require_once P3_PATH . '/start-profile.php';
 /**        PLUGIN HOOKS                                                  **/
 /**************************************************************************/
 
-// Localization
-load_plugin_textdomain( 'p3-profiler', false, dirname( plugin_basename( __FILE__ ) ) . '/languages/' );
+// Ajax actions
+if ( is_admin() && 'admin-ajax.php' == end( explode( '/', $_SERVER['PHP_SELF'] ) ) ) {
+
+	add_action( 'wp_ajax_p3_start_scan', array( 'P3_Profiler_Plugin_Admin', 'ajax_start_scan' ) );
+	add_action( 'wp_ajax_p3_stop_scan', array( 'P3_Profiler_Plugin_Admin', 'ajax_stop_scan' ) );
+	add_action( 'wp_ajax_p3_send_results', array( 'P3_Profiler_Plugin_Admin', 'ajax_send_results' ) );
+	add_action( 'wp_ajax_p3_save_settings', array( 'P3_Profiler_Plugin_Admin', 'ajax_save_settings' ) );
 
 // Admin hooks
-if ( is_admin() ) {
-
-	// Localization
-	load_plugin_textdomain( 'p3-profiler', false, dirname( plugin_basename( __FILE__ ) ) . '/languages/' );
+} elseif ( is_admin() ) {
 		
 	// Show the 'Profiler' option under the 'Plugins' menu
 	add_action( 'admin_menu', array( 'P3_Profiler_Plugin', 'tools_menu' ) );
 
 	if ( isset( $_REQUEST['page'] ) && P3_PLUGIN_SLUG == $_REQUEST['page'] ) {
 
+		// Localization
+		add_action( 'admin_init', array( 'P3_Profiler_Plugin', 'load_language' ) );
+
 		// Pre-processing of actions
-		add_action( 'admin_init', array( 'P3_Profiler_Plugin', 'action_init' ) );
+		add_action( 'admin_init', array( 'P3_Profiler_Plugin_Admin', 'action_init' ) );
 
 		// Show any notices
-		add_action( 'admin_notices', array( 'P3_Profiler_Plugin', 'show_notices' ) );
+		add_action( 'admin_notices', array( 'P3_Profiler_Plugin_Admin', 'show_notices' ) );
 	}
-	
-	// Ajax actions
-	if ( 'admin-ajax.php' == end( explode( '/', $_SERVER['PHP_SELF'] ) ) ) {
-		add_action( 'wp_ajax_p3_start_scan', array( 'P3_Profiler_Plugin', 'ajax_start_scan' ) );
-		add_action( 'wp_ajax_p3_stop_scan', array( 'P3_Profiler_Plugin', 'ajax_stop_scan' ) );
-		add_action( 'wp_ajax_p3_send_results', array( 'P3_Profiler_Plugin', 'ajax_send_results' ) );
-		add_action( 'wp_ajax_p3_save_settings', array( 'P3_Profiler_Plugin', 'ajax_save_settings' ) );
-	}
-}
 
 // Remove the admin bar when in profiling mode
-elseif ( defined( 'WPP_PROFILING_STARTED' ) || isset( $_GET['P3_HIDE_ADMIN_BAR'] ) ) {
-	add_action( 'plugins_loaded', array( 'P3_Profiler_Plugin', 'remove_admin_bar' ) );
+} elseif ( defined( 'WPP_PROFILING_STARTED' ) || isset( $_GET['P3_HIDE_ADMIN_BAR'] ) ) {
+	add_action( 'plugins_loaded', array( 'P3_Profiler_Plugin_Admin', 'remove_admin_bar' ) );
 }
 
 // Install / uninstall hooks
@@ -101,17 +99,23 @@ if ( function_exists( 'is_multisite' ) && is_multisite() ) {
  */
 function p3_profiler_autoload( $className ) {
 	switch ( $className ) {
-		case 'P3_Profile_Reader' :
-			require_once( P3_PATH . '/classes/class.p3-profile-reader.php' );
+		case 'P3_Profiler_Reader' :
+			require_once( P3_PATH . '/classes/class.p3-profiler-reader.php' );
 			break;
-		case 'P3_Profile_Table_Sorter' :
-			require_once( P3_PATH . '/classes/class.p3-profile-table-sorter.php' );
+		case 'P3_Profiler_Table_Sorter' :
+			require_once( P3_PATH . '/classes/class.p3-profiler-table-sorter.php' );
 			break;
-		case 'P3_Profile_Table' :
-			require_once( P3_PATH . '/classes/class.p3-profile-table.php' );
+		case 'P3_Profiler_Table' :
+			require_once( P3_PATH . '/classes/class.p3-profiler-table.php' );
 			break;
 		case 'P3_Profiler_Plugin' :
 			require_once( P3_PATH . '/classes/class.p3-profiler-plugin.php' );
+			break;
+		case 'P3_Profiler_Plugin_Admin' :
+			require_once( P3_PATH . '/classes/class.p3-profiler-plugin-admin.php' );
+			break;
+		case 'P3_Profiler_No_Data_Exception' :
+			require_once( P3_PATH . '/exceptions/class.p3-profiler-no-data-exception.php' );
 			break;
 	}
 }
