@@ -63,11 +63,13 @@ if ( 'current-scan' == self::$action || !empty( $_REQUEST['current_scan'] ) ) {
 
 	<!-- Header navbar -->
 	<div class="ui-widget-header" id="p3-navbar">
-		<input type="radio" name="p3-nav" id="button-current-scan" <?php echo $button_current_checked; ?> />
-		<label for="button-current-scan"><?php _e( 'Current', 'p3-profiler' ); ?></label>
-		<input type="radio" name="p3-nav" id="button-history-scans" <?php echo $button_history_checked; ?> />
-		<label for="button-history-scans"><?php _e( 'History', 'p3-profiler' ); ?></label>
-		<input type="radio" name="p3-nav" id="button-help" <?php echo $button_help_checked; ?> /><label for="button-help"><?php _e( 'Help', 'p3-profiler' ); ?></label>
+		<div>
+			<input type="radio" name="p3-nav" id="button-current-scan" <?php echo $button_current_checked; ?> />
+			<label for="button-current-scan"><?php _e( 'Current', 'p3-profiler' ); ?></label>
+			<input type="radio" name="p3-nav" id="button-history-scans" <?php echo $button_history_checked; ?> />
+			<label for="button-history-scans"><?php _e( 'History', 'p3-profiler' ); ?></label>
+			<input type="radio" name="p3-nav" id="button-help" <?php echo $button_help_checked; ?> /><label for="button-help"><?php _e( 'Help', 'p3-profiler' ); ?></label>
+		</div>
 		
 		<div id="p3-scan-label">
 			<?php if ( !empty( self::$profile ) ) : ?>
