@@ -169,12 +169,10 @@ class P3_Profiler {
 		}
 		
 		// Error detection
-		if ( !get_transient( 'p3_profiler-error_detection' ) ) {
+		$flag = get_transient( 'p3_profiler-error_detection' );
+		if ( !empty( $flag ) ) {
 			p3_profiler_disable();
-			set_transient( 'p3_notices', array( array(
-				'msg'   => __( 'A fatal error occurred during profiling.  Please check your error logs and correct the error before profiling again.', 'p3-profiler'),
-				'error' => true,
-			) ) );
+			delete_transient( 'p3_profiler-error_detection' );
 			return $this;
 		}
 
@@ -185,7 +183,7 @@ class P3_Profiler {
 		@set_time_limit( 90 );
 		
 		// Set the error detection flag
-		set_transient( 'p3_profiler-error_detction', 1 );
+		set_transient( 'p3_profiler-error_detection', time() );
 		
 		// Set the profile file
 		$this->_profile_filename = $opts['profiling_enabled']['name'] . '.json';
@@ -506,6 +504,18 @@ class P3_Profiler {
 	 */
 	public function shutdown_handler() {
 
+		// Detect fatal errors (e.g. out of memory errors)
+		$error = error_get_last();
+		if ( empty( $error ) || E_ERROR !== $error['type'] ) {
+			delete_transient( 'p3_profiler-error_detection' );
+		} else {
+			set_transient( 'p3_notices', array( array(
+				'msg'   => sprintf( __( 'A fatal error occurred during profiling: %s in file %s on line %d ', 'p3-profiler' ), $error['message'], $error['file'], $error['line'] ),
+				'error' => true,
+			) ) );
+		}
+		unset( $error );
+
 		// Write debug log
 		$opts = get_option('p3-profiler_options' );
 		if ( !empty( $opts['debug'] ) ) {
@@ -607,14 +617,10 @@ class P3_Profiler {
 		// Throw away unneeded information to make the profiles smaller
 		unset( $this->_profile['stack'] );
 
-		// Open the file and acquire an exclusive lock ( prevent multiple hits from stomping on our
-		// previous profiles
+		// Write the profile file
 		$uploads_dir = wp_upload_dir();
 		$path        = $uploads_dir['basedir'] . DIRECTORY_SEPARATOR . 'profiles' . DIRECTORY_SEPARATOR . $this->_profile_filename;
-		file_put_contents( $path, json_encode( $this->_profile ) . PHP_EOL, FILE_APPEND );
-		
-		// Clear the error detection flag
-		delete_transient( 'p3_profiler-error_detction' );
+		file_put_contents( $path, json_encode( $this->_profile ) . PHP_EOL, FILE_APPEND );		
 	}
 	
 	/**

@@ -271,6 +271,7 @@ class P3_Profiler_Plugin_Admin {
 		$filename = sanitize_file_name( basename( $_POST['p3_scan_name'] ) );
 
 		// Add the entry ( multisite installs can run more than one concurrent profile )
+		delete_transient( 'p3_profiler-error_detection' );
 		$opts = get_option( 'p3-profiler_options' );
 		$opts['profiling_enabled'] = array(
 			'ip'                   => stripslashes( $_POST['p3_ip'] ),
