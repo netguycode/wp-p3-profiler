@@ -1023,7 +1023,7 @@ Theme name: %2\$s
 Pages browsed: %3\$s
 Avg. load time: %4\$s sec
 Number of plugins: %5\$s
-Plugin impact: %6\$s %% of load time
+Plugin impact: %6\$s of load time
 Avg. plugin time: %7\$s sec
 Avg. core time: %8\$s sec
 Avg. theme time: %9\$s sec
@@ -1064,7 +1064,7 @@ $plugin_list
 			<?php _e( 'There was a problem sending the e-mail:', 'p3-profiler' ); ?> <span id="p3-email-error"></span>
 		</div>
 		<div id="p3-email-sending-success">
-			<?php _e( 'Your report was sent successfully to', 'p3-profiler' ); ?><span id="p3-email-success-recipient"></span>
+			<?php _e( 'Your report was sent successfully to', 'p3-profiler' ); ?> <span id="p3-email-success-recipient"></span>
 		</div>
 		<div id="p3-email-sending-close">
 			<input type="checkbox" id="p3-email-sending-close-submit" checked="checked" /><label for="p3-email-sending-close-submit"><?php _e( 'Done', 'p3-profiler' ); ?></label>
