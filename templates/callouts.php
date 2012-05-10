@@ -59,17 +59,12 @@ $opts = get_option( 'p3-profiler_options' );
 
 			// Turn on the profiler
 			jQuery.post( ajaxurl, data, function( response ) {
-				if ( 1 != response ) {
-					alert( "<?php _e( 'There was an error processing your request.  Please reload the page and try again.', 'p3-profiler' ); ?> [" + response + "]");
-				} else {
 
-					// Start scanning pages
-					jQuery( "#p3-scan-frame" ).attr( "onload", "P3_Scan.next_page();" );
-					jQuery( "#p3-scan-frame" ).attr( "src", P3_Scan.pages[0] );
-					P3_Scan.current_page = 0;
-					P3_Scan.update_display();
-					
-				}
+				// Start scanning pages
+				jQuery( "#p3-scan-frame" ).attr( "onload", "P3_Scan.next_page();" );
+				jQuery( "#p3-scan-frame" ).attr( "src", P3_Scan.pages[0] );
+				P3_Scan.current_page = 0;
+				P3_Scan.update_display();
 			});
 		},
 		
@@ -82,9 +77,6 @@ $opts = get_option( 'p3-profiler_options' );
 				'p3_nonce' : '<?php echo wp_create_nonce( 'p3_ajax_stop_scan' ); ?>'
 			}
 			jQuery.post( ajaxurl, data, function( response ) {
-				if ( response.indexOf( '.json' ) < 0 ) {
-					alert( "<?php _e( 'There was an error processing your request.  Please reload the page and try again.', 'p3-profiler' ); ?> [" + response + "]");
-				}
 
 				// Hide the cancel button
 				jQuery( "#p3-cancel-scan-buttonset" ).hide();
@@ -117,9 +109,6 @@ $opts = get_option( 'p3-profiler_options' );
 
 			// Turn on the profiler
 			jQuery.post( ajaxurl, data, function( response ) {
-				if ( 1 != response ) {
-					alert( "<?php _e( 'There was an error processing your request.  Please reload the page and try again.', 'p3-profiler' ); ?> [" + response + "]");
-				} else {
 
 					// Show the cancel button
 					P3_Scan.paused = false;
@@ -128,7 +117,6 @@ $opts = get_option( 'p3-profiler_options' );
 					jQuery( "#p3-view-results-buttonset" ).hide();
 					P3_Scan.update_display();
 					P3_Scan.next_page();
-				}
 			});
 		},
 
@@ -141,9 +129,6 @@ $opts = get_option( 'p3-profiler_options' );
 				'p3_nonce' : '<?php echo wp_create_nonce( 'p3_ajax_stop_scan' ); ?>'
 			}
 			jQuery.post( ajaxurl, data, function( response ) {
-				if ( response.indexOf( '.json' ) < 0 ) {
-					alert( "<?php _e( 'There was an error processing your request.  Please reload the page and try again.', 'p3-profiler' ); ?> [" + response + "]");
-				}
 				
 				// Hide the cancel button
 				jQuery( "#p3-cancel-scan-buttonset" ).hide();
@@ -233,9 +218,6 @@ $opts = get_option( 'p3-profiler_options' );
 							'p3_nonce' : '<?php echo wp_create_nonce( 'p3_save_settings' ); ?>'
 						};
 						$.post( ajaxurl, data, function( response ) {
-							if ( 1 != response ) {
-								alert( "<?php _e( 'There was an error processing your request.  Please reload the page and try again.', 'p3-profiler' ); ?> [" + response + "]");
-							}
 							$( "#p3-ip-dialog" ).dialog( "close" );
 						});
 					}
@@ -339,9 +321,6 @@ $opts = get_option( 'p3-profiler_options' );
 				'p3_nonce' : '<?php echo wp_create_nonce( 'p3_ajax_stop_scan' ); ?>'
 			}
 			jQuery.post( ajaxurl, data, function( response ) {
-				if ( response.indexOf( '.json' ) < 0 ) {
-					alert( "<?php _e( 'There was an error processing your request.  Please reload the page and try again.', 'p3-profiler' ); ?> [" + response + "]");
-				}
 				location.reload();
 			});
 		});
@@ -373,7 +352,6 @@ $opts = get_option( 'p3-profiler_options' );
 			// Stay checked to keep the styling
 			$( this ).prop( "checked", true );
 			$( this ).button( "refresh" );
-
 			
 			// Form data
 			data = {
@@ -388,9 +366,6 @@ $opts = get_option( 'p3-profiler_options' );
 
 			// Turn on the profiler
 			jQuery.post( ajaxurl, data, function( response ) {
-				if ( 1 != response ) {
-					alert( "<?php _e( 'There was an error processing your request.  Please reload the page and try again.', 'p3-profiler' ); ?> [" + response + "]");
-				}
 			});
 
 			$( "#p3-scan-name-dialog" ).dialog( "close" );
@@ -405,11 +380,7 @@ $opts = get_option( 'p3-profiler_options' );
 				'p3_nonce' : '<?php echo wp_create_nonce( 'p3_ajax_stop_scan' ); ?>'
 			}
 			jQuery.post( ajaxurl, data, function( response ) {
-				if ( response.indexOf( '.json' ) < 0 ) {
-					alert( "<?php _e( 'There was an error processing your request.  Please reload the page and try again.', 'p3-profiler' ); ?> [" + response + "]");
-				} else {
-					location.href = "<?php echo add_query_arg( array( 'p3_action' => 'view-scan', 'current_scan' => '1', 'name' => null ) ); ?>&name=" + response;
-				}
+				location.href = "<?php echo add_query_arg( array( 'p3_action' => 'view-scan', 'current_scan' => '1', 'name' => null ) ); ?>&name=" + response;
 			})
 			$( "#p3-scanner-dialog" ).dialog( "close" );
 		});
