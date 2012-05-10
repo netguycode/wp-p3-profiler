@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: P3 (Plugin Performance Profiler) 1.3.0\n"
 "Report-Msgid-Bugs-To: http://wordpress.org/tag/p3-profiler\n"
-"POT-Creation-Date: 2012-05-09 19:09:56+00:00\n"
+"POT-Creation-Date: 2012-05-10 22:11:45+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -12,408 +12,406 @@ msgstr ""
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 
-#: classes/class.p3-profile-reader.php:155
-msgid "Cannot open file: "
-msgstr ""
-
-#: classes/class.p3-profile-reader.php:167
-msgid "Cannot parse file: "
-msgstr ""
-
-#: classes/class.p3-profile-reader.php:191
-msgid "No visits recorded during this profiling session."
-msgstr ""
-
-#: classes/class.p3-profile-table.php:25 classes/class.p3-profile-table.php:26
-msgid "scan"
-msgid_plural "scans"
-msgstr[0] ""
-msgstr[1] ""
-
-#: classes/class.p3-profile-table.php:106
-#: classes/class.p3-profile-table.php:183
-#: classes/class.p3-profile-table.php:198
-msgid "Delete"
-msgstr ""
-
-#: classes/class.p3-profile-table.php:138
-msgid "Name"
-msgstr ""
-
-#: classes/class.p3-profile-table.php:139
-msgid "Date"
-msgstr ""
-
-#: classes/class.p3-profile-table.php:140
-msgid "Visits"
-msgstr ""
-
-#: classes/class.p3-profile-table.php:141
-msgid "Size"
-msgstr ""
-
-#: classes/class.p3-profile-table.php:174
-#: classes/class.p3-profile-table.php:177
-msgid "View the results of this scan"
-msgstr ""
-
-#: classes/class.p3-profile-table.php:177
-msgid "View"
-msgstr ""
-
-#: classes/class.p3-profile-table.php:180
-msgid "Continue this scan"
-msgstr ""
-
-#: classes/class.p3-profile-table.php:180
-msgid "Continue"
-msgstr ""
-
-#: classes/class.p3-profile-table.php:183
-msgid "Delete this scan"
-msgstr ""
-
-#: classes/class.p3-profile-table.php:210
-#: classes/class.p3-profiler-plugin.php:283
-#: classes/class.p3-profiler-plugin.php:320
-#: classes/class.p3-profiler-plugin.php:348
-#: classes/class.p3-profiler-plugin.php:383
-#: classes/class.p3-profiler-plugin.php:428
-#: classes/class.p3-profiler-plugin.php:439
-msgid "You do not have sufficient permissions to access this page."
-msgstr ""
-
-#: classes/class.p3-profile-table.php:215
-msgid "Error removing file: "
-msgstr ""
-
-#: classes/class.p3-profile-table.php:220
-msgid "Deleted %d scan. "
-msgid_plural "Deleted %d scans."
-msgstr[0] ""
-msgstr[1] ""
-
-#: classes/class.p3-profiler-plugin.php:74
-#: classes/class.p3-profiler-plugin.php:75
+#: classes/class.p3-profiler-plugin-admin.php:74
+#: classes/class.p3-profiler-plugin-admin.php:75
+#: classes/class.p3-profiler-plugin.php:16
+#: classes/class.p3-profiler-plugin.php:17
 msgid "P3 Plugin Profiler"
 msgstr ""
 
-#: classes/class.p3-profiler-plugin.php:142
+#: classes/class.p3-profiler-plugin-admin.php:130
 msgid "Scan does not exist"
 msgstr ""
 
-#: classes/class.p3-profiler-plugin.php:171
+#: classes/class.p3-profiler-plugin-admin.php:156
 msgid ""
 "No visits recorded during this profiling session.  Check the <a href=\"%s"
 "\">help</a> page for more information"
 msgstr ""
 
-#: classes/class.p3-profiler-plugin.php:179
+#: classes/class.p3-profiler-plugin-admin.php:164
 msgid "Error reading scan"
 msgstr ""
 
-#: classes/class.p3-profiler-plugin.php:187
+#: classes/class.p3-profiler-plugin-admin.php:172
 msgid "Click \"Start Scan\" to run a performance scan of your website."
 msgstr ""
 
-#: classes/class.p3-profiler-plugin.php:330
+#: classes/class.p3-profiler-plugin-admin.php:267
+#: classes/class.p3-profiler-plugin-admin.php:305
+#: classes/class.p3-profiler-plugin-admin.php:334
+#: classes/class.p3-profiler-plugin-admin.php:369
+#: classes/class.p3-profiler-plugin-admin.php:414
+#: classes/class.p3-profiler-plugin-admin.php:425
+#: classes/class.p3-profiler-table.php:210
+msgid "You do not have sufficient permissions to access this page."
+msgstr ""
+
+#: classes/class.p3-profiler-plugin-admin.php:316
 msgid "Turned off performance scanning."
 msgstr ""
 
-#: classes/class.p3-profiler-plugin.php:403
-#: classes/class.p3-profiler-plugin.php:406
+#: classes/class.p3-profiler-plugin-admin.php:389
+#: classes/class.p3-profiler-plugin-admin.php:392
 msgid "Invalid subject"
 msgstr ""
 
-#: classes/class.p3-profiler-plugin.php:410
+#: classes/class.p3-profiler-plugin-admin.php:396
 msgid "<a href=\"%s\" target=\"_blank\">wp_mail()</a> function returned false"
 msgstr ""
 
-#: classes/class.p3-profiler-plugin.php:456 templates/help.php:366
+#: classes/class.p3-profiler-plugin-admin.php:442 templates/help.php:366
 #: templates/help.php:406
 msgid "Profiling Enabled"
 msgstr ""
 
-#: classes/class.p3-profiler-plugin.php:457 templates/help.php:367
+#: classes/class.p3-profiler-plugin-admin.php:443 templates/help.php:367
 #: templates/help.php:407
 msgid "Recording IP"
 msgstr ""
 
-#: classes/class.p3-profiler-plugin.php:458 templates/callouts.php:275
+#: classes/class.p3-profiler-plugin-admin.php:444 templates/callouts.php:257
 #: templates/help.php:368 templates/help.php:408
 msgid "Scan Name"
 msgstr ""
 
-#: classes/class.p3-profiler-plugin.php:459 templates/help.php:369
+#: classes/class.p3-profiler-plugin-admin.php:445 templates/help.php:369
 #: templates/help.php:409
 msgid "Recording"
 msgstr ""
 
-#: classes/class.p3-profiler-plugin.php:460 templates/help.php:370
+#: classes/class.p3-profiler-plugin-admin.php:446 templates/help.php:370
 #: templates/help.php:410
 msgid "Disable Optimizers"
 msgstr ""
 
-#: classes/class.p3-profiler-plugin.php:461 templates/help.php:371
+#: classes/class.p3-profiler-plugin-admin.php:447 templates/help.php:371
 #: templates/help.php:411
 msgid "URL"
 msgstr ""
 
-#: classes/class.p3-profiler-plugin.php:462 templates/help.php:372
+#: classes/class.p3-profiler-plugin-admin.php:448 templates/help.php:372
 #: templates/help.php:412
 msgid "Visitor IP"
 msgstr ""
 
-#: classes/class.p3-profiler-plugin.php:463 templates/help.php:373
+#: classes/class.p3-profiler-plugin-admin.php:449 templates/help.php:373
 #: templates/help.php:413
 msgid "Time"
 msgstr ""
 
-#: classes/class.p3-profiler-plugin.php:464 templates/help.php:374
+#: classes/class.p3-profiler-plugin-admin.php:450 templates/help.php:374
 #: templates/help.php:414
 msgctxt "Abbreviation for process id"
 msgid "PID"
 msgstr ""
 
-#: classes/class.p3-profiler-plugin.php:499
+#: classes/class.p3-profiler-plugin-admin.php:485
 msgid "Cannot read profiles directory"
 msgstr ""
 
-#: classes/class.p3-profiler-plugin.php:561
+#: classes/class.p3-profiler-plugin-admin.php:547
 msgid "Performance scanning is enabled."
 msgstr ""
 
-#: classes/class.p3-profiler-plugin.php:668
+#: classes/class.p3-profiler-plugin-admin.php:654
 msgctxt "Abbreviation for bytes"
 msgid "B"
 msgstr ""
 
-#: classes/class.p3-profiler-plugin.php:669
+#: classes/class.p3-profiler-plugin-admin.php:655
 msgctxt "Abbreviation for kilobytes"
 msgid "KB"
 msgstr ""
 
-#: classes/class.p3-profiler-plugin.php:670 templates/view-scan.php:959
+#: classes/class.p3-profiler-plugin-admin.php:656 templates/view-scan.php:959
 msgctxt "Abbreviation for megabytes"
 msgid "MB"
 msgstr ""
 
-#: classes/class.p3-profiler-plugin.php:671
+#: classes/class.p3-profiler-plugin-admin.php:657
 msgctxt "Abbreviation for gigabytes"
 msgid "GB"
 msgstr ""
 
-#: classes/class.p3-profiler-plugin.php:672
+#: classes/class.p3-profiler-plugin-admin.php:658
 msgctxt "Abbreviation for terabytes"
 msgid "TB"
 msgstr ""
 
-#: templates/callouts.php:63 templates/callouts.php:86
-#: templates/callouts.php:121 templates/callouts.php:145
-#: templates/callouts.php:237 templates/callouts.php:343
-#: templates/callouts.php:392 templates/callouts.php:409
-msgid ""
-"There was an error processing your request.  Please reload the page and try "
-"again."
+#: classes/class.p3-profiler-reader.php:155
+msgid "Cannot open file: "
 msgstr ""
 
-#: templates/callouts.php:101
+#: classes/class.p3-profiler-reader.php:167
+msgid "Cannot parse file: "
+msgstr ""
+
+#: classes/class.p3-profiler-reader.php:191
+msgid "No visits recorded during this profiling session."
+msgstr ""
+
+#: classes/class.p3-profiler-table.php:25
+#: classes/class.p3-profiler-table.php:26
+msgid "scan"
+msgid_plural "scans"
+msgstr[0] ""
+msgstr[1] ""
+
+#: classes/class.p3-profiler-table.php:106
+#: classes/class.p3-profiler-table.php:183
+#: classes/class.p3-profiler-table.php:198
+msgid "Delete"
+msgstr ""
+
+#: classes/class.p3-profiler-table.php:138
+msgid "Name"
+msgstr ""
+
+#: classes/class.p3-profiler-table.php:139
+msgid "Date"
+msgstr ""
+
+#: classes/class.p3-profiler-table.php:140
+msgid "Visits"
+msgstr ""
+
+#: classes/class.p3-profiler-table.php:141
+msgid "Size"
+msgstr ""
+
+#: classes/class.p3-profiler-table.php:174
+#: classes/class.p3-profiler-table.php:177
+msgid "View the results of this scan"
+msgstr ""
+
+#: classes/class.p3-profiler-table.php:177
+msgid "View"
+msgstr ""
+
+#: classes/class.p3-profiler-table.php:180
+msgid "Continue this scan"
+msgstr ""
+
+#: classes/class.p3-profiler-table.php:180
+msgid "Continue"
+msgstr ""
+
+#: classes/class.p3-profiler-table.php:183
+msgid "Delete this scan"
+msgstr ""
+
+#: classes/class.p3-profiler-table.php:215
+msgid "Error removing file: "
+msgstr ""
+
+#: classes/class.p3-profiler-table.php:220
+msgid "Deleted %d scan. "
+msgid_plural "Deleted %d scans."
+msgstr[0] ""
+msgstr[1] ""
+
+#: classes/class.p3-profiler.php:513
+msgid "A fatal error occurred during profiling: %s in file %s on line %d "
+msgstr ""
+
+#: templates/callouts.php:93
 msgid "Scanning is paused."
 msgstr ""
 
-#: templates/callouts.php:157
+#: templates/callouts.php:142
 msgid "Scanning is complete."
 msgstr ""
 
-#: templates/callouts.php:163
+#: templates/callouts.php:148
 msgid "Scanning"
 msgstr ""
 
-#: templates/callouts.php:217 templates/callouts.php:518
+#: templates/callouts.php:202 templates/callouts.php:489
 msgid "Advanced Settings"
 msgstr ""
 
-#: templates/callouts.php:221 templates/view-scan.php:55
+#: templates/callouts.php:206 templates/view-scan.php:55
 msgid "OK"
 msgstr ""
 
-#: templates/callouts.php:244 templates/callouts.php:656
+#: templates/callouts.php:226 templates/callouts.php:627
 #: templates/view-scan.php:121
 msgid "Cancel"
 msgstr ""
 
-#: templates/callouts.php:262
+#: templates/callouts.php:244
 msgid "Performance Scan"
 msgstr ""
 
-#: templates/callouts.php:508 templates/callouts.php:691
+#: templates/callouts.php:479 templates/callouts.php:662
 msgid "Stop Scan"
 msgstr ""
 
-#: templates/callouts.php:515
+#: templates/callouts.php:486
 msgid "My IP:"
 msgstr ""
 
-#: templates/callouts.php:517
+#: templates/callouts.php:488
 msgid "Start Scan"
 msgstr ""
 
-#: templates/callouts.php:526
+#: templates/callouts.php:497
 msgid ""
 "Total number of active plugins, including must-use plugins, on your site."
 msgstr ""
 
-#: templates/callouts.php:528
+#: templates/callouts.php:499
 msgid "Total Plugins:"
 msgstr ""
 
-#: templates/callouts.php:541
+#: templates/callouts.php:512
 msgid "currently active"
 msgstr ""
 
-#: templates/callouts.php:548
+#: templates/callouts.php:519
 msgid ""
 "Total number of seconds dedicated to plugin code per visit on your site."
 msgstr ""
 
-#: templates/callouts.php:549 templates/callouts.php:567
-#: templates/callouts.php:585
+#: templates/callouts.php:520 templates/callouts.php:538
+#: templates/callouts.php:556
 msgid "From"
 msgstr ""
 
-#: templates/callouts.php:551 templates/help.php:483
+#: templates/callouts.php:522 templates/help.php:483
 msgid "Plugin Load Time"
 msgstr ""
 
-#: templates/callouts.php:554 templates/callouts.php:572
-#: templates/callouts.php:590
+#: templates/callouts.php:525 templates/callouts.php:543
+#: templates/callouts.php:561
 msgid "n/a"
 msgstr ""
 
-#: templates/callouts.php:559
+#: templates/callouts.php:530
 msgid "sec. per visit"
 msgstr ""
 
-#: templates/callouts.php:566
+#: templates/callouts.php:537
 msgid "Percent of load time on your site dedicated to plugin code"
 msgstr ""
 
-#: templates/callouts.php:569
+#: templates/callouts.php:540
 msgid "Plugin Impact"
 msgstr ""
 
-#: templates/callouts.php:577
+#: templates/callouts.php:548
 msgid "of page load time"
 msgstr ""
 
-#: templates/callouts.php:584
+#: templates/callouts.php:555
 msgid "Total number of database queries per visit"
 msgstr ""
 
-#: templates/callouts.php:587 templates/help.php:545
+#: templates/callouts.php:558 templates/help.php:545
 msgid "MySQL Queries"
 msgstr ""
 
-#: templates/callouts.php:595
+#: templates/callouts.php:566
 msgid "per visit"
 msgstr ""
 
-#: templates/callouts.php:606
+#: templates/callouts.php:577
 msgid "IP address or pattern:"
 msgstr ""
 
-#: templates/callouts.php:608
+#: templates/callouts.php:579
 msgid "Use my IP address"
 msgstr ""
 
-#: templates/callouts.php:610
+#: templates/callouts.php:581
 msgid "Enter IP address or regular expression pattern"
 msgstr ""
 
-#: templates/callouts.php:612
+#: templates/callouts.php:583
 msgid "Example: 1.2.3.4 or ( 1.2.3.4|4.5.6.7 )"
 msgstr ""
 
-#: templates/callouts.php:617
+#: templates/callouts.php:588
 msgid "Attempt to disable opcode optimizers"
 msgstr ""
 
-#: templates/callouts.php:617
+#: templates/callouts.php:588
 msgid "recommended"
 msgstr ""
 
-#: templates/callouts.php:619
+#: templates/callouts.php:590
 msgid ""
 "This can increase accuracy in plugin detection, but decrease accuracy in "
 "timing"
 msgstr ""
 
-#: templates/callouts.php:624
+#: templates/callouts.php:595
 msgid "Attempt to circumvent browser cache"
 msgstr ""
 
-#: templates/callouts.php:626
+#: templates/callouts.php:597
 msgid ""
 "This may help fix a \"No visits recorded\" error message.  See the <a href="
 "\"%s\">help</a> page for details."
 msgstr ""
 
-#: templates/callouts.php:633
+#: templates/callouts.php:604
 msgid "Debug mode"
 msgstr ""
 
-#: templates/callouts.php:635
+#: templates/callouts.php:606
 msgid ""
 "This will log the last 100 visits.  Check the <a href=\"%s\">help</a> page "
 "to view log messages."
 msgstr ""
 
-#: templates/callouts.php:647
+#: templates/callouts.php:618
 msgid ""
 "The scanner will analyze the speed and resource usage of all active plugins "
 "on your website. It may take several minutes, and this window must remain "
 "open for the scan to finish successfully."
 msgstr ""
 
-#: templates/callouts.php:653
+#: templates/callouts.php:624
 msgid ""
 "Click the links and pages of your site, and the scanner will analyze the "
 "speed and resource usage of all of your active plugins."
 msgstr ""
 
-#: templates/callouts.php:660
+#: templates/callouts.php:631
 msgid "I'm Done"
 msgstr ""
 
-#: templates/callouts.php:670 templates/template.php:74
+#: templates/callouts.php:641 templates/template.php:76
 msgid "Scan name:"
 msgstr ""
 
-#: templates/callouts.php:671
+#: templates/callouts.php:642
 msgid "Enter scan name here"
 msgstr ""
 
-#: templates/callouts.php:674
+#: templates/callouts.php:645
 msgid "Enter the name of a previous scan to continue scanning"
 msgstr ""
 
-#: templates/callouts.php:677
+#: templates/callouts.php:648
 msgid "Auto Scan"
 msgstr ""
 
-#: templates/callouts.php:678
+#: templates/callouts.php:649
 msgid "Manual Scan"
 msgstr ""
 
-#: templates/callouts.php:685
+#: templates/callouts.php:656
 msgid "Scanning ..."
 msgstr ""
 
-#: templates/callouts.php:696
+#: templates/callouts.php:667
 msgid "Resume"
 msgstr ""
 
-#: templates/callouts.php:698 templates/callouts.php:704
+#: templates/callouts.php:669 templates/callouts.php:675
 msgid "View Results"
 msgstr ""
 
@@ -920,7 +918,7 @@ msgstr ""
 msgid ""
 "When you run a performance scan on your site, the memory requirements go up "
 "during the scan.  Accordingly, P3 sets your <a href=\"%1$s\" target=\"_blank"
-"\">%2$s</a> to 128 MB and <a href=\"%3$s\" target=\"_blank\">%4$s</a> to 90 "
+"\">%2$s</a> to 256 MB and <a href=\"%3$s\" target=\"_blank\">%4$s</a> to 90 "
 "seconds during a performance scan.  These changes are not permanent and are "
 "only in effect when a performance scan is actively running."
 msgstr ""
@@ -1071,7 +1069,7 @@ msgstr ""
 msgid "License"
 msgstr ""
 
-#: templates/help.php:568 templates/template.php:106
+#: templates/help.php:568 templates/template.php:108
 msgid ""
 "P3 (Plugin Performance Profiler) is Copyright &copy; %1$s - %2$s <a href="
 "\"%3$s\" target=\"_blank\">GoDaddy.com</a>.  All rights reserved."
@@ -1103,35 +1101,35 @@ msgstr ""
 msgid "P3 - Plugin Performance Profiler"
 msgstr ""
 
-#: templates/template.php:67
+#: templates/template.php:68
 msgid "Current"
 msgstr ""
 
-#: templates/template.php:69
+#: templates/template.php:70
 msgid "History"
 msgstr ""
 
-#: templates/template.php:70
+#: templates/template.php:71
 msgid "Help"
 msgstr ""
 
-#: templates/template.php:95
+#: templates/template.php:97
 msgid "Do you like this plugin?"
 msgstr ""
 
-#: templates/template.php:97
+#: templates/template.php:99
 msgid "I just optimized my WordPress site with %1$s %2$s"
 msgstr ""
 
-#: templates/template.php:97
+#: templates/template.php:99
 msgid "Tweet about it"
 msgstr ""
 
-#: templates/template.php:98
+#: templates/template.php:100
 msgid "Rate it on the repository"
 msgstr ""
 
-#: templates/template.php:104
+#: templates/template.php:106
 msgid "Logo"
 msgstr ""
 
@@ -1442,7 +1440,7 @@ msgid ""
 "Pages browsed: %3$s\n"
 "Avg. load time: %4$s sec\n"
 "Number of plugins: %5$s\n"
-"Plugin impact: %6$s %% of load time\n"
+"Plugin impact: %6$s of load time\n"
 "Avg. plugin time: %7$s sec\n"
 "Avg. core time: %8$s sec\n"
 "Avg. theme time: %9$s sec\n"
