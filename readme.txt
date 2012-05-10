@@ -2,7 +2,7 @@
 Contributors: Godaddy, StarfieldTech
 Tags: debug, debugging, developer, development, performance, plugin, profiler, speed
 Requires at least: 3.3
-Tested up to: 3.4.0
+Tested up to: 3.4
 Stable tag: 1.3.0
 License: GPLv2
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -95,7 +95,7 @@ Delete the Plugin Files
 1. Delete wp-content/plugins/p3-profiler (the whole folder)
 2. Delete wp-content/mu-plugins/p3-profiler.php (if it exists)
 
-This can happen if P3 pushes hits the memory limit on your server while it's running.  This happens most often on sites with many active plugins or a complex theme.  Consider switching to the Twenty Eleven theme or deactivating a few plugins before re-running P3.
+This can happen if P3 hits the memory limit on your server while it's running.  This happens most often on sites with many active plugins or a complex theme.  Consider switching to the Twenty Eleven theme or deactivating a few plugins before re-running P3.
 
 = I get "Warning: file_put_contents( .... )" =
 
