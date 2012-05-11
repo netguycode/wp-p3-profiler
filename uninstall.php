@@ -3,6 +3,10 @@
 if( !defined( 'ABSPATH' ) && !defined( 'WP_UNINSTALL_PLUGIN' ) )
     exit();
 
+// Define the profiles path
+$uploads_dir  = wp_upload_dir();
+$profile_path = $uploads_dir['basedir'] . DIRECTORY_SEPARATOR . 'profiles';
+
 // Unhook the profiler
 update_option( 'p3-profiler_debug', false );
 update_option( 'p3-profiler_debug_log', array() );
@@ -32,7 +36,7 @@ if ( function_exists( 'is_multisite' ) && is_multisite() ) {
 	}
 	restore_current_blog();
 } else {
-	p3_profiler_uninstall_delete_profiles_folder( P3_PROFILES_PATH );
+	p3_profiler_uninstall_delete_profiles_folder( $profile_path );
 
 	// Remove any options - pre.1.3.0
 	delete_option( 'p3-profiler_disable_opcode_cache' );
