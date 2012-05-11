@@ -104,10 +104,15 @@ class P3_Profiler_Plugin_Admin {
 	}
 
 	/**
+	 * Initialize, upgrade, etc.
 	 * Determine the action from the query string that guides the exection path
 	 * Catch any special actions here (e.g. download a file)
 	 */
-	public static function action_init() {
+	public static function init() {
+
+		// Determine the profiles path
+		$uploads_dir = wp_upload_dir();
+		define( 'P3_PROFILES_PATH', $uploads_dir['basedir'] . DIRECTORY_SEPARATOR . 'profiles' );
 
 		// Upgrade
 		self::upgrade();

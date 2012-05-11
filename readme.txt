@@ -116,6 +116,7 @@ P3 is available on the Tools menu for each site in the network.
  * Added a kill switch.  If P3 is causing problems, visit yoursite.com/wordpress/index.php?P3_SHUTOFF=1 to turn off P3
  * Added automatic error detection.  If a page fails to load during profiling, the next page load will turn off P3 automatically
  * Removed ajax error alerts; they weren't helpful
+ * Path to the profiles folder is now determined on the init hook
 
 = 1.2.0 =
  * Remove .profiling_enabled file, store profiling flag as a WordPress option

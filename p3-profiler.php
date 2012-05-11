@@ -19,11 +19,6 @@ if ( !defined( 'ABSPATH') )
 // Shortcut for knowing our path
 define( 'P3_PATH',  realpath( dirname( __FILE__ ) ) );
 
-// Directory for profiles
-$uploads_dir = wp_upload_dir();
-define( 'P3_PROFILES_PATH', $uploads_dir['basedir'] . DIRECTORY_SEPARATOR . 'profiles' );
-unset( $uploads_dir );
-
 // Plugin slug
 define( 'P3_PLUGIN_SLUG', 'p3-profiler' );
 
@@ -74,7 +69,7 @@ if ( is_admin() && 'admin-ajax.php' == end( explode( '/', $_SERVER['PHP_SELF'] )
 		add_action( 'admin_init', array( 'P3_Profiler_Plugin', 'load_language' ) );
 
 		// Pre-processing of actions
-		add_action( 'admin_init', array( 'P3_Profiler_Plugin_Admin', 'action_init' ) );
+		add_action( 'admin_init', array( 'P3_Profiler_Plugin_Admin', 'init' ) );
 
 		// Show any notices
 		add_action( 'admin_notices', array( 'P3_Profiler_Plugin_Admin', 'show_notices' ) );
