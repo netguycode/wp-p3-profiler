@@ -554,32 +554,6 @@ class P3_Profiler_Plugin_Admin {
 	}
 
 	/**
-	 * Activation hook
-	 * Install the profiler loader as a mu-plugin
-	 */
-	public static function activate() {
-		global $wp_version;
-		
-		// Version check, only 3.3+
-		if ( ! version_compare( $wp_version, '3.3', '>=') ) {
-			if ( function_exists('deactivate_plugins') )
-				deactivate_plugins(__FILE__);
-			die( '<strong>P3</strong> requires WordPress 3.3 or later' );
-		}
-
-		// mu-plugins doesn't exist	
-		if ( !file_exists( WPMU_PLUGIN_DIR ) && is_writable( dirname( WPMU_PLUGIN_DIR ) ) ) {
-			wp_mkdir_p( WPMU_PLUGIN_DIR );
-		}
-		if ( file_exists( WPMU_PLUGIN_DIR ) && is_writable( WPMU_PLUGIN_DIR ) ) {
-			file_put_contents(
-				WPMU_PLUGIN_DIR . '/p3-profiler.php',
-				'<' . "?php // Start profiling\n@include_once( realpath( dirname( __FILE__ ) ) . '/../plugins/p3-profiler/start-profile.php' ); ?" . '>'
-			);
-		}
-	}
-
-	/**
 	 * Make the profiles folder
 	 * @param string $path
 	 */
@@ -609,33 +583,6 @@ class P3_Profiler_Plugin_Admin {
 		closedir( $dir );
 		rmdir( $path );
 	}	
-
-	/**
-	 * Deactivation hook
-	 * Remove the profiler loader
-	 * @return void
-	 */
-	public static function deactivate() {
-		global $p3_profiler;
-
-		// Unhook the profiler
-		$opts = get_option( 'p3-profiler_options' );
-		$opts['debug'] = false;
-		update_option( 'p3-profiler_options', $opts );
-		update_option( 'p3-profiler_debug_log', array() );
-		if ( !empty( $p3_profiler ) ) {
-			remove_action( 'shutdown', array( $p3_profiler, 'shutdown_handler' ) );
-		}
-
-		// Remove mu-plugin
-		if ( file_exists( WPMU_PLUGIN_DIR . '/p3-profiler.php' ) ) {
-			if ( is_writable( WPMU_PLUGIN_DIR . '/p3-profiler.php' ) ) {
-				// Some servers give write permission, but not delete permission.  Empty the file out, first, then try to delete it.
-				file_put_contents( WPMU_PLUGIN_DIR . '/p3-profiler.php', '' );
-				unlink( WPMU_PLUGIN_DIR . '/p3-profiler.php' );
-			}
-		}
-	}
 
 	/**
 	 * Check to see if a scan is enabled

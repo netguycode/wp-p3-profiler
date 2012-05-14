@@ -49,7 +49,7 @@ class P3_Profiler_Plugin {
 		if ( file_exists( WPMU_PLUGIN_DIR ) && is_writable( WPMU_PLUGIN_DIR ) ) {
 			file_put_contents(
 				WPMU_PLUGIN_DIR . '/p3-profiler.php',
-				'<' . "?php // Start profiling\n@include_once( realpath( dirname( __FILE__ ) ) . '/../plugins/p3-profiler/start-profile.php' ); ?" . '>'
+				'<' . "?php // Start profiling\n@include_once( WP_PLUGIN_DIR . '/p3-profiler/start-profile.php' ); ?" . '>'
 			);
 		}
 	}
