@@ -20,7 +20,22 @@ class P3_Profiler_Plugin {
 			array( 'P3_Profiler_Plugin_Admin', 'dispatcher' )				
 		);
 	}
-	
+
+
+	/**
+	 * Show the "Profile now" option on the plugins table
+	 * @param array $links
+	 * @param string $file
+	 * @return array New links
+	 */
+	public static function add_settings_link( $links, $file ) {
+		$settings_link = '<a href="tools.php?page=p3-profiler">' . __( 'Scan Now', 'p3-profiler' ) . '</a>';
+		// p3-profiler === p3-profiler
+		if ( dirname( plugin_basename( $file ) ) === basename( P3_PATH ) )
+			array_unshift( $links, $settings_link );
+		return $links;
+	}
+
 	/**
 	 * Load the language file
 	 */
