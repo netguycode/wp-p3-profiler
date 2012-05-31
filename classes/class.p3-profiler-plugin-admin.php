@@ -67,19 +67,6 @@ class P3_Profiler_Plugin_Admin {
 	}
 
 	/**
-	 * Add the 'P3 Profiler' option under the 'Tools' menu
-	 */
-	public static function tools_menu() {
-		$page = add_management_page(
-			__( 'P3 Plugin Profiler', 'p3-profiler' ),
-			__( 'P3 Plugin Profiler', 'p3-profiler' ),
-			'manage_options',
-			P3_PLUGIN_SLUG,
-			array( __CLASS__, 'dispatcher' )
-		);
-	}
-
-	/**
 	 * Load javascripts
 	 */
 	public static function load_scripts() {
