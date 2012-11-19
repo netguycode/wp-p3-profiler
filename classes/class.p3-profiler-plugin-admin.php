@@ -234,7 +234,7 @@ class P3_Profiler_Plugin_Admin {
 		}
 
 		// Done
-		return $pages;
+		return apply_filters( 'p3_automatic_scan_urls', $pages );
 	}
 
 	/**************************************************************/

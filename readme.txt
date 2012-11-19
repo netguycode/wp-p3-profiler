@@ -121,6 +121,7 @@ P3 is available on the Tools menu for each site in the network.
  * Added a Turkish translation.  Thanks to Hakaner!  http://hakanertr.wordpress.com/
  * Updated some UI elements to allow for longer text strings for translations
  * Refreshed UI to be 3.5.x compatible and use standard admin coloring
+ * Added a 'p3_automatic_scan_urls' filter
 
 = 1.3.1 =
  * Fixed an error when upgrading to 1.3.x from 1.1.x and skipping the 1.2.x upgrade.
