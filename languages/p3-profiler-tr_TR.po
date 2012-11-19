@@ -4,142 +4,142 @@ msgid ""
 msgstr ""
 "Project-Id-Version: P3 Plugin Performance Profiler\n"
 "Report-Msgid-Bugs-To: http://wordpress.org/tag/p3-profiler\n"
-"POT-Creation-Date: 2012-06-02 07:25:11+00:00\n"
+"POT-Creation-Date: 2012-11-19 18:50:13+00:00\n"
+"PO-Revision-Date: 2012-11-19 14:20-0700\n"
+"Last-Translator: Kurt Payne <kpayne@godaddy.com>\n"
+"Language-Team: hakaner <hakanerwptr@gmail.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"PO-Revision-Date: 2012-08-13 15:34-0700\n"
-"Last-Translator: Kurt Payne <kpayne@godaddy.com>\n"
-"Language-Team: hakaner <hakanerwptr@gmail.com>\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "Language: türkçe\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 
-#: classes/class.p3-profiler-plugin-admin.php:122
+#: classes/class.p3-profiler-plugin-admin.php:127
 msgid "Scan does not exist"
 msgstr "Tarama yok"
 
-#: classes/class.p3-profiler-plugin-admin.php:148
+#: classes/class.p3-profiler-plugin-admin.php:153
 msgid "No visits recorded during this profiling session.  Check the <a href=\"%s\">help</a> page for more information"
 msgstr "Bu profil oluşturma oturumunda bir ziyaret kaydedilmedi. Daha fazla bilgi için <a href=\"%s\">yardım</a> sayfasına bakın."
 
-#: classes/class.p3-profiler-plugin-admin.php:156
+#: classes/class.p3-profiler-plugin-admin.php:161
 msgid "Error reading scan"
 msgstr "Tarama okuma hatası"
 
-#: classes/class.p3-profiler-plugin-admin.php:164
+#: classes/class.p3-profiler-plugin-admin.php:169
 msgid "Click \"Start Scan\" to run a performance scan of your website."
 msgstr "Web sitenizin performans taraması için \"Taramayı Başlat\"a tıklayın."
 
-#: classes/class.p3-profiler-plugin-admin.php:259
-#: classes/class.p3-profiler-plugin-admin.php:297
-#: classes/class.p3-profiler-plugin-admin.php:326
-#: classes/class.p3-profiler-plugin-admin.php:361
-#: classes/class.p3-profiler-plugin-admin.php:406
-#: classes/class.p3-profiler-plugin-admin.php:417
+#: classes/class.p3-profiler-plugin-admin.php:264
+#: classes/class.p3-profiler-plugin-admin.php:302
+#: classes/class.p3-profiler-plugin-admin.php:331
+#: classes/class.p3-profiler-plugin-admin.php:366
+#: classes/class.p3-profiler-plugin-admin.php:411
+#: classes/class.p3-profiler-plugin-admin.php:422
 #: classes/class.p3-profiler-table.php:210
 msgid "You do not have sufficient permissions to access this page."
 msgstr "Bu sayfaya erişmek için yeterli izinlere sahip değilsiniz."
 
-#: classes/class.p3-profiler-plugin-admin.php:308
+#: classes/class.p3-profiler-plugin-admin.php:313
 msgid "Turned off performance scanning."
 msgstr "Performans taraması kapatıldı."
 
-#: classes/class.p3-profiler-plugin-admin.php:381
-#: classes/class.p3-profiler-plugin-admin.php:384
+#: classes/class.p3-profiler-plugin-admin.php:386
+#: classes/class.p3-profiler-plugin-admin.php:389
 msgid "Invalid subject"
 msgstr "Geçersiz konu"
 
-#: classes/class.p3-profiler-plugin-admin.php:388
+#: classes/class.p3-profiler-plugin-admin.php:393
 msgid "<a href=\"%s\" target=\"_blank\">wp_mail()</a> function returned false"
 msgstr "<a href=\"%s\" target=\"_blank\">wp_mail()</a> işlevi hatalı oldu"
 
-#: classes/class.p3-profiler-plugin-admin.php:434
+#: classes/class.p3-profiler-plugin-admin.php:439
 #: templates/help.php:366
 #: templates/help.php:406
 msgid "Profiling Enabled"
 msgstr "Profilleme etkin"
 
-#: classes/class.p3-profiler-plugin-admin.php:435
+#: classes/class.p3-profiler-plugin-admin.php:440
 #: templates/help.php:367
 #: templates/help.php:407
 msgid "Recording IP"
 msgstr "IP Kaydetme"
 
-#: classes/class.p3-profiler-plugin-admin.php:436
+#: classes/class.p3-profiler-plugin-admin.php:441
 #: templates/callouts.php:257
 #: templates/help.php:368
 #: templates/help.php:408
 msgid "Scan Name"
 msgstr "Tarama Adı"
 
-#: classes/class.p3-profiler-plugin-admin.php:437
+#: classes/class.p3-profiler-plugin-admin.php:442
 #: templates/help.php:369
 #: templates/help.php:409
 msgid "Recording"
 msgstr "Kaydediliyor"
 
-#: classes/class.p3-profiler-plugin-admin.php:438
+#: classes/class.p3-profiler-plugin-admin.php:443
 #: templates/help.php:370
 #: templates/help.php:410
 msgid "Disable Optimizers"
 msgstr "Düzenleyiciler Devre Dışı"
 
-#: classes/class.p3-profiler-plugin-admin.php:439
+#: classes/class.p3-profiler-plugin-admin.php:444
 #: templates/help.php:371
 #: templates/help.php:411
 msgid "URL"
 msgstr "URL"
 
-#: classes/class.p3-profiler-plugin-admin.php:440
+#: classes/class.p3-profiler-plugin-admin.php:445
 #: templates/help.php:372
 #: templates/help.php:412
 msgid "Visitor IP"
 msgstr "Ziyaretçi IP"
 
-#: classes/class.p3-profiler-plugin-admin.php:441
+#: classes/class.p3-profiler-plugin-admin.php:446
 #: templates/help.php:373
 #: templates/help.php:413
 msgid "Time"
 msgstr "Zaman"
 
-#: classes/class.p3-profiler-plugin-admin.php:442
+#: classes/class.p3-profiler-plugin-admin.php:447
 #: templates/help.php:374
 #: templates/help.php:414
 msgctxt "Abbreviation for process id"
 msgid "PID"
 msgstr "PID"
 
-#: classes/class.p3-profiler-plugin-admin.php:477
+#: classes/class.p3-profiler-plugin-admin.php:482
 msgid "Cannot read profiles directory"
 msgstr "Profil dizini okunamıyor"
 
-#: classes/class.p3-profiler-plugin-admin.php:539
+#: classes/class.p3-profiler-plugin-admin.php:544
 msgid "Performance scanning is enabled."
 msgstr "Performans tarama etkin."
 
-#: classes/class.p3-profiler-plugin-admin.php:593
+#: classes/class.p3-profiler-plugin-admin.php:598
 msgctxt "Abbreviation for bytes"
 msgid "B"
 msgstr "B"
 
-#: classes/class.p3-profiler-plugin-admin.php:594
+#: classes/class.p3-profiler-plugin-admin.php:599
 msgctxt "Abbreviation for kilobytes"
 msgid "KB"
 msgstr "KB"
 
-#: classes/class.p3-profiler-plugin-admin.php:595
+#: classes/class.p3-profiler-plugin-admin.php:600
 #: templates/view-scan.php:959
 msgctxt "Abbreviation for megabytes"
 msgid "MB"
 msgstr "MB"
 
-#: classes/class.p3-profiler-plugin-admin.php:596
+#: classes/class.p3-profiler-plugin-admin.php:601
 msgctxt "Abbreviation for gigabytes"
 msgid "GB"
 msgstr "GB"
 
-#: classes/class.p3-profiler-plugin-admin.php:597
+#: classes/class.p3-profiler-plugin-admin.php:602
 msgctxt "Abbreviation for terabytes"
 msgid "TB"
 msgstr "TB"
@@ -1258,48 +1258,48 @@ msgstr "Veritabanına gönderilen sorgu sayısı. Bu get_num_queries() WordPress
 msgid "MySQL Queries:"
 msgstr "MySQL Sorguları:"
 
-#: templates/view-scan.php:979
-#: templates/view-scan.php:980
+#: templates/view-scan.php:981
+#: templates/view-scan.php:982
 msgid "Email these results"
 msgstr "Sonuçları epostala"
 
-#: templates/view-scan.php:986
+#: templates/view-scan.php:990
 msgid "From:"
 msgstr "Tarafından:"
 
-#: templates/view-scan.php:988
+#: templates/view-scan.php:992
 msgid "Enter the e-mail address to send from"
 msgstr "Göndermek için e-posta adresinizi girin"
 
-#: templates/view-scan.php:992
+#: templates/view-scan.php:996
 msgid "Recipient:"
 msgstr "Alıcı:"
 
-#: templates/view-scan.php:995
+#: templates/view-scan.php:999
 msgid "Enter the e-mail address where you would like to send these results"
 msgstr "Bu sonuçlar göndermek istediğiniz e-posta adresini girin"
 
-#: templates/view-scan.php:999
+#: templates/view-scan.php:1003
 msgid "Subject:"
 msgstr "Konu:"
 
-#: templates/view-scan.php:1001
+#: templates/view-scan.php:1005
 msgid "Performance Profile Results for %s"
 msgstr "%s için Performance Profile Sonuçları"
 
-#: templates/view-scan.php:1001
+#: templates/view-scan.php:1005
 msgid "Enter the e-mail subject"
 msgstr "E-posta konusunu girin"
 
-#: templates/view-scan.php:1005
+#: templates/view-scan.php:1009
 msgid "Message:"
 msgstr "Mesaj:"
 
-#: templates/view-scan.php:1005
+#: templates/view-scan.php:1009
 msgid "(optional)"
 msgstr "(isteğe bağlı)"
 
-#: templates/view-scan.php:1006
+#: templates/view-scan.php:1010
 msgid ""
 "Hello,\n"
 "\n"
@@ -1310,15 +1310,15 @@ msgstr ""
 "\n"
 "Profile eklentisini kullanarak WordPress sitemin performans profilini çıkardım ve seninle sonuçları paylaşmak istedim. Lütfen aşağıdaki bilgilere bir göz at:"
 
-#: templates/view-scan.php:1013
+#: templates/view-scan.php:1017
 msgid "Results:"
 msgstr "Sonuçlar:"
 
-#: templates/view-scan.php:1013
+#: templates/view-scan.php:1017
 msgid "(system generated, do not edit)"
 msgstr "(sistem tarafından oluşturulur, düzenlemeyin)"
 
-#: templates/view-scan.php:1019
+#: templates/view-scan.php:1023
 msgid ""
 "WordPress Plugin Profile Report\n"
 "===========================================\n"
@@ -1360,19 +1360,19 @@ msgstr ""
 "===========================================\n"
 "%14$s\n"
 
-#: templates/view-scan.php:1061
+#: templates/view-scan.php:1065
 msgid "Loading"
 msgstr "Yükleniyor"
 
-#: templates/view-scan.php:1064
+#: templates/view-scan.php:1068
 msgid "There was a problem sending the e-mail:"
 msgstr "E-posta gönderilirken bir sorun oluştu:"
 
-#: templates/view-scan.php:1067
+#: templates/view-scan.php:1071
 msgid "Your report was sent successfully to"
 msgstr "Raporunuz başarıyla gönderildi"
 
-#: templates/view-scan.php:1070
+#: templates/view-scan.php:1074
 msgid "Done"
 msgstr "Tamam"
 
