@@ -55,6 +55,7 @@ require_once P3_PATH . '/start-profile.php';
 // Ajax actions
 if ( is_admin() && 'admin-ajax.php' == end( explode( '/', $_SERVER['PHP_SELF'] ) ) ) {
 
+	add_action( 'admin_init', array( 'P3_Profiler_Plugin_Admin', 'set_path' ) );
 	add_action( 'wp_ajax_p3_start_scan', array( 'P3_Profiler_Plugin_Admin', 'ajax_start_scan' ) );
 	add_action( 'wp_ajax_p3_stop_scan', array( 'P3_Profiler_Plugin_Admin', 'ajax_stop_scan' ) );
 	add_action( 'wp_ajax_p3_send_results', array( 'P3_Profiler_Plugin_Admin', 'ajax_send_results' ) );
@@ -72,6 +73,7 @@ if ( is_admin() && 'admin-ajax.php' == end( explode( '/', $_SERVER['PHP_SELF'] )
 	if ( isset( $_REQUEST['page'] ) && P3_PLUGIN_SLUG == $_REQUEST['page'] ) {
 
 		// Pre-processing of actions
+		add_action( 'admin_init', array( 'P3_Profiler_Plugin_Admin', 'set_path' ) );
 		add_action( 'admin_init', array( 'P3_Profiler_Plugin_Admin', 'init' ) );
 
 		// Show any notices
