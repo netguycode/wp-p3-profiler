@@ -715,10 +715,10 @@ $component_runtime_chart_id   = substr( md5( uniqid() ), -8 );
 						</div>
 					</td>
 					<td rowspan="2">
-						<div class="p3-graph-holder" id="p3-holder_<?php echo $component_breakdown_chart_id; ?>"></div>
+						<div class="p3-graph-holder detailed-graph" id="p3-holder_<?php echo $component_breakdown_chart_id; ?>"></div>
 					</td>
 					<td>
-						<h3><?php _ex( 'Legend', 'How to interpret the chart or graph', 'p3-profiler' ); ?></h3>
+						<h3 class="legend-title><?php _ex( 'Legend', 'How to interpret the chart or graph', 'p3-profiler' ); ?></h3>
 					</td>
 				</tr>
 				<tr>
@@ -740,15 +740,15 @@ $component_runtime_chart_id   = substr( md5( uniqid() ), -8 );
 	
 	<!-- Plugin pie chart div -->
 	<div id="p3-tabs-1">
-		<h2><?php _e( 'Runtime by Plugin', 'p3-profiler' ); ?></h2>
+		<h2 class="runtime-title"><?php _e( 'Runtime by Plugin', 'p3-profiler' ); ?></h2>
 		<div class="p3-plugin-graph" style="width: 570px;">
 			<table>
 				<tr>
 					<td rowspan="2">
-						<div style="width: 370px;" class="p3-graph-holder" id="p3-holder_<?php echo $pie_chart_id; ?>"></div>
+						<div style="width: 370px;" class="p3-graph-holder runtime-graph" id="p3-holder_<?php echo $pie_chart_id; ?>"></div>
 					</td>
 					<td>
-						<h3><?php _ex( 'Legend', 'How to interpret the chart or graph', 'p3-profiler' ); ?></h3>
+						<h3 class="legend-title"><?php _ex( 'Legend', 'How to interpret the chart or graph', 'p3-profiler' ); ?></h3>
 					</td>
 				</tr>
 				<tr>

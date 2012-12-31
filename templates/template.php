@@ -59,7 +59,7 @@ if ( 'current-scan' == self::$action || !empty( $_REQUEST['current_scan'] ) ) {
 
 	<!-- Header icon / title -->
 	<div id="icon-plugins" class="icon32"><br/></div>
-	<h2><?php _e( 'P3 - Plugin Performance Profiler', 'p3-profiler' ); ?></h2>
+	<h2 class="plugin-name"><?php _e( 'P3 - Plugin Performance Profiler', 'p3-profiler' ); ?></h2>
 
 	<!-- Header navbar -->
 	<div class="ui-widget-header" id="p3-navbar">

@@ -494,10 +494,10 @@ $opts = get_option( 'p3-profiler_options' );
 
 		<!-- First callout cell -->
 		<td class="p3-callout">
-			<div class="p3-callout-outer-wrapper qtip-tip" title="<?php esc_attr_e( 'Total number of active plugins, including must-use plugins, on your site.', 'p3-profiler' ); ?>">
+			<div class="p3-callout-outer-wrapper qtip-tip total-plugins-tip" title="<?php esc_attr_e( 'Total number of active plugins, including must-use plugins, on your site.', 'p3-profiler' ); ?>">
 				<div class="p3-callout-inner-wrapper">
-					<div class="p3-callout-caption"><?php _e( 'Total Plugins:', 'p3-profiler' ); ?></div>
-					<div class="p3-callout-data">
+					<div class="p3-callout-caption total-plugins-caption"><?php _e( 'Total Plugins:', 'p3-profiler' ); ?></div>
+					<div class="p3-callout-data total-plugins-data">
 						<?php
 						// Get the total number of plugins
 						$active_plugins = count( get_mu_plugins() );
@@ -509,61 +509,61 @@ $opts = get_option( 'p3-profiler_options' );
 						echo $active_plugins;
 						?>
 					</div>
-					<div class="p3-callout-caption">(<?php _e( 'currently active', 'p3-profiler' ); ?>)</div>
+					<div class="p3-callout-caption total-plugins-info">(<?php _e( 'currently active', 'p3-profiler' ); ?>)</div>
 				</div>
 			</div>
 		</td>
 
 		<!-- Second callout cell -->
 		<td class="p3-callout">
-			<div class="p3-callout-outer-wrapper qtip-tip" title="<?php esc_attr_e( 'Total number of seconds dedicated to plugin code per visit on your site.', 'p3-profiler' ); ?>"
+			<div class="p3-callout-outer-wrapper qtip-tip load-time-tip" title="<?php esc_attr_e( 'Total number of seconds dedicated to plugin code per visit on your site.', 'p3-profiler' ); ?>"
 				<?php if ( !empty( self::$scan ) ) { ?>title="<?php esc_attr_e( 'From', 'p3-profiler' ); ?> <?php echo basename( self::$scan ); ?><?php } ?>">
 				<div class="p3-callout-inner-wrapper">
-					<div class="p3-callout-caption"><?php _e( 'Plugin Load Time', 'p3-profiler' ); ?></div>
-					<div class="p3-callout-data">
+					<div class="p3-callout-caption load-time-caption"><?php _e( 'Plugin Load Time', 'p3-profiler' ); ?></div>
+					<div class="p3-callout-data load-time-data">
 						<?php if ( null === self::$profile ) { ?>
 							<span class="p3-faded-grey"><?php _e( 'n/a', 'p3-profiler' ); ?></span>
 						<?php } else { ?>
 							<?php printf( '%.3f', self::$profile->averages['plugins'] ); ?>
 						<?php } ?>
 					</div>
-					<div class="p3-callout-caption">(<?php _e( 'sec. per visit', 'p3-profiler' ); ?>)</div>
+					<div class="p3-callout-caption load-time-info">(<?php _e( 'sec. per visit', 'p3-profiler' ); ?>)</div>
 				</div>
 			</div>
 		</td>
 
 		<!-- Third callout cell -->
 		<td class="p3-callout">
-			<div class="p3-callout-outer-wrapper qtip-tip" title="<?php esc_attr_e( 'Percent of load time on your site dedicated to plugin code', 'p3-profiler' ); ?>"
+			<div class="p3-callout-outer-wrapper qtip-tip impact-tip" title="<?php esc_attr_e( 'Percent of load time on your site dedicated to plugin code', 'p3-profiler' ); ?>"
 				<?php if ( !empty( self::$scan ) ) { ?>title="<?php esc_attr_e( 'From', 'p3-profiler' ); ?> <?php echo basename( self::$scan ); ?><?php } ?>">
 				<div class="p3-callout-inner-wrapper">
-					<div class="p3-callout-caption"><?php _e( 'Plugin Impact', 'p3-profiler' ); ?></div>
-					<div class="p3-callout-data">
+					<div class="p3-callout-caption impact-caption"><?php _e( 'Plugin Impact', 'p3-profiler' ); ?></div>
+					<div class="p3-callout-data impact-data">
 						<?php if ( null === self::$profile ) { ?>
 							<span class="p3-faded-grey"><?php _e( 'n/a', 'p3-profiler' ); ?></span>
 						<?php } else { ?>
 							<?php printf( '%.1f%%', self::$profile->averages['plugin_impact'] ); ?>
 						<?php } ?>
 					</div>
-					<div class="p3-callout-caption">(<?php _e( 'of page load time', 'p3-profiler' ); ?>)</div>
+					<div class="p3-callout-caption impact-info">(<?php _e( 'of page load time', 'p3-profiler' ); ?>)</div>
 				</div>
 			</div>
 		</td>
 
 		<!-- Fourth callout cell -->
 		<td class="p3-callout">
-			<div class="p3-callout-outer-wrapper qtip-tip" title="<?php esc_attr_e( 'Total number of database queries per visit', 'p3-profiler' ); ?>"
+			<div class="p3-callout-outer-wrapper qtip-tip mysql-tip" title="<?php esc_attr_e( 'Total number of database queries per visit', 'p3-profiler' ); ?>"
 				<?php if ( !empty( self::$scan ) ) { ?>title="<?php esc_attr_e( 'From', 'p3-profiler' ); ?> <?php echo basename( self::$scan ); ?><?php } ?>">
 				<div class="p3-callout-inner-wrapper">
-					<div class="p3-callout-caption"><?php _e( 'MySQL Queries', 'p3-profiler' ); ?></div>
-					<div class="p3-callout-data">
+					<div class="p3-callout-caption mysql-caption"><?php _e( 'MySQL Queries', 'p3-profiler' ); ?></div>
+					<div class="p3-callout-data mysql-data">
 						<?php if ( null === self::$profile ) { ?>
 							<span class="p3-faded-grey"><?php _e( 'n/a', 'p3-profiler' ); ?></span>
 						<?php } else { ?>
 							<?php echo round( self::$profile->averages['queries'] ); ?>
 						<?php } ?>
 					</div>
-					<div class="p3-callout-caption"><?php _e( 'per visit', 'p3-profiler' ); ?></div>
+					<div class="p3-callout-caption mysql-info"><?php _e( 'per visit', 'p3-profiler' ); ?></div>
 				</div>
 			</div>
 		</td>
@@ -573,37 +573,37 @@ $opts = get_option( 'p3-profiler_options' );
 
 <!-- Dialog for IP settings -->
 <div id="p3-ip-dialog" class="p3-dialog">
-	<div>
+	<div class="ip-text">
 		<?php _e( 'IP address or pattern:', 'p3-profiler' ); ?><br /><br />
 		<input type="checkbox" id="p3-use-current-ip" <?php if ( true == $opts['use_current_ip'] ) : ?>checked="checked"<?php endif; ?> />
 		<label for="p3-use-current-ip"><?php _e( 'Use my IP address', 'p3-profiler' ); ?></label>
 		<br />
 		<input type="text" id="p3-advanced-ip" style="width:90%;" size="35" value="" title="<?php esc_attr_e( 'Enter IP address or regular expression pattern', 'p3-profiler' ); ?>" />
 		<br />
-		<em class="p3-em"><?php _e( 'Example: 1.2.3.4 or ( 1.2.3.4|4.5.6.7 )', 'p3-profiler' ); ?></em>
+		<em class="p3-em ip-example-text"><?php _e( 'Example: 1.2.3.4 or ( 1.2.3.4|4.5.6.7 )', 'p3-profiler' ); ?></em>
 	</div>
 	<br />
-	<div>
+	<div class="opcode-text">
 		<input type="checkbox" id="p3-disable-opcode-cache" <?php if ( true == $opts['disable_opcode_cache'] ) : ?>checked="checked"<?php endif; ?> />
 		<label for="p3-disable-opcode-cache"><?php _e( 'Attempt to disable opcode optimizers', 'p3-profiler' ); ?> <em>(<?php _e( 'recommended', 'p3-profiler' ); ?>)</em></label>
 		<br />
 		<em class="p3-em"><?php _e( 'This can increase accuracy in plugin detection, but decrease accuracy in timing', 'p3-profiler' ); ?></em>
 	</div>
 	<br />
-	<div>
+	<div class="cache-text">
 		<input type="checkbox" id="p3-cache-buster" <?php if ( true == $opts['cache_buster'] ) : ?>checked="checked"<?php endif; ?> />
 		<label for="p3-cache-buster"><?php _e( 'Attempt to circumvent browser cache', 'p3-profiler' ); ?></label>
 		<br />
-		<em class="p3-em"><?php printf( __('This may help fix a "No visits recorded" error message.  See the <a href="%s">help</a> page for details.', 'p3-profiler' ),
+		<em class="p3-em"><?php printf( __('This may help fix a "No visits recorded" error message.  See the <a href="%s" class="cache-help">help</a> page for details.', 'p3-profiler' ),
 			add_query_arg( array( 'p3_action' => 'help', 'current_scan' => null ) ) . '#q-debug-log'
 		); ?> </em>
 	</div>
 	<br />
-	<div>
+	<div class="debug-text">
 		<input type="checkbox" id="p3-debug" <?php if ( true == $opts['debug'] ) : ?>checked="checked"<?php endif; ?> />
 		<label for="p3-debug"><?php _e( 'Debug mode', 'p3-profiler' ); ?></label>
 		<br />
-		<em class="p3-em"><?php printf( __('This will log the last 100 visits.  Check the <a href="%s">help</a> page to view log messages.', 'p3-profiler' ),
+		<em class="p3-em"><?php printf( __('This will log the last 100 visits.  Check the <a href="%s" class="debug-help">help</a> page to view log messages.', 'p3-profiler' ),
 			add_query_arg( array( 'p3_action' => 'help', 'current_scan' => null ) ) . '#q-debug-log'
 		); ?></em>
 	</div>
