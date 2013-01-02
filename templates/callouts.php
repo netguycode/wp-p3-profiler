@@ -485,7 +485,7 @@ $opts = get_option( 'p3-profiler_options' );
 					<?php echo wp_nonce_field( 'p3_ajax_start_scan', 'p3_nonce' ); ?>
 					<strong><?php _e( 'My IP:', 'p3-profiler' ); ?></strong><?php echo htmlentities( p3_profiler_get_ip() ); ?>
 					<div class="p3-big-button"><input type="checkbox" checked="checked" id="p3-start-scan-submit" />
-					<label for="p3-start-scan-submit"><?php _e( 'Start Scan', 'p3-profiler' ); ?></label></div>
+					<label for="p3-start-scan-submit" class="scan-btn"><?php _e( 'Start Scan', 'p3-profiler' ); ?></label></div>
 					<a href="javascript:;" id="p3-advanced-settings"><?php _e( 'Advanced Settings', 'p3-profiler' ); ?></a>
 
 				<?php } ?>
