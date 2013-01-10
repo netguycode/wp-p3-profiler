@@ -1071,7 +1071,7 @@ $plugin_list
 			<?php _e( 'Your report was sent successfully to', 'p3-profiler' ); ?> <span id="p3-email-success-recipient"></span>
 		</div>
 		<div id="p3-email-sending-close">
-			<input type="checkbox" id="p3-email-sending-close-submit" checked="checked" /><label for="p3-email-sending-close-submit"><?php _e( 'Done', 'p3-profiler' ); ?></label>
+			<input type="checkbox" id="p3-email-sending-close-submit" checked="checked" /><label for="p3-email-sending-close-submit" class="p3-email-sending-close"><?php _e( 'Done', 'p3-profiler' ); ?></label>
 		</div>
 	</div>
 

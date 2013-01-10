@@ -638,15 +638,15 @@ $opts = get_option( 'p3-profiler_options' );
 
 <!-- Dialog for choose manual or auto scan  -->
 <div id="p3-scan-name-dialog" class="p3-dialog">
-	<div style="padding-top: 10px;"><?php _e( 'Scan name:', 'p3-profiler' ); ?>
+	<div style="padding-top: 10px;" class="scan-title"><?php _e( 'Scan name:', 'p3-profiler' ); ?>
 		<input type="text" name="p3_scan_name" id="p3-scan-name" title="<?php esc_attr_e( 'Enter scan name here', 'p3-profiler' ); ?>"
 			value="scan_<?php echo date( 'Y-m-d' ); ?>_<?php echo substr( md5( uniqid() ), -8 );?>" size="35" maxlength="100" />
 	</div>
-	<div style="padding-top: 10px;"><em class="p3-em"><?php _e( 'Enter the name of a previous scan to continue scanning', 'p3-profiler' ); ?></em></div>
+	<div style="padding-top: 10px;"><em class="p3-em scan-description"><?php _e( 'Enter the name of a previous scan to continue scanning', 'p3-profiler' ); ?></em></div>
 	<br />
 	<div class="p3-big-button">
-		<input type="checkbox" id="p3-auto-scan-submit" checked="checked" /><label for="p3-auto-scan-submit"><?php _e( 'Auto Scan' , 'p3-profiler' ); ?></label>
-		<input type="checkbox" id="p3-manual-scan-submit" checked="checked" /><label for="p3-manual-scan-submit"><?php _e( 'Manual Scan', 'p3-profiler' ); ?></label>
+		<input type="checkbox" id="p3-auto-scan-submit" checked="checked" /><label for="p3-auto-scan-submit" class="auto-scan"><?php _e( 'Auto Scan' , 'p3-profiler' ); ?></label>
+		<input type="checkbox" id="p3-manual-scan-submit" checked="checked" /><label for="p3-manual-scan-submit" class="manual-scan"><?php _e( 'Manual Scan', 'p3-profiler' ); ?></label>
 	</div>
 </div>
 
@@ -659,19 +659,19 @@ $opts = get_option( 'p3-profiler_options' );
 	
 	<!-- Cancel button -->
 	<div class="p3-big-button" id="p3-cancel-scan-buttonset">
-		<input type="checkbox" id="p3-cancel-scan-submit" checked="checked" /><label for="p3-cancel-scan-submit"><?php _e( 'Stop Scan', 'p3-profiler' ); ?></label>
+		<input type="checkbox" id="p3-cancel-scan-submit" checked="checked" /><label for="p3-cancel-scan-submit" class="stop-scan"><?php _e( 'Stop Scan', 'p3-profiler' ); ?></label>
 	</div>
 
 	<!-- View / resume buttons -->
 	<div class="p3-big-button" id="p3-resume-scan-buttonset" style="display: none;">
-		<input type="checkbox" id="p3-resume-scan-submit" checked="checked" /><label for="p3-resume-scan-submit"><?php _e( 'Resume', 'p3-profiler' ); ?></label>
+		<input type="checkbox" id="p3-resume-scan-submit" checked="checked" /><label for="p3-resume-scan-submit" class="resume-scan"><?php _e( 'Resume', 'p3-profiler' ); ?></label>
 		<input type="checkbox" id="p3-view-incomplete-results-submit" checked="checked" data-scan-name="" />
-		<label for="p3-view-incomplete-results-submit"><?php _e( 'View Results', 'p3-profiler' ); ?></label>
+		<label for="p3-view-incomplete-results-submit" class="incomplete-results"><?php _e( 'View Results', 'p3-profiler' ); ?></label>
 	</div>
 	
 	<!-- View results button -->
 	<div class="p3-big-button" id="p3-view-results-buttonset" style="display: none;">
 		<input type="checkbox" id="p3-view-results-submit" checked="checked" data-scan-name="" />
-		<label for="p3-view-results-submit"><?php _e( 'View Results', 'p3-profiler' ); ?></label>
+		<label for="p3-view-results-submit" class="view-results"><?php _e( 'View Results', 'p3-profiler' ); ?></label>
 	</div>	
 </div>
