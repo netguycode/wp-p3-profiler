@@ -3,7 +3,7 @@ Contributors: Godaddy, StarfieldTech
 Tags: debug, debugging, developer, development, performance, plugin, profiler, speed
 Requires at least: 3.3
 Tested up to: 3.5
-Stable tag: 1.4.1
+Stable tag: 1.4.2
 License: GPLv2
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -46,6 +46,9 @@ Manual installation:
 4. Then activate the Plugin from Plugins page.
 
 == Upgrade Notice ==
+
+= 1.4.2 =
+....
 
 = 1.4.1 =
 Fixed 2 php notices and removed a reference to a missing stylesheet.
@@ -136,6 +139,9 @@ add_filter( 'p3_automatic_scan_urls', 'my_p3_auto_scan_pages' );
 </code>
 
 == Changelog ==
+
+= 1.4.2 =
+ * Fixed a php short tag props Dean Taylor
 
 = 1.4.1 =
  * Fixed a logged php notice during uninstall
