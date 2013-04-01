@@ -142,6 +142,7 @@ add_filter( 'p3_automatic_scan_urls', 'my_p3_auto_scan_pages' );
 
 = 1.4.2 =
  * Fixed a php short tag props Dean Taylor
+ * Fixed an E_STRICT notice props Dean Taylor
 
 = 1.4.1 =
  * Fixed a logged php notice during uninstall
