@@ -2,8 +2,8 @@
 Contributors: Godaddy, StarfieldTech
 Tags: debug, debugging, developer, development, performance, plugin, profiler, speed
 Requires at least: 3.3
-Tested up to: 3.5
 Stable tag: 1.4.2
+Tested up to: 3.9
 License: GPLv2
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -47,8 +47,8 @@ Manual installation:
 
 == Upgrade Notice ==
 
-= 1.4.2 =
-....
+= 1.5.0 =
+Fixed a CSS compatibility issue between WordPress 3.8 / MP6 and jQuery UI (props mintfactory)
 
 = 1.4.1 =
 Fixed 2 php notices and removed a reference to a missing stylesheet.
@@ -140,9 +140,13 @@ add_filter( 'p3_automatic_scan_urls', 'my_p3_auto_scan_pages' );
 
 == Changelog ==
 
+= 1.5.0 =
+ * Fixed a CSS compatibility issue between WordPress 3.8 / MP6 and jQuery UI (props mintfactory)
+
 = 1.4.2 =
- * Fixed a php short tag props Dean Taylor
- * Fixed an E_STRICT notice props Dean Taylor
+ * Fixed a php short tag. Props Dean Taylor
+ * Fixed an E_STRICT notice. Props Dean Taylor
+ * Fixed an issue with debug_backtrace that broke with php 5.2.4. Props tobbykanin
 
 = 1.4.1 =
  * Fixed a logged php notice during uninstall
