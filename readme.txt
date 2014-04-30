@@ -48,7 +48,7 @@ Manual installation:
 == Upgrade Notice ==
 
 = 1.5.0 =
-Fixed a CSS compatibility issue between WordPress 3.8 / MP6 and jQuery UI (props mintfactory)
+Avoid a race condition on NFS systems.  Also fix PHP strict notices and stylesheet conflict with MP6/3.8 admin theme.
 
 = 1.4.1 =
 Fixed 2 php notices and removed a reference to a missing stylesheet.
