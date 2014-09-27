@@ -168,6 +168,9 @@ class P3_Profiler {
 			return $this;
 		}
 		
+		// Hook shutdown
+		register_shutdown_function( array( $this, 'shutdown_handler' ) );
+
 		// Error detection
 		$flag = get_option( 'p3_profiler-error_detection' );
 		if ( !empty( $flag ) ) {
@@ -236,7 +239,6 @@ class P3_Profiler {
 		// Monitor all function-calls
 		declare( ticks = 1 );
 		register_tick_function( array( $this, 'tick_handler' ) );
-		add_action( 'shutdown', array( $this, 'shutdown_handler' ) );
 	}
 
 	/**
