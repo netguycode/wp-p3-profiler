@@ -179,7 +179,9 @@ class P3_Profiler {
 		}
 
 		// Set the error detection flag
-		update_option( 'p3_profiler-error_detection', time() );
+		if ( empty( $flag ) ) {
+			update_option( 'p3_profiler-error_detection', time() );
+		}
 
 		// Kludge memory limit / time limit
 		if ( (int) @ini_get( 'memory_limit' ) < 256 ) {
