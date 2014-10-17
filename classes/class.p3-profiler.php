@@ -284,20 +284,29 @@ class P3_Profiler {
 
 		// Examine the current stack, see if we should track it.  It should be
 		// related to a plugin file if we're going to track it
-		if ( version_compare( PHP_VERSION, '5.3.6' ) < 0 ) {
-			$bt = debug_backtrace( true );
-		} elseif ( version_compare( PHP_VERSION, '5.4.0' ) < 0 ) {
+		static $is_540;
+
+		if ( $is_540 == null ) {
+			if ( $is_540 = version_compare( PHP_VERSION, '5.4.0', '>=' ) == false ) {
+				static $is_536;
+				$is_536 = version_compare( PHP_VERSION, '5.3.6', '>=' );
+			}
+		}
+
+		if ( $is_540 ) { // if $ver >= 5.4.0
+			$bt = debug_backtrace( DEBUG_BACKTRACE_IGNORE_ARGS | DEBUG_BACKTRACE_PROVIDE_OBJECT, 2 );
+		} elseif ( $is_536 ) { // if $ver >= 5.3.6
 			$bt = debug_backtrace( DEBUG_BACKTRACE_IGNORE_ARGS | DEBUG_BACKTRACE_PROVIDE_OBJECT );
-		} else {
-			$bt = debug_backtrace( DEBUG_BACKTRACE_IGNORE_ARGS | DEBUG_BACKTRACE_PROVIDE_OBJECT, 2 ); // Examine the last 2 frames
+		} else { // if $ver < 5.3.6
+			$bt = debug_backtrace( true );
 		}
 
 		// Find our function
 		$frame = $bt[0];
-		if ( count( $bt ) >= 2 ) {
+		if ( isset( $bt[1] ) ) 
 			$frame = $bt[1];
-		}
-		$lambda_file = @$bt[0]['file'];
+
+		$lambda_file = isset( $bt[0]['file']{0} ) ? $bt[0]['file'] : '';
 
 		// Free up memory
 		unset( $bt );
