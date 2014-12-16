@@ -25,6 +25,8 @@ load_plugin_textdomain( 'p3-profiler', false, plugin_basename( P3_PATH ) . '/lan
 // Plugin slug
 define( 'P3_PLUGIN_SLUG', 'p3-profiler' );
 
+define( 'P3_VERSION', '1.3.5.2' );
+
 /**************************************************************************/
 /**        AUTOLOADING                                                   **/
 /**************************************************************************/
