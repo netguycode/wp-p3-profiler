@@ -380,7 +380,7 @@ $opts = get_option( 'p3-profiler_options' );
 				'p3_nonce' : '<?php echo wp_create_nonce( 'p3_ajax_stop_scan' ); ?>'
 			}
 			jQuery.post( ajaxurl, data, function( response ) {
-				location.href = "<?php echo esc_url( add_query_arg( array( 'p3_action' => 'view-scan', 'current_scan' => '1', 'name' => null ) ) ); ?>&name=" + response;
+				location.href = "<?php echo esc_url_raw( add_query_arg( array( 'p3_action' => 'view-scan', 'current_scan' => '1', 'name' => null ) ) ); ?>&name=" + response;
 			})
 			$( "#p3-scanner-dialog" ).dialog( "close" );
 		});
@@ -423,7 +423,7 @@ $opts = get_option( 'p3-profiler_options' );
 			jQuery( "#p3-progress-dialog" ).dialog( "close" );
 
 			// View the scan
-			location.href = "<?php echo esc_url( add_query_arg( array( 'p3_action' => 'view-scan', 'current_scan' => '1', 'name' => null ) ) ); ?>&name=" + $( this ).attr( "data-scan-name" );
+			location.href = "<?php echo esc_url_raw( add_query_arg( array( 'p3_action' => 'view-scan', 'current_scan' => '1', 'name' => null ) ) ); ?>&name=" + $( this ).attr( "data-scan-name" );
 		});
 		$( "#p3-view-incomplete-results-submit" ).click( function() {
 			$( "#p3-view-results-submit" ).attr( "data-scan-name", $( "#p3-view-incomplete-results-submit" ).attr( "data-scan-name" ) );

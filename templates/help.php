@@ -347,8 +347,8 @@ After you've tuned your site up as much as possible, if you're still not happy w
 	<h2 class="p3-help-question q-debug" data-question-id="q-debug-log"><?php _e( "Where can I view the debug log?", 'p3-profiler' ); ?></h2>
 	<blockquote class="q-debug-data">
 		<?php printf( __( "Debug mode will record 100 visits to your site, then turn off automatically.  You can view the log below.  The entries are shown in reverse order with the latest visits appearing at the top of the list.  You can also <a href=\"%1\$s\" class=\"button-secondary\">Clear the log</a> or <a href=\"%2\$s\" class=\"button-secondary\">Download the log</a> as a CSV.", 'p3-profiler' ),
-			wp_nonce_url( esc_url( add_query_arg( array( 'p3_action' => 'clear-debug-log' ) ) ), 'p3-clear-debug-log' ),
-			wp_nonce_url( esc_url( add_query_arg( array( 'p3_action' => 'download-debug-log' ) ) ), 'p3-download-debug-log' )
+			wp_nonce_url( esc_url_raw( add_query_arg( array( 'p3_action' => 'clear-debug-log' ) ) ), 'p3-clear-debug-log' ),
+			wp_nonce_url( esc_url_raw( add_query_arg( array( 'p3_action' => 'download-debug-log' ) ) ), 'p3-download-debug-log' )
 		); ?>
 		<br /><br />
 		<div id="p3-debug-log-container">
