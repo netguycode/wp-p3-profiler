@@ -47,6 +47,9 @@ Manual installation:
 
 == Upgrade Notice ==
 
+= 1.5.4 =
+Fix: Deprecated create_function() warning
+
 = 1.5.3.9 =
 Security update: Escape URLs returned by add_query_arg and remove_query_arg
 
