@@ -1,9 +1,9 @@
 === P3 (Plugin Performance Profiler) ===
-Contributors: Godaddy, StarfieldTech, kurtpayne, asink
+Contributors: Godaddy, StarfieldTech, kurtpayne, asink, wpmudev
 Tags: debug, debugging, developer, development, performance, plugin, profiler, speed
 Requires at least: 3.3
-Tested up to: 4.7.2
-Stable tag: 1.5.3.9
+Tested up to: 5.5
+Stable tag: 1.5.4
 License: GPLv2
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -48,6 +48,7 @@ Manual installation:
 == Upgrade Notice ==
 
 = 1.5.4 =
+Fix: Compatibility with PHP 7 and fix JavaScript errors (props gabriel-munteanu)
 Fix: Deprecated create_function() warning
 
 = 1.5.3.9 =
